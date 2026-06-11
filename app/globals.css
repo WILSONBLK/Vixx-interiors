@@ -4,7 +4,7 @@
 
 /* ── Design tokens (dark = default) ──────────────────────────────────────── */
 :root {
-  --nav-height:      72px;
+  --nav-height:      96px;
   --scrollbar-width: 0px;
 
   --gold:        #C49A2E;

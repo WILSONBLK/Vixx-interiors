@@ -62,7 +62,7 @@ export function Navbar() {
                 alt="VIXX Interiors"
                 width={200}
                 height={66}
-                className="h-14 w-auto object-contain"
+                className="h-28 w-auto object-contain"
                 priority
               />
             </div>
