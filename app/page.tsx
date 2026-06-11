@@ -96,7 +96,7 @@ export default function Home() {
           <ScrollReveal delay={0.1}>
             <h1 className="heading-xl">
               Interiors That<br />
-              <em className="not-italic" style={{ color: 'var(--gold)' }}>Command</em><br />
+              <em style={{ color: 'var(--gold)' }}>Command</em><br />
               The Room.
             </h1>
           </ScrollReveal>
@@ -208,7 +208,7 @@ export default function Home() {
                 <p className="label-xs mb-4">The VIXX Standard</p>
                 <h2 className="heading-lg mb-6">
                   We don&apos;t just design rooms.{' '}
-                  <em className="not-italic" style={{ color: 'var(--gold)' }}>We define how you live.</em>
+                  <em style={{ color: 'var(--gold)' }}>We define how you live.</em>
                 </h2>
                 <p className="body-lg mb-8">
                   Lagos&apos;s most ambitious interiors start with a conversation. Whether it&apos;s a penthouse in Victoria Island or a flagship office in Lekki — we bring the same obsessive attention to detail, the same drive for excellence, to every project we touch.
@@ -221,7 +221,7 @@ export default function Home() {
                 >
                   {STATS.slice(0, 3).map((stat) => (
                     <div key={stat.label}>
-                      <p className="font-cormorant text-3xl font-light" style={{ color: 'var(--gold)' }}>
+                      <p className="font-cormorant text-3xl font-normal" style={{ color: 'var(--gold)' }}>
                         {stat.value}
                       </p>
                       <p className="font-jost text-[0.58rem] tracking-[0.15em] uppercase mt-1" style={{ color: 'var(--text-muted)' }}>
@@ -255,7 +255,7 @@ export default function Home() {
               <p className="label-xs mb-3">What We Do</p>
               <h2 className="heading-lg">
                 Excellence in{' '}
-                <em className="not-italic" style={{ color: 'var(--gold)' }}>every space.</em>
+                <em style={{ color: 'var(--gold)' }}>every space.</em>
               </h2>
             </div>
           </ScrollReveal>

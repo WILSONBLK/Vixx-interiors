@@ -151,20 +151,20 @@
   }
 
   .heading-xl {
-    @apply font-cormorant font-light tracking-tight
-           text-4xl sm:text-5xl lg:text-6xl xl:text-7xl
-           text-[var(--text-primary)] leading-[1.08];
+    @apply font-cormorant font-normal tracking-tight
+           text-6xl sm:text-7xl lg:text-8xl xl:text-[7rem]
+           text-[var(--text-primary)] leading-[0.95];
   }
 
   .heading-lg {
-    @apply font-cormorant font-light tracking-tight
-           text-3xl sm:text-4xl lg:text-5xl
-           text-[var(--text-primary)] leading-[1.1];
+    @apply font-cormorant font-normal tracking-tight
+           text-4xl sm:text-5xl lg:text-6xl
+           text-[var(--text-primary)] leading-[1.05];
   }
 
   .heading-md {
-    @apply font-cormorant font-light
-           text-2xl sm:text-3xl
+    @apply font-cormorant font-normal
+           text-3xl sm:text-4xl
            text-[var(--text-primary)] leading-snug;
   }
 

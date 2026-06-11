@@ -1,10 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Jost, Inter } from 'next/font/google'
+import { Playfair_Display, Jost, Inter } from 'next/font/google'
 
-const cormorant = Cormorant_Garamond({
+const cormorant = Playfair_Display({
   subsets:  ['latin'],
-  weight:   ['300', '400', '500', '600'],
+  weight:   ['400', '500', '600', '700', '800', '900'],
   style:    ['normal', 'italic'],
   variable: '--font-cormorant',
   display:  'swap',
