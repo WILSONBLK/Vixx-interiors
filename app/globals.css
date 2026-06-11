@@ -223,3 +223,8 @@
     rgba(2, 6, 23, 0.55) 100%
   );
 }
+
+@keyframes heroZoom {
+  from { transform: scale(1.08) translateZ(0); }
+  to   { transform: scale(1.18) translateZ(0); }
+}

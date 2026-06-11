@@ -4,14 +4,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { useTheme } from '@/hooks/useTheme'
 import { NAV_LINKS } from '@/lib/data'
 
 export function Navbar() {
   const pathname              = usePathname()
-  const { toggle, isDark, mounted } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
 
@@ -62,9 +60,9 @@ export function Navbar() {
               <Image
                 src="/logo-gold.png"
                 alt="VIXX Interiors"
-                width={120}
-                height={40}
-                className="h-8 w-auto object-contain"
+                width={200}
+                height={66}
+                className="h-14 w-auto object-contain"
                 priority
               />
             </div>
@@ -91,17 +89,6 @@ export function Navbar() {
 
           {/* Right actions */}
           <div className="flex items-center gap-3">
-            {/* Theme toggle */}
-            {mounted && (
-              <button
-                onClick={toggle}
-                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="hidden lg:flex items-center justify-center w-8 h-8 text-[var(--text-muted)] hover:text-[var(--gold)] transition-colors duration-200"
-              >
-                {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
-              </button>
-            )}
-
             {/* CTA */}
             <Link
               href="/contact"
@@ -160,19 +147,10 @@ export function Navbar() {
             </Link>
           ))}
 
-          <div className="mt-8 flex items-center gap-4">
+          <div className="mt-8">
             <Link href="/contact" className="btn-primary">
               Book Consultation
             </Link>
-            {mounted && (
-              <button
-                onClick={toggle}
-                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="w-10 h-10 flex items-center justify-center border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--gold)] transition-colors duration-200"
-              >
-                {isDark ? <Sun size={16} strokeWidth={1.5} /> : <Moon size={16} strokeWidth={1.5} />}
-              </button>
-            )}
           </div>
         </nav>
       </div>

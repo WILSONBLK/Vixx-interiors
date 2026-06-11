@@ -21,26 +21,58 @@ export default function Home() {
       <Navbar />
 
       {/* ── Hero ──────────────────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[95vh] flex-col items-center justify-center px-6 pb-16 pt-32 text-center lg:px-8 overflow-hidden">
-        {/* Background gradient */}
+      <section className="relative flex min-h-[100vh] flex-col items-center justify-center px-6 pb-16 pt-32 text-center lg:px-8 overflow-hidden">
+
+        {/* Video background */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(196,154,46,0.07) 0%, transparent 70%)',
-          }}
-        />
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          style={{ perspective: '800px' }}
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              transform: 'scale(1.08) translateZ(0)',
+              animation: 'heroZoom 20s ease-in-out infinite alternate',
+            }}
+          >
+            <source src="/videos/hero.mov" type="video/quicktime" />
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
 
-        {/* Decorative hex pattern */}
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none select-none opacity-[0.03]">
-          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="hex-bg" x="0" y="0" width="80" height="70" patternUnits="userSpaceOnUse">
-                <polygon points="40,3 77,22 77,57 40,76 3,57 3,22" fill="none" stroke="#C49A2E" strokeWidth="0.8" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#hex-bg)" />
-          </svg>
+          {/* Deep dark base overlay */}
+          <div
+            className="absolute inset-0"
+            style={{ background: 'rgba(2,6,23,0.55)' }}
+          />
+
+          {/* Cinematic gradient — darkens edges, opens centre */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 70% 70% at 50% 45%, transparent 0%, rgba(2,6,23,0.45) 60%, rgba(2,6,23,0.85) 100%)',
+            }}
+          />
+
+          {/* Bottom fade into content */}
+          <div
+            className="absolute bottom-0 inset-x-0 h-48"
+            style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-primary))' }}
+          />
+
+          {/* Gold shimmer overlay */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 60% 40% at 50% 30%, rgba(196,154,46,0.06) 0%, transparent 70%)',
+            }}
+          />
         </div>
 
         <div className="relative z-10 flex flex-col items-center max-w-5xl mx-auto">
