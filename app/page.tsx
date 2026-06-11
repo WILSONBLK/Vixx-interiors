@@ -40,8 +40,8 @@ export default function Home() {
               animation: 'heroZoom 20s ease-in-out infinite alternate',
             }}
           >
-            <source src="/videos/hero.mov" type="video/quicktime" />
             <source src="/videos/hero.mp4" type="video/mp4" />
+            <source src="/videos/hero.mov" type="video/quicktime" />
           </video>
 
           {/* Deep dark base overlay */}
