@@ -1,355 +1,287 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Home as HomeIcon, Building2, Sofa, LayoutGrid } from 'lucide-react'
-import { Navbar }           from '@/components/layout/Navbar'
-import { Footer }           from '@/components/layout/Footer'
-import { HexMotif }         from '@/components/ui/HexMotif'
-import { ScrollReveal }     from '@/components/ui/ScrollReveal'
-import { HeroSection }      from '@/components/ui/HeroSection'
-import { SplitText }        from '@/components/ui/SplitText'
-import { TiltCard }         from '@/components/ui/TiltCard'
-import { MagneticElement }  from '@/components/ui/MagneticElement'
-import { STATS, SERVICES, PROCESS_STEPS, PORTFOLIO_PROJECTS } from '@/lib/data'
+import { ArrowRight } from 'lucide-react'
+import { Navbar }       from '@/components/layout/Navbar'
+import { Footer }       from '@/components/layout/Footer'
+import { ScrollReveal } from '@/components/ui/ScrollReveal'
+import { HeroSection }  from '@/components/ui/HeroSection'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { ContactForm }  from '@/components/forms/ContactForm'
+import { PORTFOLIO_PROJECTS } from '@/lib/data'
 
 export const metadata: Metadata = {
   title:       'VIXX Interiors – Interior Design Studio, Lagos',
   description: 'VIXX Interiors is a Lagos interior design studio crafting considered spaces. Explore our portfolio and start a conversation.',
 }
 
-const CATEGORY_LINKS = [
-  { Icon: HomeIcon,   label: 'Residential Design', href: '/services' },
-  { Icon: Building2,  label: 'Commercial Spaces',  href: '/services' },
-  { Icon: Sofa,       label: 'Furniture Sourcing', href: '/services' },
-  { Icon: LayoutGrid, label: 'Space Planning',     href: '/services' },
-]
-
-const WHY_CARDS = [
-  {
-    image: '/images/portfolio/living-room-1.jpg',
-    label: 'Residential',
-    title: 'Homes Designed to Last',
-    body:  'We design homes that feel like you — considered, calm, and made to live in for the long term.',
-  },
-  {
-    image: '/images/portfolio/living-room-2.jpg',
-    label: 'Commercial',
-    title: 'Workspaces With Character',
-    body:  'Your environment shapes how people feel. We design spaces that communicate quality without announcing it.',
-  },
-  {
-    image: '/images/portfolio/living-room-3.jpg',
-    label: 'Craftsmanship',
-    title: 'Every Detail. Considered.',
-    body:  'From the first sketch to the final styling — nothing is accidental. Every decision earns its place.',
-  },
+const SERVICES_LIST = [
+  { number: '01', title: 'Interior Design'      },
+  { number: '02', title: 'Space Planning'        },
+  { number: '03', title: 'Residential Interiors' },
+  { number: '04', title: 'Commercial Interiors'  },
+  { number: '05', title: 'Design Consultation'   },
+  { number: '06', title: 'Creative Direction'    },
 ]
 
 export default function Home() {
-  const featured = PORTFOLIO_PROJECTS[0]
-
   return (
     <main className="relative overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
       <Navbar />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────────── */}
+      {/* ── 1. Hero ───────────────────────────────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── Floating category bar ─────────────────────────────────────────────── */}
-      <section aria-label="Service categories">
-        <div className="container-site">
-          <ScrollReveal variant="fadeUp">
-            <div
-              className="-mt-10 relative z-20 flex flex-wrap items-center justify-between gap-y-4 gap-x-6 px-6 py-5 rounded-2xl"
-              style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-lg)' }}
-            >
-              {CATEGORY_LINKS.map(({ Icon, label, href }) => (
-                <Link key={label} href={href} className="flex items-center gap-3 group" data-cursor="hover">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:border-[var(--gold)]"
-                    style={{ background: 'rgba(196,154,46,0.10)', border: '1px solid rgba(196,154,46,0.22)' }}
-                  >
-                    <Icon size={15} style={{ color: 'var(--gold)' }} strokeWidth={1.5} />
-                  </div>
-                  <span
-                    className="font-jost text-[0.68rem] tracking-[0.12em] uppercase transition-colors duration-200 group-hover:text-[var(--gold)]"
-                    style={{ color: 'var(--text-secondary)' }}
-                  >
-                    {label}
-                  </span>
-                </Link>
-              ))}
+      {/* ── 2. Services ──────────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden" style={{ minHeight: '80vh' }}>
+        {/* Background image */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+          <Image
+            src="/images/portfolio/living-room-2.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0" style={{ background: 'rgba(6,4,2,0.80)' }} />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to bottom, rgba(6,4,2,0.4) 0%, transparent 30%, transparent 70%, rgba(6,4,2,0.5) 100%)' }}
+          />
+        </div>
 
-              <MagneticElement>
-                <Link href="/contact" className="btn-primary py-2.5 text-[0.6rem] flex-shrink-0 hidden sm:inline-flex">
-                  Get a Proposal
-                  <ArrowRight size={13} strokeWidth={1.5} aria-hidden="true" />
-                </Link>
-              </MagneticElement>
+        <div className="relative z-10 container-site section-pad">
+          <ScrollReveal>
+            <div className="flex items-center gap-3 mb-14">
+              <AnimatedLine width={24} delay={0.1} />
+              <p
+                className="font-jost text-[0.54rem] tracking-[0.38em] uppercase"
+                style={{ color: 'rgba(196,154,46,0.78)' }}
+              >
+                What We Do
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div
+            className="grid md:grid-cols-2 lg:grid-cols-3"
+            style={{ borderTop: '1px solid rgba(245,245,244,0.10)' }}
+          >
+            {SERVICES_LIST.map((svc, i) => (
+              <ScrollReveal key={svc.number} delay={i * 0.06} variant="fadeUp">
+                <div
+                  className="py-10 px-6"
+                  style={{ borderBottom: '1px solid rgba(245,245,244,0.10)' }}
+                >
+                  <span
+                    className="font-cormorant text-5xl font-light block mb-5"
+                    style={{ color: 'rgba(196,154,46,0.25)' }}
+                  >
+                    {svc.number}
+                  </span>
+                  <h3
+                    className="font-cormorant text-2xl font-light"
+                    style={{ color: '#F5F5F4' }}
+                  >
+                    {svc.title}
+                  </h3>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal delay={0.35}>
+            <div className="mt-12">
+              <Link href="/services" className="btn-outline">
+                Full Services
+                <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ── Welcome / About ───────────────────────────────────────────────────── */}
-      <section className="section-pad">
-        <div className="container-site">
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
-
-            {/* Left: image with overlay badge */}
-            <ScrollReveal variant="fadeRight">
-              <div className="relative">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <Image
-                    src={featured.image}
-                    alt={featured.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to top, rgba(2,6,23,0.72) 0%, transparent 55%)' }}
-                  />
-                </div>
-
-                {/* Floating project badge */}
-                <div
-                  className="absolute bottom-6 left-6 right-6 p-4 rounded-xl"
-                  style={{ background: 'rgba(2,6,23,0.78)', backdropFilter: 'blur(14px)', border: '1px solid rgba(196,154,46,0.28)' }}
-                >
-                  <p className="font-jost text-[0.55rem] tracking-[0.25em] uppercase mb-1" style={{ color: 'var(--gold)' }}>
-                    Featured Project
-                  </p>
-                  <p className="font-cormorant text-xl font-medium" style={{ color: 'var(--text-primary)' }}>
-                    {featured.title}
-                  </p>
-                  <p className="font-jost text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                    {featured.location} &middot; {featured.completedAt}
-                  </p>
-                </div>
-
-                {/* Gold accent bar */}
-                <div
-                  className="absolute top-0 left-0 w-1 h-20"
-                  style={{ background: 'linear-gradient(to bottom, var(--gold), transparent)' }}
-                />
-              </div>
-            </ScrollReveal>
-
-            {/* Right: text */}
-            <ScrollReveal variant="fadeLeft" delay={0.1}>
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <AnimatedLine width={24} delay={0.1} />
-                  <p className="label-xs">The VIXX Standard</p>
-                </div>
-                <h2 className="heading-lg mb-6">
-                  <SplitText delay={0} wordDelay={0.05}>
-                    We don&apos;t just design rooms.
-                  </SplitText>
-                  {' '}
-                  <em style={{ color: 'var(--gold)' }}>
-                    <SplitText delay={0.3} wordDelay={0.06}>
-                      We define how you live.
-                    </SplitText>
-                  </em>
-                </h2>
-                <p className="body-lg mb-8">
-                  Every VIXX project starts with a conversation. Whether it&apos;s a home in Victoria Island or an office in Lekki — the same studio rigour, the same depth of thinking, applied to every space we touch.
-                </p>
-
-                {/* Inline stats */}
-                <div
-                  className="grid grid-cols-3 gap-6 mb-8 py-6"
-                  style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}
-                >
-                  {STATS.slice(0, 3).map((stat) => (
-                    <div key={stat.label}>
-                      <p className="font-cormorant text-3xl font-normal" style={{ color: 'var(--gold)' }}>
-                        {stat.value}
-                      </p>
-                      <p className="font-jost text-[0.58rem] tracking-[0.15em] uppercase mt-1" style={{ color: 'var(--text-muted)' }}>
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-4">
-                  <Link href="/about" className="btn-primary">
-                    Our Story
-                    <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-                  </Link>
-                  <Link href="/portfolio" className="btn-ghost">
-                    View Our Work
-                    <ChevronRight size={14} strokeWidth={1.5} aria-hidden="true" />
-                  </Link>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Why VIXX — image cards ────────────────────────────────────────────── */}
+      {/* ── 3. Portfolio ─────────────────────────────────────────────────────── */}
       <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container-site">
           <ScrollReveal>
-            <div className="text-center mb-12">
-              <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center justify-between mb-12">
+              <div className="flex items-center gap-3">
                 <AnimatedLine width={24} delay={0.1} />
-                <p className="label-xs">What We Do</p>
+                <p className="label-xs">Selected Work</p>
               </div>
-              <h2 className="heading-lg">
-                <SplitText delay={0} wordDelay={0.05}>Excellence in</SplitText>
-                {' '}
-                <em style={{ color: 'var(--gold)' }}>
-                  <SplitText delay={0.25} wordDelay={0.07}>every space.</SplitText>
-                </em>
-              </h2>
+              <Link href="/portfolio" className="btn-ghost text-xs">
+                All Projects
+                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {WHY_CARDS.map((card, i) => (
-              <ScrollReveal key={card.title} delay={i * 0.08} variant="fadeUp">
-                <TiltCard className="h-full">
-                  <div
-                    className="overflow-hidden flex flex-col h-full"
-                    style={{ background: 'var(--bg-primary)', border: '1px solid var(--border)', borderRadius: '12px' }}
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        fill
-                        className="object-cover transition-transform duration-700 hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                      <div
-                        className="absolute top-4 left-4 px-3 py-1 rounded-full"
-                        style={{ background: 'rgba(2,6,23,0.72)', backdropFilter: 'blur(8px)', border: '1px solid rgba(196,154,46,0.32)' }}
-                      >
-                        <span className="font-jost text-[0.55rem] tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
-                          {card.label}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-6 flex flex-col flex-1">
-                      <h3 className="font-cormorant text-xl font-medium mb-2" style={{ color: 'var(--text-primary)' }}>
-                        {card.title}
-                      </h3>
-                      <p className="body-md text-sm flex-1">{card.body}</p>
-                      <Link href="/services" className="btn-ghost mt-5 self-start text-xs">
-                        Learn more
-                        <ChevronRight size={13} strokeWidth={1.5} aria-hidden="true" />
-                      </Link>
-                    </div>
+          <div className="grid md:grid-cols-2 gap-px" style={{ background: 'var(--border)' }}>
+            {PORTFOLIO_PROJECTS.map((project, i) => (
+              <ScrollReveal key={project.id} delay={(i % 2) * 0.07} variant="fadeUp">
+                <Link
+                  href={`/portfolio/${project.slug}`}
+                  className="group relative block overflow-hidden"
+                  style={{ background: 'var(--bg-primary)' }}
+                  aria-label={`View ${project.title}`}
+                >
+                  <div className={`relative overflow-hidden ${i === 0 ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{ background: 'rgba(2,6,23,0.38)' }}
+                    />
                   </div>
-                </TiltCard>
+                  <div className="p-6">
+                    <p className="label-xs mb-1">{project.category}</p>
+                    <h3
+                      className="font-cormorant text-2xl font-light"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {project.title}
+                    </h3>
+                    <p
+                      className="font-jost text-xs mt-0.5"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      {project.location} &middot; {project.completedAt}
+                    </p>
+                  </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Process teaser ───────────────────────────────────────────────────── */}
-      <section className="section-pad">
-        <div className="container-site">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <ScrollReveal variant="fadeRight">
-              <div className="flex items-center gap-3 mb-4">
+      {/* ── 4. Founder ───────────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden section-pad">
+        {/* Background image */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
+          <Image
+            src="/images/portfolio/living-room-4.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(105deg, rgba(6,4,2,0.92) 0%, rgba(6,4,2,0.70) 50%, rgba(6,4,2,0.25) 100%)',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 container-site">
+          <div
+            className="max-w-xl"
+            style={{
+              '--text-primary':   '#F5F5F4',
+              '--text-secondary': 'rgba(245,242,237,0.70)',
+              '--text-muted':     'rgba(245,241,234,0.50)',
+            } as React.CSSProperties}
+          >
+            <ScrollReveal>
+              <div className="flex items-center gap-3 mb-8">
                 <AnimatedLine width={24} delay={0.1} />
-                <p className="label-xs">How We Work</p>
+                <p
+                  className="font-jost text-[0.54rem] tracking-[0.38em] uppercase"
+                  style={{ color: 'rgba(196,154,46,0.78)' }}
+                >
+                  The Founder
+                </p>
               </div>
-              <h2 className="heading-lg mb-6">
-                <SplitText delay={0} wordDelay={0.055}>A process as bold as the result.</SplitText>
+
+              <h2
+                className="font-cormorant font-light mb-2"
+                style={{ fontSize: 'clamp(2.4rem, 6vw, 4.5rem)', lineHeight: 1, color: '#F5F5F4' }}
+              >
+                Osita Agusionu
               </h2>
-              <p className="body-lg mb-8">
-                Every VIXX project follows a six-stage process built for precision — from discovery to reveal. No guesswork. No shortcuts. Just well-made spaces, delivered on time.
+              <p
+                className="font-cormorant italic text-xl mb-10"
+                style={{ color: 'rgba(196,154,46,0.80)' }}
+              >
+                Founder &amp; Principal Designer
               </p>
-              <Link href="/process" className="btn-primary">
-                See the Process
+
+              <div
+                className="mb-10 pb-10"
+                style={{ borderBottom: '1px solid rgba(245,245,244,0.12)' }}
+              >
+                <p
+                  className="font-jost font-light leading-relaxed"
+                  style={{
+                    fontSize:      'clamp(0.82rem, 1.2vw, 0.95rem)',
+                    color:         'rgba(245,241,234,0.62)',
+                    letterSpacing: '0.015em',
+                    maxWidth:      '44ch',
+                  }}
+                >
+                  With a background in architecture and fine art, Osita approaches every space as a curated composition — balancing form, function, and feeling. His philosophy: not the absence of things, but the presence of the right things.
+                </p>
+              </div>
+
+              <Link href="/about" className="btn-outline">
+                About the Studio
                 <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
               </Link>
             </ScrollReveal>
-
-            <div className="space-y-0">
-              {PROCESS_STEPS.slice(0, 4).map((step, i) => (
-                <ScrollReveal key={step.number} delay={i * 0.07} variant="fadeLeft">
-                  <div className="flex gap-6 py-6" style={{ borderBottom: '1px solid var(--border)' }}>
-                    <span
-                      className="font-cormorant text-2xl font-light flex-shrink-0 w-8 leading-none mt-0.5"
-                      style={{ color: 'var(--gold)' }}
-                    >
-                      {step.number}
-                    </span>
-                    <div>
-                      <h3 className="font-cormorant text-lg font-medium mb-1" style={{ color: 'var(--text-primary)' }}>
-                        {step.title}
-                      </h3>
-                      <p className="body-md text-sm">{step.description}</p>
-                    </div>
-                    <span
-                      className="font-jost text-[0.6rem] tracking-wider flex-shrink-0 ml-auto self-start mt-1"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      {step.duration}
-                    </span>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
           </div>
         </div>
       </section>
 
-      {/* ── CTA ──────────────────────────────────────────────────────────────── */}
-      <section id="contact" className="section-pad">
-        <div className="container-site">
-          <ScrollReveal>
-            <div
-              className="relative overflow-hidden p-10 sm:p-14 lg:p-20 text-center"
-              style={{ border: '1px solid rgba(196,154,46,0.2)', background: 'rgba(196,154,46,0.04)' }}
-            >
-              <div aria-hidden="true" className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 100%, rgba(196,154,46,0.07) 0%, transparent 70%)' }} />
-              <HexMotif size={120} variant="dual" opacity={0.06} className="absolute -top-6 -right-6 pointer-events-none" aria-hidden />
-              <HexMotif size={100} variant="outline" opacity={0.06} className="absolute -bottom-4 -left-4 pointer-events-none" aria-hidden />
+      {/* ── 5. Contact ───────────────────────────────────────────────────────── */}
+      <section
+        id="contact"
+        className="relative overflow-hidden section-pad"
+        style={{ background: 'var(--bg-secondary)' }}
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(196,154,46,0.04) 0%, transparent 65%)',
+          }}
+        />
 
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-5">
-                  <AnimatedLine width={24} delay={0.1} />
-                  <p className="label-xs">Ready to Begin?</p>
-                </div>
-                <h2 className="heading-lg max-w-2xl mx-auto mb-6">
-                  <SplitText delay={0} wordDelay={0.045}>Every great space starts with a conversation.</SplitText>
-                </h2>
-                <p className="body-lg max-w-xl mx-auto mb-10">
-                  Tell us about your project. We&apos;ll respond within 24 hours with a tailored proposal — no obligation, no off-the-shelf packages.
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-4">
-                  <MagneticElement>
-                    <Link href="/contact" className="btn-primary">
-                      Book a Consultation
-                      <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-                    </Link>
-                  </MagneticElement>
-                  <MagneticElement>
-                    <Link href="/portfolio" className="btn-outline">
-                      View Our Work
-                    </Link>
-                  </MagneticElement>
-                </div>
+        <div className="relative z-10 container-site">
+          <div className="grid lg:grid-cols-2 gap-20 items-start">
+
+            {/* Left: heading */}
+            <ScrollReveal variant="fadeRight">
+              <div className="flex items-center gap-3 mb-6">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">Start a Project</p>
               </div>
-            </div>
-          </ScrollReveal>
+              <h2 className="heading-lg mb-5">
+                Tell us about{' '}
+                <em style={{ color: 'var(--gold)' }}>your space.</em>
+              </h2>
+              <p className="body-lg" style={{ maxWidth: '38ch' }}>
+                Fill in the form and we&apos;ll respond within 24 hours with a tailored proposal. All enquiries are handled in confidence.
+              </p>
+            </ScrollReveal>
+
+            {/* Right: form */}
+            <ScrollReveal delay={0.1} variant="fadeLeft">
+              <ContactForm />
+            </ScrollReveal>
+          </div>
         </div>
       </section>
 
+      {/* ── 6. Footer ────────────────────────────────────────────────────────── */}
       <Footer />
     </main>
   )
