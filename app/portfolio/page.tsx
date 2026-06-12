@@ -5,8 +5,9 @@ import { Navbar }          from '@/components/layout/Navbar'
 import { Footer }          from '@/components/layout/Footer'
 import { ScrollReveal }    from '@/components/ui/ScrollReveal'
 import { AnimatedLine }    from '@/components/ui/AnimatedLine'
-import { ProjectGallery }  from '@/components/ui/ProjectGallery'
-import { HexMotif }        from '@/components/ui/HexMotif'
+import { ProjectGallery }   from '@/components/ui/ProjectGallery'
+import { PortfolioArchive }  from '@/components/ui/PortfolioArchive'
+import { HexMotif }          from '@/components/ui/HexMotif'
 import { PORTFOLIO_PROJECTS } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -48,6 +49,9 @@ export default function PortfolioPage() {
           ))}
         </div>
       </section>
+
+      {/* ── Archive grid ── */}
+      <PortfolioArchive />
 
       {/* ── CTA ── */}
       <section className="section-pad relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
