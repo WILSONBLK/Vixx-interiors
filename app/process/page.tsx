@@ -6,6 +6,7 @@ import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { PROCESS_STEPS } from '@/lib/data'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
   title:       'Our Design Process – VIXX Interiors',
@@ -26,11 +27,15 @@ export default function ProcessPage() {
         />
         <div className="container-site relative z-10 max-w-4xl">
           <ScrollReveal>
-            <p className="label-xs mb-5">How We Work</p>
-            <h1 className="heading-xl mb-6">
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">How We Work</p>
+            </div>
+            <h1 className="heading-xl mb-4">
               A process as refined{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>as the result.</em>
             </h1>
+            <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg max-w-2xl">
               Every VIXX project follows a structured six-stage process — from initial discovery through to final reveal. Nothing is left to chance, and nothing is rushed.
             </p>
@@ -102,7 +107,10 @@ export default function ProcessPage() {
         <div className="container-site">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal variant="fadeRight">
-              <p className="label-xs mb-4">Project Timeline</p>
+              <div className="flex items-center gap-3 mb-4">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">Project Timeline</p>
+              </div>
               <h2 className="heading-lg mb-6">Typically 12–16 weeks from start to reveal.</h2>
               <p className="body-lg mb-6">
                 The exact timeline depends on the scope of your project, the availability of materials, and site conditions. We share a detailed programme at the beginning of every project so you know exactly what to expect — and when.
@@ -156,7 +164,10 @@ export default function ProcessPage() {
         <HexMotif size={200} variant="dual" opacity={0.04} className="absolute -left-12 top-1/2 -translate-y-1/2" aria-hidden />
         <div className="container-site relative z-10 text-center">
           <ScrollReveal>
-            <p className="label-xs mb-4">Ready to Begin?</p>
+            <div className="flex items-center gap-3 mb-4">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Ready to Begin?</p>
+            </div>
             <h2 className="heading-lg max-w-xl mx-auto mb-8">
               Your project starts with a conversation.
             </h2>

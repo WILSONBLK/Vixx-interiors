@@ -6,6 +6,7 @@ import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SERVICES } from '@/lib/data'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
   title:       'Interior Design Services – VIXX Interiors',
@@ -26,11 +27,15 @@ export default function ServicesPage() {
         />
         <div className="container-site relative z-10 max-w-4xl">
           <ScrollReveal>
-            <p className="label-xs mb-5">Our Services</p>
-            <h1 className="heading-xl mb-6">
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Our Services</p>
+            </div>
+            <h1 className="heading-xl mb-4">
               Complete design solutions{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>for every space.</em>
             </h1>
+            <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg max-w-2xl">
               From full residential projects to focused design consultations, every engagement is tailored to your scope, your timeline, and your vision.
             </p>
@@ -88,7 +93,10 @@ export default function ServicesPage() {
         <div className="container-site">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal variant="fadeRight">
-              <p className="label-xs mb-4">How It Works</p>
+              <div className="flex items-center gap-3 mb-4">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">How It Works</p>
+              </div>
               <h2 className="heading-lg mb-6">Every project starts with a conversation.</h2>
               <p className="body-lg mb-8">
                 We begin with a no-obligation introductory call to understand your project. From there, we develop a proposal tailored to your scope, budget, and timeline — with transparent pricing and no hidden costs.

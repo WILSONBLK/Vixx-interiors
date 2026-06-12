@@ -6,6 +6,7 @@ import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { WHY_ITEMS, TESTIMONIALS } from '@/lib/data'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
   title:       'About VIXX Interiors – Luxury Design Studio',
@@ -26,11 +27,15 @@ export default function AboutPage() {
         />
         <div className="container-site relative z-10 max-w-4xl">
           <ScrollReveal>
-            <p className="label-xs mb-5">About the Studio</p>
-            <h1 className="heading-xl mb-6">
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">About the Studio</p>
+            </div>
+            <h1 className="heading-xl mb-4">
               Design driven by{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>intention.</em>
             </h1>
+            <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg max-w-2xl">
               VIXX Interiors is a Lagos-based luxury design studio founded on the belief that a great space is not simply beautiful — it is purposeful, personal, and enduring.
             </p>
@@ -61,7 +66,10 @@ export default function AboutPage() {
             </ScrollReveal>
 
             <ScrollReveal variant="fadeLeft" delay={0.1}>
-              <p className="label-xs mb-5">The Founder</p>
+              <div className="flex items-center gap-3 mb-5">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">The Founder</p>
+              </div>
               <h2 className="heading-lg mb-6">
                 An artist&apos;s eye for functional design.
               </h2>
@@ -93,7 +101,10 @@ export default function AboutPage() {
         <div className="container-site">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal>
-              <p className="label-xs mb-5 text-center">Our Philosophy</p>
+              <div className="flex items-center justify-center gap-3 mb-5">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">Our Philosophy</p>
+              </div>
               <h2 className="heading-lg text-center mb-14">
                 Simplicity is luxury.<br />Balance creates calm.
               </h2>
@@ -124,7 +135,10 @@ export default function AboutPage() {
       <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container-site">
           <ScrollReveal>
-            <p className="label-xs mb-4">Why VIXX</p>
+            <div className="flex items-center gap-3 mb-4">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Why VIXX</p>
+            </div>
             <h2 className="heading-lg mb-14 max-w-xl">What sets us apart.</h2>
           </ScrollReveal>
 
@@ -174,7 +188,10 @@ export default function AboutPage() {
       <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container-site text-center">
           <ScrollReveal>
-            <p className="label-xs mb-4">Ready to Begin?</p>
+            <div className="flex items-center gap-3 mb-4">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Ready to Begin?</p>
+            </div>
             <h2 className="heading-lg max-w-xl mx-auto mb-8">
               Let&apos;s build something that lasts.
             </h2>

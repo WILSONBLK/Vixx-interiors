@@ -7,63 +7,54 @@ import { ArrowRight } from 'lucide-react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { MagneticElement } from '@/components/ui/MagneticElement'
 
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
+
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
-  const [isTouch, setIsTouch] = useState(false)
+  const [isTouch, setIsTouch]               = useState(false)
   const [isReducedMotion, setIsReducedMotion] = useState(false)
-  const [imageHovered, setImageHovered] = useState(false)
+  const [imageHovered, setImageHovered]       = useState(false)
 
-  const rawX = useMotionValue(0)
-  const rawY = useMotionValue(0)
-
+  const rawX   = useMotionValue(0)
+  const rawY   = useMotionValue(0)
   const springX = useSpring(rawX, { stiffness: 25, damping: 20 })
   const springY = useSpring(rawY, { stiffness: 25, damping: 20 })
-
-  // Convert to CSS percentage strings for use in transform
-  const xPx = useTransform(springX, (v) => `${v}%`)
-  const yPx = useTransform(springY, (v) => `${v}%`)
+  const xPx     = useTransform(springX, (v) => `${v}%`)
+  const yPx     = useTransform(springY, (v) => `${v}%`)
 
   useEffect(() => {
-    const touch = window.matchMedia('(hover: none)').matches
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const touch   = window.matchMedia('(hover: none)').matches
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     setIsTouch(touch)
-    setIsReducedMotion(reducedMotion)
-
-    if (touch || reducedMotion) return
+    setIsReducedMotion(reduced)
+    if (touch || reduced) return
 
     const section = sectionRef.current
     if (!section) return
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = section.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
-
-      // Move OPPOSITE to cursor (depth illusion), range ±2.5%
-      rawX.set(-((e.clientX - centerX) / rect.width) * 2.5)
-      rawY.set(-((e.clientY - centerY) / rect.height) * 2.5)
+    const onMove = (e: MouseEvent) => {
+      const r = section.getBoundingClientRect()
+      rawX.set(-((e.clientX - (r.left + r.width  / 2)) / r.width)  * 2.5)
+      rawY.set(-((e.clientY - (r.top  + r.height / 2)) / r.height) * 2.5)
     }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
   }, [rawX, rawY])
 
   const enableParallax = !isTouch && !isReducedMotion
-  const enableScale = !isTouch && !isReducedMotion
+  const enableScale    = !isTouch && !isReducedMotion
+  // When reduced motion is on, initial={false} renders elements at their final state instantly
+  const rm = isReducedMotion
 
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[100vh] flex-col justify-end px-6 pb-28 pt-36 lg:px-8 overflow-hidden"
+      className="relative flex min-h-screen flex-col justify-end overflow-hidden px-5 pb-16 pt-32 sm:px-6 sm:pb-24 lg:px-8 lg:pb-28"
       onMouseEnter={() => setImageHovered(true)}
       onMouseLeave={() => setImageHovered(false)}
     >
-      {/* ── Parallax image layer ─────────────────────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className="absolute pointer-events-none"
-        style={{ inset: '-6%' }}
-      >
+      {/* ── Background image + overlay stack ──────────────────────────────────── */}
+      <div aria-hidden="true" className="absolute pointer-events-none" style={{ inset: '-6%' }}>
         <motion.div
           style={{
             position: 'absolute',
@@ -71,11 +62,11 @@ export function HeroSection() {
             x: enableParallax ? xPx : 0,
             y: enableParallax ? yPx : 0,
           }}
-          animate={{ scale: enableScale && imageHovered ? 1.035 : 1 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          animate={{ scale: enableScale && imageHovered ? 1.03 : 1 }}
+          transition={{ duration: 1.6, ease: EASE }}
         >
           <Image
-            src="/images/portfolio/living-room-1.jpg"
+            src="/images/portfolio/living-room-3.jpg"
             alt=""
             fill
             priority
@@ -84,118 +75,164 @@ export function HeroSection() {
           />
         </motion.div>
 
-        {/* Dark base overlay */}
-        <div className="absolute inset-0" style={{ background: 'rgba(2,6,23,0.52)' }} />
+        {/* Base dark — warm near-black, not cold navy */}
+        <div className="absolute inset-0" style={{ background: 'rgba(6,4,2,0.70)' }} />
 
-        {/* Left-weighted radial vignette */}
+        {/* Left-to-right gradient — deepens text zone, lightens right */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 90% 110% at 20% 60%, transparent 0%, rgba(2,6,23,0.35) 45%, rgba(2,6,23,0.88) 100%)',
+              'linear-gradient(105deg, rgba(6,4,2,0.72) 0%, rgba(6,4,2,0.40) 55%, rgba(6,4,2,0.08) 100%)',
           }}
         />
 
-        {/* Bottom fade into bg-primary */}
+        {/* Bottom fade into page background */}
         <div
-          className="absolute bottom-0 inset-x-0 h-56"
+          className="absolute bottom-0 inset-x-0 h-64"
           style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-primary))' }}
         />
 
-        {/* Subtle gold warmth on left */}
+        {/* Subtle warm gold glow anchored to text zone */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 50% 50% at 15% 50%, rgba(196,154,46,0.07) 0%, transparent 65%)',
+              'radial-gradient(ellipse 42% 42% at 12% 58%, rgba(196,154,46,0.08) 0%, transparent 60%)',
           }}
         />
       </div>
 
-      {/* ── Hero content ─────────────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-2xl">
+      {/* ── Hero content ──────────────────────────────────────────────────────────
+          CSS variables overridden locally so every child reads light values
+          in both dark and light theme — the hero is always over a dark image.
+      ──────────────────────────────────────────────────────────────────────────── */}
+      <div
+        className="relative z-10"
+        style={{
+          '--text-primary':   '#F5F5F4',
+          '--text-secondary': 'rgba(245,242,237,0.70)',
+          '--border-strong':  'rgba(245,245,244,0.28)',
+          '--border':         'rgba(245,245,244,0.12)',
+        } as React.CSSProperties}
+      >
 
-        {/* Badge */}
+        {/* ── Eyebrow ── */}
         <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 mb-8 px-3 py-1.5 rounded-full"
-          style={{
-            background: 'rgba(196,154,46,0.12)',
-            border: '1px solid rgba(196,154,46,0.28)',
-          }}
+          className="flex items-center gap-3 mb-7 sm:mb-9"
+          initial={rm ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.4, delay: 0.2, ease: 'easeOut' }}
         >
-          <span
-            className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-            style={{ background: 'var(--gold)' }}
+          <div
+            className="h-px w-6 sm:w-8 flex-shrink-0"
+            style={{ background: 'var(--gold)', opacity: 0.8 }}
           />
           <span
-            className="font-jost text-[0.6rem] tracking-[0.25em] uppercase"
-            style={{ color: 'var(--gold)' }}
+            className="font-jost text-[0.54rem] sm:text-[0.58rem] tracking-[0.42em] uppercase"
+            style={{ color: 'rgba(196,154,46,0.78)' }}
           >
-            VIXX Interiors &middot; Lagos
+            Luxury Interior Design &nbsp;&middot;&nbsp; Lagos
           </span>
         </motion.div>
 
-        {/* H1 — three lines with slide-up reveal */}
-        <h1 className="heading-xl">
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: '110%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              Interiors That
-            </motion.span>
-          </span>
+        {/* ── Brand lockup: VIXX + Interiors ── */}
+        <h1 aria-label="VIXX Interiors" className="leading-none">
 
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: '110%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <em style={{ color: 'var(--gold)' }}>Command</em>
-            </motion.span>
-          </span>
+          {/* VIXX — dominant, blur-to-sharp cinematic reveal */}
+          <motion.span
+            className="block font-cormorant font-black"
+            style={{
+              fontSize:      'clamp(4rem, 18vw, 13rem)',
+              lineHeight:    0.88,
+              letterSpacing: '-0.01em',
+              color:         '#F5F5F4',
+              textShadow:    '0 4px 40px rgba(6,4,2,0.92)',
+            }}
+            initial={rm ? false : { opacity: 0, filter: 'blur(16px)', y: 28 }}
+            animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+            transition={{ duration: 2.0, delay: 0.28, ease: EASE }}
+          >
+            VIXX
+          </motion.span>
 
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: '110%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              The Room.
-            </motion.span>
-          </span>
+          {/* Interiors — italic counterpoint, weight contrast creates luxury hierarchy */}
+          <motion.span
+            className="block font-cormorant italic font-normal"
+            style={{
+              fontSize:      'clamp(1.7rem, 7.4vw, 5.3rem)',
+              lineHeight:    1,
+              letterSpacing: '0.22em',
+              color:         'rgba(245,241,234,0.85)',
+              textShadow:    '0 2px 24px rgba(6,4,2,0.88)',
+              marginTop:     '-0.03em',
+            }}
+            initial={rm ? false : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.6, delay: 0.72, ease: EASE }}
+          >
+            Interiors
+          </motion.span>
         </h1>
 
-        {/* Body text */}
+        {/* ── Animated gold separator ── */}
+        <motion.div
+          className="mt-6 sm:mt-8"
+          style={{
+            height:          '1px',
+            maxWidth:        '300px',
+            background:      'linear-gradient(90deg, #C49A2E 0%, rgba(196,154,46,0.28) 65%, transparent 100%)',
+            transformOrigin: 'left center',
+          }}
+          initial={rm ? false : { scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.1, delay: 1.06, ease: [0.4, 0, 0.2, 1] }}
+        />
+
+        {/* ── Tagline: Different by Design ── */}
         <motion.p
-          className="body-lg mt-6 max-w-lg"
-          initial={{ opacity: 0, y: 16 }}
+          className="font-cormorant italic font-normal mt-5 sm:mt-6"
+          style={{
+            fontSize:      'clamp(1rem, 2.3vw, 1.6rem)',
+            letterSpacing: '0.10em',
+            color:         'rgba(196,154,46,0.88)',
+            textShadow:    '0 2px 16px rgba(6,4,2,0.80)',
+          }}
+          initial={rm ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2, delay: 1.30, ease: EASE }}
         >
-          Bespoke luxury design for Lagos&apos;s most discerning homes and commercial spaces.{' '}
-          Bold vision. Flawless execution.
+          Different by Design
         </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          className="mt-10 flex flex-wrap items-center gap-4"
-          initial={{ opacity: 0, y: 16 }}
+        {/* ── Descriptor ── */}
+        <motion.p
+          className="font-jost font-light leading-relaxed mt-5 sm:mt-7"
+          style={{
+            fontSize:      'clamp(0.82rem, 1.35vw, 1rem)',
+            maxWidth:      '42ch',
+            color:         'rgba(245,241,234,0.62)',
+            letterSpacing: '0.015em',
+            textShadow:    '0 1px 10px rgba(6,4,2,0.70)',
+          }}
+          initial={rm ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.0, delay: 1.60, ease: EASE }}
+        >
+          We create interiors with clarity, confidence, and character—spaces that feel exceptional without trying too hard.
+        </motion.p>
+
+        {/* ── CTAs ── */}
+        <motion.div
+          className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3 sm:gap-4"
+          initial={rm ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, delay: 1.85, ease: EASE }}
         >
           <MagneticElement>
             <Link href="/portfolio" className="btn-primary">
               Explore Our Work
-              <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
+              <ArrowRight size={13} strokeWidth={1.5} aria-hidden="true" />
             </Link>
           </MagneticElement>
 

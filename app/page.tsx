@@ -11,6 +11,7 @@ import { SplitText }        from '@/components/ui/SplitText'
 import { TiltCard }         from '@/components/ui/TiltCard'
 import { MagneticElement }  from '@/components/ui/MagneticElement'
 import { STATS, SERVICES, PROCESS_STEPS, TESTIMONIALS, PORTFOLIO_PROJECTS } from '@/lib/data'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
   title:       'VIXX Interiors – Luxury Interior Design, Lagos',
@@ -141,7 +142,10 @@ export default function Home() {
             {/* Right: text */}
             <ScrollReveal variant="fadeLeft" delay={0.1}>
               <div>
-                <p className="label-xs mb-4">The VIXX Standard</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <AnimatedLine width={24} delay={0.1} />
+                  <p className="label-xs">The VIXX Standard</p>
+                </div>
                 <h2 className="heading-lg mb-6">
                   <SplitText delay={0} wordDelay={0.05}>
                     We don&apos;t just design rooms.
@@ -195,7 +199,10 @@ export default function Home() {
         <div className="container-site">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <p className="label-xs mb-3">What We Do</p>
+              <div className="flex items-center gap-3 mb-3">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">What We Do</p>
+              </div>
               <h2 className="heading-lg">
                 <SplitText delay={0} wordDelay={0.05}>Excellence in</SplitText>
                 {' '}
@@ -255,7 +262,10 @@ export default function Home() {
         <div className="container-site">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <ScrollReveal variant="fadeRight">
-              <p className="label-xs mb-4">How We Work</p>
+              <div className="flex items-center gap-3 mb-4">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">How We Work</p>
+              </div>
               <h2 className="heading-lg mb-6">
                 <SplitText delay={0} wordDelay={0.055}>A process as bold as the result.</SplitText>
               </h2>
@@ -337,7 +347,10 @@ export default function Home() {
               <HexMotif size={100} variant="outline" opacity={0.06} className="absolute -bottom-4 -left-4 pointer-events-none" aria-hidden />
 
               <div className="relative z-10">
-                <p className="label-xs mb-5">Ready to Begin?</p>
+                <div className="flex items-center gap-3 mb-5">
+                  <AnimatedLine width={24} delay={0.1} />
+                  <p className="label-xs">Ready to Begin?</p>
+                </div>
                 <h2 className="heading-lg max-w-2xl mx-auto mb-6">
                   <SplitText delay={0} wordDelay={0.045}>Your most impressive space starts here.</SplitText>
                 </h2>

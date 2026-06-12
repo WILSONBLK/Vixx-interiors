@@ -4,7 +4,7 @@
 
 /* ── Design tokens (dark = default) ──────────────────────────────────────── */
 :root {
-  --nav-height:      96px;
+  --nav-height:      76px;
   --scrollbar-width: 0px;
 
   --gold:        #C49A2E;
@@ -151,30 +151,30 @@
   }
 
   .heading-xl {
-    @apply font-cormorant font-normal tracking-tight
+    @apply font-cormorant font-medium
            text-6xl sm:text-7xl lg:text-8xl xl:text-[7rem]
            text-[var(--text-primary)] leading-[0.95];
   }
 
   .heading-lg {
-    @apply font-cormorant font-normal tracking-tight
+    @apply font-cormorant font-medium
            text-4xl sm:text-5xl lg:text-6xl
            text-[var(--text-primary)] leading-[1.05];
   }
 
   .heading-md {
-    @apply font-cormorant font-normal
+    @apply font-cormorant font-medium
            text-3xl sm:text-4xl
            text-[var(--text-primary)] leading-snug;
   }
 
   .body-lg {
-    @apply font-sans text-base sm:text-lg leading-relaxed
+    @apply font-jost font-light text-base sm:text-lg leading-relaxed
            text-[var(--text-secondary)];
   }
 
   .body-md {
-    @apply font-sans text-sm sm:text-base leading-relaxed
+    @apply font-jost text-sm sm:text-base leading-relaxed
            text-[var(--text-secondary)];
   }
 

@@ -7,6 +7,7 @@ import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { PORTFOLIO_PROJECTS } from '@/lib/data'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
   title:       'Interior Design Portfolio – VIXX Interiors',
@@ -29,11 +30,15 @@ export default function PortfolioPage() {
         />
         <div className="container-site relative z-10">
           <ScrollReveal>
-            <p className="label-xs mb-5">Our Portfolio</p>
-            <h1 className="heading-xl mb-6 max-w-3xl">
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Our Portfolio</p>
+            </div>
+            <h1 className="heading-xl mb-4 max-w-3xl">
               Realized projects that{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>speak for themselves.</em>
             </h1>
+            <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg max-w-xl">
               Each project begins with a conversation and ends with a space that exceeds what was imagined.
             </p>
@@ -113,7 +118,10 @@ export default function PortfolioPage() {
         <HexMotif size={180} variant="dual" opacity={0.04} className="absolute -right-8 top-1/2 -translate-y-1/2" aria-hidden />
         <div className="container-site relative z-10 text-center">
           <ScrollReveal>
-            <p className="label-xs mb-4">Start Your Project</p>
+            <div className="flex items-center gap-3 mb-4">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Start Your Project</p>
+            </div>
             <h2 className="heading-lg max-w-xl mx-auto mb-8">
               Your space could be next.
             </h2>

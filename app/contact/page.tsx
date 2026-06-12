@@ -5,6 +5,7 @@ import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { ContactForm }  from '@/components/forms/ContactForm'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
   title:       'Book a Consultation – VIXX Interiors',
@@ -25,11 +26,15 @@ export default function ContactPage() {
         />
         <div className="container-site relative z-10 max-w-3xl">
           <ScrollReveal>
-            <p className="label-xs mb-5">Start Your Project</p>
-            <h1 className="heading-xl mb-6">
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Start Your Project</p>
+            </div>
+            <h1 className="heading-xl mb-4">
               Tell us about{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>your space.</em>
             </h1>
+            <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg">
               Fill in the form below and we&apos;ll respond within 24 hours with a tailored proposal. All enquiries are handled in confidence.
             </p>
@@ -53,7 +58,10 @@ export default function ContactPage() {
 
                 {/* Contact details */}
                 <div>
-                  <p className="label-xs mb-6">Get in Touch</p>
+                  <div className="flex items-center gap-3 mb-6">
+                    <AnimatedLine width={24} delay={0.1} />
+                    <p className="label-xs">Get in Touch</p>
+                  </div>
                   <ul className="space-y-5">
                     <li className="flex items-start gap-4">
                       <MapPin size={16} strokeWidth={1.5} className="mt-0.5 flex-shrink-0" style={{ color: 'var(--gold)' }} />
@@ -104,7 +112,10 @@ export default function ContactPage() {
 
                 {/* What to expect */}
                 <div>
-                  <p className="label-xs mb-5">What to Expect</p>
+                  <div className="flex items-center gap-3 mb-5">
+                    <AnimatedLine width={24} delay={0.2} />
+                    <p className="label-xs">What to Expect</p>
+                  </div>
                   <div className="space-y-4">
                     {[
                       { step: '01', text: 'We\'ll acknowledge your enquiry within a few hours.' },

@@ -8,6 +8,7 @@ import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { FAQ_ITEMS } from '@/lib/data'
+import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 function FAQItem({ question, answer, isOpen, onToggle }: {
   question: string
@@ -68,11 +69,15 @@ export default function FAQPage() {
         />
         <div className="container-site relative z-10 max-w-3xl">
           <ScrollReveal>
-            <p className="label-xs mb-5">Frequently Asked Questions</p>
-            <h1 className="heading-xl mb-6">
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Frequently Asked Questions</p>
+            </div>
+            <h1 className="heading-xl mb-4">
               Everything you need{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>to know.</em>
             </h1>
+            <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg">
               We believe in complete transparency from the first conversation. Here are the questions we hear most often — answered honestly.
             </p>
@@ -104,7 +109,10 @@ export default function FAQPage() {
         <div className="container-site relative z-10">
           <div className="max-w-2xl">
             <ScrollReveal>
-              <p className="label-xs mb-4">Still Have Questions?</p>
+              <div className="flex items-center gap-3 mb-4">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">Still Have Questions?</p>
+              </div>
               <h2 className="heading-lg mb-6">
                 We&apos;re happy to talk it through.
               </h2>
