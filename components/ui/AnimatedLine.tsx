@@ -1,13 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 interface AnimatedLineProps {
-  /** CSS length or pixel number. Omit for full-width. */
   width?:     string | number
   delay?:     number
   className?: string
-  /** Full-width centred divider style — both ends fade to transparent */
   full?:      boolean
 }
 
@@ -17,6 +15,31 @@ export function AnimatedLine({
   className = '',
   full = false,
 }: AnimatedLineProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [vis, setVis] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVis(true)
+      return
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVis(true)
+          io.unobserve(el)
+        }
+      },
+      { rootMargin: '-30px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   const resolvedWidth = full
     ? '100%'
     : typeof width === 'number'
@@ -28,7 +51,8 @@ export function AnimatedLine({
     : 'linear-gradient(90deg, #C49A2E 0%, rgba(196,154,46,0.28) 68%, transparent 100%)'
 
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={className}
       style={{
         height:          '1px',
@@ -36,11 +60,9 @@ export function AnimatedLine({
         background,
         transformOrigin: 'left center',
         flexShrink:      0,
+        transform:       `scaleX(${vis ? 1 : 0})`,
+        transition:      vis ? `transform 1.1s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s` : 'none',
       }}
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, margin: '-30px' }}
-      transition={{ duration: 1.1, delay, ease: [0.4, 0, 0.2, 1] }}
     />
   )
 }

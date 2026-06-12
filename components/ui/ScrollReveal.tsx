@@ -66,7 +66,7 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        'transition-all duration-700 ease-out will-change-transform',
+        'transition-all duration-700 ease-out',
         visible ? visibleClass : hidden,
         className,
       )}

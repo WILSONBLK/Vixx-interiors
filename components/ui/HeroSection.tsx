@@ -32,13 +32,20 @@ export function HeroSection() {
     const section = sectionRef.current
     if (!section) return
 
+    let rafId = 0
     const onMove = (e: MouseEvent) => {
-      const r = section.getBoundingClientRect()
-      rawX.set(-((e.clientX - (r.left + r.width  / 2)) / r.width)  * 2.5)
-      rawY.set(-((e.clientY - (r.top  + r.height / 2)) / r.height) * 2.5)
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(() => {
+        const r = section.getBoundingClientRect()
+        rawX.set(-((e.clientX - (r.left + r.width  / 2)) / r.width)  * 2.5)
+        rawY.set(-((e.clientY - (r.top  + r.height / 2)) / r.height) * 2.5)
+      })
     }
-    window.addEventListener('mousemove', onMove)
-    return () => window.removeEventListener('mousemove', onMove)
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(rafId)
+    }
   }, [rawX, rawY])
 
   const enableParallax = !isTouch && !isReducedMotion
@@ -49,7 +56,8 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-screen flex-col justify-end overflow-hidden px-5 pb-16 pt-32 sm:px-6 sm:pb-24 lg:px-8 lg:pb-28"
+      className="relative flex flex-col justify-end overflow-hidden px-5 pb-16 pt-32 sm:px-6 sm:pb-24 lg:px-8 lg:pb-28"
+      style={{ minHeight: '100svh' }}
       onMouseEnter={() => setImageHovered(true)}
       onMouseLeave={() => setImageHovered(false)}
     >
@@ -149,9 +157,9 @@ export function HeroSection() {
               color:         '#F5F5F4',
               textShadow:    '0 4px 40px rgba(6,4,2,0.92)',
             }}
-            initial={rm ? false : { opacity: 0, filter: 'blur(16px)', y: 28 }}
-            animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-            transition={{ duration: 2.0, delay: 0.28, ease: EASE }}
+            initial={rm ? false : { opacity: 0, scale: 0.96, y: 28 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.6, delay: 0.28, ease: EASE }}
           >
             VIXX
           </motion.span>

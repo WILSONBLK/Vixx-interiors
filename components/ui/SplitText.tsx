@@ -32,7 +32,7 @@ export function SplitText({
           style={{ verticalAlign: 'bottom' }}
         >
           <motion.span
-            className="inline-block"
+            className="inline-block split-word"
             initial={{ y: '105%', opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once }}

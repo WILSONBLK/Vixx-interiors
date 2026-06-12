@@ -29,6 +29,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# restructure remnant (locked DLLs — delete manually after VS Code restart)
+/Vixx-interiors/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

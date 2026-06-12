@@ -241,3 +241,11 @@
   from { transform: scale(1.08) translateZ(0); }
   to   { transform: scale(1.18) translateZ(0); }
 }
+
+/* SplitText: words are always visible on touch/mobile ───────────────────── */
+@media (hover: none) {
+  .split-word {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
