@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: 'Browse our completed interior design projects (homes, offices, living spaces). See why clients love our work in Lagos, Nigeria.',
 }
 
-const CATEGORIES = ['All', 'Luxury Living Rooms', 'Master Bedrooms', 'Commercial Offices']
+const CATEGORIES = ['All', 'Living Spaces', 'Master Bedrooms', 'Commercial Offices']
 
 export default function PortfolioPage() {
   return (

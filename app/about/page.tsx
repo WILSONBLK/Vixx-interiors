@@ -9,8 +9,8 @@ import { WHY_ITEMS, TESTIMONIALS } from '@/lib/data'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
-  title:       'About VIXX Interiors – Luxury Design Studio',
-  description: 'Learn about Osita Agusionu and VIXX Interiors\' philosophy: creating calming, sophisticated interiors in Lagos, Nigeria.',
+  title:       'About VIXX Interiors – Interior Design Studio',
+  description: 'Learn about Osita Agusionu and VIXX Interiors\' philosophy: creating calm, considered interiors in Lagos, Nigeria.',
 }
 
 export default function AboutPage() {
@@ -37,7 +37,7 @@ export default function AboutPage() {
             </h1>
             <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg max-w-2xl">
-              VIXX Interiors is a Lagos-based luxury design studio founded on the belief that a great space is not simply beautiful — it is purposeful, personal, and enduring.
+              VIXX Interiors is a Lagos-based interior design studio founded on the belief that a great space is not simply beautiful — it is purposeful, personal, and enduring.
             </p>
           </ScrollReveal>
         </div>
@@ -106,7 +106,7 @@ export default function AboutPage() {
                 <p className="label-xs">Our Philosophy</p>
               </div>
               <h2 className="heading-lg text-center mb-14">
-                Simplicity is luxury.<br />Balance creates calm.
+                Simplicity Kind of Different
               </h2>
             </ScrollReveal>
 

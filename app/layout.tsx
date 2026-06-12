@@ -26,14 +26,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default:  'VIXX Interiors – Luxury Interior Design, Lagos',
+    default:  'VIXX Interiors – Interior Design Studio, Lagos',
     template: '%s | VIXX Interiors',
   },
   description:
-    'Lagos-based luxury interior design studio crafting calm, refined living and commercial spaces with an unmistakable personal touch.',
+    'Lagos-based interior design studio crafting calm, considered living and commercial spaces with an unmistakable personal touch.',
   keywords: [
     'interior design Lagos',
-    'luxury interior designer Nigeria',
+    'interior design studio Nigeria',
     'residential interior design',
     'commercial interior design',
     'VIXX Interiors',
@@ -45,12 +45,12 @@ export const metadata: Metadata = {
     type:        'website',
     locale:      'en_NG',
     siteName:    'VIXX Interiors',
-    title:       'VIXX Interiors – Luxury Interior Design, Lagos',
-    description: 'Lagos-based luxury interior design studio crafting calm, refined spaces.',
+    title:       'VIXX Interiors – Interior Design Studio, Lagos',
+    description: 'Lagos-based interior design studio crafting calm, considered spaces.',
   },
   twitter: {
     card:  'summary_large_image',
-    title: 'VIXX Interiors – Luxury Interior Design, Lagos',
+    title: 'VIXX Interiors – Interior Design Studio, Lagos',
   },
 }
 

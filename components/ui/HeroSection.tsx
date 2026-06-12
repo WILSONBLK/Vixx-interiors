@@ -140,7 +140,7 @@ export function HeroSection() {
             className="font-jost text-[0.54rem] sm:text-[0.58rem] tracking-[0.42em] uppercase"
             style={{ color: 'rgba(196,154,46,0.78)' }}
           >
-            Luxury Interior Design &nbsp;&middot;&nbsp; Lagos
+            Interior Design Studio &nbsp;&middot;&nbsp; Lagos
           </span>
         </motion.div>
 
@@ -164,7 +164,7 @@ export function HeroSection() {
             VIXX
           </motion.span>
 
-          {/* Interiors — italic counterpoint, weight contrast creates luxury hierarchy */}
+          {/* Interiors — italic counterpoint, weight creates visual rhythm */}
           <motion.span
             className="block font-cormorant italic font-normal"
             style={{
@@ -210,7 +210,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 1.30, ease: EASE }}
         >
-          Different by Design
+          Simplicity Kind of Different
         </motion.p>
 
         {/* ── Descriptor ── */}
@@ -227,7 +227,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, delay: 1.60, ease: EASE }}
         >
-          We create interiors with clarity, confidence, and character—spaces that feel exceptional without trying too hard.
+          A Lagos interior design studio creating considered spaces where simplicity and expression meet.
         </motion.p>
 
         {/* ── CTAs ── */}

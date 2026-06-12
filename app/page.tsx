@@ -14,8 +14,8 @@ import { STATS, SERVICES, PROCESS_STEPS, TESTIMONIALS, PORTFOLIO_PROJECTS } from
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
-  title:       'VIXX Interiors – Luxury Interior Design, Lagos',
-  description: 'VIXX Interiors crafts luxury spaces in Lagos and beyond. Explore our portfolio and book a design consultation.',
+  title:       'VIXX Interiors – Interior Design Studio, Lagos',
+  description: 'VIXX Interiors is a Lagos interior design studio crafting considered spaces. Explore our portfolio and start a conversation.',
 }
 
 const CATEGORY_LINKS = [
@@ -29,14 +29,14 @@ const WHY_CARDS = [
   {
     image: '/images/portfolio/living-room-1.jpg',
     label: 'Residential',
-    title: 'Residences Built to Impress',
-    body:  'We design homes that turn heads and hold value — tailored to your life, your taste, and your ambition.',
+    title: 'Homes Designed to Last',
+    body:  'We design homes that feel like you — considered, calm, and made to live in for the long term.',
   },
   {
     image: '/images/portfolio/living-room-2.jpg',
     label: 'Commercial',
-    title: 'Commercial Spaces That Win',
-    body:  'Your environment shapes how clients, partners, and talent see you. We make sure they see the best.',
+    title: 'Workspaces With Character',
+    body:  'Your environment shapes how people feel. We design spaces that communicate quality without announcing it.',
   },
   {
     image: '/images/portfolio/living-room-3.jpg',
@@ -158,7 +158,7 @@ export default function Home() {
                   </em>
                 </h2>
                 <p className="body-lg mb-8">
-                  Lagos&apos;s most ambitious interiors start with a conversation. Whether it&apos;s a penthouse in Victoria Island or a flagship office in Lekki — we bring the same obsessive attention to detail, the same drive for excellence, to every project we touch.
+                  Every VIXX project starts with a conversation. Whether it&apos;s a home in Victoria Island or an office in Lekki — the same studio rigour, the same depth of thinking, applied to every space we touch.
                 </p>
 
                 {/* Inline stats */}
@@ -270,7 +270,7 @@ export default function Home() {
                 <SplitText delay={0} wordDelay={0.055}>A process as bold as the result.</SplitText>
               </h2>
               <p className="body-lg mb-8">
-                Every VIXX project follows a six-stage process built for precision — from discovery to reveal. No guesswork. No shortcuts. Just exceptional outcomes, delivered on time.
+                Every VIXX project follows a six-stage process built for precision — from discovery to reveal. No guesswork. No shortcuts. Just well-made spaces, delivered on time.
               </p>
               <Link href="/process" className="btn-primary">
                 See the Process
@@ -352,10 +352,10 @@ export default function Home() {
                   <p className="label-xs">Ready to Begin?</p>
                 </div>
                 <h2 className="heading-lg max-w-2xl mx-auto mb-6">
-                  <SplitText delay={0} wordDelay={0.045}>Your most impressive space starts here.</SplitText>
+                  <SplitText delay={0} wordDelay={0.045}>Every great space starts with a conversation.</SplitText>
                 </h2>
                 <p className="body-lg max-w-xl mx-auto mb-10">
-                  Tell us about your project. We&apos;ll respond within 24 hours with a tailored proposal — no obligation, no generic packages.
+                  Tell us about your project. We&apos;ll respond within 24 hours with a tailored proposal — no obligation, no off-the-shelf packages.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4">
                   <MagneticElement>

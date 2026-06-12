@@ -52,7 +52,7 @@ export function Footer() {
               />
             </Link>
             <p className="font-sans text-sm leading-relaxed mb-6" style={{ color: 'var(--text-muted)' }}>
-              Lagos-based luxury interior design studio crafting calm, refined spaces that stand the test of time.
+              Lagos-based interior design studio crafting calm, considered spaces that stand the test of time.
             </p>
             <div className="flex items-center gap-3">
               {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (

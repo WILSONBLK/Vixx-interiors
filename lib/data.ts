@@ -11,7 +11,7 @@ import type {
 // ── Stats ────────────────────────────────────────────────────────────────────
 export const STATS: StatItem[] = [
   { value: '30+',  label: 'Projects Completed' },
-  { value: '4+',   label: 'Years of Excellence' },
+  { value: '4+',   label: 'Years in Practice' },
   { value: '100%', label: 'Client Satisfaction' },
   { value: '2',    label: 'Design Awards' },
 ]
@@ -158,7 +158,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     id:          'lekki-residence',
     slug:        'lekki-residence',
     title:       'The Lekki Residence',
-    category:    'Luxury Living Rooms',
+    category:    'Living Spaces',
     description: 'A contemporary living and entertainment space designed around warmth, natural texture, and a signature orange accent.',
     location:    'Lekki Phase 1, Lagos',
     completedAt: '2024',
@@ -169,7 +169,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/living-room-3.jpg',
       '/images/portfolio/living-room-4.jpg',
     ],
-    overview:    'A full-scope residential redesign of the ground floor living and dining spaces within a four-bedroom duplex. The brief called for a space that felt both luxurious and lived-in – sophisticated enough to entertain guests, comfortable enough to watch football on a Sunday afternoon.',
+    overview:    'A full-scope residential redesign of the ground floor living and dining spaces within a four-bedroom duplex. The brief called for a space that felt both considered and lived-in – composed enough to entertain guests, comfortable enough to watch football on a Sunday afternoon.',
     challenge:   'The original layout fragmented the open-plan floor into disconnected zones, and the existing palette felt neither warm nor resolved. The client wanted drama without maximalism – presence without weight.',
     solution:    'We anchored the space with a sculptural L-shaped sectional in warm taupe, offset by a single burnt-orange swivel chair that became the room\'s statement piece. A bespoke media wall in dark charcoal and natural oak grounds the entertainment zone, while coffered ceilings with concealed amber cove lighting add architectural depth without structural intervention.',
     materials:   ['Calacatta marble flooring', 'Natural oak veneer', 'Charcoal lacquer panels', 'Crystal cluster chandelier', 'Velvet upholstery', 'Hand-knotted rug'],
@@ -180,7 +180,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     id:          'vi-penthouse',
     slug:        'vi-penthouse',
     title:       'Victoria Island Penthouse',
-    category:    'Luxury Living Rooms',
+    category:    'Living Spaces',
     description: 'A full penthouse transformation blending coastal calm with metropolitan elegance.',
     location:    'Victoria Island, Lagos',
     completedAt: '2024',
@@ -203,7 +203,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     slug:        'ikoyi-master',
     title:       'Ikoyi Master Bedroom',
     category:    'Master Bedrooms',
-    description: 'A serene master suite designed around rest, texture, and the art of understated luxury.',
+    description: 'A serene master suite designed around rest, texture, and the art of quiet materiality.',
     location:    'Ikoyi, Lagos',
     completedAt: '2023',
     image:       '/images/portfolio/living-room-3.jpg',
@@ -252,7 +252,7 @@ export const TESTIMONIALS: Testimonial[] = [
     role:        'Homeowner',
     location:    'Lekki, Lagos',
     quote:       'VIXX transformed our home into something we never imagined possible. Every detail was considered, every suggestion was precise. It didn\'t feel like hiring a designer – it felt like collaborating with someone who cared deeply about our space.',
-    projectType: 'Luxury Living Rooms',
+    projectType: 'Living Spaces',
     rating:      5,
   },
   {
