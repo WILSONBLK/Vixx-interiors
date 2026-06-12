@@ -5,7 +5,7 @@ import { Navbar }       from '@/components/layout/Navbar'
 import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { WHY_ITEMS, TESTIMONIALS } from '@/lib/data'
+import { WHY_ITEMS } from '@/lib/data'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
@@ -160,27 +160,6 @@ export default function AboutPage() {
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── Testimonial ── */}
-      <section className="section-pad relative overflow-hidden">
-        <HexMotif size={200} variant="outline" opacity={0.03} className="absolute -right-12 top-1/2 -translate-y-1/2" aria-hidden />
-        <div className="container-site relative z-10">
-          <ScrollReveal>
-            <div className="max-w-3xl mx-auto text-center">
-              <HexMotif size="sm" opacity={0.5} className="mx-auto mb-6" />
-              <blockquote>
-                <p className="font-cormorant text-2xl sm:text-3xl font-light leading-snug mb-6" style={{ color: 'var(--text-primary)' }}>
-                  &ldquo;{TESTIMONIALS[1].quote}&rdquo;
-                </p>
-                <footer>
-                  <p className="font-jost text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{TESTIMONIALS[1].name}</p>
-                  <p className="label-xs mt-1 opacity-70">{TESTIMONIALS[1].role} · {TESTIMONIALS[1].location}</p>
-                </footer>
-              </blockquote>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 

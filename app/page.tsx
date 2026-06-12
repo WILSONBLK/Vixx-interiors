@@ -10,7 +10,7 @@ import { HeroSection }      from '@/components/ui/HeroSection'
 import { SplitText }        from '@/components/ui/SplitText'
 import { TiltCard }         from '@/components/ui/TiltCard'
 import { MagneticElement }  from '@/components/ui/MagneticElement'
-import { STATS, SERVICES, PROCESS_STEPS, TESTIMONIALS, PORTFOLIO_PROJECTS } from '@/lib/data'
+import { STATS, SERVICES, PROCESS_STEPS, PORTFOLIO_PROJECTS } from '@/lib/data'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
@@ -305,32 +305,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Testimonial ──────────────────────────────────────────────────────── */}
-      <section className="section-pad relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
-        <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196,154,46,0.05) 0%, transparent 70%)' }} />
-        <HexMotif size={200} variant="dual" opacity={0.04} className="absolute -left-12 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden />
-        <HexMotif size={160} variant="outline" opacity={0.04} className="absolute -right-8 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden />
-
-        <div className="container-site relative z-10">
-          <ScrollReveal>
-            <div className="max-w-3xl mx-auto text-center">
-              <HexMotif size="sm" opacity={0.5} className="mx-auto mb-6" />
-              <blockquote>
-                <p className="font-cormorant text-2xl sm:text-3xl lg:text-4xl font-light leading-snug mb-8" style={{ color: 'var(--text-primary)' }}>
-                  &ldquo;<SplitText delay={0.1} wordDelay={0.04}>{TESTIMONIALS[0].quote}</SplitText>&rdquo;
-                </p>
-                <footer>
-                  <p className="font-jost text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
-                    {TESTIMONIALS[0].name}
-                  </p>
-                  <p className="label-xs mt-1 opacity-70">{TESTIMONIALS[0].role} &middot; {TESTIMONIALS[0].location}</p>
-                </footer>
-              </blockquote>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 

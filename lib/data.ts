@@ -3,7 +3,6 @@ import type {
   ProcessStep,
   FAQItem,
   PortfolioProject,
-  Testimonial,
   StatItem,
   WhyItem,
 } from '@/types'
@@ -12,7 +11,6 @@ import type {
 export const STATS: StatItem[] = [
   { value: '30+',  label: 'Projects Completed' },
   { value: '4+',   label: 'Years in Practice' },
-  { value: '100%', label: 'Client Satisfaction' },
   { value: '2',    label: 'Design Awards' },
 ]
 
@@ -173,7 +171,6 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     challenge:   'The original layout fragmented the open-plan floor into disconnected zones, and the existing palette felt neither warm nor resolved. The client wanted drama without maximalism – presence without weight.',
     solution:    'We anchored the space with a sculptural L-shaped sectional in warm taupe, offset by a single burnt-orange swivel chair that became the room\'s statement piece. A bespoke media wall in dark charcoal and natural oak grounds the entertainment zone, while coffered ceilings with concealed amber cove lighting add architectural depth without structural intervention.',
     materials:   ['Calacatta marble flooring', 'Natural oak veneer', 'Charcoal lacquer panels', 'Crystal cluster chandelier', 'Velvet upholstery', 'Hand-knotted rug'],
-    results:     'The client described the finished space as "exactly what we imagined but couldn\'t articulate." The residence has since been featured in three client referrals.',
     featured:    true,
   },
   {
@@ -195,7 +192,6 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     challenge:   'Making a space feel intimate at scale – ensuring the living areas didn\'t feel like hotel lobbies despite their generous proportions.',
     solution:    'We introduced a series of intimate zones within the open plan, using rugs, ceiling elements, and carefully placed lighting to define each area. The palette of warm ivory, dusty rose, and brushed gold references the tones of the water at different times of day.',
     materials:   ['Travertine tile', 'Brushed brass fixtures', 'Linen upholstery', 'Custom stone coffee table', 'Rattan accents', 'Silk drapery'],
-    results:     'The project was completed two weeks ahead of schedule. The client has since commissioned us for their Abuja home.',
     featured:    true,
   },
   {
@@ -217,7 +213,6 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     challenge:   'Balancing the client\'s differing preferences – one wanted warmth and texture, the other preferred clean lines and cool tones. The result needed to satisfy both without compromise.',
     solution:    'A custom upholstered headboard wall in deep charcoal velvet serves as the dramatic anchor, balanced by warm walnut bedside tables and ivory linen. Indirect lighting behind the headboard creates a glow that shifts from energising in the morning to deeply relaxing in the evening.',
     materials:   ['Charcoal velvet', 'Walnut timber', 'Ivory linen', 'Terrazzo ensuite tiles', 'Brass hardware', 'Custom rug'],
-    results:     'The client described sleeping in the room as "feeling like a holiday every night." They have since referred three family members.',
     featured:    false,
   },
   {
@@ -239,39 +234,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     challenge:   'Creating distinct zones – a client-facing reception, collaborative open-plan desks, private meeting rooms, and a breakout area – within a relatively compact floor plate.',
     solution:    'We designed a modular layout that uses acoustic partitions and varying floor levels to define zones without closing them off. The brand colours (navy and gold) were woven into the design through furniture, artwork, and surface finishes.',
     materials:   ['Polished concrete floors', 'Acoustic felt panels', 'Custom joinery', 'Ergonomic seating', 'Biophilic elements', 'Integrated tech'],
-    results:     'Staff survey results showed a 40% improvement in satisfaction with the workspace environment. The company has since expanded and retained VIXX for the second floor.',
     featured:    false,
-  },
-]
-
-// ── Testimonials ─────────────────────────────────────────────────────────────
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    id:          't1',
-    name:        'Adaeze Okonkwo',
-    role:        'Homeowner',
-    location:    'Lekki, Lagos',
-    quote:       'VIXX transformed our home into something we never imagined possible. Every detail was considered, every suggestion was precise. It didn\'t feel like hiring a designer – it felt like collaborating with someone who cared deeply about our space.',
-    projectType: 'Living Spaces',
-    rating:      5,
-  },
-  {
-    id:          't2',
-    name:        'Emeka Osei',
-    role:        'Managing Director',
-    location:    'Victoria Island, Lagos',
-    quote:       'We needed our office to reflect the quality of work we deliver to clients. VIXX understood that brief immediately. The space now communicates exactly what we want it to – without saying a word.',
-    projectType: 'Commercial Offices',
-    rating:      5,
-  },
-  {
-    id:          't3',
-    name:        'Titi Bankole',
-    role:        'Homeowner',
-    location:    'Ikoyi, Lagos',
-    quote:       'From the first call to the final reveal, the process was seamless. VIXX managed everything – I didn\'t have to chase a single supplier. I walked in on reveal day and genuinely cried.',
-    projectType: 'Master Bedrooms',
-    rating:      5,
   },
 ]
 

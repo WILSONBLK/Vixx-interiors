@@ -120,17 +120,6 @@ export default async function PortfolioDetailPage({ params }: Props) {
                   </ul>
                 </div>
 
-                {/* Result */}
-                <div
-                  className="p-7"
-                  style={{ border: '1px solid rgba(196,154,46,0.2)', background: 'rgba(196,154,46,0.03)' }}
-                >
-                  <HexMotif size="xs" opacity={0.5} className="mb-4" />
-                  <p className="label-xs mb-3">The Result</p>
-                  <p className="font-cormorant text-lg font-light leading-snug" style={{ color: 'var(--text-secondary)' }}>
-                    {project.results}
-                  </p>
-                </div>
               </div>
             </ScrollReveal>
           </div>

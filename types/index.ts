@@ -53,19 +53,7 @@ export interface PortfolioProject {
   challenge:   string
   solution:    string
   materials:   string[]
-  results:     string
   featured:    boolean
-}
-
-// ── Testimonials ─────────────────────────────────────────────────────────────
-export interface Testimonial {
-  id:          string
-  name:        string
-  role:        string
-  location:    string
-  quote:       string
-  projectType: string
-  rating:      number
 }
 
 // ── Why Choose ───────────────────────────────────────────────────────────────
