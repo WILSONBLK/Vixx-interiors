@@ -205,6 +205,19 @@
   }
 }
 
+/* ── Custom cursor (hover-capable devices only) ──────────────────────────── */
+@media (hover: hover) {
+  body, a, button { cursor: none; }
+}
+
+/* ── Gold pulse animation ─────────────────────────────────────────────────── */
+@keyframes goldPulse {
+  0%, 100% { text-shadow: 0 0 0px rgba(196,154,46,0); }
+  50%       { text-shadow: 0 0 20px rgba(196,154,46,0.4), 0 0 40px rgba(196,154,46,0.15); }
+}
+
+.gold-pulse { animation: goldPulse 3s ease-in-out infinite; }
+
 /* ── Reduced motion ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

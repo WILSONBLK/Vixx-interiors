@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Playfair_Display, Jost, Inter } from 'next/font/google'
+import { CustomCursor } from '@/components/ui/CustomCursor'
 
 const cormorant = Playfair_Display({
   subsets:  ['latin'],
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}
         style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
       >
+        <CustomCursor />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         {children}
       </body>
