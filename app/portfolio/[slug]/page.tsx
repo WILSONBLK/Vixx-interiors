@@ -3,10 +3,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, MapPin, Calendar } from 'lucide-react'
-import { Navbar }       from '@/components/layout/Navbar'
-import { Footer }       from '@/components/layout/Footer'
-import { HexMotif }     from '@/components/ui/HexMotif'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
+import { Navbar }          from '@/components/layout/Navbar'
+import { Footer }          from '@/components/layout/Footer'
+import { HexMotif }        from '@/components/ui/HexMotif'
+import { ScrollReveal }    from '@/components/ui/ScrollReveal'
+import { ProjectGallery }  from '@/components/ui/ProjectGallery'
 import { PORTFOLIO_PROJECTS } from '@/lib/data'
 
 interface Props {
@@ -127,30 +128,14 @@ export default async function PortfolioDetailPage({ params }: Props) {
       </section>
 
       {/* ── Image gallery ── */}
-      <section className="section-pad">
-        <div className="container-site">
-          <ScrollReveal>
-            <p className="label-xs mb-10">Project Photography</p>
-          </ScrollReveal>
-          <div className="grid md:grid-cols-2 gap-px" style={{ background: 'var(--border)' }}>
-            {project.images.map((src, i) => (
-              <ScrollReveal key={src + i} delay={(i % 2) * 0.06} variant="fadeUp">
-                <div
-                  className={`relative overflow-hidden ${i === 0 ? 'md:col-span-2 aspect-[16/7]' : 'aspect-[4/3]'}`}
-                  style={{ background: 'var(--bg-secondary)' }}
-                >
-                  <Image
-                    src={src}
-                    alt={`${project.title} – image ${i + 1}`}
-                    fill
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes={i === 0 ? '100vw' : '(max-width: 768px) 100vw, 50vw'}
-                  />
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
+      <section className="py-12">
+        <ScrollReveal>
+          <p className="label-xs mb-8 container-site">Project Photography</p>
+        </ScrollReveal>
+        <ProjectGallery
+          images={project.images}
+          height="clamp(300px, 65vh, 660px)"
+        />
       </section>
 
       {/* ── Other projects ── */}

@@ -249,3 +249,28 @@
     transform: none !important;
   }
 }
+
+/* ── Gallery panoramic pan animations ────────────────────────────────────── */
+/*
+   Pan wrapper is positioned: left: -10%; width: 120%
+   This gives 10% overhang each side (of the item width).
+   translateX(0%) → start (shows left portion)
+   translateX(-8.33%) → end (8.33% × 120% = 10% of item → right edge flush)
+   Both extremes keep the item fully covered.
+*/
+@keyframes vixx-pan-ltr {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(-8.33%); }
+}
+
+@keyframes vixx-pan-rtl {
+  from { transform: translateX(-8.33%); }
+  to   { transform: translateX(0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="vixx-pan-ltr"],
+  [style*="vixx-pan-rtl"] {
+    animation: none !important;
+  }
+}
