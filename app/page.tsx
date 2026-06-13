@@ -6,6 +6,7 @@ import { Navbar }       from '@/components/layout/Navbar'
 import { Footer }       from '@/components/layout/Footer'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { HeroSection }    from '@/components/ui/HeroSection'
+import { AboutStudio }   from '@/components/ui/AboutStudio'
 import { AnimatedLine }   from '@/components/ui/AnimatedLine'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ContactForm }  from '@/components/forms/ContactForm'
@@ -33,7 +34,84 @@ export default function Home() {
       {/* ── 1. Hero ───────────────────────────────────────────────────────────── */}
       <HeroSection />
 
-      {/* ── 2. Services ─────────────────────────────────────────────────────── */}
+      {/* ── 2. About Studio ─────────────────────────────────────────────────── */}
+      <AboutStudio />
+
+      {/* ── 3. Portfolio (featured – full-bleed editorial grid) ──────────────── */}
+      <section style={{ background: 'var(--bg-primary)' }}>
+        {/* Section header — constrained */}
+        <div className="container-site pt-20 pb-10 lg:pt-28 lg:pb-14">
+          <ScrollReveal>
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <AnimatedLine width={24} delay={0.1} />
+                  <p className="label-xs">Selected Work</p>
+                </div>
+                <h2 className="heading-lg">Recent Projects</h2>
+              </div>
+              <Link href="/portfolio" className="btn-ghost hidden sm:inline-flex mt-3">
+                View All
+                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+
+        {/* Constrained 2-col grid with breathing room */}
+        <div className="container-site pb-16 lg:pb-24">
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+            {PORTFOLIO_PROJECTS.filter((p) => p.featured).map((project, i) => (
+              <ScrollReveal key={project.id} delay={i * 0.12} variant="fadeUp">
+                <Link
+                  href={`/portfolio/${project.slug}`}
+                  className="group relative block overflow-hidden rounded-2xl"
+                  aria-label={`View ${project.title}`}
+                >
+                  <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: 'linear-gradient(to top, var(--overlay-heavy) 0%, var(--overlay-subtle) 45%, transparent 100%)' }}
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 p-7 lg:p-9">
+                      <p
+                        className="font-jost text-[0.56rem] tracking-[0.28em] uppercase mb-2"
+                        style={{ color: 'var(--gold-text)' }}
+                      >
+                        {project.category}
+                      </p>
+                      <h3
+                        className="font-cormorant font-light text-[var(--brand-cream)] leading-tight"
+                        style={{ fontSize: 'clamp(1.3rem, 2.4vw, 2rem)' }}
+                      >
+                        {project.title}
+                      </h3>
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* View all — centred below cards */}
+          <div className="mt-8 flex justify-center">
+            <Link href="/portfolio" className="btn-ghost">
+              View All Projects
+              <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Services ─────────────────────────────────────────────────────── */}
       <section
         className="relative overflow-hidden section-pad"
         style={{ background: 'var(--bg-secondary)' }}
@@ -123,81 +201,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 3. Portfolio (featured – full-bleed editorial grid) ──────────────── */}
-      <section style={{ background: 'var(--bg-primary)' }}>
-        {/* Section header — constrained */}
-        <div className="container-site pt-20 pb-10 lg:pt-28 lg:pb-14">
-          <ScrollReveal>
-            <div className="flex items-start justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <AnimatedLine width={24} delay={0.1} />
-                  <p className="label-xs">Selected Work</p>
-                </div>
-                <h2 className="heading-lg">Recent Projects</h2>
-              </div>
-              <Link href="/portfolio" className="btn-ghost hidden sm:inline-flex mt-3">
-                View All
-                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-
-        {/* Constrained 2-col grid with breathing room */}
-        <div className="container-site pb-16 lg:pb-24">
-          <div className="grid lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
-            {PORTFOLIO_PROJECTS.filter((p) => p.featured).map((project, i) => (
-              <ScrollReveal key={project.id} delay={i * 0.12} variant="fadeUp">
-                <Link
-                  href={`/portfolio/${project.slug}`}
-                  className="group relative block overflow-hidden rounded-2xl"
-                  aria-label={`View ${project.title}`}
-                >
-                  <div className="relative overflow-hidden" style={{ aspectRatio: '4/5' }}>
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 pointer-events-none"
-                      style={{ background: 'linear-gradient(to top, var(--overlay-heavy) 0%, var(--overlay-subtle) 45%, transparent 100%)' }}
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-7 lg:p-9">
-                      <p
-                        className="font-jost text-[0.56rem] tracking-[0.28em] uppercase mb-2"
-                        style={{ color: 'var(--gold-text)' }}
-                      >
-                        {project.category}
-                      </p>
-                      <h3
-                        className="font-cormorant font-light text-[var(--brand-cream)] leading-tight"
-                        style={{ fontSize: 'clamp(1.3rem, 2.4vw, 2rem)' }}
-                      >
-                        {project.title}
-                      </h3>
-                    </div>
-                  </div>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          {/* View all — centred below cards */}
-          <div className="mt-8 flex justify-center">
-            <Link href="/portfolio" className="btn-ghost">
-              View All Projects
-              <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4. Founder (no photo — editorial 2-col text layout) ──────────────── */}
+      {/* ── 5. Founder (no photo — editorial 2-col text layout) ──────────────── */}
       <section
         className="relative overflow-hidden section-pad"
         style={{ background: 'var(--bg-secondary)' }}
@@ -283,7 +287,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. Manifesto quote ───────────────────────────────────────────────── */}
+      {/* ── 6. Manifesto quote ───────────────────────────────────────────────── */}
       <section
         className="relative py-24 lg:py-36 overflow-hidden"
         style={{ background: 'var(--bg-primary)' }}
@@ -324,7 +328,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 6. Contact ───────────────────────────────────────────────────────── */}
+      {/* ── 7. Contact ───────────────────────────────────────────────────────── */}
       <section
         id="contact"
         className="relative overflow-hidden section-pad"
@@ -360,7 +364,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7. Footer ────────────────────────────────────────────────────────── */}
+      {/* ── 8. Footer ────────────────────────────────────────────────────────── */}
       <Footer />
     </main>
   )

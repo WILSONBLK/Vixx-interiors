@@ -93,13 +93,13 @@ export function HeroSection() {
           />
         </motion.div>
 
-        {/* Uniform base — lets the image breathe */}
-        <div className="absolute inset-0" style={{ background: 'var(--overlay-mid)' }} />
+        {/* Uniform base — reduced from 0.50 to keep image detail visible */}
+        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.28)' }} />
 
-        {/* Soft vignette — edges slightly darker, center open */}
+        {/* Soft vignette — wider open centre, lighter edges */}
         <div
           className="absolute inset-0"
-          style={{ background: `radial-gradient(ellipse 80% 80% at 50% 50%, transparent 10%, var(--overlay-gentle) 100%)` }}
+          style={{ background: 'radial-gradient(ellipse 90% 88% at 50% 46%, transparent 42%, rgba(8,8,8,0.30) 100%)' }}
         />
 
         {/* Bottom fade into page background */}
