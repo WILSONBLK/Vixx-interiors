@@ -1,5 +1,13 @@
 import type { Metadata } from 'next'
 import { Phone, Mail, MapPin, Instagram } from 'lucide-react'
+
+function TikTokIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.14 8.14 0 0 0 4.77 1.52V6.77a4.85 4.85 0 0 1-1-.08z"/>
+    </svg>
+  )
+}
 import { Navbar }       from '@/components/layout/Navbar'
 import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
@@ -22,7 +30,7 @@ export default function ContactPage() {
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,154,46,0.06) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
         />
         <div className="container-site relative z-10 max-w-3xl">
           <ScrollReveal>
@@ -74,33 +82,47 @@ export default function ContactPage() {
                     </li>
                     <li>
                       <a
-                        href="tel:+2348000000000"
+                        href="https://wa.me/2348065672607"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
                         style={{ color: 'var(--text-secondary)' }}
                       >
                         <Phone size={16} strokeWidth={1.5} style={{ color: 'var(--gold)' }} />
-                        +234 800 000 0000
+                        +234 806 567 2607 &nbsp;<span className="font-jost text-[0.6rem] tracking-[0.15em] uppercase" style={{ color: 'var(--gold-dim)' }}>WhatsApp</span>
                       </a>
                     </li>
                     <li>
                       <a
-                        href="mailto:hello@vixxinteriors.com"
+                        href="mailto:vixxinteriors@gmail.com"
                         className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
                         style={{ color: 'var(--text-secondary)' }}
                       >
                         <Mail size={16} strokeWidth={1.5} style={{ color: 'var(--gold)' }} />
-                        hello@vixxinteriors.com
+                        vixxinteriors@gmail.com
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://instagram.com/vixxinteriors"
+                        href="https://www.instagram.com/vixx_interiors"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
                         style={{ color: 'var(--text-secondary)' }}
                       >
                         <Instagram size={16} strokeWidth={1.5} style={{ color: 'var(--gold)' }} />
+                        @vixx_interiors
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.tiktok.com/@vixxinteriors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        <TikTokIcon size={16} />
                         @vixxinteriors
                       </a>
                     </li>
@@ -136,7 +158,7 @@ export default function ContactPage() {
                 {/* Quote */}
                 <div
                   className="p-6"
-                  style={{ border: '1px solid rgba(196,154,46,0.15)', background: 'rgba(196,154,46,0.03)' }}
+                  style={{ border: '1px solid var(--gold-border-subtle)', background: 'var(--gold-glow)' }}
                 >
                   <HexMotif size="xs" opacity={0.5} className="mb-3" />
                   <blockquote>

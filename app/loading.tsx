@@ -18,14 +18,14 @@ export default function Loading() {
         >
           <polygon
             points="24,4 42,14 42,34 24,44 6,34 6,14"
-            stroke="#C49A2E"
+            stroke="var(--gold)"
             strokeWidth="1"
             fill="none"
             opacity="0.4"
           />
           <polygon
             points="24,10 37,17.5 37,30.5 24,38 11,30.5 11,17.5"
-            stroke="#C49A2E"
+            stroke="var(--gold)"
             strokeWidth="1"
             fill="none"
             opacity="0.7"

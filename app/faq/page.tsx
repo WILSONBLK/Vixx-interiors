@@ -65,7 +65,7 @@ export default function FAQPage() {
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,154,46,0.06) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
         />
         <div className="container-site relative z-10 max-w-3xl">
           <ScrollReveal>

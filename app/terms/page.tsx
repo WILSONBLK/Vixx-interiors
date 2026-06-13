@@ -103,7 +103,7 @@ export default function TermsPage() {
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,154,46,0.05) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
         />
         <div className="container-site relative z-10 max-w-3xl">
           <ScrollReveal>
@@ -175,11 +175,11 @@ export default function TermsPage() {
                           Lagos, Nigeria
                         </p>
                         <a
-                          href="mailto:hello@vixxinteriors.com"
+                          href="mailto:vixxinteriors@gmail.com"
                           className="block font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
                           style={{ color: 'var(--text-secondary)' }}
                         >
-                          hello@vixxinteriors.com
+                          vixxinteriors@gmail.com
                         </a>
                         <a
                           href="tel:+2348000000000"

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowRight, MapPin, Calendar } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Navbar }          from '@/components/layout/Navbar'
 import { Footer }          from '@/components/layout/Footer'
 import { HexMotif }        from '@/components/ui/HexMotif'
@@ -51,32 +51,21 @@ export default async function PortfolioDetailPage({ params }: Props) {
         />
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, rgba(2,6,23,0.35) 0%, rgba(2,6,23,0.6) 100%)' }}
+          style={{ background: 'linear-gradient(to bottom, var(--overlay-light) 0%, var(--overlay-mid) 100%)' }}
         />
         <div className="absolute inset-0 flex flex-col justify-end pb-12">
           <div className="container-site">
             <Link
               href="/portfolio"
               className="inline-flex items-center gap-2 mb-6 font-jost text-xs tracking-[0.15em] uppercase transition-colors duration-200"
-              style={{ color: 'rgba(245,245,244,0.65)' }}
+              style={{ color: 'rgba(240,235,225,0.65)' }}
             >
               <ArrowLeft size={13} strokeWidth={1.5} />
               All Projects
             </Link>
-            <p className="label-xs mb-3">{project.category}</p>
-            <h1 className="font-cormorant text-4xl sm:text-5xl lg:text-6xl font-light text-white">
+            <h1 className="font-cormorant text-4xl sm:text-5xl lg:text-6xl font-light text-[var(--brand-cream)]">
               {project.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-5 mt-4">
-              <span className="flex items-center gap-2 font-jost text-xs" style={{ color: 'rgba(245,245,244,0.65)' }}>
-                <MapPin size={12} strokeWidth={1.5} />
-                {project.location}
-              </span>
-              <span className="flex items-center gap-2 font-jost text-xs" style={{ color: 'rgba(245,245,244,0.65)' }}>
-                <Calendar size={12} strokeWidth={1.5} />
-                Completed {project.completedAt}
-              </span>
-            </div>
           </div>
         </div>
       </section>
@@ -167,12 +156,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'rgba(2,6,23,0.3)' }} />
-                    </div>
-                    <div className="p-6">
-                      <p className="label-xs mb-2">{p.category}</p>
-                      <h3 className="font-cormorant text-2xl font-light" style={{ color: 'var(--text-primary)' }}>{p.title}</h3>
-                      <p className="font-jost text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{p.location}</p>
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'var(--overlay-light)' }} />
                     </div>
                   </Link>
                 </ScrollReveal>

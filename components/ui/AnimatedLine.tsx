@@ -47,8 +47,8 @@ export function AnimatedLine({
       : (width ?? '100%')
 
   const background = full
-    ? 'linear-gradient(90deg, transparent 0%, rgba(196,154,46,0.35) 25%, rgba(196,154,46,0.35) 75%, transparent 100%)'
-    : 'linear-gradient(90deg, #C49A2E 0%, rgba(196,154,46,0.28) 68%, transparent 100%)'
+    ? 'linear-gradient(90deg, transparent 0%, var(--gold-line) 25%, var(--gold-line) 75%, transparent 100%)'
+    : 'linear-gradient(90deg, var(--gold) 0%, var(--gold-border) 68%, transparent 100%)'
 
   return (
     <div

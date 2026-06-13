@@ -1,78 +1,61 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-type Variant = 'fadeUp' | 'fadeIn' | 'fadeLeft' | 'fadeRight'
+type RevealVariant = 'fadeUp' | 'fadeIn' | 'fadeLeft' | 'fadeRight' | 'scaleUp'
 
 interface ScrollRevealProps {
   children:   React.ReactNode
-  variant?:   Variant
+  variant?:   RevealVariant
   delay?:     number
   threshold?: number
   className?: string
+  once?:      boolean
 }
 
-const VARIANTS: Record<Variant, { hidden: string; visible: string }> = {
-  fadeUp: {
-    hidden:  'opacity-0 translate-y-6',
-    visible: 'opacity-100 translate-y-0',
-  },
-  fadeIn: {
-    hidden:  'opacity-0',
-    visible: 'opacity-100',
-  },
-  fadeLeft: {
-    hidden:  'opacity-0 translate-x-6',
-    visible: 'opacity-100 translate-x-0',
-  },
-  fadeRight: {
-    hidden:  'opacity-0 -translate-x-6',
-    visible: 'opacity-100 translate-x-0',
-  },
+const SPRING = { type: 'spring' as const, stiffness: 88, damping: 22, mass: 0.6 }
+const EASE   = [0.16, 1, 0.3, 1] as const
+
+const VARIANTS: Record<RevealVariant, Variants> = {
+  fadeUp:    { hidden: { opacity: 0, y: 28 },        visible: { opacity: 1, y: 0 } },
+  fadeIn:    { hidden: { opacity: 0 },                visible: { opacity: 1 } },
+  fadeLeft:  { hidden: { opacity: 0, x: 22 },         visible: { opacity: 1, x: 0 } },
+  fadeRight: { hidden: { opacity: 0, x: -22 },        visible: { opacity: 1, x: 0 } },
+  scaleUp:   { hidden: { opacity: 0, scale: 0.95 },   visible: { opacity: 1, scale: 1 } },
+}
+
+const TRANSITION: Record<RevealVariant, object> = {
+  fadeUp:    SPRING,
+  fadeIn:    { duration: 0.7, ease: EASE },
+  fadeLeft:  SPRING,
+  fadeRight: SPRING,
+  scaleUp:   { ...SPRING, stiffness: 120 },
 }
 
 export function ScrollReveal({
   children,
   variant = 'fadeUp',
   delay = 0,
-  threshold = 0.12,
+  threshold = 0.08,
   className,
+  once = true,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.unobserve(el)
-        }
-      },
-      { threshold },
-    )
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [threshold])
-
-  const { hidden, visible: visibleClass } = VARIANTS[variant]
+  const ref            = useRef<HTMLDivElement>(null)
+  const inView         = useInView(ref, { once, amount: threshold })
+  const prefersReduced = useReducedMotion()
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={cn(
-        'transition-all duration-700 ease-out',
-        visible ? visibleClass : hidden,
-        className,
-      )}
-      style={{ transitionDelay: visible ? `${delay}s` : '0s' }}
+      className={cn(className)}
+      initial={prefersReduced ? false : 'hidden'}
+      animate={inView || prefersReduced ? 'visible' : 'hidden'}
+      variants={VARIANTS[variant]}
+      transition={{ ...TRANSITION[variant], delay }}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }

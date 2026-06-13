@@ -6,11 +6,31 @@ export default {
   theme: {
     extend: {
       colors: {
+        /* Brand primitives — mirror CSS custom properties */
+        brand: {
+          black: 'var(--brand-black)',
+          cream: 'var(--brand-cream)',
+          white: 'var(--brand-white)',
+        },
+        /* Semantic surface tokens */
+        surface: {
+          primary:   'var(--bg-primary)',
+          secondary: 'var(--bg-secondary)',
+          card:      'var(--bg-card)',
+        },
+        /* Gold — Accent scale */
         gold: {
-          DEFAULT: '#C49A2E',
-          light:   '#D4AF37',
-          pale:    '#E8C56D',
-          dark:    '#8B6914',
+          DEFAULT: 'var(--gold)',
+          light:   'var(--gold-light)',
+          pale:    'var(--gold-pale)',
+          dark:    'var(--gold-dark)',
+        },
+        /* Semantic text tokens */
+        copy: {
+          primary:   'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          muted:     'var(--text-muted)',
+          accent:    'var(--text-on-accent)',
         },
       },
       fontFamily: {
@@ -23,19 +43,19 @@ export default {
         spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
       boxShadow: {
-        'glow':     '0 18px 45px rgba(196, 154, 46, 0.18)',
-        'gold-sm':  '0 4px 20px rgba(196, 154, 46, 0.15)',
-        'gold-md':  '0 8px 32px rgba(196, 154, 46, 0.28)',
-        'gold-lg':  '0 16px 56px rgba(196, 154, 46, 0.35)',
+        'glow':     '0 18px 45px var(--gold-border)',
+        'gold-sm':  '0 4px 20px var(--gold-border-subtle)',
+        'gold-md':  '0 8px 32px var(--gold-border)',
+        'gold-lg':  '0 16px 56px var(--gold-line)',
         'dark-sm':  '0 2px 8px rgba(0,0,0,0.40)',
         'dark-md':  '0 4px 16px rgba(0,0,0,0.50)',
         'dark-lg':  '0 8px 32px rgba(0,0,0,0.60)',
         'dark-xl':  '0 16px 48px rgba(0,0,0,0.70)',
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(90deg, transparent, #C49A2E, transparent)',
-        'gold-radial':   'radial-gradient(ellipse at center, rgba(196,154,46,0.12) 0%, transparent 70%)',
-        'dark-gradient': 'linear-gradient(135deg, #020617 0%, #0F172A 50%, #020617 100%)',
+        'gold-gradient': 'linear-gradient(90deg, transparent, var(--gold), transparent)',
+        'gold-radial':   'radial-gradient(ellipse at center, var(--gold-ghost) 0%, transparent 70%)',
+        'dark-gradient': 'linear-gradient(135deg, var(--brand-black) 0%, var(--bg-secondary) 50%, var(--brand-black) 100%)',
       },
       keyframes: {
         'hex-rotate': {

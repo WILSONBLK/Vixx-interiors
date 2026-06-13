@@ -23,7 +23,7 @@ export default function ProcessPage() {
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,154,46,0.06) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
         />
         <div className="container-site relative z-10 max-w-4xl">
           <ScrollReveal>
@@ -86,9 +86,9 @@ export default function ProcessPage() {
                     <span
                       className="font-jost text-[0.7rem] tracking-[0.15em] uppercase px-3 py-1.5"
                       style={{
-                        border: '1px solid rgba(196,154,46,0.25)',
+                        border: '1px solid var(--gold-border-subtle)',
                         color: 'var(--gold)',
-                        background: 'rgba(196,154,46,0.05)',
+                        background: 'var(--gold-glow)',
                         whiteSpace: 'nowrap',
                       }}
                     >

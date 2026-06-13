@@ -32,7 +32,7 @@ const SECTIONS = [
     title:  'Data Retention',
     body: [
       'We retain your personal information for as long as necessary to fulfil the purpose for which it was collected — typically for the duration of our professional relationship and up to five (5) years thereafter for business record-keeping.',
-      'You may request deletion of your personal data at any time by contacting us at hello@vixxinteriors.com. Valid deletion requests will be actioned within 30 days.',
+      'You may request deletion of your personal data at any time by contacting us at vixxinteriors@gmail.com. Valid deletion requests will be actioned within 30 days.',
     ],
   },
   {
@@ -56,7 +56,7 @@ const SECTIONS = [
     title:  'Your Rights Under the NDPR',
     body: [
       'In compliance with the Nigeria Data Protection Regulation (NDPR) 2019 and its implementing framework, you have the right to: access the personal data we hold about you; request correction of any inaccurate data; request deletion of your data; and object to certain forms of processing.',
-      'To exercise any of these rights, please contact us at hello@vixxinteriors.com. We will respond within a reasonable timeframe and at no cost to you.',
+      'To exercise any of these rights, please contact us at vixxinteriors@gmail.com. We will respond within a reasonable timeframe and at no cost to you.',
     ],
   },
   {
@@ -93,7 +93,7 @@ export default function PrivacyPage() {
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,154,46,0.05) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
         />
         <div className="container-site relative z-10 max-w-3xl">
           <ScrollReveal>
@@ -165,11 +165,11 @@ export default function PrivacyPage() {
                           Lagos, Nigeria
                         </p>
                         <a
-                          href="mailto:hello@vixxinteriors.com"
+                          href="mailto:vixxinteriors@gmail.com"
                           className="block font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
                           style={{ color: 'var(--text-secondary)' }}
                         >
-                          hello@vixxinteriors.com
+                          vixxinteriors@gmail.com
                         </a>
                         <a
                           href="tel:+2348000000000"

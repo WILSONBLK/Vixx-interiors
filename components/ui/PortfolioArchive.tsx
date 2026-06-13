@@ -88,23 +88,9 @@ export function PortfolioArchive() {
                 {/* Barely-there hover veil */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'rgba(2,6,23,0.12)' }}
+                  style={{ background: 'var(--overlay-subtle)' }}
                 />
               </div>
-
-              {/* Project title — outside image, below cell */}
-              <p
-                className="mt-2 mb-1 transition-colors duration-200 group-hover:text-[var(--gold)]"
-                style={{
-                  fontFamily:    'var(--font-jost)',
-                  fontSize:      '0.55rem',
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  color:         'var(--text-muted)',
-                }}
-              >
-                {entry.title}
-              </p>
             </Link>
           ))}
         </div>
@@ -136,18 +122,6 @@ export function PortfolioArchive() {
                   loading="lazy"
                 />
               </div>
-              <p
-                className="mt-1.5 mb-1 transition-colors duration-200 group-hover:text-[var(--gold)]"
-                style={{
-                  fontFamily:    'var(--font-jost)',
-                  fontSize:      '0.52rem',
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  color:         'var(--text-muted)',
-                }}
-              >
-                {entry.title}
-              </p>
             </Link>
           ))}
         </div>

@@ -236,6 +236,29 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     materials:   ['Polished concrete floors', 'Acoustic felt panels', 'Custom joinery', 'Ergonomic seating', 'Biophilic elements', 'Integrated tech'],
     featured:    false,
   },
+  {
+    id:          'ajah-duplex',
+    slug:        'ajah-duplex',
+    title:       'The Ajah Duplex',
+    category:    'Residential Interiors',
+    description: 'A full residential transformation — warm tones, refined materiality, and considered spatial flow across every room.',
+    location:    'Ajah, Lagos',
+    completedAt: '2025',
+    image:       '/images/portfolio/proj2-1.jpg',
+    images:      [
+      '/images/portfolio/proj2-1.jpg',
+      '/images/portfolio/proj2-2.jpg',
+      '/images/portfolio/proj2-3.jpg',
+      '/images/portfolio/proj2-4.jpg',
+      '/images/portfolio/proj2-5.jpg',
+      '/images/portfolio/proj2-6.jpg',
+    ],
+    overview:    'A full-scope duplex redesign spanning living, dining, and bedroom spaces. The client wanted a home that felt immediately warm and personal without sacrificing a clean, modern sensibility.',
+    challenge:   'Bringing coherence to a multi-floor residence where each room had been furnished independently over time, resulting in a fragmented visual language and poor spatial flow.',
+    solution:    'We established a unified palette of warm neutrals, natural timber, and soft gold accents that threads through each floor. Custom joinery anchors the key rooms while carefully curated furniture and lighting complete each zone.',
+    materials:   ['Natural timber veneer', 'Warm stone flooring', 'Bespoke upholstery', 'Brushed brass hardware', 'Woven textiles', 'Statement pendant lighting'],
+    featured:    true,
+  },
 ]
 
 // ── Why Choose ───────────────────────────────────────────────────────────────
@@ -264,12 +287,11 @@ export const WHY_ITEMS: WhyItem[] = [
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 export const NAV_LINKS = [
-  { label: 'About',     href: '/about'     },
-  { label: 'Services',  href: '/services'  },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Process',   href: '/process'   },
-  { label: 'FAQ',       href: '/faq'       },
-  { label: 'Contact',   href: '/contact'   },
+  { label: 'Home',         href: '/'          },
+  { label: 'About Studio', href: '/about'     },
+  { label: 'Portfolio',    href: '/portfolio' },
+  { label: 'Services',     href: '/services'  },
+  { label: 'Contact',      href: '/contact'   },
 ]
 
 // ── Budget Options ────────────────────────────────────────────────────────────
@@ -293,4 +315,12 @@ export const PROJECT_TYPE_OPTIONS = [
   'Commercial',
   'Hospitality',
   'Other',
+]
+
+// ── Social links ──────────────────────────────────────────────────────────────
+// Update handles/number before launch; structure is permanent.
+export const SOCIAL_LINKS = [
+  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/vixxinteriors' },
+  { id: 'tiktok',    label: 'TikTok',    href: 'https://www.tiktok.com/@vixxinteriors'   },
+  { id: 'whatsapp',  label: 'WhatsApp',  href: 'https://wa.me/2348000000000'             },
 ]

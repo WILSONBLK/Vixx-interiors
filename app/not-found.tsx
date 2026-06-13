@@ -13,7 +13,7 @@ export default function NotFound() {
       <div className="relative z-10 max-w-lg">
         <span
           className="font-cormorant text-[8rem] sm:text-[10rem] font-light leading-none block"
-          style={{ color: 'rgba(196,154,46,0.15)' }}
+          style={{ color: 'var(--gold-ghost)' }}
           aria-hidden="true"
         >
           404

@@ -2,50 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Design tokens (dark = default) ──────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────────────
+   VIXX INTERIORS — DESIGN TOKEN SYSTEM
+   Brand palette:  Primary: Black  |  Secondary: Cream  |  Accent: Gold  |  Support: White
+   All components inherit from these tokens. Never use raw hex or rgba(R,G,B,A)
+   for brand colors — reference a token instead.
+───────────────────────────────────────────────────────────────────────────── */
 :root {
   --nav-height:      76px;
   --scrollbar-width: 0px;
 
-  --gold:        #C49A2E;
-  --gold-light:  #D4AF37;
-  --gold-pale:   #E8C56D;
-  --gold-dark:   #8B6914;
+  /* ── Brand primitives — fixed across all themes ──────────────────────────── */
+  --brand-black: #080808;      /* Primary:   architectural black                */
+  --brand-cream: #F0EBE1;      /* Secondary: warm cream — warmth, sophistication */
+  --brand-white: #FAFAF9;      /* Support:   clean near-white                   */
 
-  --bg-primary:   #020617;
-  --bg-secondary: #0F172A;
-  --bg-card:      rgba(255, 255, 255, 0.04);
-  --bg-card-hover:rgba(255, 255, 255, 0.07);
+  /* ── Gold scale — Accent ────────────────────────────────────────────────── */
+  --gold:       #C49A2E;
+  --gold-light: #D4AF37;
+  --gold-pale:  #E8C56D;
+  --gold-dark:  #8B6914;
 
-  --text-primary:   #F5F5F4;
-  --text-secondary: #D6D3D1;
-  --text-muted:     #78716C;
+  /* Gold opacity tokens — semantic, never use raw rgba(196,154,46,…) elsewhere */
+  --gold-text:          rgba(196,154,46,0.85);  /* primary gold text (labels, eyebrows)   */
+  --gold-dim:           rgba(196,154,46,0.65);  /* secondary gold text                    */
+  --gold-line:          rgba(196,154,46,0.50);  /* decorative lines, thin accents         */
+  --gold-border:        rgba(196,154,46,0.28);  /* active / hover borders                 */
+  --gold-border-subtle: rgba(196,154,46,0.14);  /* resting gold borders, card outlines    */
+  --gold-ghost:         rgba(196,154,46,0.16);  /* ghost numbers, decorative overlays     */
+  --gold-glow:          rgba(196,154,46,0.05);  /* ambient background radial glows        */
 
-  --border:        rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  /* ── Photography overlay tokens — always dark regardless of theme ────────── */
+  --overlay-heavy:  rgba(8,8,8,0.78);   /* deep image darkening                   */
+  --overlay-mid:    rgba(8,8,8,0.50);   /* standard photo overlay / nav bg        */
+  --overlay-gentle: rgba(8,8,8,0.35);   /* soft gradient stop                     */
+  --overlay-light:  rgba(8,8,8,0.18);   /* light hover veil                       */
+  --overlay-subtle: rgba(8,8,8,0.10);   /* barely-there image tints               */
 
-  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.40);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.50);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.60);
+  /* ── Text on accent (gold) backgrounds ─────────────────────────────────── */
+  --text-on-accent: #1A1208;
+
+  /* ── Semantic surface tokens — Dark theme (default experience) ──────────── */
+  --bg-primary:    #080808;              /* page background — Primary Black        */
+  --bg-secondary:  #100E0A;             /* section alternate bg — warm near-black */
+  --bg-card:       rgba(255,255,255,0.04);
+  --bg-card-hover: rgba(255,255,255,0.07);
+
+  /* ── Semantic text tokens ───────────────────────────────────────────────── */
+  --text-primary:   #F0EBE1;                    /* Primary text — Cream              */
+  --text-secondary: rgba(240,235,225,0.72);     /* Body text                         */
+  --text-muted:     rgba(240,235,225,0.42);     /* Labels, metadata                  */
+
+  /* ── Border tokens ──────────────────────────────────────────────────────── */
+  --border:        rgba(240,235,225,0.08);
+  --border-strong: rgba(240,235,225,0.18);
+
+  /* ── Shadow tokens ──────────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.40);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.50);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.60);
+
+  /* ── Navigation overlay tokens — theme-aware ────────────────────────────── */
+  --bg-nav-scrolled: rgba(8,8,8,0.50);
+  --bg-nav-menu:     rgba(8,8,8,0.96);
+  --shadow-nav:      0 4px 24px rgba(8,8,8,0.20);
 }
 
-/* ── Light theme overrides ─────────────────────────────────────────────────── */
-[data-theme='light'] {
-  --bg-primary:   #FAFAF9;
-  --bg-secondary: #F2EFE9;
-  --bg-card:      rgba(0, 0, 0, 0.025);
-  --bg-card-hover:rgba(0, 0, 0, 0.045);
+/* ── Light theme (system preference) ──────────────────────────────────────── */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary:    #FAFAF9;              /* Support White                         */
+    --bg-secondary:  #F0EBE1;             /* Secondary Cream                       */
+    --bg-card:       rgba(8,8,8,0.025);
+    --bg-card-hover: rgba(8,8,8,0.045);
 
-  --text-primary:   #1C1917;
-  --text-secondary: #44403C;
-  --text-muted:     #78716C;
+    --text-primary:   #080808;            /* Primary Black                         */
+    --text-secondary: rgba(8,8,8,0.72);
+    --text-muted:     rgba(8,8,8,0.48);
 
-  --border:        rgba(28, 25, 23, 0.07);
-  --border-strong: rgba(28, 25, 23, 0.14);
+    --border:        rgba(8,8,8,0.08);
+    --border-strong: rgba(8,8,8,0.16);
 
-  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.07);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.09);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.11);
+    --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.09);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.11);
+
+    --bg-nav-scrolled: rgba(250,250,249,0.58);
+    --bg-nav-menu:     rgba(250,250,249,0.96);
+    --shadow-nav:      0 4px 24px rgba(0,0,0,0.06);
+  }
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────────── */
@@ -76,7 +121,7 @@
   img, video { max-width: 100%; display: block; }
 
   ::selection {
-    background-color: rgba(196, 154, 46, 0.22);
+    background-color: var(--gold-border-subtle);
     color: var(--text-primary);
   }
 
@@ -101,11 +146,12 @@
   /* ── Buttons ── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
-           bg-[var(--gold)] text-stone-950
+           bg-[var(--gold)] text-[var(--text-on-accent)]
            px-6 py-3.5
            font-jost text-[0.68rem] font-medium tracking-[0.22em] uppercase
            transition-all duration-300 ease-smooth
-           hover:bg-[var(--gold-light)] hover:shadow-gold-md
+           hover:bg-[var(--gold-light)] hover:shadow-gold-md hover:scale-[1.02]
+           active:scale-[0.97]
            focus-visible:outline focus-visible:outline-2
            focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2;
   }
@@ -117,7 +163,8 @@
            px-6 py-3.5
            font-jost text-[0.68rem] font-medium tracking-[0.22em] uppercase
            transition-all duration-300 ease-smooth
-           hover:border-[var(--gold)] hover:text-[var(--gold)]
+           hover:border-[var(--gold)] hover:text-[var(--gold)] hover:scale-[1.02]
+           active:scale-[0.97]
            focus-visible:outline focus-visible:outline-2
            focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2;
   }
@@ -138,11 +185,13 @@
     background: var(--bg-card);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   }
 
   .card-glass:hover {
     background: var(--bg-card-hover);
-    border-color: var(--border-strong);
+    border-color: var(--gold-border);
+    box-shadow: inset 0 1px 0 var(--gold-ghost), 0 0 0 1px var(--gold-glow);
   }
 
   /* ── Typography helpers ── */
@@ -190,13 +239,35 @@
     background-image: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
 
+  /* ── Social icons ── */
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--text-muted);
+    opacity: 0.55;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .social-icon:hover {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  .social-icon:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
   /* ── Form inputs ── */
   .input-field {
     @apply w-full bg-transparent border border-[var(--border)]
-           px-4 py-3 font-sans text-sm text-[var(--text-primary)]
+           px-4 py-3 font-sans text-base text-[var(--text-primary)]
            placeholder:text-[var(--text-muted)]
            focus:outline-none focus:border-[var(--gold)]
-           transition-colors duration-200;
+           transition-all duration-200;
   }
 
   .input-label {
@@ -205,15 +276,64 @@
   }
 }
 
+/* ── Link reveal underline ────────────────────────────────────────────────── */
+.link-reveal {
+  position: relative;
+}
+.link-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-reveal:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Button icon slide ────────────────────────────────────────────────────── */
+.btn-primary svg,
+.btn-outline svg,
+.btn-ghost svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary:hover svg,
+.btn-outline:hover svg,
+.btn-ghost:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Input focus lift ─────────────────────────────────────────────────────── */
+.input-field:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--gold-glow);
+}
+
 /* ── Custom cursor (hover-capable devices only) ──────────────────────────── */
 @media (hover: hover) {
   body, a, button { cursor: none; }
 }
 
+/* ── Service cards ────────────────────────────────────────────────────────── */
+.service-card {
+  border:     1px solid var(--gold-border-subtle);
+  background: var(--bg-card);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.35s ease;
+}
+.service-card:hover {
+  border-color: var(--gold-border);
+  box-shadow:   0 0 28px var(--gold-ghost);
+}
+
 /* ── Gold pulse animation ─────────────────────────────────────────────────── */
 @keyframes goldPulse {
   0%, 100% { text-shadow: 0 0 0px rgba(196,154,46,0); }
-  50%       { text-shadow: 0 0 20px rgba(196,154,46,0.4), 0 0 40px rgba(196,154,46,0.15); }
+  50%       { text-shadow: 0 0 20px var(--gold-border), 0 0 40px var(--gold-glow); }
 }
 
 .gold-pulse { animation: goldPulse 3s ease-in-out infinite; }
@@ -231,9 +351,9 @@
 .hero-video-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(2, 6, 23, 0.55) 0%,
-    rgba(2, 6, 23, 0.35) 40%,
-    rgba(2, 6, 23, 0.55) 100%
+    var(--overlay-mid)    0%,
+    var(--overlay-gentle) 40%,
+    var(--overlay-mid)    100%
   );
 }
 
@@ -251,13 +371,6 @@
 }
 
 /* ── Gallery panoramic pan animations ────────────────────────────────────── */
-/*
-   Pan wrapper is positioned: left: -10%; width: 120%
-   This gives 10% overhang each side (of the item width).
-   translateX(0%) → start (shows left portion)
-   translateX(-8.33%) → end (8.33% × 120% = 10% of item → right edge flush)
-   Both extremes keep the item fully covered.
-*/
 @keyframes vixx-pan-ltr {
   from { transform: translateX(0%); }
   to   { transform: translateX(-8.33%); }

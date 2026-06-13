@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Playfair_Display, Jost, Inter } from 'next/font/google'
-import { CustomCursor } from '@/components/ui/CustomCursor'
+import { CustomCursor }    from '@/components/ui/CustomCursor'
+import { PageTransition }  from '@/components/ui/PageTransition'
 
 const cormorant = Playfair_Display({
   subsets:  ['latin'],
@@ -54,29 +55,9 @@ export const metadata: Metadata = {
   },
 }
 
-const themeScript = `
-(function(){
-  try {
-    var saved = localStorage.getItem('vixx-theme');
-    var isDark = saved !== 'light';
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  } catch(e) {
-    document.documentElement.classList.add('dark');
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-})();
-`
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`
           ${cormorant.variable}
@@ -87,8 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
       >
         <CustomCursor />
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   )

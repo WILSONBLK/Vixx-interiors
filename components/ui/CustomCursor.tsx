@@ -94,7 +94,7 @@ export function CustomCursor() {
           translateX: '-50%',
           translateY: '-50%',
           borderRadius: '50%',
-          border: '1px solid rgba(196,154,46,0.5)',
+          border: '1px solid var(--gold-line)',
           pointerEvents: 'none',
           zIndex: 99998,
           willChange: 'transform',

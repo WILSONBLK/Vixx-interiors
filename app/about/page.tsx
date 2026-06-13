@@ -23,7 +23,7 @@ export default function AboutPage() {
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(196,154,46,0.06) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
         />
         <div className="container-site relative z-10 max-w-4xl">
           <ScrollReveal>
@@ -58,7 +58,7 @@ export default function AboutPage() {
                 >
                   <HexMotif size={180} variant="dual" opacity={0.12} />
                 </div>
-                <div className="absolute bottom-0 inset-x-0 p-6" style={{ background: 'linear-gradient(to top, rgba(2,6,23,0.9), transparent)' }}>
+                <div className="absolute bottom-0 inset-x-0 p-6" style={{ background: 'linear-gradient(to top, var(--overlay-heavy), transparent)' }}>
                   <p className="font-cormorant text-xl font-light" style={{ color: 'var(--text-primary)' }}>Osita Agusionu</p>
                   <p className="label-xs mt-1">Founder & Principal Designer</p>
                 </div>
@@ -148,7 +148,7 @@ export default function AboutPage() {
                 <div className="card-glass p-6 h-full">
                   <div
                     className="w-8 h-8 flex items-center justify-center mb-4"
-                    style={{ border: '1px solid rgba(196,154,46,0.3)' }}
+                    style={{ border: '1px solid var(--gold-border)' }}
                   >
                     <HexMotif size="xs" opacity={0.7} />
                   </div>

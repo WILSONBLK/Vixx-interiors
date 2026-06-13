@@ -4,16 +4,22 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { NAV_LINKS } from '@/lib/data'
-import { useTheme } from '@/hooks/useTheme'
+import { NAV_LINKS, SOCIAL_LINKS } from '@/lib/data'
+import { InstagramIcon, TikTokIcon, WhatsAppIcon } from '@/components/ui/SocialIcons'
+
+function SocialIcon({ id, size = 16 }: { id: string; size?: number }) {
+  if (id === 'instagram') return <InstagramIcon size={size} />
+  if (id === 'tiktok')    return <TikTokIcon size={size} />
+  if (id === 'whatsapp')  return <WhatsAppIcon size={size} />
+  return null
+}
 
 export function Navbar() {
   const pathname                     = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [open, setOpen]               = useState(false)
-  const { isDark, toggle, mounted }   = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -28,6 +34,11 @@ export function Navbar() {
     return () => document.body.classList.remove('modal-open')
   }, [open])
 
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/'
+    return pathname === href || pathname.startsWith(href + '/')
+  }
+
   return (
     <>
       <header
@@ -35,18 +46,14 @@ export function Navbar() {
         className="fixed top-0 inset-x-0 z-50 transition-all duration-500"
         style={{
           height: 'var(--nav-height)',
-          background: scrolled
-            ? isDark
-              ? 'rgba(2,6,23,0.50)'
-              : 'rgba(250,250,249,0.58)'
-            : 'transparent',
+          background:           scrolled ? 'var(--bg-nav-scrolled)' : 'transparent',
           backdropFilter:       scrolled ? 'blur(18px) saturate(160%)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(18px) saturate(160%)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : 'none',
-          boxShadow:    scrolled ? '0 4px 24px rgba(2,6,23,0.20)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--border)' : 'none',
+          boxShadow:    scrolled ? 'var(--shadow-nav)' : 'none',
         }}
       >
-        {/* Hairline gold accent — subtle at top, sharper when scrolled */}
+        {/* Hairline gold accent */}
         <div
           aria-hidden
           className="absolute top-0 inset-x-0 h-px transition-opacity duration-500"
@@ -57,62 +64,88 @@ export function Navbar() {
         />
 
         <nav
-          className="container-site h-full flex items-center justify-between gap-4 lg:gap-8"
+          className="w-full h-full relative flex items-center justify-center"
           aria-label="Primary navigation"
         >
-          {/* ── Logo ── flush left, ~50% smaller than previous 112px */}
-          <Link
-            href="/"
-            className="relative z-10 flex-shrink-0 flex items-center"
-            aria-label="VIXX Interiors – Home"
-            data-cursor="hover"
-          >
-            <Image
-              src="/logo-gold.png"
-              alt="VIXX Interiors"
-              width={160}
-              height={52}
-              className="h-14 w-auto object-contain"
-              priority
-            />
-          </Link>
+          {/* Logo — pinned left */}
+          <div className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-10">
+            <Link
+              href="/"
+              className="flex items-center"
+              aria-label="VIXX Interiors – Home"
+              data-cursor="hover"
+            >
+              <Image
+                src="/logo-gold.png"
+                alt="VIXX Interiors"
+                width={260}
+                height={84}
+                className="h-[4.5rem] w-auto object-contain"
+                priority
+              />
+            </Link>
+          </div>
 
-          {/* ── Desktop nav links ── */}
-          <ul className="hidden lg:flex items-center gap-7 xl:gap-9 flex-1 justify-center" role="list">
+          {/* Desktop nav links — centered */}
+          <ul className="hidden lg:flex items-center gap-7 xl:gap-9" role="list">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   data-cursor="hover"
                   className={cn(
-                    'font-jost text-[0.64rem] tracking-[0.22em] uppercase transition-colors duration-200 whitespace-nowrap',
-                    pathname === link.href
+                    'relative pb-1 font-jost text-[0.64rem] tracking-[0.22em] uppercase transition-colors duration-200 whitespace-nowrap',
+                    isActive(link.href)
                       ? 'text-[var(--gold)]'
                       : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]',
                   )}
                 >
                   {link.label}
+                  <span
+                    aria-hidden="true"
+                    className="absolute bottom-0 left-0 h-px w-full origin-left"
+                    style={{
+                      background: 'var(--gold)',
+                      transform:  isActive(link.href) ? 'scaleX(1)' : 'scaleX(0)',
+                      transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
+                  />
                 </Link>
               </li>
             ))}
           </ul>
 
-          {/* ── Right actions ── */}
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          {/* Right utility area — pinned right */}
+          <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 flex items-center gap-2 sm:gap-3 z-10">
 
-            {/* Theme toggle */}
-            {mounted && (
-              <button
-                onClick={toggle}
-                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                data-cursor="hover"
-                className="flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200 text-[var(--text-muted)] hover:text-[var(--gold)]"
-              >
-                {isDark
-                  ? <Sun  size={15} strokeWidth={1.5} />
-                  : <Moon size={15} strokeWidth={1.5} />}
-              </button>
-            )}
+            {/* Social icons — desktop only */}
+            <div
+              className="hidden lg:flex items-center gap-1"
+              role="list"
+              aria-label="Social media links"
+            >
+              {SOCIAL_LINKS.map(({ id, label, href }) => (
+                <a
+                  key={id}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`VIXX Interiors on ${label}`}
+                  data-cursor="hover"
+                  className="social-icon"
+                  role="listitem"
+                >
+                  <SocialIcon id={id} size={16} />
+                </a>
+              ))}
+            </div>
+
+            {/* Thin separator — desktop only */}
+            <div
+              aria-hidden
+              className="hidden lg:block w-px h-3.5 opacity-20"
+              style={{ background: 'var(--border-strong)' }}
+            />
 
             {/* Desktop CTA */}
             <Link
@@ -120,7 +153,7 @@ export function Navbar() {
               data-cursor="hover"
               className="hidden lg:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
             >
-              Book Consultation
+              Start Project
             </Link>
 
             {/* Mobile hamburger */}
@@ -140,7 +173,7 @@ export function Navbar() {
         </nav>
       </header>
 
-      {/* ── Mobile full-screen menu ── */}
+      {/* Mobile full-screen menu */}
       <div
         id="mobile-menu"
         role="dialog"
@@ -151,7 +184,7 @@ export function Navbar() {
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
         )}
         style={{
-          background:           isDark ? 'rgba(2,6,23,0.96)' : 'rgba(250,250,249,0.96)',
+          background:           'var(--bg-nav-menu)',
           backdropFilter:       'blur(24px) saturate(160%)',
           WebkitBackdropFilter: 'blur(24px) saturate(160%)',
         }}
@@ -160,42 +193,65 @@ export function Navbar() {
         <div style={{ height: 'var(--nav-height)', flexShrink: 0 }} />
 
         <nav
-          className="flex flex-col flex-1 container-site py-8 sm:py-12 gap-0 overflow-y-auto"
+          className="flex flex-col flex-1 container-site py-8 sm:py-12 overflow-y-auto"
           aria-label="Mobile navigation links"
         >
-          {NAV_LINKS.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                'font-cormorant text-3xl sm:text-4xl font-light py-4 sm:py-5',
-                'border-b border-[var(--border)] transition-colors duration-200',
-                pathname === link.href
-                  ? 'text-[var(--gold)]'
-                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
-                open ? 'animate-fade-up' : '',
-              )}
-              style={{ animationDelay: `${i * 0.06}s`, animationFillMode: 'both' }}
+          {/* Nav links */}
+          <ul role="list" className="flex flex-col">
+            {NAV_LINKS.map((link, i) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    'block font-cormorant text-3xl sm:text-4xl font-light py-4 sm:py-5',
+                    'border-b border-[var(--border)] transition-colors duration-200',
+                    isActive(link.href)
+                      ? 'text-[var(--gold)]'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
+                    open ? 'animate-fade-up' : '',
+                  )}
+                  style={{ animationDelay: `${i * 0.06}s`, animationFillMode: 'both' }}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Social links — dedicated section */}
+          <div
+            className="mt-10 pt-6 border-t border-[var(--border)]"
+            aria-label="Social media links"
+          >
+            <p
+              className="font-jost text-[0.55rem] tracking-[0.32em] uppercase mb-5"
+              style={{ color: 'var(--gold-dim)' }}
             >
-              {link.label}
-            </Link>
-          ))}
+              Follow
+            </p>
+            <ul role="list" className="flex items-center gap-2">
+              {SOCIAL_LINKS.map(({ id, label, href }) => (
+                <li key={id}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`VIXX Interiors on ${label}`}
+                    data-cursor="hover"
+                    className="social-icon !w-11 !h-11"
+                  >
+                    <SocialIcon id={id} size={18} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          {/* CTA */}
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link href="/contact" className="btn-primary">
-              Book Consultation
+              Start Project
             </Link>
-
-            {mounted && (
-              <button
-                onClick={toggle}
-                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                className="flex items-center gap-2 font-jost text-[0.65rem] tracking-[0.2em] uppercase transition-colors duration-200 text-[var(--text-muted)] hover:text-[var(--gold)]"
-              >
-                {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
-                {isDark ? 'Light mode' : 'Dark mode'}
-              </button>
-            )}
           </div>
         </nav>
       </div>

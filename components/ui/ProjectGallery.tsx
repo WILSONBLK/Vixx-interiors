@@ -49,10 +49,16 @@ export function ProjectGallery({ images, height = 'clamp(340px, 72vh, 740px)' }:
   return (
     <div
       ref={containerRef}
-      className="overflow-hidden"
+      className="overflow-hidden relative"
       style={{ cursor: dragging ? 'grabbing' : 'grab' }}
       aria-label="Project gallery — drag or swipe to explore"
     >
+      {/* Left / right feather — stays fixed as the gallery track drags */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{ background: 'linear-gradient(to right, var(--bg-primary) 0%, transparent 10%, transparent 90%, var(--bg-primary) 100%)' }}
+      />
       <motion.div
         drag="x"
         dragConstraints={{ left: -maxDrag, right: 0 }}
@@ -83,12 +89,6 @@ export function ProjectGallery({ images, height = 'clamp(340px, 72vh, 740px)' }:
               background: 'var(--bg-secondary)',
             }}
           >
-            {/*
-             * Pan wrapper is 120 % wide, offset −10 % to give equal
-             * panning room on both sides. The animation translates
-             * between 0 % and −8.33 % (= 10 % of the item width),
-             * so the image always fully covers the item frame.
-             */}
             <div
               style={{
                 position:   'absolute',
