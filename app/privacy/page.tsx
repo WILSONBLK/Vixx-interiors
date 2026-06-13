@@ -172,11 +172,11 @@ export default function PrivacyPage() {
                           vixxinteriors@gmail.com
                         </a>
                         <a
-                          href="tel:+2348000000000"
+                          href="tel:+2348065672607"
                           className="block font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
                           style={{ color: 'var(--text-secondary)' }}
                         >
-                          +234 800 000 0000
+                          +234 806 567 2607
                         </a>
                       </div>
                     )}

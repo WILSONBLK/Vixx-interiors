@@ -125,7 +125,7 @@ export default function FAQPage() {
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
                 </Link>
                 <a
-                  href="https://wa.me/2348000000000"
+                  href="https://wa.me/2348065672607"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline"

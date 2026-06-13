@@ -14,8 +14,8 @@ function TikTokIcon({ size = 15 }: { size?: number }) {
 }
 
 const SOCIAL_LINKS = [
-  { icon: 'instagram', href: 'https://www.instagram.com/vixx_interiors', label: 'Instagram' },
-  { icon: 'tiktok',    href: 'https://www.tiktok.com/@vixxinteriors',     label: 'TikTok'    },
+  { icon: 'instagram', href: 'https://www.instagram.com/vixx_interiors?igsh=MWlqZzY5MHpnaDBpaQ==', label: 'Instagram' },
+  { icon: 'tiktok',    href: 'https://www.tiktok.com/@vixxinteriors',                               label: 'TikTok'    },
 ]
 
 const LEGAL_LINKS = [

@@ -104,7 +104,7 @@ export default function ContactPage() {
                     </li>
                     <li>
                       <a
-                        href="https://www.instagram.com/vixx_interiors"
+                        href="https://www.instagram.com/vixx_interiors?igsh=MWlqZzY5MHpnaDBpaQ=="
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"

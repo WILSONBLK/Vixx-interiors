@@ -320,7 +320,7 @@ export const PROJECT_TYPE_OPTIONS = [
 // ── Social links ──────────────────────────────────────────────────────────────
 // Update handles/number before launch; structure is permanent.
 export const SOCIAL_LINKS = [
-  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/vixxinteriors' },
-  { id: 'tiktok',    label: 'TikTok',    href: 'https://www.tiktok.com/@vixxinteriors'   },
-  { id: 'whatsapp',  label: 'WhatsApp',  href: 'https://wa.me/2348000000000'             },
+  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/vixx_interiors?igsh=MWlqZzY5MHpnaDBpaQ==' },
+  { id: 'tiktok',    label: 'TikTok',    href: 'https://www.tiktok.com/@vixxinteriors'                              },
+  { id: 'whatsapp',  label: 'WhatsApp',  href: 'https://wa.me/2348065672607'                                        },
 ]
