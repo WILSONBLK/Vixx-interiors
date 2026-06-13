@@ -233,70 +233,77 @@ export function AboutStudio() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
 
-            {/* ── Left: Founder image placeholder ── */}
+            {/* ── Left: Founder image — circular, no box ── */}
             <ScrollReveal variant="fadeRight">
-              <div
-                className="relative rounded-2xl overflow-hidden"
-                style={{
-                  aspectRatio: '3/4',
-                  background:  'var(--surface-elevated)',
-                  border:      '1px dashed var(--border-strong)',
-                }}
-              >
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                  {/* Portrait silhouette */}
+              <div className="flex justify-center lg:justify-start py-6 lg:py-0">
+                <div className="relative">
+                  {/* Outer decorative ring */}
                   <div
+                    className="absolute inset-0 rounded-full pointer-events-none"
                     style={{
-                      width:          '4.5rem',
-                      height:         '4.5rem',
-                      borderRadius:   '50%',
-                      background:     'var(--surface-overlay)',
-                      border:         '1px dashed var(--gold-border)',
-                      display:        'flex',
-                      alignItems:     'center',
-                      justifyContent: 'center',
+                      transform: 'scale(1.09)',
+                      border:    '1px solid var(--gold-border-subtle)',
+                    }}
+                  />
+                  {/* Circular portrait container */}
+                  <div
+                    className="relative overflow-hidden flex items-center justify-center"
+                    style={{
+                      width:        'clamp(200px, 48vw, 290px)',
+                      height:       'clamp(200px, 48vw, 290px)',
+                      borderRadius: '50%',
+                      background:   'var(--surface-elevated)',
+                      border:       '1px solid var(--gold-border)',
                     }}
                   >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="8.5" r="4" stroke="var(--gold-dim)" strokeWidth="1.4" />
-                      <path
-                        d="M4 20.5c0-4 3.6-7 8-7s8 3 8 7"
-                        stroke="var(--gold-dim)"
-                        strokeWidth="1.4"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+                    <div className="flex flex-col items-center gap-3">
+                      <div
+                        style={{
+                          width:          '4rem',
+                          height:         '4rem',
+                          borderRadius:   '50%',
+                          background:     'var(--surface-overlay)',
+                          border:         '1px solid var(--gold-border-subtle)',
+                          display:        'flex',
+                          alignItems:     'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <circle cx="12" cy="8.5" r="4" stroke="var(--gold-dim)" strokeWidth="1.4" />
+                          <path
+                            d="M4 20.5c0-4 3.6-7 8-7s8 3 8 7"
+                            stroke="var(--gold-dim)"
+                            strokeWidth="1.4"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </div>
+                      <p
+                        className="font-jost text-[0.58rem] tracking-[0.24em] uppercase text-center px-6"
+                        style={{ color: 'var(--text-tertiary)' }}
+                      >
+                        Founder Portrait
+                      </p>
+                      <p
+                        className="font-jost text-[0.5rem] tracking-[0.12em] text-center"
+                        style={{ color: 'var(--text-tertiary)', opacity: 0.45 }}
+                      >
+                        Circular portrait image
+                      </p>
+                    </div>
                   </div>
-
-                  <p
-                    className="font-jost text-[0.62rem] tracking-[0.26em] uppercase"
-                    style={{ color: 'var(--text-tertiary)' }}
-                  >
-                    Founder Image Placeholder
-                  </p>
-                  <p
-                    className="font-jost text-[0.52rem] tracking-[0.12em]"
-                    style={{ color: 'var(--text-tertiary)', opacity: 0.45 }}
-                  >
-                    Clean portrait — 3 × 4 ratio
-                  </p>
                 </div>
               </div>
             </ScrollReveal>
 
-            {/* ── Right: Structured text placeholder blocks ── */}
-            <ScrollReveal variant="fadeLeft" delay={0.1}>
-              <div className="flex flex-col gap-4 pt-0 lg:pt-4">
+            {/* ── Right: Text blocks — staggered entrance ── */}
+            <div className="flex flex-col gap-4 pt-0 lg:pt-4">
 
-                {/* Name & title */}
+              {/* Name & title */}
+              <ScrollReveal variant="fadeLeft" delay={0.1}>
                 <div
                   className="rounded-xl p-5"
                   style={{
@@ -315,8 +322,10 @@ export function AboutStudio() {
                     <div className="h-3 rounded-full" style={{ width: '38%', background: 'var(--border-default)' }} />
                   </div>
                 </div>
+              </ScrollReveal>
 
-                {/* Founder story */}
+              {/* Founder story */}
+              <ScrollReveal variant="fadeLeft" delay={0.18}>
                 <div
                   className="rounded-xl p-5"
                   style={{
@@ -340,8 +349,10 @@ export function AboutStudio() {
                     ))}
                   </div>
                 </div>
+              </ScrollReveal>
 
-                {/* Design philosophy */}
+              {/* Design philosophy */}
+              <ScrollReveal variant="fadeLeft" delay={0.26}>
                 <div
                   className="rounded-xl p-5"
                   style={{
@@ -365,8 +376,10 @@ export function AboutStudio() {
                     ))}
                   </div>
                 </div>
+              </ScrollReveal>
 
-                {/* Founder quote — gold accent */}
+              {/* Founder quote — gold accent */}
+              <ScrollReveal variant="fadeLeft" delay={0.34}>
                 <div
                   className="rounded-xl p-5"
                   style={{
@@ -391,9 +404,9 @@ export function AboutStudio() {
                     ))}
                   </div>
                 </div>
+              </ScrollReveal>
 
-              </div>
-            </ScrollReveal>
+            </div>
 
           </div>
         </div>

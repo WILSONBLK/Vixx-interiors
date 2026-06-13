@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS, SOCIAL_LINKS } from '@/lib/data'
 import { InstagramIcon, TikTokIcon, WhatsAppIcon } from '@/components/ui/SocialIcons'
+import { useTheme } from '@/hooks/useTheme'
 
 function SocialIcon({ id, size = 16 }: { id: string; size?: number }) {
   if (id === 'instagram') return <InstagramIcon size={size} />
@@ -20,6 +21,7 @@ export function Navbar() {
   const pathname                     = usePathname()
   const [scrolled, setScrolled]       = useState(false)
   const [open, setOpen]               = useState(false)
+  const { isDark, toggleTheme, mounted } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -47,10 +49,9 @@ export function Navbar() {
         style={{
           height: 'var(--nav-height)',
           background:           scrolled ? 'var(--bg-nav-scrolled)' : 'transparent',
-          backdropFilter:       scrolled ? 'blur(18px) saturate(160%)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(18px) saturate(160%)' : 'none',
-          borderBottom: scrolled ? '1px solid var(--border)' : 'none',
-          boxShadow:    scrolled ? 'var(--shadow-nav)' : 'none',
+          backdropFilter:       scrolled ? 'blur(5px) saturate(110%)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(5px) saturate(110%)' : 'none',
+          boxShadow:            scrolled ? 'var(--shadow-nav)' : 'none',
         }}
       >
         {/* Hairline gold accent */}
@@ -59,7 +60,7 @@ export function Navbar() {
           className="absolute top-0 inset-x-0 h-px transition-opacity duration-500"
           style={{
             background: 'linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%)',
-            opacity: scrolled ? 0.75 : 0.40,
+            opacity: scrolled ? 0.30 : 0.18,
           }}
         />
 
@@ -140,12 +141,17 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Thin separator — desktop only */}
-            <div
-              aria-hidden
-              className="hidden lg:block w-px h-3.5 opacity-20"
-              style={{ background: 'var(--border-strong)' }}
-            />
+            {/* Theme toggle — always visible (header bar on mobile, header on desktop) */}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                data-cursor="hover"
+                className="inline-flex items-center justify-center w-7 h-7 text-[var(--text-muted)] opacity-60 transition-all duration-200 hover:opacity-100 hover:text-[var(--gold)]"
+              >
+                {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
+              </button>
+            )}
 
             {/* Desktop CTA */}
             <Link
@@ -185,8 +191,8 @@ export function Navbar() {
         )}
         style={{
           background:           'var(--bg-nav-menu)',
-          backdropFilter:       'blur(24px) saturate(160%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+          backdropFilter:       'blur(8px) saturate(110%)',
+          WebkitBackdropFilter: 'blur(8px) saturate(110%)',
         }}
       >
         {/* Spacer matching fixed header */}
@@ -248,7 +254,7 @@ export function Navbar() {
           </div>
 
           {/* CTA */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8">
             <Link href="/contact" className="btn-primary">
               Start Project
             </Link>

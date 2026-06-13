@@ -59,6 +59,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Runs synchronously before first paint — prevents theme flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('vixx-theme');var d=t?t==='dark':true;if(d)document.documentElement.classList.add('dark')}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body
         className={`
           ${cormorant.variable}

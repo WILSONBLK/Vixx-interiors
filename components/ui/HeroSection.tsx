@@ -104,7 +104,7 @@ export function HeroSection() {
 
         {/* Bottom fade into page background */}
         <div
-          className="absolute bottom-0 inset-x-0 h-48"
+          className="absolute bottom-0 inset-x-0 h-24"
           style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-primary))' }}
         />
       </div>

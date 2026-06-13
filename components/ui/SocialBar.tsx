@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { SOCIAL_LINKS } from '@/lib/data'
 import { InstagramIcon, TikTokIcon, WhatsAppIcon } from '@/components/ui/SocialIcons'
 
@@ -10,40 +11,37 @@ function BarIcon({ id, size = 18 }: { id: string; size?: number }) {
   return null
 }
 
-/*
- * SocialBar — fixed bottom strip, persistent across every page.
- *
- * z-30 is intentional: sits below the navbar (z-50) and mobile
- * menu overlay (z-40) so those cover it when active, but the bar
- * is always visible otherwise.
- *
- * Body padding-bottom (set via CSS var --social-bar-height in
- * globals.css) ensures page content is never hidden behind the bar.
- */
 export function SocialBar() {
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    let lastY = window.scrollY
+
+    const onScroll = () => {
+      const y          = window.scrollY
+      const atTop      = y < 60
+      const nearBottom = y + window.innerHeight >= document.documentElement.scrollHeight - 80
+      const scrollingUp = y < lastY
+
+      setVisible(atTop || nearBottom || scrollingUp)
+      lastY = y
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <nav
       aria-label="Follow VIXX Interiors on social media"
       className="fixed bottom-0 inset-x-0 z-30 pointer-events-none"
       style={{
-        background:           'var(--bg-nav-scrolled)',
-        backdropFilter:       'blur(20px) saturate(160%)',
-        WebkitBackdropFilter: 'blur(20px) saturate(160%)',
-        borderTop:            '1px solid var(--border-default)',
-        /* push bar content above iPhone home-indicator */
-        paddingBottom:        'env(safe-area-inset-bottom, 0px)',
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        transform:     visible ? 'translateY(0)' : 'translateY(110%)',
+        opacity:       visible ? 1 : 0,
+        transition:    'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease',
       }}
     >
-      {/* Gold hairline at top edge — mirrors navbar treatment */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 inset-x-0 h-px"
-        style={{
-          background: 'linear-gradient(90deg, transparent 0%, var(--gold-line) 50%, transparent 100%)',
-          opacity: 0.45,
-        }}
-      />
-
       <ul
         role="list"
         className="flex items-center justify-center gap-3 sm:gap-5"
@@ -57,10 +55,9 @@ export function SocialBar() {
               rel="noopener noreferrer"
               aria-label={`VIXX Interiors on ${label}`}
               data-cursor="hover"
-              /* 48 px touch target on mobile → 44 px on desktop */
-              className="social-icon !w-12 !h-12 sm:!w-11 sm:!h-11"
+              className="social-icon !w-10 !h-10 sm:!w-9 sm:!h-9"
             >
-              <BarIcon id={id} size={18} />
+              <BarIcon id={id} size={16} />
             </a>
           </li>
         ))}

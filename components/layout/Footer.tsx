@@ -4,6 +4,7 @@ import { Instagram, Phone, Mail, MapPin } from 'lucide-react'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { NAV_LINKS }    from '@/lib/data'
+import { WhatsAppIcon } from '@/components/ui/SocialIcons'
 
 function TikTokIcon({ size = 15 }: { size?: number }) {
   return (
@@ -16,6 +17,7 @@ function TikTokIcon({ size = 15 }: { size?: number }) {
 const SOCIAL_LINKS = [
   { icon: 'instagram', href: 'https://www.instagram.com/vixx_interiors?igsh=MWlqZzY5MHpnaDBpaQ==', label: 'Instagram' },
   { icon: 'tiktok',    href: 'https://www.tiktok.com/@vixxinteriors',                               label: 'TikTok'    },
+  { icon: 'whatsapp',  href: 'https://wa.me/2348065672607',                                         label: 'WhatsApp'  },
 ]
 
 const LEGAL_LINKS = [
@@ -76,6 +78,8 @@ export function Footer() {
                   >
                     {icon === 'tiktok'
                       ? <TikTokIcon size={15} />
+                      : icon === 'whatsapp'
+                      ? <WhatsAppIcon size={15} />
                       : <Instagram size={15} strokeWidth={1.5} />}
                   </a>
                 ))}
