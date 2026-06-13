@@ -85,10 +85,12 @@ export default function ContactPage() {
                         href="https://wa.me/2348065672607"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
-                        style={{ color: 'var(--text-secondary)' }}
+                        className="flex items-center gap-4 font-sans text-sm hover:text-[var(--gold)]"
+                        style={{ color: 'var(--text-secondary)', transition: 'color 0.28s cubic-bezier(0.4,0,0.2,1)' }}
                       >
-                        <Phone size={16} strokeWidth={1.5} style={{ color: 'var(--gold)' }} />
+                        <span className="social-link-icon" style={{ color: 'var(--gold)' }}>
+                          <Phone size={16} strokeWidth={1.5} />
+                        </span>
                         +234 806 567 2607 &nbsp;<span className="font-jost text-[0.6rem] tracking-[0.15em] uppercase" style={{ color: 'var(--gold-dim)' }}>WhatsApp</span>
                       </a>
                     </li>
@@ -107,10 +109,12 @@ export default function ContactPage() {
                         href="https://www.instagram.com/vixx_interiors?igsh=MWlqZzY5MHpnaDBpaQ=="
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
-                        style={{ color: 'var(--text-secondary)' }}
+                        className="flex items-center gap-4 font-sans text-sm hover:text-[var(--gold)]"
+                        style={{ color: 'var(--text-secondary)', transition: 'color 0.28s cubic-bezier(0.4,0,0.2,1)' }}
                       >
-                        <Instagram size={16} strokeWidth={1.5} style={{ color: 'var(--gold)' }} />
+                        <span className="social-link-icon" style={{ color: 'var(--gold)' }}>
+                          <Instagram size={16} strokeWidth={1.5} />
+                        </span>
                         @vixx_interiors
                       </a>
                     </li>
@@ -119,10 +123,12 @@ export default function ContactPage() {
                         href="https://www.tiktok.com/@vixxinteriors"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-4 font-sans text-sm transition-colors duration-200 hover:text-[var(--gold)]"
-                        style={{ color: 'var(--text-secondary)' }}
+                        className="flex items-center gap-4 font-sans text-sm hover:text-[var(--gold)]"
+                        style={{ color: 'var(--text-secondary)', transition: 'color 0.28s cubic-bezier(0.4,0,0.2,1)' }}
                       >
-                        <TikTokIcon size={16} />
+                        <span className="social-link-icon" style={{ color: 'var(--gold)' }}>
+                          <TikTokIcon size={16} />
+                        </span>
                         @vixxinteriors
                       </a>
                     </li>

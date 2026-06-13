@@ -379,6 +379,104 @@
     font-size: 0.75rem;
     color: var(--color-error);
   }
+
+  /* ─── Social icon — unified interaction system ───────────────────────────
+   * All three variants share identical timing (0.28s), easing, translate,
+   * scale, and drop-shadow physics. Only the outer chrome differs.
+   *
+   * .social-icon      → bare icon link (Navbar header + mobile menu)
+   * .social-icon-btn  → bordered square button (Footer)
+   * .social-link-icon → icon wrapper inside a text+icon anchor (Contact)
+   * ─────────────────────────────────────────────────────────────────────── */
+
+  .social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--text-muted);
+    opacity: 0.60;
+    transition:
+      color     0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity   0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      filter    0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .social-icon:hover {
+    color: var(--gold-text);
+    opacity: 1;
+    transform: translateY(-2px) scale(1.1);
+    filter: drop-shadow(0 0 8px var(--gold-border));
+  }
+  .social-icon:active {
+    transform: translateY(0) scale(0.95);
+    opacity: 0.85;
+    transition-duration: 0.1s;
+  }
+  .social-icon:focus-visible {
+    color: var(--gold-text);
+    opacity: 1;
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+    transform: none;
+    filter: none;
+  }
+
+  .social-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--border-default);
+    color: var(--text-muted);
+    transition:
+      color        0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      transform    0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      filter       0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow   0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .social-icon-btn:hover {
+    color: var(--gold-text);
+    border-color: var(--gold-border);
+    transform: translateY(-2px) scale(1.1);
+    filter: drop-shadow(0 0 8px var(--gold-border));
+    box-shadow: 0 0 16px var(--gold-ghost);
+  }
+  .social-icon-btn:active {
+    transform: translateY(0) scale(0.95);
+    transition-duration: 0.1s;
+  }
+  .social-icon-btn:focus-visible {
+    color: var(--gold-text);
+    border-color: var(--gold-border);
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    transform: none;
+    filter: none;
+    box-shadow: none;
+  }
+
+  /* Icon inside a text+icon anchor — receives float+glow when parent is hovered */
+  .social-link-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    transition:
+      transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+      filter    0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  a:hover .social-link-icon,
+  a:focus-visible .social-link-icon {
+    transform: translateY(-2px) scale(1.1);
+    filter: drop-shadow(0 0 8px var(--gold-border));
+  }
+  a:active .social-link-icon {
+    transform: translateY(0) scale(0.95);
+    transition-duration: 0.1s;
+  }
 }
 
 /* ─── LINK REVEAL UNDERLINE ──────────────────────────────────────────────── */

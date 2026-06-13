@@ -72,7 +72,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 flex items-center justify-center border border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--gold)] hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                    className="social-icon-btn"
                   >
                     {icon === 'tiktok'
                       ? <TikTokIcon size={15} />
