@@ -18,8 +18,9 @@
 
 /* ─── THEME-INVARIANT TOKENS ─────────────────────────────────────────────── */
 :root {
-  --nav-height:      76px;
-  --scrollbar-width: 0px;
+  --nav-height:        76px;
+  --social-bar-height: 60px;
+  --scrollbar-width:   0px;
 
   /* ── Brand primitives (reference only — use semantic tokens in components) */
   --brand-black: #0A0908;
@@ -175,6 +176,8 @@
     background-color: var(--surface-base);
     color: var(--text-primary);
     transition: background-color 0.35s ease, color 0.35s ease;
+    /* Reserve space at the bottom so content doesn't hide behind the fixed SocialBar */
+    padding-bottom: var(--social-bar-height);
   }
 
   body.modal-open {

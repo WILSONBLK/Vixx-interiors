@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Jost, Inter } from 'next/font/google'
 import { CustomCursor }    from '@/components/ui/CustomCursor'
 import { PageTransition }  from '@/components/ui/PageTransition'
+import { SocialBar }       from '@/components/ui/SocialBar'
 
 const cormorant = Playfair_Display({
   subsets:  ['latin'],
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <CustomCursor />
         <PageTransition>{children}</PageTransition>
+        <SocialBar />
       </body>
     </html>
   )
