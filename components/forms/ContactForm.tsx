@@ -80,11 +80,11 @@ export function ContactForm() {
             autoComplete="name"
             required
             placeholder="Adaeze Johnson"
-            className={cn('input-field', errors.name && 'border-red-500')}
+            className={cn('input-field', errors.name && 'input-error')}
             aria-describedby={errors.name ? 'name-error' : undefined}
           />
           {errors.name && (
-            <p id="name-error" role="alert" className="mt-1 text-red-500 text-xs">{errors.name}</p>
+            <p id="name-error" role="alert" className="field-error">{errors.name}</p>
           )}
         </div>
         <div>
@@ -96,11 +96,11 @@ export function ContactForm() {
             autoComplete="email"
             required
             placeholder="hello@example.com"
-            className={cn('input-field', errors.email && 'border-red-500')}
+            className={cn('input-field', errors.email && 'input-error')}
             aria-describedby={errors.email ? 'email-error' : undefined}
           />
           {errors.email && (
-            <p id="email-error" role="alert" className="mt-1 text-red-500 text-xs">{errors.email}</p>
+            <p id="email-error" role="alert" className="field-error">{errors.email}</p>
           )}
         </div>
       </div>
@@ -116,11 +116,11 @@ export function ContactForm() {
             autoComplete="tel"
             required
             placeholder="+234 800 000 0000"
-            className={cn('input-field', errors.phone && 'border-red-500')}
+            className={cn('input-field', errors.phone && 'input-error')}
             aria-describedby={errors.phone ? 'phone-error' : undefined}
           />
           {errors.phone && (
-            <p id="phone-error" role="alert" className="mt-1 text-red-500 text-xs">{errors.phone}</p>
+            <p id="phone-error" role="alert" className="field-error">{errors.phone}</p>
           )}
         </div>
         <div>
@@ -131,11 +131,11 @@ export function ContactForm() {
             type="text"
             required
             placeholder="Lekki Phase 1, Lagos"
-            className={cn('input-field', errors.location && 'border-red-500')}
+            className={cn('input-field', errors.location && 'input-error')}
             aria-describedby={errors.location ? 'location-error' : undefined}
           />
           {errors.location && (
-            <p id="location-error" role="alert" className="mt-1 text-red-500 text-xs">{errors.location}</p>
+            <p id="location-error" role="alert" className="field-error">{errors.location}</p>
           )}
         </div>
       </div>
@@ -148,7 +148,7 @@ export function ContactForm() {
             id="projectType"
             name="projectType"
             required
-            className={cn('input-field', errors.projectType && 'border-red-500')}
+            className={cn('input-field', errors.projectType && 'input-error')}
             defaultValue=""
           >
             <option value="" disabled>Select type…</option>
@@ -157,7 +157,7 @@ export function ContactForm() {
             ))}
           </select>
           {errors.projectType && (
-            <p role="alert" className="mt-1 text-red-500 text-xs">{errors.projectType}</p>
+            <p role="alert" className="field-error">{errors.projectType}</p>
           )}
         </div>
         <div>
@@ -166,7 +166,7 @@ export function ContactForm() {
             id="budget"
             name="budget"
             required
-            className={cn('input-field', errors.budget && 'border-red-500')}
+            className={cn('input-field', errors.budget && 'input-error')}
             defaultValue=""
           >
             <option value="" disabled>Select budget…</option>
@@ -175,7 +175,7 @@ export function ContactForm() {
             ))}
           </select>
           {errors.budget && (
-            <p role="alert" className="mt-1 text-red-500 text-xs">{errors.budget}</p>
+            <p role="alert" className="field-error">{errors.budget}</p>
           )}
         </div>
       </div>
@@ -235,7 +235,11 @@ export function ContactForm() {
         </button>
 
         {status === 'error' && (
-          <div className="flex items-center gap-2 text-red-500 text-sm" role="alert">
+          <div
+            className="flex items-center gap-2 text-sm"
+            style={{ color: 'var(--color-error)' }}
+            role="alert"
+          >
             <AlertCircle size={14} strokeWidth={1.5} />
             <span>Something went wrong. Please try again.</span>
           </div>

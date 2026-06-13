@@ -2,98 +2,164 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   VIXX INTERIORS — DESIGN TOKEN SYSTEM
-   Brand palette:  Primary: Black  |  Secondary: Cream  |  Accent: Gold  |  Support: White
-   All components inherit from these tokens. Never use raw hex or rgba(R,G,B,A)
-   for brand colors — reference a token instead.
-───────────────────────────────────────────────────────────────────────────── */
+/*
+ * VIXX INTERIORS — SEMANTIC THEME ARCHITECTURE v2
+ *
+ * Surface model  :  base → raised → elevated → overlay  (increasing depth)
+ * Text hierarchy :  text-primary → text-secondary → text-tertiary
+ * Form system    :  --input-bg / --input-text / --input-border (explicit, never transparent)
+ *
+ * Two complete themes share identical token names; components inherit the right
+ * values automatically. Raw hex/rgba only ever appears in the definitions below.
+ *
+ * Dark  (default) :  Black-based cinematic premium
+ * Light (system)  :  Cream-based luxury editorial
+ */
+
+/* ─── THEME-INVARIANT TOKENS ─────────────────────────────────────────────── */
 :root {
   --nav-height:      76px;
   --scrollbar-width: 0px;
 
-  /* ── Brand primitives — fixed across all themes ──────────────────────────── */
-  --brand-black: #080808;      /* Primary:   architectural black                */
-  --brand-cream: #F0EBE1;      /* Secondary: warm cream — warmth, sophistication */
-  --brand-white: #FAFAF9;      /* Support:   clean near-white                   */
+  /* ── Brand primitives (reference only — use semantic tokens in components) */
+  --brand-black: #0A0908;
+  --brand-cream: #F0EBE1;
+  --brand-white: #FAFAF9;
 
-  /* ── Gold scale — Accent ────────────────────────────────────────────────── */
-  --gold:       #C49A2E;
-  --gold-light: #D4AF37;
-  --gold-pale:  #E8C56D;
-  --gold-dark:  #8B6914;
+  /* ── Gold — Accent palette (unchanged across both themes) */
+  --gold:              #C49A2E;
+  --gold-light:        #D4AF37;
+  --gold-pale:         #E8C56D;
+  --gold-dark:         #8B6914;
 
-  /* Gold opacity tokens — semantic, never use raw rgba(196,154,46,…) elsewhere */
-  --gold-text:          rgba(196,154,46,0.85);  /* primary gold text (labels, eyebrows)   */
-  --gold-dim:           rgba(196,154,46,0.65);  /* secondary gold text                    */
-  --gold-line:          rgba(196,154,46,0.50);  /* decorative lines, thin accents         */
-  --gold-border:        rgba(196,154,46,0.28);  /* active / hover borders                 */
-  --gold-border-subtle: rgba(196,154,46,0.14);  /* resting gold borders, card outlines    */
-  --gold-ghost:         rgba(196,154,46,0.16);  /* ghost numbers, decorative overlays     */
-  --gold-glow:          rgba(196,154,46,0.05);  /* ambient background radial glows        */
+  /* Gold opacity tokens — semantic names, stable across themes */
+  --gold-text:          rgba(196,154,46,0.85);   /* primary gold text            */
+  --gold-dim:           rgba(196,154,46,0.65);   /* secondary gold text          */
+  --gold-line:          rgba(196,154,46,0.50);   /* decorative lines             */
+  --gold-border:        rgba(196,154,46,0.28);   /* active / hover borders       */
+  --gold-border-subtle: rgba(196,154,46,0.14);   /* resting gold borders         */
+  --gold-ghost:         rgba(196,154,46,0.16);   /* ghost numbers / decorative   */
+  --gold-glow:          rgba(196,154,46,0.05);   /* ambient radial glows         */
 
-  /* ── Photography overlay tokens — always dark regardless of theme ────────── */
-  --overlay-heavy:  rgba(8,8,8,0.78);   /* deep image darkening                   */
-  --overlay-mid:    rgba(8,8,8,0.50);   /* standard photo overlay / nav bg        */
-  --overlay-gentle: rgba(8,8,8,0.35);   /* soft gradient stop                     */
-  --overlay-light:  rgba(8,8,8,0.18);   /* light hover veil                       */
-  --overlay-subtle: rgba(8,8,8,0.10);   /* barely-there image tints               */
+  /* Accent aliases */
+  --accent-primary: #C49A2E;
+  --accent-hover:   #D4AF37;
+  --text-on-accent: #1A1208;   /* dark text for use on gold backgrounds */
 
-  /* ── Text on accent (gold) backgrounds ─────────────────────────────────── */
-  --text-on-accent: #1A1208;
+  /* ── Photography overlays — always dark, never theme-variant */
+  --overlay-heavy:   rgba(8,8,8,0.78);
+  --overlay-mid:     rgba(8,8,8,0.50);
+  --overlay-gentle:  rgba(8,8,8,0.35);
+  --overlay-light:   rgba(8,8,8,0.18);
+  --overlay-subtle:  rgba(8,8,8,0.10);
 
-  /* ── Semantic surface tokens — Dark theme (default experience) ──────────── */
-  --bg-primary:    #080808;              /* page background — Primary Black        */
-  --bg-secondary:  #100E0A;             /* section alternate bg — warm near-black */
-  --bg-card:       rgba(255,255,255,0.04);
-  --bg-card-hover: rgba(255,255,255,0.07);
-
-  /* ── Semantic text tokens ───────────────────────────────────────────────── */
-  --text-primary:   #F0EBE1;                    /* Primary text — Cream              */
-  --text-secondary: rgba(240,235,225,0.72);     /* Body text                         */
-  --text-muted:     rgba(240,235,225,0.42);     /* Labels, metadata                  */
-
-  /* ── Border tokens ──────────────────────────────────────────────────────── */
-  --border:        rgba(240,235,225,0.08);
-  --border-strong: rgba(240,235,225,0.18);
-
-  /* ── Shadow tokens ──────────────────────────────────────────────────────── */
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.40);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.50);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.60);
-
-  /* ── Navigation overlay tokens — theme-aware ────────────────────────────── */
-  --bg-nav-scrolled: rgba(8,8,8,0.50);
-  --bg-nav-menu:     rgba(8,8,8,0.96);
-  --shadow-nav:      0 4px 24px rgba(8,8,8,0.20);
+  /* ── Status */
+  --color-error:          #C0392B;
+  --color-error-subtle:   rgba(192,57,43,0.10);
+  --color-error-border:   rgba(192,57,43,0.55);
+  --color-success:        #5A8A5A;
+  --color-success-subtle: rgba(90,138,90,0.12);
 }
 
-/* ── Light theme (system preference) ──────────────────────────────────────── */
+/* ─── DARK THEME — Black-based cinematic premium (default) ──────────────── */
+:root {
+  color-scheme: dark;   /* tells browser to render native controls dark */
+
+  /* Surfaces: four distinct depth levels — NOT near-identical near-blacks */
+  --surface-base:     #0A0908;   /* deepest:  page foundation            */
+  --surface-raised:   #16130F;   /* +1 depth: section backgrounds        */
+  --surface-elevated: #201D18;   /* +2 depth: cards, panels              */
+  --surface-overlay:  #2A2520;   /* +3 depth: dropdowns, modals          */
+
+  /* Text — cream warmth */
+  --text-primary:   #F0EBE1;
+  --text-secondary: rgba(240,235,225,0.75);
+  --text-tertiary:  rgba(240,235,225,0.45);
+
+  /* Borders */
+  --border-default: rgba(240,235,225,0.10);
+  --border-subtle:  rgba(240,235,225,0.06);
+  --border-strong:  rgba(240,235,225,0.22);
+
+  /* ── Input tokens — explicit, never transparent ── */
+  --input-bg:           rgba(255,255,255,0.05);  /* subtly lit container      */
+  --input-bg-focus:     rgba(255,255,255,0.09);  /* brightens on focus        */
+  --input-text:         #F0EBE1;
+  --input-placeholder:  rgba(240,235,225,0.38);
+  --input-border:       rgba(240,235,225,0.20);  /* clearly visible           */
+  --input-border-focus: #C49A2E;                 /* gold focus ring           */
+  --input-border-error: rgba(192,57,43,0.70);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 4px  rgba(0,0,0,0.55);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.65);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.75);
+
+  /* Navigation */
+  --bg-nav-scrolled: rgba(10,9,8,0.60);
+  --bg-nav-menu:     rgba(10,9,8,0.97);
+  --shadow-nav:      0 4px 24px rgba(0,0,0,0.45);
+
+  /* ── Legacy aliases — components using old token names still work ── */
+  --bg-primary:    var(--surface-base);
+  --bg-secondary:  var(--surface-raised);
+  --bg-card:       var(--surface-elevated);
+  --bg-card-hover: var(--surface-overlay);
+  --text-muted:    var(--text-tertiary);
+  --border:        var(--border-default);
+}
+
+/* ─── LIGHT THEME — Cream-based luxury editorial ─────────────────────────── */
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-primary:    #FAFAF9;              /* Support White                         */
-    --bg-secondary:  #F0EBE1;             /* Secondary Cream                       */
-    --bg-card:       rgba(8,8,8,0.025);
-    --bg-card-hover: rgba(8,8,8,0.045);
+    color-scheme: light;
 
-    --text-primary:   #080808;            /* Primary Black                         */
-    --text-secondary: rgba(8,8,8,0.72);
-    --text-muted:     rgba(8,8,8,0.48);
+    /* Surfaces: white base → warm cream depth */
+    --surface-base:     #FAFAF9;   /* clean white page          */
+    --surface-raised:   #F0EBE1;   /* cream sections            */
+    --surface-elevated: #E4DDD0;   /* deeper cream cards        */
+    --surface-overlay:  #D8D0C2;   /* warmest — overlays/modals */
 
-    --border:        rgba(8,8,8,0.08);
-    --border-strong: rgba(8,8,8,0.16);
+    /* Text — near-black on cream */
+    --text-primary:   #0A0908;
+    --text-secondary: rgba(10,9,8,0.72);
+    --text-tertiary:  rgba(10,9,8,0.52);
 
-    --shadow-sm: 0 1px 4px rgba(0,0,0,0.07);
-    --shadow-md: 0 4px 16px rgba(0,0,0,0.09);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.11);
+    /* Borders */
+    --border-default: rgba(10,9,8,0.12);
+    --border-subtle:  rgba(10,9,8,0.07);
+    --border-strong:  rgba(10,9,8,0.24);
 
-    --bg-nav-scrolled: rgba(250,250,249,0.58);
-    --bg-nav-menu:     rgba(250,250,249,0.96);
-    --shadow-nav:      0 4px 24px rgba(0,0,0,0.06);
+    /* ── Input tokens — pure white on cream sections = editorial contrast ── */
+    --input-bg:           #FFFFFF;
+    --input-bg-focus:     #FFFFFF;
+    --input-text:         #0A0908;
+    --input-placeholder:  rgba(10,9,8,0.38);
+    --input-border:       rgba(10,9,8,0.22);
+    --input-border-focus: #C49A2E;
+    --input-border-error: rgba(192,57,43,0.65);
+
+    /* Shadows */
+    --shadow-sm:  0 1px 4px  rgba(0,0,0,0.08);
+    --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+    --shadow-lg:  0 8px 32px rgba(0,0,0,0.13);
+
+    /* Navigation */
+    --bg-nav-scrolled: rgba(250,250,249,0.88);
+    --bg-nav-menu:     rgba(250,250,249,0.97);
+    --shadow-nav:      0 4px 24px rgba(0,0,0,0.08);
+
+    /* Legacy aliases */
+    --bg-primary:    var(--surface-base);
+    --bg-secondary:  var(--surface-raised);
+    --bg-card:       var(--surface-elevated);
+    --bg-card-hover: var(--surface-overlay);
+    --text-muted:    var(--text-tertiary);
+    --border:        var(--border-default);
   }
 }
 
-/* ── Base ─────────────────────────────────────────────────────────────────── */
+/* ─── BASE ────────────────────────────────────────────────────────────────── */
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -106,7 +172,7 @@
 
   body {
     margin: 0;
-    background-color: var(--bg-primary);
+    background-color: var(--surface-base);
     color: var(--text-primary);
     transition: background-color 0.35s ease, color 0.35s ease;
   }
@@ -117,7 +183,6 @@
   }
 
   a { text-decoration: none; color: inherit; }
-
   img, video { max-width: 100%; display: block; }
 
   ::selection {
@@ -131,10 +196,10 @@
   }
 }
 
-/* ── Components ───────────────────────────────────────────────────────────── */
+/* ─── COMPONENTS ──────────────────────────────────────────────────────────── */
 @layer components {
 
-  /* ── Layout ── */
+  /* Layout ── */
   .container-site {
     @apply mx-auto w-full max-w-7xl px-6 lg:px-8;
   }
@@ -172,29 +237,27 @@
   .btn-ghost {
     @apply inline-flex items-center gap-2
            font-jost text-[0.68rem] tracking-[0.22em] uppercase
-           text-[var(--text-muted)]
+           text-[var(--text-tertiary)]
            transition-colors duration-300
            hover:text-[var(--gold)]
            focus-visible:outline focus-visible:outline-2
            focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2;
   }
 
-  /* ── Cards ── */
+  /* ── Cards — solid surface depth, no glass illusion ── */
   .card-glass {
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-default);
     transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   }
 
   .card-glass:hover {
-    background: var(--bg-card-hover);
+    background: var(--surface-overlay);
     border-color: var(--gold-border);
-    box-shadow: inset 0 1px 0 var(--gold-ghost), 0 0 0 1px var(--gold-glow);
+    box-shadow: inset 0 1px 0 var(--gold-ghost), 0 0 24px var(--gold-glow);
   }
 
-  /* ── Typography helpers ── */
+  /* ── Typography ── */
   .label-xs {
     @apply font-jost text-[0.65rem] tracking-[0.35em] uppercase text-gold;
   }
@@ -234,52 +297,92 @@
     opacity: 0.25;
   }
 
-  /* ── Gold gradient line (used in Navbar) ── */
   .bg-gold-gradient {
     background-image: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
 
-  /* ── Social icons ── */
-  .social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    color: var(--text-muted);
-    opacity: 0.55;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-  }
-  .social-icon:hover {
-    opacity: 1;
-    transform: scale(1.12);
-  }
-  .social-icon:focus-visible {
-    opacity: 1;
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  /* ── Form inputs ── */
-  .input-field {
-    @apply w-full bg-transparent border border-[var(--border)]
-           px-4 py-3 font-sans text-base text-[var(--text-primary)]
-           placeholder:text-[var(--text-muted)]
-           focus:outline-none focus:border-[var(--gold)]
-           transition-all duration-200;
-  }
-
+  /* ── Form inputs — fully themed, never transparent ── */
   .input-label {
-    @apply block font-jost text-[0.65rem] tracking-[0.2em] uppercase
-           text-[var(--text-muted)] mb-2;
+    display: block;
+    font-family: var(--font-jost), system-ui, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.5rem;
+  }
+
+  .input-field {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--input-text);
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.2s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease,
+                transform 0.2s ease;
+  }
+
+  .input-field::placeholder {
+    color: var(--input-placeholder);
+    opacity: 1; /* Firefox normalisation */
+  }
+
+  .input-field:focus {
+    border-color: var(--input-border-focus);
+    background-color: var(--input-bg-focus);
+    box-shadow: 0 0 0 3px var(--gold-glow), 0 4px 16px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+  }
+
+  /* Select — custom gold chevron arrow */
+  select.input-field {
+    /* URL-encoded SVG: gold chevron-down */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C49A2E' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  select.input-field:focus {
+    /* keep custom arrow on focus — combine with base focus bg */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C49A2E' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  /* Textarea */
+  textarea.input-field {
+    resize: vertical;
+    min-height: 7rem;
+  }
+
+  /* Error state — applied as additional class alongside .input-field */
+  .input-field.input-error {
+    border-color: var(--input-border-error);
+    background-color: var(--color-error-subtle);
+  }
+
+  /* Error message text */
+  .field-error {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-error);
   }
 }
 
-/* ── Link reveal underline ────────────────────────────────────────────────── */
-.link-reveal {
-  position: relative;
-}
+/* ─── LINK REVEAL UNDERLINE ──────────────────────────────────────────────── */
+.link-reveal { position: relative; }
 .link-reveal::after {
   content: '';
   position: absolute;
@@ -292,11 +395,9 @@
   transform-origin: left;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.link-reveal:hover::after {
-  transform: scaleX(1);
-}
+.link-reveal:hover::after { transform: scaleX(1); }
 
-/* ── Button icon slide ────────────────────────────────────────────────────── */
+/* ─── BUTTON ICON SLIDE ──────────────────────────────────────────────────── */
 .btn-primary svg,
 .btn-outline svg,
 .btn-ghost svg {
@@ -304,41 +405,33 @@
 }
 .btn-primary:hover svg,
 .btn-outline:hover svg,
-.btn-ghost:hover svg {
-  transform: translateX(3px);
-}
+.btn-ghost:hover svg { transform: translateX(3px); }
 
-/* ── Input focus lift ─────────────────────────────────────────────────────── */
-.input-field:focus {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px var(--gold-glow);
-}
-
-/* ── Custom cursor (hover-capable devices only) ──────────────────────────── */
+/* ─── CUSTOM CURSOR (hover devices only) ─────────────────────────────────── */
 @media (hover: hover) {
   body, a, button { cursor: none; }
 }
 
-/* ── Service cards ────────────────────────────────────────────────────────── */
+/* ─── SERVICE CARDS ──────────────────────────────────────────────────────── */
 .service-card {
   border:     1px solid var(--gold-border-subtle);
-  background: var(--bg-card);
+  background: var(--surface-elevated);
   transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.35s ease;
 }
 .service-card:hover {
+  background:   var(--surface-overlay);
   border-color: var(--gold-border);
   box-shadow:   0 0 28px var(--gold-ghost);
 }
 
-/* ── Gold pulse animation ─────────────────────────────────────────────────── */
+/* ─── GOLD PULSE ANIMATION ───────────────────────────────────────────────── */
 @keyframes goldPulse {
-  0%, 100% { text-shadow: 0 0 0px rgba(196,154,46,0); }
-  50%       { text-shadow: 0 0 20px var(--gold-border), 0 0 40px var(--gold-glow); }
+  0%, 100% { text-shadow: 0 0  0px rgba(196,154,46,0.00); }
+  50%       { text-shadow: 0 0 20px rgba(196,154,46,0.40), 0 0 40px rgba(196,154,46,0.15); }
 }
-
 .gold-pulse { animation: goldPulse 3s ease-in-out infinite; }
 
-/* ── Reduced motion ──────────────────────────────────────────────────────── */
+/* ─── REDUCED MOTION ─────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -347,7 +440,7 @@
   }
 }
 
-/* ── Video hero ──────────────────────────────────────────────────────────── */
+/* ─── VIDEO HERO OVERLAY ─────────────────────────────────────────────────── */
 .hero-video-overlay {
   background: linear-gradient(
     to bottom,
@@ -362,28 +455,21 @@
   to   { transform: scale(1.18) translateZ(0); }
 }
 
-/* SplitText: words are always visible on touch/mobile ───────────────────── */
+/* SplitText: always visible on touch/no-hover ───────────────────────────── */
 @media (hover: none) {
-  .split-word {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  .split-word { opacity: 1 !important; transform: none !important; }
 }
 
-/* ── Gallery panoramic pan animations ────────────────────────────────────── */
+/* ─── GALLERY PAN ANIMATIONS ─────────────────────────────────────────────── */
 @keyframes vixx-pan-ltr {
   from { transform: translateX(0%); }
   to   { transform: translateX(-8.33%); }
 }
-
 @keyframes vixx-pan-rtl {
   from { transform: translateX(-8.33%); }
   to   { transform: translateX(0%); }
 }
-
 @media (prefers-reduced-motion: reduce) {
   [style*="vixx-pan-ltr"],
-  [style*="vixx-pan-rtl"] {
-    animation: none !important;
-  }
+  [style*="vixx-pan-rtl"] { animation: none !important; }
 }

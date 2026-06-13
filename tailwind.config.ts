@@ -1,36 +1,53 @@
 import type { Config } from 'tailwindcss'
 
 export default {
-  darkMode: 'class',
+  darkMode: 'media',
   content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        /* Brand primitives — mirror CSS custom properties */
+        /* Brand primitives */
         brand: {
           black: 'var(--brand-black)',
           cream: 'var(--brand-cream)',
           white: 'var(--brand-white)',
         },
-        /* Semantic surface tokens */
+        /* Semantic surface layers — base → raised → elevated → overlay */
         surface: {
+          base:     'var(--surface-base)',
+          raised:   'var(--surface-raised)',
+          elevated: 'var(--surface-elevated)',
+          overlay:  'var(--surface-overlay)',
+          /* legacy aliases */
           primary:   'var(--bg-primary)',
           secondary: 'var(--bg-secondary)',
           card:      'var(--bg-card)',
         },
-        /* Gold — Accent scale */
+        /* Gold — accent palette */
         gold: {
           DEFAULT: 'var(--gold)',
           light:   'var(--gold-light)',
           pale:    'var(--gold-pale)',
           dark:    'var(--gold-dark)',
         },
-        /* Semantic text tokens */
+        /* Text hierarchy */
         copy: {
           primary:   'var(--text-primary)',
           secondary: 'var(--text-secondary)',
+          tertiary:  'var(--text-tertiary)',
           muted:     'var(--text-muted)',
           accent:    'var(--text-on-accent)',
+        },
+        /* Input tokens */
+        input: {
+          bg:    'var(--input-bg)',
+          text:  'var(--input-text)',
+          border:'var(--input-border)',
+        },
+        /* Status */
+        status: {
+          error:   'var(--color-error)',
+          success: 'var(--color-success)',
         },
       },
       fontFamily: {
