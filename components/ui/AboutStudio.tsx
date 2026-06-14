@@ -22,13 +22,6 @@ export function AboutStudio() {
       className="relative overflow-hidden flex flex-col"
       style={{ minHeight: '100svh' }}
     >
-      {/* Gold hairline bridge from Hero */}
-      <div
-        aria-hidden
-        className="absolute top-0 inset-x-0 h-px pointer-events-none z-10"
-        style={{ background: 'linear-gradient(90deg, transparent, var(--gold-line), transparent)' }}
-      />
-
       {/* Background image — smooth load-in, reduced to half opacity */}
       <motion.div
         className="absolute inset-0"
@@ -62,15 +55,6 @@ export function AboutStudio() {
         }}
       />
 
-      {/* Bottom fade — dissolves into next section */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 inset-x-0 pointer-events-none"
-        style={{
-          height:     90,
-          background: 'linear-gradient(to bottom, transparent, var(--bg-primary))',
-        }}
-      />
 
       {/* Content */}
       <div

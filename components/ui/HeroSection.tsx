@@ -98,10 +98,6 @@ export function HeroSection() {
           className="absolute inset-0"
           style={{ background: 'radial-gradient(ellipse 90% 88% at 50% 46%, transparent 42%, rgba(8,8,8,0.15) 100%)' }}
         />
-        <div
-          className="absolute bottom-0 inset-x-0 h-5 opacity-60"
-          style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-primary))' }}
-        />
       </div>
 
       {/* ── Cursor proximity glow ───────────────────────────────────────────── */}

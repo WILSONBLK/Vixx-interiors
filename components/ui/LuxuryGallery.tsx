@@ -402,7 +402,7 @@ function TitleSection() {
       }}
     >
       {/* Hero background image */}
-      <PageHeroBackground src="/images/portfolio/proj-b-1.jpg" overlay={0.28} fadeHeight={70} />
+      <PageHeroBackground src="/images/portfolio/proj-b-1.jpg" overlay={0.28} />
 
       {/* Ambient gold glow — on top of image, warms the center */}
       <div
@@ -494,14 +494,6 @@ function TitleSection() {
 
       </div>
 
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 right-0 pointer-events-none"
-        style={{
-          height:     '120px',
-          background: 'linear-gradient(to bottom, transparent 0%, var(--bg-primary) 100%)',
-        }}
-      />
     </section>
   )
 }

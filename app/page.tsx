@@ -287,7 +287,9 @@ export default function Home() {
       </section>
 
       {/* ── 6. Selected Work ────────────────────────────────────────────────── */}
-      <section id="portfolio" style={{ background: 'var(--bg-primary)' }}>
+      <section id="portfolio" className="relative overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
+        <div aria-hidden className="absolute top-0 inset-x-0 pointer-events-none z-0"
+             style={{ height: 32, background: 'linear-gradient(to bottom, var(--bg-secondary), transparent)' }} />
         <div className="container-site pt-20 pb-10 lg:pt-28 lg:pb-14">
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-3">
@@ -336,6 +338,8 @@ export default function Home() {
         className="relative py-24 lg:py-36 overflow-hidden"
         style={{ background: 'var(--bg-secondary)' }}
       >
+        <div aria-hidden className="absolute top-0 inset-x-0 pointer-events-none z-0"
+             style={{ height: 32, background: 'linear-gradient(to bottom, var(--bg-primary), transparent)' }} />
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -375,6 +379,8 @@ export default function Home() {
         className="relative overflow-hidden py-24 lg:py-36"
         style={{ background: 'var(--bg-primary)' }}
       >
+        <div aria-hidden className="absolute top-0 inset-x-0 pointer-events-none z-0"
+             style={{ height: 32, background: 'linear-gradient(to bottom, var(--bg-secondary), transparent)' }} />
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"

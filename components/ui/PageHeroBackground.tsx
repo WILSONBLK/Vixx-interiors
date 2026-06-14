@@ -7,12 +7,10 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 export function PageHeroBackground({
   src,
-  overlay    = 0.21,
-  fadeHeight = 80,
+  overlay = 0.21,
 }: {
-  src:          string
-  overlay?:     number
-  fadeHeight?:  number
+  src:      string
+  overlay?: number
 }) {
   const rm = useReducedMotion() ?? false
 
@@ -52,15 +50,6 @@ export function PageHeroBackground({
         }}
       />
 
-      {/* Bottom fade to page background */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 inset-x-0 pointer-events-none"
-        style={{
-          height:     fadeHeight,
-          background: 'linear-gradient(to bottom, transparent, var(--bg-primary))',
-        }}
-      />
     </>
   )
 }

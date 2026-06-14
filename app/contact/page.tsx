@@ -32,7 +32,7 @@ export default function ContactPage() {
         className="relative flex flex-col justify-end overflow-hidden"
         style={{ minHeight: '58vh' }}
       >
-        <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.40} fadeHeight={120} />
+        <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.40} />
         <div
           className="container-site relative z-10 max-w-3xl pb-12 lg:pb-16"
           style={{ '--text-primary': 'var(--brand-cream)', '--text-secondary': 'rgba(240,235,225,0.72)' } as CSSProperties}
