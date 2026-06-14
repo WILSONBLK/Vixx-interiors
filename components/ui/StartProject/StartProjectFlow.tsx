@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react'
 
 /* ── Design tokens ────────────────────────────────────────────────────────── */
@@ -128,9 +129,172 @@ const TOTAL = STEPS.length // 8
 const EMPTY: Answers = { name:'', email:'', location:'', type:'', space:'', timeline:'', budget:'', style:'' }
 
 /* ══════════════════════════════════════════════════════════════════════════════
+   INTRO HERO SCREEN
+══════════════════════════════════════════════════════════════════════════════ */
+function IntroScreen({ onBegin }: { onBegin: () => void }) {
+  const rm = useReducedMotion()
+
+  return (
+    <div
+      className="relative flex flex-col items-center justify-center"
+      style={{ minHeight: '100dvh', background: T.bg }}
+    >
+      {/* Background image */}
+      <motion.div
+        style={{ position: 'absolute', inset: 0 }}
+        initial={rm ? false : { opacity: 0, scale: 1.04 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.8, ease: EASE }}
+      >
+        <Image
+          src="/images/start-project-bg.png"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      </motion.div>
+
+      {/* Overlays */}
+      <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.52)' }} />
+      <div
+        aria-hidden
+        style={{
+          position:   'absolute',
+          inset:       0,
+          background: 'radial-gradient(ellipse 90% 78% at 50% 52%, transparent 44%, rgba(8,8,8,0.32) 100%)',
+        }}
+      />
+
+      {/* Back to site — top left */}
+      <Link
+        href="/"
+        style={{
+          position:      'absolute',
+          top:            '2rem',
+          left:           '1.75rem',
+          zIndex:         20,
+          display:       'flex',
+          alignItems:    'center',
+          gap:            6,
+          color:          T.dim,
+          fontFamily:    'var(--font-jost)',
+          fontSize:      '0.6rem',
+          letterSpacing: '0.26em',
+          textTransform: 'uppercase',
+          textDecoration: 'none',
+          transition:    'color 0.2s',
+        }}
+        className="hover:text-[#C49A2E]"
+      >
+        <ArrowLeft size={13} strokeWidth={1.5} />
+        Home
+      </Link>
+
+      {/* Content */}
+      <div
+        style={{
+          position:  'relative',
+          zIndex:     10,
+          textAlign:  'center',
+          padding:    '0 1.5rem',
+          maxWidth:  '560px',
+          color:      T.text,
+        }}
+      >
+        {/* Eyebrow */}
+        <motion.div
+          initial={rm ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.0, delay: 0.3, ease: 'easeOut' }}
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}
+        >
+          <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
+          <span style={{ fontFamily: 'var(--font-jost)', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: T.gold }}>
+            VIXX Interiors
+          </span>
+          <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
+        </motion.div>
+
+        {/* Title */}
+        <motion.h1
+          initial={rm ? false : { opacity: 0, y: 22 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.3, delay: 0.45, ease: EASE }}
+          style={{
+            fontFamily:  'var(--font-cormorant)',
+            fontSize:    'clamp(3rem, 8vw, 6rem)',
+            fontWeight:   400,
+            lineHeight:   0.95,
+            color:        T.text,
+            textShadow:  '0 4px 28px rgba(8,8,8,0.55)',
+            marginBottom: '1.25rem',
+          }}
+        >
+          Start Your{' '}
+          <em style={{ fontStyle: 'italic', color: T.gold }}>Project</em>
+        </motion.h1>
+
+        {/* Intro */}
+        <motion.p
+          initial={rm ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, delay: 0.72, ease: EASE }}
+          style={{
+            fontFamily:   'var(--font-jost)',
+            fontSize:     '0.9rem',
+            color:         T.sub,
+            lineHeight:    1.7,
+            maxWidth:     '36ch',
+            margin:       '0 auto 2.5rem',
+          }}
+        >
+          A guided consultation to understand your space and your vision. Two minutes of your time.
+        </motion.p>
+
+        {/* CTA */}
+        <motion.div
+          initial={rm ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.0, ease: EASE }}
+        >
+          <motion.button
+            onClick={onBegin}
+            whileHover={{ scale: 1.04, backgroundColor: T.goldL }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.25 }}
+            style={{
+              display:        'inline-flex',
+              alignItems:     'center',
+              gap:             10,
+              background:      T.gold,
+              color:          '#1A1208',
+              border:         'none',
+              fontFamily:     'var(--font-jost)',
+              fontSize:       '0.64rem',
+              letterSpacing:  '0.22em',
+              textTransform:  'uppercase',
+              fontWeight:      500,
+              padding:        '0.95rem 2.2rem',
+              borderRadius:    2,
+              cursor:         'pointer',
+            }}
+          >
+            Begin
+            <ArrowRight size={13} />
+          </motion.button>
+        </motion.div>
+      </div>
+    </div>
+  )
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
    ROOT
 ══════════════════════════════════════════════════════════════════════════════ */
 export function StartProjectFlow() {
+  const [phase,    setPhase]    = useState<'intro' | 'flow'>('intro')
   const [stepIdx,  setStepIdx]  = useState(0)
   const [answers,  setAnswers]  = useState<Answers>(EMPTY)
   const [dir,      setDir]      = useState<1|-1>(1)
@@ -161,17 +325,38 @@ export function StartProjectFlow() {
 
   const animKey = complete ? 'complete' : step.id
 
+  const INTAKE_CSS = `
+    .vixx-intake input::placeholder,
+    .vixx-intake textarea::placeholder {
+      color: rgba(240,235,225,0.24);
+      font-family: var(--font-jost);
+    }
+    .vixx-intake input:focus,
+    .vixx-intake textarea:focus { outline: none; }
+  `
+
   return (
     <>
-      <style>{`
-        .vixx-intake input::placeholder,
-        .vixx-intake textarea::placeholder {
-          color: rgba(240,235,225,0.24);
-          font-family: var(--font-jost);
-        }
-        .vixx-intake input:focus,
-        .vixx-intake textarea:focus { outline: none; }
-      `}</style>
+      <style>{INTAKE_CSS}</style>
+
+      <AnimatePresence mode="wait">
+        {phase === 'intro' ? (
+          <motion.div
+            key="intro"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, filter: 'blur(6px)', scale: 0.99 }}
+            transition={{ duration: 0.55, ease: EASE }}
+          >
+            <IntroScreen onBegin={() => setPhase('flow')} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="flow"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: EASE }}
+          >
 
       <div
         className="vixx-intake relative flex flex-col"
@@ -293,6 +478,10 @@ export function StartProjectFlow() {
           </AnimatePresence>
         </div>
       </div>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

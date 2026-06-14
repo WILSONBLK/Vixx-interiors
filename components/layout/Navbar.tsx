@@ -164,7 +164,7 @@ export function Navbar() {
                 onClick={toggleTheme}
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 data-cursor="hover"
-                className="inline-flex items-center justify-center w-7 h-7 text-[var(--text-muted)] opacity-60 transition-all duration-200 hover:opacity-100 hover:text-[var(--gold)]"
+                className="inline-flex items-center justify-center w-7 h-7 text-[var(--text-muted)] opacity-60 transition-all duration-200 hover:opacity-100 hover:text-[var(--gold)] active:opacity-50 active:scale-90"
               >
                 {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
               </button>
@@ -186,7 +186,7 @@ export function Navbar() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               data-cursor="hover"
-              className="lg:hidden flex items-center justify-center w-8 h-8 text-[var(--text-primary)]"
+              className="lg:hidden flex items-center justify-center w-8 h-8 text-[var(--text-primary)] active:opacity-60 active:scale-90 transition-all duration-150"
             >
               {open
                 ? <X    size={19} strokeWidth={1.5} />

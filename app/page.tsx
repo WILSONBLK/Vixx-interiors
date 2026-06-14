@@ -30,7 +30,7 @@ export default function Home() {
       {/* ── 3. Founder ──────────────────────────────────────────────────────── */}
       <section
         id="founder"
-        className="relative overflow-hidden section-pad"
+        className="relative overflow-hidden py-12 lg:py-16"
         style={{ background: 'var(--bg-secondary)' }}
       >
         <HexMotif
@@ -42,115 +42,127 @@ export default function Home() {
         />
 
         <div className="container-site relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
-            {/* Left: bio + stats + CTA */}
-            <ScrollReveal variant="fadeRight">
-              <div className="flex items-center gap-3 mb-6">
-                <AnimatedLine width={24} delay={0.1} />
-                <p className="label-xs">The Founder</p>
-              </div>
+            {/* Left: label → name → bio → stats — each layer staggered */}
+            <div>
+              <ScrollReveal variant="fadeRight">
+                <div className="flex items-center gap-3 mb-6">
+                  <AnimatedLine width={24} delay={0.1} />
+                  <p className="label-xs">The Founder</p>
+                </div>
 
-              <h2
-                className="font-cormorant font-light mb-3"
-                style={{ fontSize: 'clamp(2.8rem, 5vw, 5rem)', lineHeight: 0.92, color: 'var(--text-primary)' }}
-              >
-                Osita<br />Agusionu
-              </h2>
-              <p
-                className="font-cormorant italic mb-10"
-                style={{ fontSize: '1.25rem', color: 'var(--gold-text)' }}
-              >
-                Founder &amp; Principal Designer
-              </p>
-
-              <div className="space-y-4 mb-12">
-                <p className="body-lg">
-                  With a background in architecture and fine art, Osita founded VIXX Interiors on a conviction that great design begins with deep listening — not drawing.
-                </p>
-                <p className="body-lg">
-                  Over four years and thirty-plus projects across Lagos, he has built a practice defined by precision, restraint, and an unwillingness to compromise on the integrity of a space.
-                </p>
-                <p className="body-lg">
-                  His philosophy is quietly radical: not the absence of things, but the deliberate presence of the right things. Every material chosen. Every proportion considered. Every space made entirely yours.
-                </p>
-              </div>
-
-              {/* Stats */}
-              <div style={{ borderTop: '1px solid var(--border)' }}>
-                {STATS.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="py-6"
-                    style={{ borderBottom: '1px solid var(--border)' }}
-                  >
-                    <p
-                      className="font-cormorant font-light leading-none mb-1"
-                      style={{ fontSize: 'clamp(2.4rem, 3.8vw, 3.8rem)', color: 'var(--gold)' }}
-                    >
-                      {stat.value}
-                    </p>
-                    <p
-                      className="font-jost text-[0.62rem] tracking-[0.20em] uppercase"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-            </ScrollReveal>
-
-            {/* Right: image + quote overlay */}
-            <ScrollReveal variant="fadeLeft" delay={0.1}>
-              <div
-                className="relative overflow-hidden rounded-2xl w-full"
-                style={{ aspectRatio: '3/4', background: 'var(--surface-elevated)' }}
-              >
-                <Image
-                  src="/images/founder.jpg"
-                  alt="Osita Agusionu — Founder, VIXX Interiors"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                />
-
-                {/* Quote overlaid on image */}
-                <div
-                  className="absolute bottom-0 inset-x-0 p-7 lg:p-9"
-                  style={{ background: 'linear-gradient(to top, var(--overlay-heavy) 0%, var(--overlay-mid) 55%, transparent 100%)' }}
+                <h2
+                  className="font-cormorant font-light mb-3"
+                  style={{ fontSize: 'clamp(2.8rem, 5vw, 5rem)', lineHeight: 0.92, color: 'var(--text-primary)' }}
                 >
+                  Osita<br />Agusionu
+                </h2>
+                <p
+                  className="font-cormorant italic mb-6"
+                  style={{ fontSize: '1.25rem', color: 'var(--gold-text)' }}
+                >
+                  Founder &amp; Principal Designer
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal variant="fadeUp" delay={0.12}>
+                <div className="space-y-3 mb-7">
+                  <p className="body-lg">
+                    With a background in architecture and fine art, Osita approaches every space as a curated composition — balancing form, function, and feeling.
+                  </p>
+                  <p className="body-lg">
+                    His philosophy: not the absence of things, but the deliberate presence of the right things.
+                  </p>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal variant="fadeUp" delay={0.22}>
+                <div
+                  className="flex"
+                  style={{ borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}
+                >
+                  {STATS.map((stat, i) => (
+                    <div
+                      key={stat.label}
+                      className="flex-1 py-5 text-center"
+                      style={{ borderLeft: i > 0 ? '1px solid var(--border)' : 'none' }}
+                    >
+                      <p
+                        className="font-cormorant font-light leading-none mb-1"
+                        style={{ fontSize: 'clamp(1.9rem, 3vw, 3.2rem)', color: 'var(--gold)' }}
+                      >
+                        {stat.value}
+                      </p>
+                      <p
+                        className="font-jost text-[0.58rem] tracking-[0.18em] uppercase"
+                        style={{ color: 'var(--text-muted)' }}
+                      >
+                        {stat.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </ScrollReveal>
+            </div>
+
+            {/* Right: circular image, then quote directly below */}
+            <div>
+              <ScrollReveal variant="fadeLeft" delay={0.1}>
+                <div
+                  className="relative overflow-hidden rounded-full mx-auto"
+                  style={{ aspectRatio: '1/1', maxHeight: '56vh', maxWidth: '56vh', width: '100%', background: 'var(--surface-elevated)' }}
+                >
+                  <Image
+                    src="/images/founder.jpg"
+                    alt="Osita Agusionu — Founder, VIXX Interiors"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 45vw"
+                  />
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal variant="fadeUp" delay={0.28}>
+                <div className="mt-7 lg:mt-8 text-center px-4">
+                  <div className="flex justify-center mb-4">
+                    <AnimatedLine width={32} delay={0.3} />
+                  </div>
                   <blockquote>
                     <p
                       className="font-cormorant italic font-light leading-snug mb-3"
-                      style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.45rem)', color: 'var(--brand-cream)' }}
+                      style={{ fontSize: 'clamp(1.05rem, 1.7vw, 1.38rem)', color: 'var(--text-primary)' }}
                     >
                       &ldquo;We start every project by listening — deeply — before we design anything.&rdquo;
                     </p>
                     <footer>
                       <p
                         className="font-jost text-[0.58rem] tracking-[0.24em] uppercase"
-                        style={{ color: 'rgba(240,235,225,0.6)' }}
+                        style={{ color: 'var(--text-muted)' }}
                       >
                         Osita Agusionu — Founder, VIXX Interiors
                       </p>
                     </footer>
                   </blockquote>
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
 
           </div>
 
-          <SectionCTA href="#services" label="Explore Our Services" />
+          <ScrollReveal delay={0.3} variant="fadeUp">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-12 lg:pt-16">
+              <SectionCTAButton href="#services" label="Explore Our Services" variant="primary" />
+              <SectionCTAButton href="/about" label="Read Full Story" variant="secondary" />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ── 4. Services ─────────────────────────────────────────────────────── */}
       <section
         id="services"
-        className="relative overflow-hidden section-pad"
+        className="relative overflow-hidden py-12 lg:py-16"
         style={{ background: 'var(--bg-primary)' }}
       >
         <div
@@ -173,7 +185,7 @@ export default function Home() {
               <p className="label-xs">What We Do</p>
             </div>
             <h2
-              className="font-cormorant font-light mb-10 lg:mb-14"
+              className="font-cormorant font-light mb-7 lg:mb-10"
               style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', color: 'var(--text-primary)', lineHeight: 1.1 }}
             >
               Studio Services
@@ -208,14 +220,19 @@ export default function Home() {
             ))}
           </div>
 
-          <SectionCTA href="#process" label="How We Work" delay={0.3} />
+          <ScrollReveal delay={0.3} variant="fadeUp">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-12 lg:pt-16">
+              <SectionCTAButton href="#process" label="How We Work" variant="primary" />
+              <SectionCTAButton href="/services" label="View All Services" variant="secondary" />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ── 5. How We Work ──────────────────────────────────────────────────── */}
       <section
         id="process"
-        className="relative overflow-hidden section-pad"
+        className="relative overflow-hidden py-12 lg:py-16"
         style={{ background: 'var(--bg-secondary)' }}
       >
         <div className="container-site relative z-10">
@@ -225,52 +242,47 @@ export default function Home() {
               <p className="label-xs">How We Work</p>
             </div>
             <h2
-              className="font-cormorant font-light mb-12 lg:mb-16"
+              className="font-cormorant font-light mb-8 lg:mb-10"
               style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', color: 'var(--text-primary)', lineHeight: 1.1 }}
             >
               Our Process
             </h2>
           </ScrollReveal>
 
-          <div style={{ borderTop: '1px solid var(--border)' }}>
-            {PROCESS_STEPS.map((step, i) => (
-              <ScrollReveal key={step.number} delay={i * 0.07} variant="fadeUp">
+          <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
+            {PROCESS_STEPS.slice(0, 3).map((step, i) => (
+              <ScrollReveal key={step.number} delay={i * 0.1} variant="fadeUp">
                 <div
-                  className="grid sm:grid-cols-[3.5rem_1fr] gap-6 sm:gap-10 py-8 lg:py-10 items-start"
-                  style={{ borderBottom: '1px solid var(--border)' }}
+                  className="rounded-2xl p-6 lg:p-8 h-full"
+                  style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border-default)' }}
                 >
                   <span
                     aria-hidden="true"
-                    className="font-cormorant font-light leading-none select-none"
-                    style={{ fontSize: '2.6rem', color: 'var(--gold-ghost)' }}
+                    className="block font-cormorant font-light leading-none select-none mb-5"
+                    style={{ fontSize: '2.5rem', color: 'var(--gold-ghost)' }}
                   >
                     {step.number}
                   </span>
-                  <div>
-                    <div className="flex items-start justify-between gap-4 mb-2">
-                      <h3
-                        className="font-cormorant font-light"
-                        style={{ fontSize: 'clamp(1.3rem, 2vw, 1.65rem)', color: 'var(--text-primary)' }}
-                      >
-                        {step.title}
-                      </h3>
-                      <span
-                        className="font-jost text-[0.56rem] tracking-[0.22em] uppercase shrink-0 pt-1"
-                        style={{ color: 'var(--text-tertiary)' }}
-                      >
-                        {step.duration}
-                      </span>
-                    </div>
-                    <p className="body-md" style={{ color: 'var(--text-secondary)' }}>
-                      {step.description}
-                    </p>
-                  </div>
+                  <h3
+                    className="font-cormorant font-light mb-3"
+                    style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="body-md" style={{ color: 'var(--text-secondary)' }}>
+                    {step.description}
+                  </p>
                 </div>
               </ScrollReveal>
             ))}
           </div>
 
-          <SectionCTA href="#portfolio" label="View Selected Work" delay={0.3} />
+          <ScrollReveal delay={0.3} variant="fadeUp">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-10 lg:pt-12">
+              <SectionCTAButton href="#portfolio" label="View Selected Work" variant="primary" />
+              <SectionCTAButton href="/start" label="Start A Project" variant="secondary" />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -292,7 +304,7 @@ export default function Home() {
               <ScrollReveal key={project.id} delay={i * 0.08} variant="fadeUp">
                 <Link
                   href={`/portfolio/${project.slug}`}
-                  className="group relative block overflow-hidden rounded-2xl"
+                  className="portfolio-card group relative block overflow-hidden rounded-2xl"
                   aria-label={`View ${project.title}`}
                 >
                   <div className="relative overflow-hidden" style={{ aspectRatio: '5/6' }}>
@@ -303,32 +315,19 @@ export default function Home() {
                       className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
+                    {/* Subtle depth gradient — no text overlay */}
                     <div
                       aria-hidden="true"
-                      className="absolute inset-0 pointer-events-none"
-                      style={{ background: 'linear-gradient(to top, var(--overlay-heavy) 0%, var(--overlay-subtle) 45%, transparent 100%)' }}
+                      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                      style={{ background: 'linear-gradient(to top, var(--overlay-gentle) 0%, transparent 60%)' }}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-7">
-                      <p
-                        className="font-jost text-[0.56rem] tracking-[0.28em] uppercase mb-2"
-                        style={{ color: 'var(--gold-text)' }}
-                      >
-                        {project.category}
-                      </p>
-                      <h3
-                        className="font-cormorant font-light text-[var(--brand-cream)] leading-tight"
-                        style={{ fontSize: 'clamp(1.1rem, 2vw, 1.65rem)' }}
-                      >
-                        {project.title}
-                      </h3>
-                    </div>
                   </div>
                 </Link>
               </ScrollReveal>
             ))}
           </div>
 
-          <SectionCTA href="/start" label="Start Your Project" />
+          <SectionCTA href="/portfolio" label="View Our Library" />
         </div>
       </section>
 
@@ -414,7 +413,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <SectionCTAButton href="/start" label="Start Your Project" variant="primary" />
-              <SectionCTAButton href="/contact" label="Start A Conversation" variant="secondary" />
+              <SectionCTAButton href="/contact" label="Contact Us" variant="secondary" />
             </div>
 
           </ScrollReveal>

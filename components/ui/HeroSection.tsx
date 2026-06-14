@@ -218,28 +218,6 @@ export function HeroSection() {
           Simplicity Kind of Different
         </motion.p>
 
-        {/* ── Descriptor ── */}
-        <motion.p
-          className="font-cormorant font-light leading-relaxed mt-4 sm:mt-5"
-          style={{
-            fontSize:      'clamp(0.9rem, 1.32vw, 1.06rem)',
-            maxWidth:      '44ch',
-            color:         'rgba(240,235,225,0.58)',
-            letterSpacing: '0.018em',
-            textShadow:    '0 1px 8px var(--overlay-mid)',
-          }}
-          initial={rm ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 1.60, ease: EASE }}
-          whileHover={rm ? {} : {
-            opacity:    0.88,
-            y:          -2,
-            transition: HOVER_SPRING,
-          }}
-        >
-          A Lagos interior design studio creating considered spaces where simplicity and expression meet.
-        </motion.p>
-
         {/* ── CTA ── */}
         <motion.div
           className="mt-8 sm:mt-10 flex justify-start"

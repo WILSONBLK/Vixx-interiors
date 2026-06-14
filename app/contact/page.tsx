@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { CSSProperties } from 'react'
 import { Phone, Mail, MapPin, Instagram } from 'lucide-react'
 
 function TikTokIcon({ size = 16 }: { size?: number }) {
@@ -8,12 +9,13 @@ function TikTokIcon({ size = 16 }: { size?: number }) {
     </svg>
   )
 }
-import { Navbar }       from '@/components/layout/Navbar'
-import { Footer }       from '@/components/layout/Footer'
-import { HexMotif }     from '@/components/ui/HexMotif'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { ContactForm }  from '@/components/forms/ContactForm'
-import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { Navbar }             from '@/components/layout/Navbar'
+import { Footer }             from '@/components/layout/Footer'
+import { HexMotif }           from '@/components/ui/HexMotif'
+import { ScrollReveal }       from '@/components/ui/ScrollReveal'
+import { ContactForm }        from '@/components/forms/ContactForm'
+import { AnimatedLine }       from '@/components/ui/AnimatedLine'
+import { PageHeroBackground } from '@/components/ui/PageHeroBackground'
 
 export const metadata: Metadata = {
   title:       'Start a Project – VIXX Interiors',
@@ -26,13 +28,15 @@ export default function ContactPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="relative pt-40 pb-16 overflow-hidden">
+      <section
+        className="relative flex flex-col justify-end overflow-hidden"
+        style={{ minHeight: '58vh' }}
+      >
+        <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.40} fadeHeight={120} />
         <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
-        />
-        <div className="container-site relative z-10 max-w-3xl">
+          className="container-site relative z-10 max-w-3xl pb-12 lg:pb-16"
+          style={{ '--text-primary': 'var(--brand-cream)', '--text-secondary': 'rgba(240,235,225,0.72)' } as CSSProperties}
+        >
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-5">
               <AnimatedLine width={24} delay={0.1} />

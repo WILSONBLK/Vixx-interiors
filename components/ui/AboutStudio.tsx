@@ -1,36 +1,98 @@
 'use client'
 
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { AnimatedLine } from '@/components/ui/AnimatedLine'
-import { SectionCTA } from '@/components/ui/SectionCTA'
+import Image from 'next/image'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ScrollReveal }    from '@/components/ui/ScrollReveal'
+import { AnimatedLine }    from '@/components/ui/AnimatedLine'
+import { SectionCTAButton } from '@/components/ui/SectionCTA'
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
+
+const SECTION_TEXT = {
+  '--text-primary':   'var(--brand-cream)',
+  '--text-secondary': 'rgba(240,235,225,0.72)',
+} as React.CSSProperties
 
 export function AboutStudio() {
-  return (
-    <section id="about" className="relative overflow-x-hidden">
+  const rm = useReducedMotion()
 
-      {/* Visual bridge from Hero */}
+  return (
+    <section
+      id="about"
+      className="relative overflow-hidden flex flex-col"
+      style={{ minHeight: '100svh' }}
+    >
+      {/* Gold hairline bridge from Hero */}
       <div
-        aria-hidden="true"
-        className="absolute top-0 inset-x-0 h-px pointer-events-none"
+        aria-hidden
+        className="absolute top-0 inset-x-0 h-px pointer-events-none z-10"
         style={{ background: 'linear-gradient(90deg, transparent, var(--gold-line), transparent)' }}
       />
 
-      <div className="relative" style={{ background: 'var(--bg-primary)' }}>
-        <div className="container-site pt-24 pb-20 lg:pt-32 lg:pb-28">
+      {/* Background image — smooth load-in, reduced to half opacity */}
+      <motion.div
+        className="absolute inset-0"
+        initial={rm ? false : { opacity: 0, scale: 1.03 }}
+        animate={{ opacity: 0.5, scale: 1 }}
+        transition={{ duration: 2.0, ease: EASE, delay: 0.1 }}
+      >
+        <Image
+          src="/images/about-studio.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </motion.div>
+
+      {/* Dark tint — keeps text legible */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{ background: 'rgba(8,8,8,0.55)' }}
+      />
+
+      {/* Radial vignette — edges darker, centre breathes */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 85% 72% at 50% 50%, transparent 38%, rgba(8,8,8,0.38) 100%)',
+        }}
+      />
+
+      {/* Bottom fade — dissolves into next section */}
+      <div
+        aria-hidden
+        className="absolute bottom-0 inset-x-0 pointer-events-none"
+        style={{
+          height:     180,
+          background: 'linear-gradient(to bottom, transparent, var(--bg-primary))',
+        }}
+      />
+
+      {/* Content */}
+      <div
+        className="relative z-10 flex-1 flex flex-col items-center justify-center"
+        style={SECTION_TEXT}
+      >
+        <div className="container-site w-full text-center py-20 lg:py-24">
 
           <ScrollReveal>
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center justify-center gap-3 mb-6">
               <AnimatedLine width={24} delay={0.1} />
               <p className="label-xs">About the Studio</p>
+              <AnimatedLine width={24} delay={0.1} />
             </div>
 
             <h2
-              className="font-cormorant font-light mb-8"
+              className="font-cormorant font-light mb-8 mx-auto"
               style={{
-                fontSize:   'clamp(2.6rem, 5vw, 4.5rem)',
+                fontSize:   'clamp(2.4rem, 4.5vw, 4rem)',
                 lineHeight: 1.05,
-                color:      'var(--text-primary)',
-                maxWidth:   '20ch',
+                color:      'var(--brand-cream)',
+                textShadow: '0 4px 24px rgba(8,8,8,0.5)',
               }}
             >
               Design driven by{' '}
@@ -38,26 +100,40 @@ export function AboutStudio() {
             </h2>
           </ScrollReveal>
 
-          <ScrollReveal delay={0.12} variant="fadeUp">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-start max-w-4xl">
-              <div className="space-y-5">
-                <p className="body-lg">
-                  VIXX Interiors is a Lagos-based interior design studio founded on the belief that a great space is not simply beautiful — it is purposeful, personal, and enduring.
-                </p>
-                <p className="body-lg">
-                  Every project begins with deep listening. We understand how you live, what matters to you, and what the space must become — before a single line is drawn.
-                </p>
-              </div>
-
-              <div className="space-y-5">
-                <p className="body-lg">
-                  From full residential commissions to focused design consultations, we bring the same precision and care to every scale of work.
-                </p>
-              </div>
+          <ScrollReveal delay={0.1} variant="fadeUp">
+            <div className="space-y-5 mx-auto mb-10" style={{ maxWidth: '48ch' }}>
+              <p className="body-lg">
+                VIXX Interiors is a premium interior design studio built on the belief that great
+                spaces are not simply beautiful — they are purposeful and personal.
+              </p>
+              <p className="body-lg">
+                We begin every project by listening deeply, understanding how you live and what you
+                need, before a single line is drawn.
+              </p>
+              <p className="body-lg">
+                From full residential transformations to focused design consultations, we bring the
+                same level of craft and intention to every project — regardless of scale.
+              </p>
             </div>
           </ScrollReveal>
 
-          <SectionCTA href="#founder" label="Meet The Founder" delay={0.2} />
+          {/* Studio identity pillars */}
+          <ScrollReveal delay={0.15} variant="fadeUp">
+            <div className="flex items-center justify-center gap-5 mb-10">
+              <span className="label-xs">Precision</span>
+              <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
+              <span className="label-xs">Restraint</span>
+              <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
+              <span className="label-xs">Intention</span>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.2} variant="fadeUp">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <SectionCTAButton href="#founder" label="Meet The Founder" variant="primary" />
+              <SectionCTAButton href="/about" label="About The Studio" variant="secondary" />
+            </div>
+          </ScrollReveal>
 
         </div>
       </div>

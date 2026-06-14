@@ -162,16 +162,16 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A considered residential interior — warm textures, layered lighting, and composed materiality throughout.',
     location:    'Lagos',
     completedAt: '2025',
-    image:       '/images/portfolio/proj-b-1.jpg',
+    image:       '/images/portfolio/proj-f-1.png',
     images:      [
+      '/images/portfolio/proj-f-1.png',
+      '/images/portfolio/proj-f-2.png',
+      '/images/portfolio/proj-f-3.png',
+      '/images/portfolio/proj-f-4.png',
+      '/images/portfolio/proj-f-5.png',
       '/images/portfolio/proj-b-1.jpg',
-      '/images/portfolio/proj-b-2.jpg',
-      '/images/portfolio/proj-b-3.jpg',
-      '/images/portfolio/proj-b-4.jpg',
-      '/images/portfolio/proj-b-5.jpg',
-      '/images/portfolio/proj-b-6.jpg',
     ],
-    overview:    'A full-scope residential interior spanning living and dining spaces. Every element was chosen for its relationship to the whole — form, texture, and light working in concert.',
+    overview:    'A full-scope residential interior spanning living, dining, and bedroom spaces. Every element was chosen for its relationship to the whole — form, texture, and light working in concert.',
     challenge:   'Creating spaces that feel curated but never staged. The client wanted warmth without weight, presence without clutter.',
     solution:    'We worked with a tightly edited palette of warm neutrals and natural materials, anchoring each room with a single statement piece and letting the light do the rest.',
     materials:   ['Natural stone flooring', 'Warm timber veneer', 'Bespoke upholstery', 'Brass hardware', 'Woven textiles', 'Ambient pendant lighting'],
@@ -185,7 +185,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A full residential transformation — warm tones, refined materiality, and considered spatial flow across every room.',
     location:    'Lagos',
     completedAt: '2025',
-    image:       '/images/portfolio/proj2-1.jpg',
+    image:       '/images/portfolio/proj-f-3.png',
     images:      [
       '/images/portfolio/proj2-1.jpg',
       '/images/portfolio/proj2-2.jpg',
@@ -208,7 +208,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A private residential suite — serene, edited, and deeply personal.',
     location:    'Lagos',
     completedAt: '2025',
-    image:       '/images/portfolio/proj-c-1.jpg',
+    image:       '/images/portfolio/proj-f-4.png',
     images:      [
       '/images/portfolio/proj-c-1.jpg',
       '/images/portfolio/proj-c-2.jpg',
@@ -231,7 +231,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A contemporary Lagos interior — confident proportions, considered detailing, and a palette that rewards attention.',
     location:    'Lagos',
     completedAt: '2026',
-    image:       '/images/portfolio/proj-d-1.jpg',
+    image:       '/images/portfolio/proj-f-2.png',
     images:      [
       '/images/portfolio/proj-d-1.jpg',
       '/images/portfolio/proj-d-2.jpg',
@@ -254,7 +254,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A precise, intimate interior study — architecture, material, and light in careful dialogue.',
     location:    'Lagos',
     completedAt: '2024',
-    image:       '/images/portfolio/proj-a-1.jpg',
+    image:       '/images/portfolio/proj-f-5.png',
     images:      [
       '/images/portfolio/proj-a-1.jpg',
       '/images/portfolio/proj-a-2.jpg',
@@ -265,6 +265,29 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     challenge:   'Working within a defined brief to achieve maximum impact through restraint.',
     solution:    'Precise material selection and considered placement create spaces that feel both resolved and alive.',
     materials:   ['Stone surfaces', 'Timber accents', 'Curated lighting', 'Woven fabrics'],
+    featured:    false,
+  },
+  {
+    id:          'project-06',
+    slug:        'project-06',
+    title:       'Warm Residence',
+    category:    'Residential',
+    description: 'A warm, layered residential interior — rich textures, considered lighting, and a curated material palette.',
+    location:    'Lagos',
+    completedAt: '2025',
+    image:       '/images/portfolio/proj-b-1.jpg',
+    images:      [
+      '/images/portfolio/proj-b-1.jpg',
+      '/images/portfolio/proj-b-2.jpg',
+      '/images/portfolio/proj-b-3.jpg',
+      '/images/portfolio/proj-b-4.jpg',
+      '/images/portfolio/proj-b-5.jpg',
+      '/images/portfolio/proj-b-6.jpg',
+    ],
+    overview:    'A full-scope residential interior where every surface and material choice contributes to a cohesive, lived-in warmth.',
+    challenge:   "Translating the client's desire for comfort and elegance into a space that felt personal rather than prescribed.",
+    solution:    'A restrained palette of warm neutrals and natural materials, anchored by curated art and layered ambient lighting.',
+    materials:   ['Natural stone flooring', 'Warm timber veneer', 'Bespoke upholstery', 'Brass hardware', 'Woven textiles', 'Curated art'],
     featured:    false,
   },
 ]
@@ -295,11 +318,12 @@ export const WHY_ITEMS: WhyItem[] = [
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 export const NAV_LINKS = [
-  { label: 'Home',         href: '/'          },
-  { label: 'About Studio', href: '/about'     },
-  { label: 'Portfolio',    href: '/portfolio' },
-  { label: 'Services',     href: '/services'  },
-  { label: 'Contact',      href: '/contact'   },
+  { label: 'Home',          href: '/'          },
+  { label: 'About Studio',  href: '/about'     },
+  { label: 'Portfolio',     href: '/portfolio' },
+  { label: 'Services',      href: '/services'  },
+  { label: 'Start Project', href: '/start'     },
+  { label: 'Contact',       href: '/contact'   },
 ]
 
 // ── Budget Options ────────────────────────────────────────────────────────────

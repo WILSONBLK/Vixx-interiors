@@ -1,12 +1,19 @@
 import type { Metadata } from 'next'
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { Navbar }       from '@/components/layout/Navbar'
-import { Footer }       from '@/components/layout/Footer'
-import { HexMotif }     from '@/components/ui/HexMotif'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { WHY_ITEMS } from '@/lib/data'
-import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { Navbar }              from '@/components/layout/Navbar'
+import { Footer }              from '@/components/layout/Footer'
+import { HexMotif }            from '@/components/ui/HexMotif'
+import { ScrollReveal }        from '@/components/ui/ScrollReveal'
+import { WHY_ITEMS }           from '@/lib/data'
+import { AnimatedLine }        from '@/components/ui/AnimatedLine'
+import { PageHeroBackground }  from '@/components/ui/PageHeroBackground'
+
+const HERO_STYLE: CSSProperties = {
+  '--text-primary':   'var(--brand-cream)',
+  '--text-secondary': 'rgba(240,235,225,0.72)',
+} as CSSProperties
 
 export const metadata: Metadata = {
   title:       'About VIXX Interiors – Interior Design Studio',
@@ -19,13 +26,12 @@ export default function AboutPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="relative pt-40 pb-20 overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
-        />
-        <div className="container-site relative z-10 max-w-4xl">
+      <section
+        className="relative flex flex-col justify-end overflow-hidden"
+        style={{ minHeight: '68vh' }}
+      >
+        <PageHeroBackground src="/images/portfolio/proj-c-1.jpg" />
+        <div className="container-site relative z-10 max-w-4xl pb-14 lg:pb-20" style={HERO_STYLE}>
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-5">
               <AnimatedLine width={24} delay={0.1} />

@@ -7,6 +7,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { PORTFOLIO_PROJECTS } from '@/lib/data'
 import type { PortfolioProject } from '@/types'
+import { PageHeroBackground } from '@/components/ui/PageHeroBackground'
 
 /* ── Animation helpers ─────────────────────────────────────────────────────── */
 
@@ -117,11 +118,12 @@ function GalleryImage({
               }
         }
       >
-        {/* ③ Hover lift + scale */}
+        {/* ③ Hover lift + scale, tap press */}
         <motion.div
           className="relative w-full overflow-hidden rounded-2xl group"
           style={{ aspectRatio: aspect, background: 'var(--surface-raised)' }}
           whileHover={prefersReduced ? {} : { scale: 1.018, y: -6 }}
+          whileTap={prefersReduced   ? {} : { scale: 0.985, y: 0 }}
           transition={{ duration: 0.65, ease: EASE }}
         >
           <Image
@@ -394,12 +396,15 @@ function TitleSection() {
     <section
       className="relative overflow-hidden"
       style={{
-        paddingTop:    'calc(var(--nav-height) + 7rem)',
+        minHeight:     '85vh',
+        paddingTop:    'calc(var(--nav-height) + 6rem)',
         paddingBottom: '7rem',
-        background:    'var(--bg-primary)',
       }}
     >
-      {/* Ambient radial glow */}
+      {/* Hero background image */}
+      <PageHeroBackground src="/images/portfolio/proj-b-1.jpg" overlay={0.55} fadeHeight={140} />
+
+      {/* Ambient gold glow — on top of image, warms the center */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -436,7 +441,10 @@ function TitleSection() {
         </svg>
       </div>
 
-      <div className="container-site relative z-10 text-center">
+      <div
+        className="container-site relative z-10 text-center"
+        style={{ '--text-primary': 'var(--brand-cream)' } as React.CSSProperties}
+      >
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -455,8 +463,9 @@ function TitleSection() {
             style={{
               fontSize:      'clamp(4.5rem, 10vw, 11rem)',
               lineHeight:    0.9,
-              color:         'var(--text-primary)',
+              color:         'var(--brand-cream)',
               letterSpacing: '-0.01em',
+              textShadow:    '0 4px 28px rgba(8,8,8,0.55)',
             }}
             initial={{ opacity: 0, y: 48 }}
             animate={{ opacity: 1, y: 0 }}
