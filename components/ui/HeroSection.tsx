@@ -218,7 +218,7 @@ export function HeroSection() {
 
       {/* ── CTA ── */}
       <motion.div
-        className="relative z-20 mt-14 sm:mt-16 w-full flex justify-center"
+        className="relative z-20 mt-32 sm:mt-36 w-full flex justify-center"
         initial={rm ? false : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.0, delay: 1.85, ease: EASE }}
