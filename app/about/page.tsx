@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Navbar }             from '@/components/layout/Navbar'
@@ -41,8 +42,15 @@ export default function AboutPage() {
               <em className="not-italic" style={{ color: 'var(--gold)' }}>art.</em>
             </h1>
             <AnimatedLine width={200} className="mb-6" delay={0.25} />
-            <p className="body-lg max-w-2xl">
-              VIXX Interiors is a Lagos-based interior design studio with one conviction: your home should feel like you — personal, calm, and completely your own.
+            <p
+              className="body-lg max-w-2xl font-semibold"
+              style={{
+                color: '#FFF5E1',
+                textShadow: '0 2px 20px rgba(0,0,0,0.95), 0 1px 6px rgba(0,0,0,0.85)',
+                letterSpacing: '0.01em',
+              }}
+            >
+              VIXX Interiors is a Nigerian interior design studio built on a single belief: every space has a story to tell — and that story should be yours.
             </p>
           </ScrollReveal>
         </div>
@@ -111,7 +119,7 @@ export default function AboutPage() {
                 <p className="label-xs">The Name</p>
               </div>
               <h2 className="heading-lg mb-6">
-                Named after the woman who made him.
+                Named after his mother.
               </h2>
               <div className="space-y-4 body-lg">
                 <p>
@@ -129,15 +137,16 @@ export default function AboutPage() {
 
             <ScrollReveal variant="fadeLeft" delay={0.1}>
               <div
-                className="relative aspect-square flex flex-col items-center justify-center"
+                className="relative aspect-square flex flex-col items-center justify-center gap-10"
                 style={{ background: 'var(--bg-secondary)' }}
               >
-                <p
-                  className="font-cormorant font-light leading-none mb-8 select-none"
-                  style={{ fontSize: 'clamp(5rem, 12vw, 8rem)', color: 'var(--gold)', opacity: 0.15 }}
-                >
-                  VIXX
-                </p>
+                <Image
+                  src="/logo-gold.png"
+                  alt="VIXX Interiors"
+                  width={220}
+                  height={80}
+                  className="object-contain"
+                />
                 <div className="flex flex-col items-center gap-3">
                   {['Strength', 'Patience', 'Hard Work'].map((word) => (
                     <p key={word} className="label-xs tracking-widest">{word}</p>
@@ -157,7 +166,7 @@ export default function AboutPage() {
               className="font-cormorant font-light italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'var(--text-primary)' }}
             >
-              &ldquo;Can we allow white to breathe?&rdquo;
+              &ldquo;You get to your door. You open it. You walk in — and it just feels like you are in another world.&rdquo;
             </p>
             <p className="label-xs" style={{ color: 'var(--text-secondary)' }}>
               Osita Agusionu — Founder & Creative Director
@@ -166,8 +175,38 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Philosophy ── */}
+      {/* ── Colour & Expression ── */}
       <section className="section-pad">
+        <div className="container-site">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <ScrollReveal>
+              <div className="flex items-center gap-3 mb-5">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">On Colour & Expression</p>
+              </div>
+              <h2 className="heading-lg mb-6">
+                A home is not a gallery.
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <div className="space-y-4 body-lg pt-2 lg:pt-16">
+                <p>
+                  White is beautiful. But a home that is only white is a home that says nothing about the person who lives in it. It is safe — and it is empty of you.
+                </p>
+                <p>
+                  Osita&apos;s question — &ldquo;Can we allow white to breathe?&rdquo; — is a provocation. It challenges the idea that minimalism means colourlessness, that elegance means erasing yourself from your own space.
+                </p>
+                <p>
+                  At VIXX, we believe colour is one of the most powerful tools a home has. The right palette, used with intention, can make a room feel warm or expansive, grounded or alive. It is not about adding more — it is about choosing the colours that speak for you, so that your home tells your story the moment anyone walks through the door.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Philosophy ── */}
+      <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container-site">
           <div className="max-w-4xl mx-auto">
             <ScrollReveal>
