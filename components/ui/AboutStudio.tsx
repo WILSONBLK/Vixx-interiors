@@ -87,16 +87,16 @@ export function AboutStudio() {
           <ScrollReveal delay={0.1} variant="fadeUp">
             <div className="space-y-5 mx-auto mb-10" style={{ maxWidth: '48ch' }}>
               <p className="body-lg">
-                VIXX Interiors is a premium interior design studio built on the belief that great
-                spaces are not simply beautiful — they are purposeful and personal.
+                VIXX Interiors is a Nigerian interior design studio with a single belief: every
+                space has a story to tell — and that story should be yours.
               </p>
               <p className="body-lg">
-                We begin every project by listening deeply, understanding how you live and what you
-                need, before a single line is drawn.
+                We put your personality into every space so that when you walk through your door,
+                it feels like you — calm, personal, and completely your own.
               </p>
               <p className="body-lg">
-                From full residential transformations to focused design consultations, we bring the
-                same level of craft and intention to every project — regardless of scale.
+                From homes and apartments to commercial spaces, we carry the same craft and
+                intention to every project, across Nigeria.
               </p>
             </div>
           </ScrollReveal>
@@ -104,11 +104,11 @@ export function AboutStudio() {
           {/* Studio identity pillars */}
           <ScrollReveal delay={0.15} variant="fadeUp">
             <div className="flex items-center justify-center gap-5 mb-10">
-              <span className="label-xs">Precision</span>
+              <span className="label-xs">Simplicity</span>
               <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
-              <span className="label-xs">Restraint</span>
+              <span className="label-xs">Personal</span>
               <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
-              <span className="label-xs">Intention</span>
+              <span className="label-xs">Peace</span>
             </div>
           </ScrollReveal>
 

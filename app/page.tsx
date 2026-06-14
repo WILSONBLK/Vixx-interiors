@@ -13,7 +13,7 @@ import { PORTFOLIO_PROJECTS, STATS, SERVICES, PROCESS_STEPS } from '@/lib/data'
 
 export const metadata: Metadata = {
   title:       'VIXX Interiors – Interior Design Studio, Lagos',
-  description: 'VIXX Interiors is a Lagos interior design studio crafting considered spaces. Explore our portfolio and start a conversation.',
+  description: 'VIXX Interiors is a Nigerian interior design studio crafting spaces that feel personal, calm, and completely yours. Explore our portfolio and start a conversation.',
 }
 
 export default function Home() {
@@ -62,17 +62,17 @@ export default function Home() {
                   className="font-cormorant italic mb-6"
                   style={{ fontSize: '1.25rem', color: 'var(--gold-text)' }}
                 >
-                  Founder &amp; Principal Designer
+                  Founder &amp; Creative Director
                 </p>
               </ScrollReveal>
 
               <ScrollReveal variant="fadeUp" delay={0.12}>
                 <div className="space-y-3 mb-7">
                   <p className="body-lg">
-                    With a background in architecture and fine art, Osita approaches every space as a curated composition — balancing form, function, and feeling.
+                    Osita founded VIXX Interiors after COVID gave him the stillness to ask the right question — and interior design was the answer. Not chosen, but recognised.
                   </p>
                   <p className="body-lg">
-                    His philosophy: not the absence of things, but the deliberate presence of the right things.
+                    His conviction: your home should feel like you. Personal, calm, and built to give you peace the moment you walk through the door.
                   </p>
                 </div>
               </ScrollReveal>
@@ -133,7 +133,7 @@ export default function Home() {
                       className="font-cormorant italic font-light leading-snug mb-3"
                       style={{ fontSize: 'clamp(1.05rem, 1.7vw, 1.38rem)', color: 'var(--text-primary)' }}
                     >
-                      &ldquo;We start every project by listening — deeply — before we design anything.&rdquo;
+                      &ldquo;We want our clients to feel safe, feel at home, feel peace — away from the noise and the chaos of the city.&rdquo;
                     </p>
                     <footer>
                       <p

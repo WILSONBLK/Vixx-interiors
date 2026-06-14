@@ -9,9 +9,8 @@ import type {
 
 // ── Stats ────────────────────────────────────────────────────────────────────
 export const STATS: StatItem[] = [
-  { value: '30+',  label: 'Projects Completed' },
-  { value: '4+',   label: 'Years in Practice' },
-  { value: '2',    label: 'Design Awards' },
+  { value: '30+', label: 'Projects Completed' },
+  { value: '5+',  label: 'Years in Practice' },
 ]
 
 // ── Services ─────────────────────────────────────────────────────────────────
