@@ -7,8 +7,8 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 export function PageHeroBackground({
   src,
-  overlay    = 0.42,
-  fadeHeight = 160,
+  overlay    = 0.21,
+  fadeHeight = 80,
 }: {
   src:          string
   overlay?:     number
@@ -48,7 +48,7 @@ export function PageHeroBackground({
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 92% 82% at 50% 54%, transparent 44%, rgba(8,8,8,0.28) 100%)',
+            'radial-gradient(ellipse 92% 82% at 50% 54%, transparent 44%, rgba(8,8,8,0.14) 100%)',
         }}
       />
 

@@ -86,7 +86,7 @@ export function Navbar() {
           aria-label="Primary navigation"
         >
           {/* Logo — pinned left */}
-          <div className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-10">
+          <div className="absolute left-4 sm:left-6 xl:left-8 top-1/2 -translate-y-1/2 z-10">
             <Link
               href="/"
               className="flex items-center"
@@ -105,7 +105,7 @@ export function Navbar() {
           </div>
 
           {/* Desktop nav links — centered */}
-          <ul className="hidden lg:flex items-center gap-7 xl:gap-9" role="list">
+          <ul className="hidden xl:flex items-center gap-8 2xl:gap-10" role="list">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
@@ -134,11 +134,11 @@ export function Navbar() {
           </ul>
 
           {/* Right utility area — pinned right */}
-          <div className="absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 flex items-center gap-2 sm:gap-3 z-10">
+          <div className="absolute right-4 sm:right-6 xl:right-8 top-1/2 -translate-y-1/2 flex items-center gap-3 sm:gap-4 xl:gap-5 z-10">
 
             {/* Social icons — desktop only */}
             <div
-              className="hidden lg:flex items-center gap-1"
+              className="hidden xl:flex items-center gap-2"
               role="list"
               aria-label="Social media links"
             >
@@ -174,7 +174,7 @@ export function Navbar() {
             <Link
               href="/start"
               data-cursor="hover"
-              className="hidden lg:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
+              className="hidden xl:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
             >
               Start a Project
             </Link>
@@ -186,7 +186,7 @@ export function Navbar() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               data-cursor="hover"
-              className="lg:hidden flex items-center justify-center w-8 h-8 text-[var(--text-primary)] active:opacity-60 active:scale-90 transition-all duration-150"
+              className="xl:hidden flex items-center justify-center w-8 h-8 text-[var(--text-primary)] active:opacity-60 active:scale-90 transition-all duration-150"
             >
               {open
                 ? <X    size={19} strokeWidth={1.5} />
@@ -204,7 +204,7 @@ export function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="fixed inset-0 z-40 flex flex-col lg:hidden"
+            className="fixed inset-0 z-40 flex flex-col xl:hidden"
             style={{
               background:           'var(--bg-nav-menu)',
               backdropFilter:       'blur(8px) saturate(110%)',

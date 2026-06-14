@@ -67,7 +67,7 @@ export function AboutStudio() {
         aria-hidden
         className="absolute bottom-0 inset-x-0 pointer-events-none"
         style={{
-          height:     180,
+          height:     90,
           background: 'linear-gradient(to bottom, transparent, var(--bg-primary))',
         }}
       />

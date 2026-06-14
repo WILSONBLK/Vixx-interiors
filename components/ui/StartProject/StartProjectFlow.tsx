@@ -157,13 +157,13 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
       </motion.div>
 
       {/* Overlays */}
-      <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.52)' }} />
+      <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.26)' }} />
       <div
         aria-hidden
         style={{
           position:   'absolute',
           inset:       0,
-          background: 'radial-gradient(ellipse 90% 78% at 50% 52%, transparent 44%, rgba(8,8,8,0.32) 100%)',
+          background: 'radial-gradient(ellipse 90% 78% at 50% 52%, transparent 44%, rgba(8,8,8,0.16) 100%)',
         }}
       />
 
