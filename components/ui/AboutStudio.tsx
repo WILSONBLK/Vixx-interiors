@@ -1,9 +1,8 @@
 'use client'
 
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { SectionCTA } from '@/components/ui/SectionCTA'
 
 export function AboutStudio() {
   return (
@@ -54,13 +53,11 @@ export function AboutStudio() {
                 <p className="body-lg">
                   From full residential commissions to focused design consultations, we bring the same precision and care to every scale of work.
                 </p>
-                <a href="#founder" className="btn-ghost inline-flex mt-2">
-                  Meet the Founder
-                  <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-                </a>
               </div>
             </div>
           </ScrollReveal>
+
+          <SectionCTA href="#founder" label="Meet The Founder" delay={0.2} />
 
         </div>
       </div>

@@ -172,7 +172,7 @@ export default function ProcessPage() {
               Your project starts with a conversation.
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href="/contact" className="btn-primary">
+              <Link href="/start" className="btn-primary">
                 Start a Project
                 <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
               </Link>

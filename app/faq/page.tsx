@@ -120,7 +120,7 @@ export default function FAQPage() {
                 Every project is different. If your question isn&apos;t covered here, reach out directly — we&apos;ll give you a straight answer, not a sales pitch.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/contact" className="btn-primary">
+                <Link href="/start" className="btn-primary">
                   Start a Project
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
                 </Link>

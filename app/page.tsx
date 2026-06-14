@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-import { Navbar }       from '@/components/layout/Navbar'
-import { Footer }       from '@/components/layout/Footer'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { HeroSection }  from '@/components/ui/HeroSection'
-import { AboutStudio }  from '@/components/ui/AboutStudio'
-import { AnimatedLine } from '@/components/ui/AnimatedLine'
-import { HexMotif }     from '@/components/ui/HexMotif'
+import { Navbar }            from '@/components/layout/Navbar'
+import { Footer }            from '@/components/layout/Footer'
+import { ScrollReveal }      from '@/components/ui/ScrollReveal'
+import { HeroSection }       from '@/components/ui/HeroSection'
+import { AboutStudio }       from '@/components/ui/AboutStudio'
+import { AnimatedLine }      from '@/components/ui/AnimatedLine'
+import { HexMotif }          from '@/components/ui/HexMotif'
+import { SectionCTA, SectionCTAButton } from '@/components/ui/SectionCTA'
 import { PORTFOLIO_PROJECTS, STATS, SERVICES, PROCESS_STEPS } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -100,12 +100,6 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="mt-10">
-                <a href="#services" className="btn-outline">
-                  Our Services
-                  <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-                </a>
-              </div>
             </ScrollReveal>
 
             {/* Right: image + quote overlay */}
@@ -148,6 +142,8 @@ export default function Home() {
             </ScrollReveal>
 
           </div>
+
+          <SectionCTA href="#services" label="Explore Our Services" />
         </div>
       </section>
 
@@ -212,14 +208,7 @@ export default function Home() {
             ))}
           </div>
 
-          <ScrollReveal delay={0.5}>
-            <div className="mt-10">
-              <a href="#process" className="btn-outline">
-                How We Work
-                <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-              </a>
-            </div>
-          </ScrollReveal>
+          <SectionCTA href="#process" label="How We Work" delay={0.3} />
         </div>
       </section>
 
@@ -281,14 +270,7 @@ export default function Home() {
             ))}
           </div>
 
-          <ScrollReveal delay={0.4}>
-            <div className="mt-10">
-              <a href="#portfolio" className="btn-outline">
-                Explore Portfolio
-                <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-              </a>
-            </div>
-          </ScrollReveal>
+          <SectionCTA href="#portfolio" label="View Selected Work" delay={0.3} />
         </div>
       </section>
 
@@ -296,19 +278,11 @@ export default function Home() {
       <section id="portfolio" style={{ background: 'var(--bg-primary)' }}>
         <div className="container-site pt-20 pb-10 lg:pt-28 lg:pb-14">
           <ScrollReveal>
-            <div className="flex items-start justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <AnimatedLine width={24} delay={0.1} />
-                  <p className="label-xs">Selected Work</p>
-                </div>
-                <h2 className="heading-lg">Selected Work</h2>
-              </div>
-              <Link href="/portfolio" className="btn-ghost hidden sm:inline-flex mt-3">
-                View Library
-                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-              </Link>
+            <div className="flex items-center gap-3 mb-3">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Selected Work</p>
             </div>
+            <h2 className="heading-lg">Selected Work</h2>
           </ScrollReveal>
         </div>
 
@@ -354,12 +328,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="mt-10 flex justify-center">
-            <Link href="/portfolio" className="btn-ghost">
-              View Library
-              <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-            </Link>
-          </div>
+          <SectionCTA href="/start" label="Start Your Project" />
         </div>
       </section>
 
@@ -443,15 +412,9 @@ export default function Home() {
               Tell us about your space. We&apos;ll respond within 24 hours with a tailored proposal — handled in complete confidence.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/start" className="btn-primary">
-                Start a Conversation
-                <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
-              </Link>
-              <Link href="/start" className="btn-ghost">
-                Start Your Project
-                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-              </Link>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <SectionCTAButton href="/start" label="Start Your Project" variant="primary" />
+              <SectionCTAButton href="/contact" label="Start A Conversation" variant="secondary" />
             </div>
 
           </ScrollReveal>

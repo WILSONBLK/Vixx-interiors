@@ -551,7 +551,7 @@ function CTASection() {
 
         <FadeUp delay={0.12}>
           <Link
-            href="/contact"
+            href="/start"
             className="btn-primary"
             style={{
               fontSize:      '0.7rem',

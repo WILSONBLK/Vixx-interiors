@@ -77,7 +77,7 @@ export default function ServicesPage() {
                   </ul>
 
                   <div className="pt-4" style={{ borderTop: '1px solid var(--border)' }}>
-                    <Link href="/contact" className="btn-ghost">
+                    <Link href="/start" className="btn-ghost">
                       Enquire about this service <ArrowRight size={13} strokeWidth={1.5} aria-hidden="true" />
                     </Link>
                   </div>
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                 We begin with a no-obligation introductory call to understand your project. From there, we develop a proposal tailored to your scope, budget, and timeline — with transparent pricing and no hidden costs.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/contact" className="btn-primary">
+                <Link href="/start" className="btn-primary">
                   Start a Project
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
                 </Link>

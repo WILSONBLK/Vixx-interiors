@@ -175,7 +175,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
             <h2 className="heading-lg max-w-xl mx-auto mb-8">
               Let&apos;s create something this good for your space.
             </h2>
-            <Link href="/contact" className="btn-primary">
+            <Link href="/start" className="btn-primary">
               Start a Project
               <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
             </Link>

@@ -86,7 +86,7 @@ export default function AboutPage() {
               </div>
 
               <div className="mt-10">
-                <Link href="/contact" className="btn-primary">
+                <Link href="/start" className="btn-primary">
                   Work With Us
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
                 </Link>
@@ -175,7 +175,7 @@ export default function AboutPage() {
               Let&apos;s build something that lasts.
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href="/contact" className="btn-primary">
+              <Link href="/start" className="btn-primary">
                 Start a Project
                 <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
               </Link>
