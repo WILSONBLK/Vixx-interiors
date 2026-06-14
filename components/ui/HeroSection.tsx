@@ -214,48 +214,49 @@ export function HeroSection() {
           Simplicity Kind of Different
         </motion.p>
 
-        {/* ── CTA ── */}
-        <motion.div
-          className="mt-8 sm:mt-10 flex justify-start"
-          initial={rm ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 1.85, ease: EASE }}
-        >
-          <MagneticElement>
-            <motion.div
-              style={{ borderRadius: '9999px', display: 'inline-flex' }}
-              animate={rm ? {} : {
-                boxShadow: [
-                  '0 0 0px  0px rgba(196,154,46,0.00)',
-                  '0 0 28px 8px rgba(196,154,46,0.32)',
-                  '0 0 0px  0px rgba(196,154,46,0.00)',
-                ],
-              }}
-              transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.2 }}
-            >
-              <a
-                href="#about"
-                className="inline-flex items-center gap-3 rounded-full font-jost text-[0.65rem]
-                           font-medium tracking-[0.22em] uppercase transition-all duration-500
-                           hover:scale-[1.05] hover:brightness-110 active:scale-[0.97]"
-                style={{
-                  background: 'var(--gold)',
-                  color:      'var(--text-on-accent)',
-                  padding:    '0.9rem 2rem',
-                }}
-              >
-                About the Studio
-                <motion.span
-                  animate={rm ? {} : { x: [0, 4, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-                </motion.span>
-              </a>
-            </motion.div>
-          </MagneticElement>
-        </motion.div>
       </div>
+
+      {/* ── CTA ── */}
+      <motion.div
+        className="relative z-20 mt-14 sm:mt-16 w-full flex justify-center"
+        initial={rm ? false : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, delay: 1.85, ease: EASE }}
+      >
+        <MagneticElement>
+          <motion.div
+            style={{ borderRadius: '9999px', display: 'inline-flex' }}
+            animate={rm ? {} : {
+              boxShadow: [
+                '0 0 0px  0px rgba(196,154,46,0.00)',
+                '0 0 28px 8px rgba(196,154,46,0.32)',
+                '0 0 0px  0px rgba(196,154,46,0.00)',
+              ],
+            }}
+            transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.2 }}
+          >
+            <a
+              href="#about"
+              className="inline-flex items-center gap-3 rounded-full font-jost text-[0.65rem]
+                         font-medium tracking-[0.22em] uppercase transition-all duration-500
+                         hover:scale-[1.05] hover:brightness-110 active:scale-[0.97]"
+              style={{
+                background: 'var(--gold)',
+                color:      'var(--text-on-accent)',
+                padding:    '0.9rem 2rem',
+              }}
+            >
+              About the Studio
+              <motion.span
+                animate={rm ? {} : { x: [0, 4, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+              </motion.span>
+            </a>
+          </motion.div>
+        </MagneticElement>
+      </motion.div>
     </section>
   )
 }
