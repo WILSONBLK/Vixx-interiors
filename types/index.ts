@@ -20,6 +20,7 @@ export interface Service {
   title:       string
   description: string
   features:    string[]
+  examples:    string[]
   icon:        string
 }
 

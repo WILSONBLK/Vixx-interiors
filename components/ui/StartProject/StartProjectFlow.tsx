@@ -3,8 +3,18 @@
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react'
+
+const SERVICE_TYPE_MAP: Record<string, string> = {
+  residential: 'residential',
+  commercial:  'commercial',
+  consultation: '',
+  sourcing:    '',
+  planning:    '',
+  management:  '',
+}
 
 /* ── Design tokens ────────────────────────────────────────────────────────── */
 const T = {
@@ -294,9 +304,13 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
    ROOT
 ══════════════════════════════════════════════════════════════════════════════ */
 export function StartProjectFlow() {
-  const [phase,    setPhase]    = useState<'intro' | 'flow'>('intro')
+  const searchParams = useSearchParams()
+  const serviceParam = searchParams.get('service') ?? ''
+  const preselectedType = SERVICE_TYPE_MAP[serviceParam] ?? ''
+
+  const [phase,    setPhase]    = useState<'intro' | 'flow'>(serviceParam ? 'flow' : 'intro')
   const [stepIdx,  setStepIdx]  = useState(0)
-  const [answers,  setAnswers]  = useState<Answers>(EMPTY)
+  const [answers,  setAnswers]  = useState<Answers>({ ...EMPTY, type: preselectedType })
   const [dir,      setDir]      = useState<1|-1>(1)
   const [complete, setComplete] = useState(false)
 
@@ -468,6 +482,7 @@ export function StartProjectFlow() {
                       step={step}
                       onSelect={v => { set(step.id, v); setTimeout(advance, 220) }}
                       onSkip={step.optional ? advance : undefined}
+                      initialValue={step.id === 'type' && preselectedType ? preselectedType : undefined}
                     />
                   )}
                 </>
@@ -610,11 +625,18 @@ function TextareaStep({ step, value, onChange, onNext }: {
 /* ══════════════════════════════════════════════════════════════════════════════
    STEP: SELECT
 ══════════════════════════════════════════════════════════════════════════════ */
-function SelectStep({ step, onSelect, onSkip }: {
-  step: Step; onSelect: (v: string) => void; onSkip?: () => void
+function SelectStep({ step, onSelect, onSkip, initialValue }: {
+  step: Step; onSelect: (v: string) => void; onSkip?: () => void; initialValue?: string
 }) {
   const [hov,      setHov]      = useState<string | null>(null)
-  const [selected, setSelected] = useState<string | null>(null)
+  const [selected, setSelected] = useState<string | null>(initialValue ?? null)
+
+  useEffect(() => {
+    if (initialValue) {
+      const t = setTimeout(() => onSelect(initialValue), 320)
+      return () => clearTimeout(t)
+    }
+  }, [initialValue, onSelect])
 
   function pick(val: string) {
     setSelected(val)

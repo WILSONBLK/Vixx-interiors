@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { StartProjectFlow } from '@/components/ui/StartProject/StartProjectFlow'
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function StartProjectPage() {
-  return <StartProjectFlow />
+  return (
+    <Suspense>
+      <StartProjectFlow />
+    </Suspense>
+  )
 }

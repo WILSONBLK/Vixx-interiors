@@ -22,6 +22,7 @@ export const SERVICES: Service[] = [
     title:       'Residential Design',
     description: 'Full-scope interior design for homes, duplexes, and apartments across Lagos. From the first sketch to the final styling, every detail is considered.',
     features:    ['Space planning & layout', 'Material & finish selection', 'Custom furniture design', 'Lighting design', 'Art & décor curation'],
+    examples:    ['Family homes', 'Apartments', 'Duplexes'],
     icon:        'Home',
   },
   {
@@ -30,6 +31,7 @@ export const SERVICES: Service[] = [
     title:       'Commercial Design',
     description: 'Offices, retail spaces, restaurants, and hospitality environments that elevate the human experience and reinforce your brand identity.',
     features:    ['Brand-aligned environments', 'Workflow optimisation', 'Guest experience design', 'Acoustic & lighting strategy', 'FF&E specification'],
+    examples:    ['Offices', 'Restaurants', 'Retail stores'],
     icon:        'Building2',
   },
   {
@@ -38,6 +40,7 @@ export const SERVICES: Service[] = [
     title:       'Design Consultation',
     description: 'A focused two-hour session for those who need direction, not full management. Walk away with a clear vision, a material palette, and an action plan.',
     features:    ['Space assessment', 'Mood board & palette', 'Furniture recommendations', 'Priority action list', 'Follow-up Q&A'],
+    examples:    ['New homeowners', 'Pre-renovation advice', 'Quick direction'],
     icon:        'MessageSquare',
   },
   {
@@ -46,6 +49,7 @@ export const SERVICES: Service[] = [
     title:       'Furniture Sourcing',
     description: 'We curate, source, and procure furniture and accessories from trusted local craftsmen and international suppliers – handling logistics from door to placement.',
     features:    ['Custom manufacturing', 'International procurement', 'Quality inspection', 'Delivery coordination', 'Installation oversight'],
+    examples:    ['Custom-built pieces', 'Imported furniture', 'Full room fit-out'],
     icon:        'Sofa',
   },
   {
@@ -54,6 +58,7 @@ export const SERVICES: Service[] = [
     title:       'Space Planning',
     description: 'Before a single piece of furniture is selected, we optimise the flow, function, and proportion of your space using measured plans and 3D visualisations.',
     features:    ['Measured floor plans', '3D space layouts', 'Traffic flow analysis', 'Scale furniture plans', 'Zoning strategy'],
+    examples:    ['New builds', 'Open-plan layouts', 'Renovations'],
     icon:        'LayoutGrid',
   },
   {
@@ -62,6 +67,7 @@ export const SERVICES: Service[] = [
     title:       'Project Management',
     description: 'We coordinate contractors, suppliers, and timelines end-to-end – so you step back from the complexity and step into a finished space.',
     features:    ['Contractor coordination', 'Timeline management', 'Budget tracking', 'Site supervision', 'Snagging & handover'],
+    examples:    ['Full renovations', 'New construction fit-outs', 'Multi-room overhauls'],
     icon:        'ClipboardList',
   },
 ]

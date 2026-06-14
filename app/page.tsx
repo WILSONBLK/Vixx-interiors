@@ -195,27 +195,46 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {SERVICES.map((svc, i) => (
               <ScrollReveal key={svc.id} delay={i * 0.08} variant="fadeUp">
-                <div className="service-card rounded-2xl p-7 sm:p-8 relative overflow-hidden group cursor-default h-full">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none rounded-2xl"
-                    style={{ background: 'radial-gradient(ellipse 90% 50% at 50% 110%, var(--gold-glow) 0%, transparent 70%)', transition: 'opacity 0.5s ease' }}
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-5 right-6 font-cormorant font-light select-none leading-none"
-                    style={{ fontSize: '2.25rem', color: 'var(--gold-ghost)' }}
-                  >
-                    {svc.number}
-                  </span>
-                  <div className="w-1.5 h-1.5 rounded-full mb-6" style={{ background: 'var(--gold)', opacity: 0.65 }} />
-                  <h3
-                    className="font-cormorant font-light leading-snug relative z-10"
-                    style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
-                  >
-                    {svc.title}
-                  </h3>
-                </div>
+                <Link href={`/start?service=${svc.id}`} className="block h-full">
+                  <div className="service-card rounded-2xl p-7 sm:p-8 relative overflow-hidden group cursor-pointer h-full">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none rounded-2xl"
+                      style={{ background: 'radial-gradient(ellipse 90% 50% at 50% 110%, var(--gold-glow) 0%, transparent 70%)', transition: 'opacity 0.5s ease' }}
+                    />
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-5 right-6 font-cormorant font-light select-none leading-none"
+                      style={{ fontSize: '2.25rem', color: 'var(--gold-ghost)' }}
+                    >
+                      {svc.number}
+                    </span>
+                    <div className="w-1.5 h-1.5 rounded-full mb-5" style={{ background: 'var(--gold)', opacity: 0.65 }} />
+                    <h3
+                      className="font-cormorant font-light leading-snug relative z-10 mb-5"
+                      style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
+                    >
+                      {svc.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-2 relative z-10">
+                      {svc.examples.map((ex) => (
+                        <span
+                          key={ex}
+                          className="label-xs px-2.5 py-1 rounded-full"
+                          style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border-default)', color: 'var(--text-tertiary)' }}
+                        >
+                          {ex}
+                        </span>
+                      ))}
+                      <span
+                        className="label-xs px-2.5 py-1 rounded-full"
+                        style={{ border: '1px dashed var(--border-default)', color: 'var(--gold)', opacity: 0.7 }}
+                      >
+                        & more
+                      </span>
+                    </div>
+                  </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
