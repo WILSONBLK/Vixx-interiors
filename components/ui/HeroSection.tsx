@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion'
 import { MagneticElement } from '@/components/ui/MagneticElement'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -17,7 +17,8 @@ const HERO_OVERRIDES = {
 } as React.CSSProperties
 
 export function HeroSection() {
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef   = useRef<HTMLElement>(null)
+  const isInView     = useInView(sectionRef, { amount: 0.1 })
   const [isTouch, setIsTouch]               = useState(false)
   const [isReducedMotion, setIsReducedMotion] = useState(false)
   const [imageHovered, setImageHovered]       = useState(false)
@@ -75,10 +76,11 @@ export function HeroSection() {
       <div aria-hidden="true" className="absolute pointer-events-none" style={{ inset: '-6%' }}>
         <motion.div
           style={{
-            position: 'absolute',
-            inset:    0,
-            x:        enableParallax ? xPx : 0,
-            y:        enableParallax ? yPx : 0,
+            position:   'absolute',
+            inset:       0,
+            x:           enableParallax ? xPx : 0,
+            y:           enableParallax ? yPx : 0,
+            willChange: 'transform',
           }}
           animate={{ scale: enableScale && imageHovered ? 1.03 : 1 }}
           transition={{ duration: 1.6, ease: EASE }}
@@ -170,11 +172,11 @@ export function HeroSection() {
           </motion.span>
 
           <motion.span
-            className="block font-cormorant italic font-normal"
+            className="block font-cormorant italic font-normal overflow-hidden"
             style={{
               fontSize:      'clamp(1.65rem, 5.4vw, 4.2rem)',
               lineHeight:    1,
-              letterSpacing: '0.26em',
+              letterSpacing: 'clamp(0.08em, 0.26em, 0.26em)',
               color:         'rgba(240,235,225,0.82)',
               textShadow:    '0 2px 18px var(--overlay-heavy)',
               marginTop:     '-0.02em',
@@ -218,7 +220,7 @@ export function HeroSection() {
 
       {/* ── CTA ── */}
       <motion.div
-        className="relative z-20 mt-32 sm:mt-36 w-full flex justify-center"
+        className="relative z-20 mt-16 sm:mt-24 lg:mt-32 w-full flex justify-center"
         initial={rm ? false : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.0, delay: 1.85, ease: EASE }}
@@ -226,7 +228,7 @@ export function HeroSection() {
         <MagneticElement>
           <motion.div
             style={{ borderRadius: '9999px', display: 'inline-flex' }}
-            animate={rm ? {} : {
+            animate={rm || !isInView ? {} : {
               boxShadow: [
                 '0 0 0px  0px rgba(196,154,46,0.00)',
                 '0 0 28px 8px rgba(196,154,46,0.32)',
@@ -248,7 +250,7 @@ export function HeroSection() {
             >
               About the Studio
               <motion.span
-                animate={rm ? {} : { x: [0, 4, 0] }}
+                animate={rm || !isInView ? {} : { x: [0, 4, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />

@@ -35,8 +35,8 @@
   --gold-dark:         #8B6914;
 
   /* Gold opacity tokens — semantic names, stable across themes */
-  --gold-text:          rgba(196,154,46,0.85);   /* primary gold text            */
-  --gold-dim:           rgba(196,154,46,0.65);   /* secondary gold text          */
+  --gold-text:          rgba(196,154,46,1.00);   /* primary gold text            */
+  --gold-dim:           rgba(196,154,46,0.78);   /* secondary gold text          */
   --gold-line:          rgba(196,154,46,0.50);   /* decorative lines             */
   --gold-border:        rgba(196,154,46,0.28);   /* active / hover borders       */
   --gold-border-subtle: rgba(196,154,46,0.14);   /* resting gold borders         */
@@ -75,8 +75,8 @@
 
   /* Text — near-black on cream */
   --text-primary:   #0A0908;
-  --text-secondary: rgba(10,9,8,0.72);
-  --text-tertiary:  rgba(10,9,8,0.52);
+  --text-secondary: rgba(10,9,8,0.75);
+  --text-tertiary:  rgba(10,9,8,0.60);
 
   /* Borders */
   --border-default: rgba(10,9,8,0.12);
@@ -123,8 +123,8 @@
 
   /* Text — cream warmth */
   --text-primary:   #F0EBE1;
-  --text-secondary: rgba(240,235,225,0.75);
-  --text-tertiary:  rgba(240,235,225,0.45);
+  --text-secondary: rgba(240,235,225,0.82);
+  --text-tertiary:  rgba(240,235,225,0.55);
 
   /* Borders */
   --border-default: rgba(240,235,225,0.10);
@@ -215,7 +215,7 @@
     @apply inline-flex items-center justify-center gap-2
            bg-[var(--gold)] text-[var(--text-on-accent)]
            px-6 py-3.5
-           font-jost text-[0.68rem] font-medium tracking-[0.22em] uppercase
+           font-jost text-[0.72rem] font-medium tracking-[0.20em] uppercase
            transition-all duration-300 ease-smooth
            hover:bg-[var(--gold-light)] hover:shadow-gold-md hover:scale-[1.02]
            active:scale-[0.97]
@@ -228,7 +228,7 @@
            border border-[var(--border-strong)]
            text-[var(--text-primary)]
            px-6 py-3.5
-           font-jost text-[0.68rem] font-medium tracking-[0.22em] uppercase
+           font-jost text-[0.72rem] font-medium tracking-[0.20em] uppercase
            transition-all duration-300 ease-smooth
            hover:border-[var(--gold)] hover:text-[var(--gold)] hover:scale-[1.02]
            active:scale-[0.97]
@@ -238,7 +238,7 @@
 
   .btn-ghost {
     @apply inline-flex items-center gap-2
-           font-jost text-[0.68rem] tracking-[0.22em] uppercase
+           font-jost text-[0.72rem] tracking-[0.20em] uppercase
            text-[var(--text-tertiary)]
            transition-colors duration-300
            hover:text-[var(--gold)]
@@ -268,7 +268,7 @@
 
   /* ── Typography ── */
   .label-xs {
-    @apply font-jost text-[0.65rem] tracking-[0.35em] uppercase text-gold;
+    @apply font-jost text-[0.7rem] tracking-[0.32em] uppercase text-gold;
   }
 
   .heading-xl {
@@ -521,14 +521,15 @@
 
 /* ─── SERVICE CARDS ──────────────────────────────────────────────────────── */
 .service-card {
-  border:     1px solid var(--gold-border-subtle);
+  border:     1px solid var(--border-strong);
   background: var(--surface-elevated);
+  box-shadow: var(--shadow-sm);
   transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.35s ease, transform 0.15s ease, opacity 0.15s ease;
 }
 .service-card:hover {
   background:   var(--surface-overlay);
   border-color: var(--gold-border);
-  box-shadow:   0 0 28px var(--gold-ghost);
+  box-shadow:   var(--shadow-md), 0 0 28px var(--gold-ghost);
 }
 .service-card:active {
   transform: scale(0.99);
@@ -538,12 +539,23 @@
 
 /* ─── PORTFOLIO CARDS ────────────────────────────────────────────────────── */
 .portfolio-card {
-  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+.portfolio-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 .portfolio-card:active {
-  transform: scale(0.983);
-  opacity: 0.88;
+  transform: scale(0.975);
+  opacity: 0.84;
   transition-duration: 0.1s;
+}
+/* Touch: show a subtle lift effect on tap */
+@media (hover: none) {
+  .portfolio-card:active {
+    transform: scale(0.965);
+    opacity: 0.80;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  }
 }
 
 /* ─── GOLD PULSE ANIMATION ───────────────────────────────────────────────── */

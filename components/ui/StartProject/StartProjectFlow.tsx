@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -359,7 +359,7 @@ export function StartProjectFlow() {
             key="intro"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, filter: 'blur(6px)', scale: 0.99 }}
+            exit={{ opacity: 0, filter: 'blur(3px)', scale: 0.99 }}
             transition={{ duration: 0.55, ease: EASE }}
           >
             <IntroScreen onBegin={() => setPhase('flow')} />
@@ -449,9 +449,9 @@ export function StartProjectFlow() {
               key={animKey}
               custom={dir}
               variants={{
-                enter:  (d: number) => ({ opacity: 0, y: d > 0 ? 28 : -28, scale: d > 0 ? 1.018 : 0.982, filter: 'blur(10px)' }),
-                center:              { opacity: 1, y: 0,                    scale: 1,                      filter: 'blur(0px)'  },
-                exit:   (d: number) => ({ opacity: 0, y: d > 0 ? -28 : 28, scale: d > 0 ? 0.982 : 1.018, filter: 'blur(10px)' }),
+                enter:  (d: number) => ({ opacity: 0, y: d > 0 ? 22 : -22, scale: d > 0 ? 1.012 : 0.988, filter: 'blur(5px)' }),
+                center:              { opacity: 1, y: 0,                    scale: 1,                      filter: 'blur(0px)' },
+                exit:   (d: number) => ({ opacity: 0, y: d > 0 ? -22 : 22, scale: d > 0 ? 0.988 : 1.012, filter: 'blur(5px)' }),
               }}
               initial="enter"
               animate="center"
@@ -504,10 +504,18 @@ export function StartProjectFlow() {
 /* ══════════════════════════════════════════════════════════════════════════════
    STEP: TEXT / EMAIL INPUT
 ══════════════════════════════════════════════════════════════════════════════ */
+function usePlatformKey() {
+  return useMemo(() => {
+    if (typeof navigator === 'undefined') return '↵'
+    return /Mac|iPhone|iPad|iPod/i.test(navigator.platform) ? '↵' : 'Enter'
+  }, [])
+}
+
 function TextStep({ step, value, onChange, onNext }: {
   step: Step; value: string; onChange: (v: string) => void; onNext: () => void
 }) {
-  const ref = useRef<HTMLInputElement>(null)
+  const ref       = useRef<HTMLInputElement>(null)
+  const enterKey  = usePlatformKey()
   const [shk, setShk] = useState(false)
   const [foc, setFoc] = useState(false)
 
@@ -557,8 +565,8 @@ function TextStep({ step, value, onChange, onNext }: {
 
       <div className="flex items-center justify-between">
         <GoldBtn onClick={tryNext}>Continue <ArrowRight size={13} /></GoldBtn>
-        <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.6rem', color: T.dim, letterSpacing:'0.1em' }}>
-          Press ↵
+        <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.68rem', color: T.dim, letterSpacing:'0.1em' }}>
+          Press {enterKey}
         </span>
       </div>
     </div>
@@ -571,7 +579,8 @@ function TextStep({ step, value, onChange, onNext }: {
 function TextareaStep({ step, value, onChange, onNext }: {
   step: Step; value: string; onChange: (v: string) => void; onNext: () => void
 }) {
-  const ref = useRef<HTMLTextAreaElement>(null)
+  const ref      = useRef<HTMLTextAreaElement>(null)
+  const isMac    = useMemo(() => typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/i.test(navigator.platform), [])
 
   useEffect(() => {
     const t = setTimeout(() => ref.current?.focus(), 380)
@@ -600,8 +609,8 @@ function TextareaStep({ step, value, onChange, onNext }: {
       />
 
       <div style={{ textAlign: 'right', marginBottom: '2rem' }}>
-        <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', color: T.dim, letterSpacing:'0.1em' }}>
-          ⌘ Return to continue
+        <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.68rem', color: T.dim, letterSpacing:'0.1em' }}>
+          {isMac ? '⌘ Return' : 'Ctrl + Enter'} to continue
         </span>
       </div>
 

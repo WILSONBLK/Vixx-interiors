@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="relative overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
+    <main id="main" className="relative overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
       <Navbar />
 
       {/* ── 1. Hero ───────────────────────────────────────────────────────────── */}
@@ -95,7 +95,7 @@ export default function Home() {
                         {stat.value}
                       </p>
                       <p
-                        className="font-jost text-[0.58rem] tracking-[0.18em] uppercase"
+                        className="font-jost text-[0.68rem] tracking-[0.15em] uppercase"
                         style={{ color: 'var(--text-secondary)' }}
                       >
                         {stat.label}
@@ -137,7 +137,7 @@ export default function Home() {
                     </p>
                     <footer>
                       <p
-                        className="font-jost text-[0.58rem] tracking-[0.24em] uppercase"
+                        className="font-jost text-[0.68rem] tracking-[0.20em] uppercase"
                         style={{ color: 'var(--text-secondary)' }}
                       >
                         Osita Agusionu — Founder, VIXX Interiors
@@ -194,7 +194,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {SERVICES.map((svc, i) => (
-              <ScrollReveal key={svc.id} delay={i * 0.08} variant="fadeUp">
+              <ScrollReveal key={svc.id} delay={Math.min(i * 0.08, 0.24)} variant="fadeUp">
                 <Link href={`/start?service=${svc.id}`} className="block h-full">
                   <div className="service-card rounded-2xl p-7 sm:p-8 relative overflow-hidden group cursor-pointer h-full">
                     <div
@@ -268,12 +268,12 @@ export default function Home() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {PROCESS_STEPS.slice(0, 3).map((step, i) => (
               <ScrollReveal key={step.number} delay={i * 0.1} variant="fadeUp">
                 <div
                   className="rounded-2xl p-6 lg:p-8 h-full"
-                  style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border-default)' }}
+                  style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border-strong)', boxShadow: 'var(--shadow-sm)' }}
                 >
                   <span
                     aria-hidden="true"
@@ -308,7 +308,7 @@ export default function Home() {
       {/* ── 6. Selected Work ────────────────────────────────────────────────── */}
       <section id="portfolio" className="relative overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
         <div aria-hidden className="absolute top-0 inset-x-0 pointer-events-none z-0"
-             style={{ height: 32, background: 'linear-gradient(to bottom, var(--bg-secondary), transparent)' }} />
+             style={{ height: 56, background: 'linear-gradient(to bottom, var(--bg-secondary), transparent)' }} />
         <div className="container-site pt-20 pb-10 lg:pt-28 lg:pb-14">
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-3">
@@ -322,7 +322,7 @@ export default function Home() {
         <div className="container-site pb-16 lg:pb-24">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {PORTFOLIO_PROJECTS.map((project, i) => (
-              <ScrollReveal key={project.id} delay={i * 0.08} variant="fadeUp">
+              <ScrollReveal key={project.id} delay={Math.min(i * 0.08, 0.24)} variant="fadeUp">
                 <Link
                   href={`/portfolio/${project.slug}`}
                   className="portfolio-card group relative block overflow-hidden rounded-2xl"
@@ -358,7 +358,7 @@ export default function Home() {
         style={{ background: 'var(--bg-secondary)' }}
       >
         <div aria-hidden className="absolute top-0 inset-x-0 pointer-events-none z-0"
-             style={{ height: 32, background: 'linear-gradient(to bottom, var(--bg-primary), transparent)' }} />
+             style={{ height: 56, background: 'linear-gradient(to bottom, var(--bg-primary), transparent)' }} />
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -381,7 +381,7 @@ export default function Home() {
               <footer className="mt-8 flex flex-col items-center gap-3">
                 <AnimatedLine width={40} delay={0.3} />
                 <p
-                  className="font-jost text-[0.62rem] tracking-[0.28em] uppercase"
+                  className="font-jost text-[0.7rem] tracking-[0.22em] uppercase"
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   Osita Agusionu — Founder, VIXX Interiors
@@ -399,7 +399,7 @@ export default function Home() {
         style={{ background: 'var(--bg-primary)' }}
       >
         <div aria-hidden className="absolute top-0 inset-x-0 pointer-events-none z-0"
-             style={{ height: 32, background: 'linear-gradient(to bottom, var(--bg-secondary), transparent)' }} />
+             style={{ height: 56, background: 'linear-gradient(to bottom, var(--bg-secondary), transparent)' }} />
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -61,12 +61,48 @@ export function Navbar() {
   const pathname                       = usePathname()
   const [open, setOpen]                = useState(false)
   const { isDark, toggleTheme, mounted } = useTheme()
+  const menuRef                        = useRef<HTMLDivElement>(null)
+  const hamburgerRef                   = useRef<HTMLButtonElement>(null)
 
   useEffect(() => { setOpen(false) }, [pathname])
 
   useEffect(() => {
     document.body.classList.toggle('modal-open', open)
     return () => document.body.classList.remove('modal-open')
+  }, [open])
+
+  /* Escape key closes the menu */
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false)
+        hamburgerRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
+
+  /* Focus trap inside the mobile menu */
+  useEffect(() => {
+    if (!open || !menuRef.current) return
+    const focusable = menuRef.current.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+    const first = focusable[0]
+    const last  = focusable[focusable.length - 1]
+    const trap  = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last?.focus() }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first?.focus() }
+      }
+    }
+    first?.focus()
+    window.addEventListener('keydown', trap)
+    return () => window.removeEventListener('keydown', trap)
   }, [open])
 
   const isActive = (href: string) => {
@@ -98,7 +134,7 @@ export function Navbar() {
                 alt="VIXX Interiors"
                 width={260}
                 height={84}
-                className="h-[4.5rem] w-auto object-contain"
+                className="h-10 sm:h-14 xl:h-[4.5rem] w-auto object-contain"
                 priority
               />
             </Link>
@@ -112,7 +148,7 @@ export function Navbar() {
                   href={link.href}
                   data-cursor="hover"
                   className={cn(
-                    'relative pb-1 font-jost text-[0.64rem] tracking-[0.22em] uppercase transition-colors duration-200 whitespace-nowrap',
+                    'relative pb-1 font-jost text-[0.72rem] tracking-[0.20em] uppercase transition-colors duration-200 whitespace-nowrap',
                     isActive(link.href)
                       ? 'text-[var(--gold)]'
                       : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]',
@@ -164,7 +200,7 @@ export function Navbar() {
                 onClick={toggleTheme}
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 data-cursor="hover"
-                className="inline-flex items-center justify-center w-7 h-7 text-[var(--text-muted)] opacity-60 transition-all duration-200 hover:opacity-100 hover:text-[var(--gold)] active:opacity-50 active:scale-90"
+                className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-7 h-7 text-[var(--text-muted)] opacity-60 transition-all duration-200 hover:opacity-100 hover:text-[var(--gold)] active:opacity-50 active:scale-90"
               >
                 {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
               </button>
@@ -181,12 +217,13 @@ export function Navbar() {
 
             {/* Mobile hamburger */}
             <button
+              ref={hamburgerRef}
               onClick={() => setOpen((v) => !v)}
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
               aria-controls="mobile-menu"
               data-cursor="hover"
-              className="xl:hidden flex items-center justify-center w-8 h-8 text-[var(--text-primary)] active:opacity-60 active:scale-90 transition-all duration-150"
+              className="xl:hidden flex items-center justify-center min-w-[44px] min-h-[44px] w-8 h-8 text-[var(--text-primary)] active:opacity-60 active:scale-90 transition-all duration-150"
             >
               {open
                 ? <X    size={19} strokeWidth={1.5} />
@@ -200,6 +237,7 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={menuRef}
             id="mobile-menu"
             role="dialog"
             aria-modal="true"

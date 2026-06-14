@@ -182,7 +182,7 @@ export function Footer() {
         {/* Bottom bar */}
         <ScrollReveal delay={0.1} threshold={0.02}>
           <div className="mt-12 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-jost text-[0.6rem] tracking-[0.15em] uppercase" style={{ color: 'var(--text-muted)' }}>
+            <p className="font-jost text-[0.72rem] tracking-[0.12em] uppercase" style={{ color: 'var(--text-muted)' }}>
               © {year} VIXX Interiors. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
@@ -190,7 +190,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="link-reveal font-jost text-[0.6rem] tracking-[0.1em] uppercase transition-colors duration-200 hover:text-[var(--gold)]"
+                  className="link-reveal font-jost text-[0.72rem] tracking-[0.1em] uppercase transition-colors duration-200 hover:text-[var(--gold)]"
                   style={{ color: 'var(--text-muted)' }}
                 >
                   {link.label}
