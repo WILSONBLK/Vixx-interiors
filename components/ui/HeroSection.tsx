@@ -93,7 +93,7 @@ export function HeroSection() {
           />
         </motion.div>
 
-        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.14)' }} />
+        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.38)' }} />
         <div
           className="absolute inset-0"
           style={{ background: 'radial-gradient(ellipse 90% 88% at 50% 46%, transparent 42%, rgba(8,8,8,0.15) 100%)' }}
@@ -135,7 +135,7 @@ export function HeroSection() {
         >
           <motion.span
             className="font-jost text-[0.78rem] sm:text-[0.84rem] tracking-[0.42em] uppercase"
-            style={{ color: 'var(--gold-text)' }}
+            style={{ color: 'var(--gold-text)', textShadow: '0 1px 14px rgba(8,8,8,0.9)' }}
             whileHover={rm ? {} : {
               color:      'rgba(212,175,55,1)',
               transition: HOVER_SPRING,
@@ -200,7 +200,7 @@ export function HeroSection() {
             fontSize:      'clamp(1.35rem, 2.4vw, 1.73rem)',
             letterSpacing: '0.10em',
             color:         'var(--gold-text)',
-            textShadow:    '0 2px 12px var(--overlay-mid)',
+            textShadow:    '0 2px 18px rgba(8,8,8,0.85)',
           }}
           initial={rm ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

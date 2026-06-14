@@ -96,7 +96,7 @@ export default function Home() {
                       </p>
                       <p
                         className="font-jost text-[0.58rem] tracking-[0.18em] uppercase"
-                        style={{ color: 'var(--text-muted)' }}
+                        style={{ color: 'var(--text-secondary)' }}
                       >
                         {stat.label}
                       </p>
@@ -138,7 +138,7 @@ export default function Home() {
                     <footer>
                       <p
                         className="font-jost text-[0.58rem] tracking-[0.24em] uppercase"
-                        style={{ color: 'var(--text-muted)' }}
+                        style={{ color: 'var(--text-secondary)' }}
                       >
                         Osita Agusionu — Founder, VIXX Interiors
                       </p>
@@ -363,7 +363,7 @@ export default function Home() {
                 <AnimatedLine width={40} delay={0.3} />
                 <p
                   className="font-jost text-[0.62rem] tracking-[0.28em] uppercase"
-                  style={{ color: 'var(--text-muted)' }}
+                  style={{ color: 'var(--text-secondary)' }}
                 >
                   Osita Agusionu — Founder, VIXX Interiors
                 </p>
