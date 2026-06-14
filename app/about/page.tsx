@@ -166,7 +166,7 @@ export default function AboutPage() {
               className="font-cormorant font-light italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'var(--text-primary)' }}
             >
-              &ldquo;You get to your door. You open it. You walk in — and it just feels like you are in another world.&rdquo;
+              &ldquo;When you get it right, people don&apos;t say &lsquo;I love the design.&rsquo; They say &lsquo;I love being here.&rsquo; That&apos;s the goal.&rdquo;
             </p>
             <p className="label-xs" style={{ color: 'var(--text-secondary)' }}>
               Osita Agusionu — Founder & Creative Director
@@ -224,7 +224,7 @@ export default function AboutPage() {
                 {
                   number: '01',
                   title:  'Simplicity',
-                  body:   'When you open your door and walk in, it should feel like another world. Not decorated — transformed. We remove until what remains is exactly right.',
+                  body:   'A space should feel settled the moment you enter it. We design by subtraction — keeping only what earns its place.',
                 },
                 {
                   number: '02',
