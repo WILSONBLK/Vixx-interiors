@@ -2,13 +2,12 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { Navbar }              from '@/components/layout/Navbar'
-import { Footer }              from '@/components/layout/Footer'
-import { HexMotif }            from '@/components/ui/HexMotif'
-import { ScrollReveal }        from '@/components/ui/ScrollReveal'
-import { WHY_ITEMS }           from '@/lib/data'
-import { AnimatedLine }        from '@/components/ui/AnimatedLine'
-import { PageHeroBackground }  from '@/components/ui/PageHeroBackground'
+import { Navbar }             from '@/components/layout/Navbar'
+import { Footer }             from '@/components/layout/Footer'
+import { HexMotif }           from '@/components/ui/HexMotif'
+import { ScrollReveal }       from '@/components/ui/ScrollReveal'
+import { AnimatedLine }       from '@/components/ui/AnimatedLine'
+import { PageHeroBackground } from '@/components/ui/PageHeroBackground'
 
 const HERO_STYLE: CSSProperties = {
   '--text-primary':   'var(--brand-cream)',
@@ -17,7 +16,7 @@ const HERO_STYLE: CSSProperties = {
 
 export const metadata: Metadata = {
   title:       'About VIXX Interiors – Interior Design Studio',
-  description: 'Learn about Osita Agusionu and VIXX Interiors\' philosophy: creating calm, considered interiors in Lagos, Nigeria.',
+  description: 'Meet Osita Agusionu, Creative Director of VIXX Interiors — a Lagos-based studio dedicated to calm, personal, story-driven spaces.',
 }
 
 export default function AboutPage() {
@@ -38,12 +37,12 @@ export default function AboutPage() {
               <p className="label-xs">About the Studio</p>
             </div>
             <h1 className="heading-xl mb-4">
-              Design driven by{' '}
-              <em className="not-italic" style={{ color: 'var(--gold)' }}>intention.</em>
+              Everything is{' '}
+              <em className="not-italic" style={{ color: 'var(--gold)' }}>art.</em>
             </h1>
             <AnimatedLine width={200} className="mb-6" delay={0.25} />
             <p className="body-lg max-w-2xl">
-              VIXX Interiors is a Lagos-based interior design studio founded on the belief that a great space is not simply beautiful — it is purposeful, personal, and enduring.
+              VIXX Interiors is a Lagos-based interior design studio with one conviction: your home should feel like you — personal, calm, and completely your own.
             </p>
           </ScrollReveal>
         </div>
@@ -66,7 +65,7 @@ export default function AboutPage() {
                 </div>
                 <div className="absolute bottom-0 inset-x-0 p-6" style={{ background: 'linear-gradient(to top, var(--overlay-heavy), transparent)' }}>
                   <p className="font-cormorant text-xl font-light" style={{ color: 'var(--text-primary)' }}>Osita Agusionu</p>
-                  <p className="label-xs mt-1">Founder & Principal Designer</p>
+                  <p className="label-xs mt-1">Founder & Creative Director</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -77,17 +76,17 @@ export default function AboutPage() {
                 <p className="label-xs">The Founder</p>
               </div>
               <h2 className="heading-lg mb-6">
-                An artist&apos;s eye for functional design.
+                A calling, not a career.
               </h2>
               <div className="space-y-4 body-lg">
                 <p>
-                  Osita Agusionu founded VIXX Interiors with a single conviction: that every space should feel like a personal sanctuary. With a background rooted in architecture and fine art, he approaches each project as a curated composition — balancing form, function, and feeling.
+                  Osita Agusionu founded VIXX Interiors after a moment of clarity during the COVID lockdown. A former 9-to-5 professional, he sat still for the first time and asked himself the right question. Interior design was the answer — not chosen, but recognised. &ldquo;This is what I&apos;m called for,&rdquo; he said. He hasn&apos;t looked back since.
                 </p>
                 <p>
-                  His philosophy is rooted in simplicity. Not the absence of things, but the presence of the right things. Warm materials, considered proportions, and lighting that changes how a room feels through the day. The result is always calm — always complete.
+                  His early internship tested that conviction. Doubted by a mentor — &ldquo;Are you sure you can do this? You&apos;ll be under the sun, under the rain&rdquo; — he simply showed up and kept showing up. As the days passed, he fell deeper in love with the work.
                 </p>
                 <p>
-                  &ldquo;I love making a space calm and focused. The best interiors feel complete without being busy.&rdquo;
+                  &ldquo;Waking up every morning to go out there and do something that you actually love, and it actually fetches you money — I feel like that&apos;s the highest blessing.&rdquo;
                 </p>
               </div>
 
@@ -102,6 +101,71 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── The Name ── */}
+      <section className="section-pad">
+        <div className="container-site">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <ScrollReveal>
+              <div className="flex items-center gap-3 mb-5">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">The Name</p>
+              </div>
+              <h2 className="heading-lg mb-6">
+                Named after the woman who made him.
+              </h2>
+              <div className="space-y-4 body-lg">
+                <p>
+                  When it came time to name the studio, Osita knew one thing: he didn&apos;t want his own name on the door. He thought of his mother, Victoria — known to everyone as Vicky.
+                </p>
+                <p>
+                  Victoria became Vicky. Vicky became VICKS. VICKS became VIX. A friend&apos;s suggestion added the final X.{' '}
+                  <span className="font-cormorant text-xl font-light" style={{ color: 'var(--gold)' }}>VIXX.</span>
+                </p>
+                <p>
+                  &ldquo;Growing up, my mom is my hero, literally. She represents strength, patience, hard work — and that&apos;s what has kept me going.&rdquo;
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal variant="fadeLeft" delay={0.1}>
+              <div
+                className="relative aspect-square flex flex-col items-center justify-center"
+                style={{ background: 'var(--bg-secondary)' }}
+              >
+                <p
+                  className="font-cormorant font-light leading-none mb-8 select-none"
+                  style={{ fontSize: 'clamp(5rem, 12vw, 8rem)', color: 'var(--gold)', opacity: 0.15 }}
+                >
+                  VIXX
+                </p>
+                <div className="flex flex-col items-center gap-3">
+                  {['Strength', 'Patience', 'Hard Work'].map((word) => (
+                    <p key={word} className="label-xs tracking-widest">{word}</p>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pull Quote ── */}
+      <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container-site max-w-3xl mx-auto text-center">
+          <ScrollReveal>
+            <p
+              className="font-cormorant font-light italic leading-snug mb-6"
+              style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'var(--text-primary)' }}
+            >
+              &ldquo;Can we allow white to breathe?&rdquo;
+            </p>
+            <p className="label-xs" style={{ color: 'var(--text-secondary)' }}>
+              Osita Agusionu — Founder & Creative Director
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ── Philosophy ── */}
       <section className="section-pad">
         <div className="container-site">
@@ -112,15 +176,27 @@ export default function AboutPage() {
                 <p className="label-xs">Our Philosophy</p>
               </div>
               <h2 className="heading-lg text-center mb-14">
-                Simplicity Kind of Different
+                How we think about space.
               </h2>
             </ScrollReveal>
 
             <div className="grid md:grid-cols-3 gap-px" style={{ background: 'var(--border)' }}>
               {[
-                { number: '01', title: 'Intention', body: 'Every decision in a VIXX project has a reason. We don\'t add for the sake of adding — we curate until what remains is exactly right.' },
-                { number: '02', title: 'Balance',   body: 'Great interiors feel settled. We achieve this through symmetry, proportion, and a careful tension between warmth and restraint.' },
-                { number: '03', title: 'Longevity', body: 'Trends fade. We design for how you will feel in a space ten years from now — choosing materials and forms that age with grace.' },
+                {
+                  number: '01',
+                  title:  'Simplicity',
+                  body:   'When you open your door and walk in, it should feel like another world. Not decorated — transformed. We remove until what remains is exactly right.',
+                },
+                {
+                  number: '02',
+                  title:  'Personal',
+                  body:   'Your home should feel like you. We put your personality into every space so that when you are there, you feel comfortable, relaxed, and completely at ease.',
+                },
+                {
+                  number: '03',
+                  title:  'Peace',
+                  body:   'We want our clients to feel safe. To feel at home. To have peace — away from the noise and chaos of the city. That is what every VIXX project is built for.',
+                },
               ].map((item, i) => (
                 <ScrollReveal key={item.number} delay={i * 0.07} variant="fadeUp">
                   <div className="card-glass p-8 h-full" style={{ background: 'var(--bg-primary)' }}>
@@ -137,48 +213,44 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Why VIXX ── */}
+      {/* ── Invest in Your Space ── */}
       <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container-site">
-          <ScrollReveal>
-            <div className="flex items-center gap-3 mb-4">
-              <AnimatedLine width={24} delay={0.1} />
-              <p className="label-xs">Why VIXX</p>
-            </div>
-            <h2 className="heading-lg mb-14 max-w-xl">What sets us apart.</h2>
-          </ScrollReveal>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {WHY_ITEMS.map((item, i) => (
-              <ScrollReveal key={item.title} delay={i * 0.07} variant="fadeUp">
-                <div className="card-glass p-6 h-full">
-                  <div
-                    className="w-8 h-8 flex items-center justify-center mb-4"
-                    style={{ border: '1px solid var(--gold-border)' }}
-                  >
-                    <HexMotif size="xs" opacity={0.7} />
-                  </div>
-                  <h3 className="font-cormorant text-xl font-light mb-2" style={{ color: 'var(--text-primary)' }}>
-                    {item.title}
-                  </h3>
-                  <p className="body-md text-sm">{item.description}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+          <div className="max-w-3xl">
+            <ScrollReveal>
+              <div className="flex items-center gap-3 mb-5">
+                <AnimatedLine width={24} delay={0.1} />
+                <p className="label-xs">A Message From Osita</p>
+              </div>
+              <h2 className="heading-lg mb-8">
+                Invest in your space.
+              </h2>
+              <div className="space-y-4 body-lg">
+                <p>
+                  We go out there every day. We work. We stress to make the money. And then we come back home — and ignore where we actually live.
+                </p>
+                <p>
+                  Your space deserves better. You deserve better. It doesn&apos;t have to be everything at once. Start somewhere — your bedroom, your living room, a single corner that finally feels like yours. Invest in the place you come home to.
+                </p>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                  Wake up in the morning and be happy to be alive.
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
+      <section className="section-pad">
         <div className="container-site text-center">
           <ScrollReveal>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3 mb-4">
               <AnimatedLine width={24} delay={0.1} />
               <p className="label-xs">Ready to Begin?</p>
             </div>
             <h2 className="heading-lg max-w-xl mx-auto mb-8">
-              Let&apos;s build something that lasts.
+              Let&apos;s tell your story — in your space.
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link href="/start" className="btn-primary">
