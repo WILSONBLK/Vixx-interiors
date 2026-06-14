@@ -176,7 +176,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
               Let&apos;s create something this good for your space.
             </h2>
             <Link href="/contact" className="btn-primary">
-              Book a Consultation
+              Start a Project
               <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
             </Link>
           </ScrollReveal>

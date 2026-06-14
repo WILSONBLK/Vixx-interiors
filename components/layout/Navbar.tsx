@@ -5,10 +5,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Sun, Moon } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { NAV_LINKS, SOCIAL_LINKS } from '@/lib/data'
 import { InstagramIcon, TikTokIcon, WhatsAppIcon } from '@/components/ui/SocialIcons'
 import { useTheme } from '@/hooks/useTheme'
+
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
+const SPRING = { type: 'spring' as const, stiffness: 320, damping: 24 }
 
 function SocialIcon({ id, size = 16 }: { id: string; size?: number }) {
   if (id === 'instagram') return <InstagramIcon size={size} />
@@ -17,17 +21,46 @@ function SocialIcon({ id, size = 16 }: { id: string; size?: number }) {
   return null
 }
 
-export function Navbar() {
-  const pathname                     = usePathname()
-  const [scrolled, setScrolled]       = useState(false)
-  const [open, setOpen]               = useState(false)
-  const { isDark, toggleTheme, mounted } = useTheme()
+/* Reusable glow text that reacts on hover, click, and touch */
+function GlowText({
+  children,
+  active = false,
+  className,
+  style,
+}: {
+  children: React.ReactNode
+  active?:  boolean
+  className?: string
+  style?:    React.CSSProperties
+}) {
+  const goldGlow  = '0 0 24px rgba(196,154,46,0.95), 0 0 48px rgba(196,154,46,0.55), 0 0 80px rgba(196,154,46,0.25)'
+  const creamGlow = '0 0 20px rgba(240,235,225,0.55), 0 0 40px rgba(240,235,225,0.25)'
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  return (
+    <motion.span
+      className={className}
+      style={style}
+      whileHover={{
+        textShadow: active ? goldGlow : creamGlow,
+        color:      active ? 'rgba(212,175,55,1)' : 'rgba(240,235,225,1)',
+        transition: SPRING,
+      }}
+      whileTap={{
+        textShadow: goldGlow,
+        color:      'rgba(212,175,55,1)',
+        scale:      0.97,
+        transition: SPRING,
+      }}
+    >
+      {children}
+    </motion.span>
+  )
+}
+
+export function Navbar() {
+  const pathname                       = usePathname()
+  const [open, setOpen]                = useState(false)
+  const { isDark, toggleTheme, mounted } = useTheme()
 
   useEffect(() => { setOpen(false) }, [pathname])
 
@@ -45,25 +78,9 @@ export function Navbar() {
     <>
       <header
         role="banner"
-        className="fixed top-0 inset-x-0 z-50 transition-all duration-500"
-        style={{
-          height: 'var(--nav-height)',
-          background:           scrolled ? 'var(--bg-nav-scrolled)' : 'transparent',
-          backdropFilter:       scrolled ? 'blur(5px) saturate(110%)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(5px) saturate(110%)' : 'none',
-          boxShadow:            scrolled ? 'var(--shadow-nav)' : 'none',
-        }}
+        className="fixed top-0 inset-x-0 z-50"
+        style={{ height: 'var(--nav-height)' }}
       >
-        {/* Hairline gold accent */}
-        <div
-          aria-hidden
-          className="absolute top-0 inset-x-0 h-px transition-opacity duration-500"
-          style={{
-            background: 'linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%)',
-            opacity: scrolled ? 0.30 : 0.18,
-          }}
-        />
-
         <nav
           className="w-full h-full relative flex items-center justify-center"
           aria-label="Primary navigation"
@@ -141,7 +158,7 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Theme toggle — always visible (header bar on mobile, header on desktop) */}
+            {/* Theme toggle */}
             {mounted && (
               <button
                 onClick={toggleTheme}
@@ -159,7 +176,7 @@ export function Navbar() {
               data-cursor="hover"
               className="hidden lg:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
             >
-              Start Project
+              Start a Project
             </Link>
 
             {/* Mobile hamburger */}
@@ -180,87 +197,122 @@ export function Navbar() {
       </header>
 
       {/* Mobile full-screen menu */}
-      <div
-        id="mobile-menu"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile navigation"
-        className={cn(
-          'fixed inset-0 z-40 flex flex-col lg:hidden transition-all duration-500',
-          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
-        )}
-        style={{
-          background:           'var(--bg-nav-menu)',
-          backdropFilter:       'blur(8px) saturate(110%)',
-          WebkitBackdropFilter: 'blur(8px) saturate(110%)',
-        }}
-      >
-        {/* Spacer matching fixed header */}
-        <div style={{ height: 'var(--nav-height)', flexShrink: 0 }} />
-
-        <nav
-          className="flex flex-col flex-1 container-site py-8 sm:py-12 overflow-y-auto"
-          aria-label="Mobile navigation links"
-        >
-          {/* Nav links */}
-          <ul role="list" className="flex flex-col">
-            {NAV_LINKS.map((link, i) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    'block font-cormorant text-3xl sm:text-4xl font-light py-4 sm:py-5',
-                    'border-b border-[var(--border)] transition-colors duration-200',
-                    isActive(link.href)
-                      ? 'text-[var(--gold)]'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
-                    open ? 'animate-fade-up' : '',
-                  )}
-                  style={{ animationDelay: `${i * 0.06}s`, animationFillMode: 'both' }}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Social links — dedicated section */}
-          <div
-            className="mt-10 pt-6 border-t border-[var(--border)]"
-            aria-label="Social media links"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
+            className="fixed inset-0 z-40 flex flex-col lg:hidden"
+            style={{
+              background:           'var(--bg-nav-menu)',
+              backdropFilter:       'blur(8px) saturate(110%)',
+              WebkitBackdropFilter: 'blur(8px) saturate(110%)',
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
           >
-            <p
-              className="font-jost text-[0.55rem] tracking-[0.32em] uppercase mb-5"
-              style={{ color: 'var(--gold-dim)' }}
-            >
-              Follow
-            </p>
-            <ul role="list" className="flex items-center gap-2">
-              {SOCIAL_LINKS.map(({ id, label, href }) => (
-                <li key={id}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`VIXX Interiors on ${label}`}
-                    data-cursor="hover"
-                    className="social-icon !w-11 !h-11"
-                  >
-                    <SocialIcon id={id} size={18} />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* Spacer matching fixed header */}
+            <div style={{ height: 'var(--nav-height)', flexShrink: 0 }} />
 
-          {/* CTA */}
-          <div className="mt-8">
-            <Link href="/contact" className="btn-primary">
-              Start Project
-            </Link>
-          </div>
-        </nav>
-      </div>
+            <nav
+              className="flex flex-col flex-1 container-site py-8 sm:py-12 overflow-y-auto"
+              aria-label="Mobile navigation links"
+            >
+              {/* Nav links */}
+              <ul role="list" className="flex flex-col">
+                {NAV_LINKS.map((link, i) => {
+                  const active = isActive(link.href)
+                  return (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, x: -24 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.45, delay: i * 0.07, ease: EASE }}
+                    >
+                      <Link
+                        href={link.href}
+                        className={cn(
+                          'block py-4 sm:py-5 border-b border-[var(--border)]',
+                          active ? 'text-[var(--gold)]' : 'text-[var(--text-secondary)]',
+                        )}
+                      >
+                        <GlowText
+                          active={active}
+                          className="block font-cormorant text-3xl sm:text-4xl font-light"
+                        >
+                          {link.label}
+                        </GlowText>
+                      </Link>
+                    </motion.li>
+                  )
+                })}
+              </ul>
+
+              {/* Social links */}
+              <motion.div
+                className="mt-10 pt-6 border-t border-[var(--border)]"
+                aria-label="Social media links"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: NAV_LINKS.length * 0.07 + 0.05, ease: EASE }}
+              >
+                <GlowText
+                  className="block font-jost text-[0.55rem] tracking-[0.32em] uppercase mb-5"
+                  style={{ color: 'var(--gold-dim)' }}
+                >
+                  Follow
+                </GlowText>
+
+                <ul role="list" className="flex items-center gap-2">
+                  {SOCIAL_LINKS.map(({ id, label, href }) => (
+                    <li key={id}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`VIXX Interiors on ${label}`}
+                        data-cursor="hover"
+                        className="social-icon !w-11 !h-11"
+                      >
+                        <SocialIcon id={id} size={18} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* CTA */}
+              <motion.div
+                className="mt-8"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: NAV_LINKS.length * 0.07 + 0.12, ease: EASE }}
+              >
+                <motion.div
+                  whileHover={{
+                    boxShadow: '0 0 28px rgba(196,154,46,0.55), 0 0 60px rgba(196,154,46,0.25)',
+                    transition: SPRING,
+                  }}
+                  whileTap={{
+                    scale:     0.97,
+                    boxShadow: '0 0 36px rgba(196,154,46,0.8), 0 0 72px rgba(196,154,46,0.4)',
+                    transition: SPRING,
+                  }}
+                  style={{ display: 'inline-block', borderRadius: '9999px' }}
+                >
+                  <Link href="/contact" className="btn-primary">
+                    Start a Project
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

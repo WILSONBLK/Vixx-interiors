@@ -9,7 +9,6 @@ import { HeroSection }    from '@/components/ui/HeroSection'
 import { AboutStudio }   from '@/components/ui/AboutStudio'
 import { AnimatedLine }   from '@/components/ui/AnimatedLine'
 import { HexMotif }     from '@/components/ui/HexMotif'
-import { ContactForm }  from '@/components/forms/ContactForm'
 import { PORTFOLIO_PROJECTS, STATS } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -193,7 +192,7 @@ export default function Home() {
           <ScrollReveal delay={0.5}>
             <div className="mt-10">
               <Link href="/services" className="btn-outline">
-                Full Services
+                View Services
                 <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
               </Link>
             </div>
@@ -328,39 +327,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 7. Contact ───────────────────────────────────────────────────────── */}
+      {/* ── 7. Start a Project CTA ───────────────────────────────────────────── */}
       <section
         id="contact"
-        className="relative overflow-hidden section-pad"
+        className="relative overflow-hidden py-24 lg:py-36"
         style={{ background: 'var(--bg-secondary)' }}
       >
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 0%, var(--gold-glow) 0%, transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 65% 55% at 50% 50%, var(--gold-glow) 0%, transparent 68%)' }}
+        />
+        <HexMotif
+          size={320}
+          variant="outline"
+          opacity={0.025}
+          className="absolute -right-20 top-1/2 -translate-y-1/2 pointer-events-none"
+          aria-hidden
         />
 
-        <div className="relative z-10 container-site">
-          <div className="grid lg:grid-cols-2 gap-20 items-start">
+        <div className="relative z-10 container-site text-center max-w-3xl mx-auto px-6">
+          <ScrollReveal variant="fadeIn">
 
-            <ScrollReveal variant="fadeRight">
-              <div className="flex items-center gap-3 mb-6">
-                <AnimatedLine width={24} delay={0.1} />
-                <p className="label-xs">Start a Project</p>
-              </div>
-              <h2 className="heading-lg mb-5">
-                Tell us about{' '}
-                <em style={{ color: 'var(--gold)' }}>your space.</em>
-              </h2>
-              <p className="body-lg" style={{ maxWidth: '38ch' }}>
-                Fill in the form and we&apos;ll respond within 24 hours with a tailored proposal. All enquiries are handled in confidence.
-              </p>
-            </ScrollReveal>
+            <div className="flex justify-center mb-8">
+              <HexMotif size={38} opacity={0.28} aria-hidden />
+            </div>
 
-            <ScrollReveal delay={0.1} variant="fadeLeft">
-              <ContactForm />
-            </ScrollReveal>
-          </div>
+            <div className="flex justify-center mb-5">
+              <AnimatedLine width={40} delay={0.1} />
+            </div>
+
+            <h2
+              className="font-cormorant font-light mb-5"
+              style={{
+                fontSize:   'clamp(2.4rem, 4.5vw, 4rem)',
+                lineHeight: 1.08,
+                color:      'var(--text-primary)',
+              }}
+            >
+              Ready to begin{' '}
+              <em className="not-italic" style={{ color: 'var(--gold)' }}>your project?</em>
+            </h2>
+
+            <p className="body-lg mb-10" style={{ maxWidth: '42ch', margin: '0 auto 2.5rem' }}>
+              Tell us about your space. We&apos;ll respond within 24 hours with a tailored proposal — handled in complete confidence.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-primary">
+                Start a Project
+                <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
+              <Link href="/portfolio" className="btn-ghost">
+                View Our Work
+                <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
+            </div>
+
+          </ScrollReveal>
         </div>
       </section>
 

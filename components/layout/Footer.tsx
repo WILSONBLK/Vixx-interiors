@@ -172,7 +172,7 @@ export function Footer() {
 
               <div className="mt-6">
                 <Link href="/contact" className="btn-primary py-2.5 text-[0.6rem]">
-                  Book Consultation
+                  Start a Project
                 </Link>
               </div>
             </div>

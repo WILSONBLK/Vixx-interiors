@@ -173,7 +173,7 @@ export default function ProcessPage() {
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link href="/contact" className="btn-primary">
-                Book a Consultation
+                Start a Project
                 <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
               </Link>
               <Link href="/portfolio" className="btn-outline">View Our Work</Link>

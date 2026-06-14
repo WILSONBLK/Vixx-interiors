@@ -103,7 +103,7 @@ export default function ServicesPage() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact" className="btn-primary">
-                  Book a Consultation
+                  Start a Project
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
                 </Link>
                 <Link href="/process" className="btn-outline">See Our Process</Link>

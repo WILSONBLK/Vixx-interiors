@@ -121,7 +121,7 @@ export default function FAQPage() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact" className="btn-primary">
-                  Get in Touch
+                  Start a Project
                   <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
                 </Link>
                 <a

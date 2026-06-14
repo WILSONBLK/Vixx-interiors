@@ -16,8 +16,8 @@ import { ContactForm }  from '@/components/forms/ContactForm'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
 
 export const metadata: Metadata = {
-  title:       'Book a Consultation – VIXX Interiors',
-  description: 'Book a free design consultation with VIXX Interiors. Tell us about your project (location, budget, timeline) to get started.',
+  title:       'Start a Project – VIXX Interiors',
+  description: 'Tell us about your space. VIXX Interiors will respond within 24 hours with a tailored design proposal.',
 }
 
 export default function ContactPage() {
