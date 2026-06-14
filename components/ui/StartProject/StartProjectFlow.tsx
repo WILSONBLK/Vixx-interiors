@@ -316,6 +316,16 @@ export function StartProjectFlow() {
 
   const step = STEPS[stepIdx]
 
+  /* Fire-and-forget submission when user reaches the thank-you screen */
+  useEffect(() => {
+    if (!complete) return
+    fetch('/api/contact', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ ...answers, source: 'start-project' }),
+    }).catch(() => {})
+  }, [complete]) // eslint-disable-line react-hooks/exhaustive-deps
+
   function set(key: FieldKey, val: string) {
     setAnswers(prev => ({ ...prev, [key]: val }))
   }
@@ -526,6 +536,10 @@ function TextStep({ step, value, onChange, onNext }: {
 
   function tryNext() {
     if (!step.optional && !value.trim()) {
+      setShk(true); setTimeout(() => setShk(false), 550)
+      return
+    }
+    if (step.kind === 'email' && value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
       setShk(true); setTimeout(() => setShk(false), 550)
       return
     }

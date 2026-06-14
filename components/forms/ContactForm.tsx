@@ -8,8 +8,9 @@ import { BUDGET_OPTIONS, TIMELINE_OPTIONS, PROJECT_TYPE_OPTIONS, SERVICES } from
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export function ContactForm() {
-  const [status, setStatus] = useState<Status>('idle')
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [status,     setStatus]     = useState<Status>('idle')
+  const [errors,     setErrors]     = useState<Record<string, string>>({})
+  const [submitError, setSubmitError] = useState('')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -28,6 +29,11 @@ export function ContactForm() {
       newErrors.email = 'Please enter a valid email address'
     }
 
+    const phone = data.get('phone') as string
+    if (phone && !/^[+\d][\d\s\-().]{6,}$/.test(phone)) {
+      newErrors.phone = 'Please enter a valid phone number'
+    }
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
       return
@@ -37,11 +43,33 @@ export function ContactForm() {
     setStatus('submitting')
 
     try {
-      // Simulate API call — replace with /api/consultation POST
-      await new Promise((res) => setTimeout(res, 1200))
+      const res = await fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:        data.get('name'),
+          email:       data.get('email'),
+          phone:       data.get('phone'),
+          location:    data.get('location'),
+          projectType: data.get('projectType'),
+          budget:      data.get('budget'),
+          timeline:    data.get('timeline'),
+          service:     data.get('service'),
+          message:     data.get('message'),
+          source:      'contact-form',
+        }),
+      })
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        throw new Error((json as { error?: string }).error ?? 'Submission failed')
+      }
+
       setStatus('success')
+      setSubmitError('')
       form.reset()
-    } catch {
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
       setStatus('error')
     }
   }
@@ -241,7 +269,7 @@ export function ContactForm() {
             role="alert"
           >
             <AlertCircle size={14} strokeWidth={1.5} />
-            <span>Something went wrong. Please try again.</span>
+            <span>{submitError || 'Something went wrong. Please try again.'}</span>
           </div>
         )}
       </div>

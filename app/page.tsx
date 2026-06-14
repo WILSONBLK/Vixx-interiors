@@ -162,7 +162,7 @@ export default function Home() {
       {/* ── 4. Services ─────────────────────────────────────────────────────── */}
       <section
         id="services"
-        className="relative overflow-hidden py-12 lg:py-16"
+        className="relative overflow-hidden py-8 lg:py-12"
         style={{ background: 'var(--bg-primary)' }}
       >
         <div
@@ -185,8 +185,8 @@ export default function Home() {
               <p className="label-xs">What We Do</p>
             </div>
             <h2
-              className="font-cormorant font-light mb-7 lg:mb-10"
-              style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', color: 'var(--text-primary)', lineHeight: 1.1 }}
+              className="font-cormorant font-light mb-5 lg:mb-7"
+              style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', color: 'var(--text-primary)', lineHeight: 1.1 }}
             >
               Studio Services
             </h2>
@@ -196,7 +196,7 @@ export default function Home() {
             {SERVICES.map((svc, i) => (
               <ScrollReveal key={svc.id} delay={Math.min(i * 0.08, 0.24)} variant="fadeUp">
                 <Link href={`/start?service=${svc.id}`} className="block h-full">
-                  <div className="service-card rounded-2xl p-7 sm:p-8 relative overflow-hidden group cursor-pointer h-full">
+                  <div className="service-card rounded-2xl p-5 sm:p-6 relative overflow-hidden group cursor-pointer h-full">
                     <div
                       aria-hidden="true"
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none rounded-2xl"
@@ -205,14 +205,14 @@ export default function Home() {
                     <span
                       aria-hidden="true"
                       className="absolute top-5 right-6 font-cormorant font-light select-none leading-none"
-                      style={{ fontSize: '2.25rem', color: 'var(--gold-ghost)' }}
+                      style={{ fontSize: '1.75rem', color: 'var(--gold-ghost)' }}
                     >
                       {svc.number}
                     </span>
                     <div className="w-1.5 h-1.5 rounded-full mb-5" style={{ background: 'var(--gold)', opacity: 0.65 }} />
                     <h3
                       className="font-cormorant font-light leading-snug relative z-10 mb-5"
-                      style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
+                      style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.35rem)', color: 'var(--text-primary)' }}
                     >
                       {svc.title}
                     </h3>
@@ -240,7 +240,7 @@ export default function Home() {
           </div>
 
           <ScrollReveal delay={0.3} variant="fadeUp">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-12 lg:pt-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 lg:pt-10">
               <SectionCTAButton href="#process" label="How We Work" variant="primary" />
               <SectionCTAButton href="/services" label="View All Services" variant="secondary" />
             </div>
