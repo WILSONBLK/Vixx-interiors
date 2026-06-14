@@ -172,7 +172,7 @@ export function Navbar() {
 
             {/* Desktop CTA */}
             <Link
-              href="/contact"
+              href="/start"
               data-cursor="hover"
               className="hidden lg:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
             >
@@ -304,7 +304,7 @@ export function Navbar() {
                   }}
                   style={{ display: 'inline-block', borderRadius: '9999px' }}
                 >
-                  <Link href="/contact" className="btn-primary">
+                  <Link href="/start" className="btn-primary">
                     Start a Project
                   </Link>
                 </motion.div>

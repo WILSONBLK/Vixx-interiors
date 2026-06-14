@@ -171,7 +171,7 @@ export function Footer() {
               </ul>
 
               <div className="mt-6">
-                <Link href="/contact" className="btn-primary py-2.5 text-[0.6rem]">
+                <Link href="/start" className="btn-primary py-2.5 text-[0.6rem]">
                   Start a Project
                 </Link>
               </div>
