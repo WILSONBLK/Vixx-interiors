@@ -9,6 +9,9 @@ import { AboutStudio }       from '@/components/ui/AboutStudio'
 import { AnimatedLine }      from '@/components/ui/AnimatedLine'
 import { HexMotif }          from '@/components/ui/HexMotif'
 import { SectionCTA, SectionCTAButton } from '@/components/ui/SectionCTA'
+import { FloatingParticles } from '@/components/ui/FloatingParticles'
+import { Tilt3DCard }        from '@/components/ui/Tilt3DCard'
+// import { SplineScene }    from '@/components/ui/SplineScene'
 import { PORTFOLIO_PROJECTS, STATS, SERVICES, PROCESS_STEPS } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -18,7 +21,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main id="main" className="relative overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
+    <main id="main" className="relative overflow-x-hidden" style={{ background: 'var(--bg-primary)', perspective: '1px', perspectiveOrigin: '50% 0%' }}>
+      {/* <SplineScene scene="YOUR_SPLINE_SCENE_URL_HERE" style={{ opacity: 0.35 }} /> */}
+      <FloatingParticles />
       <Navbar />
 
       {/* ── 1. Hero ───────────────────────────────────────────────────────────── */}
@@ -109,18 +114,20 @@ export default function Home() {
             {/* Right: circular image, then quote directly below */}
             <div>
               <ScrollReveal variant="fadeLeft" delay={0.1}>
-                <div
-                  className="relative overflow-hidden rounded-full mx-auto"
-                  style={{ aspectRatio: '1/1', maxHeight: '56vh', maxWidth: '56vh', width: '100%', background: 'var(--surface-elevated)' }}
-                >
-                  <Image
-                    src="/images/founder.jpg"
-                    alt="Osita Agusionu — Founder, VIXX Interiors"
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                  />
-                </div>
+                <Tilt3DCard intensity={6}>
+                  <div
+                    className="relative overflow-hidden rounded-full mx-auto"
+                    style={{ aspectRatio: '1/1', maxHeight: '56vh', maxWidth: '56vh', width: '100%', background: 'var(--surface-elevated)' }}
+                  >
+                    <Image
+                      src="/images/founder.jpg"
+                      alt="Osita Agusionu — Founder, VIXX Interiors"
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                    />
+                  </div>
+                </Tilt3DCard>
               </ScrollReveal>
 
               <ScrollReveal variant="fadeUp" delay={0.28}>
@@ -192,9 +199,10 @@ export default function Home() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4" style={{ perspective: '1200px' }}>
             {SERVICES.map((svc, i) => (
               <ScrollReveal key={svc.id} delay={Math.min(i * 0.08, 0.24)} variant="fadeUp">
+                <Tilt3DCard className="block h-full">
                 <Link href={`/start?service=${svc.id}`} className="block h-full">
                   <div className="service-card rounded-2xl p-5 sm:p-6 relative overflow-hidden group cursor-pointer h-full">
                     <div
@@ -235,6 +243,7 @@ export default function Home() {
                     </div>
                   </div>
                 </Link>
+                </Tilt3DCard>
               </ScrollReveal>
             ))}
           </div>
@@ -268,30 +277,32 @@ export default function Home() {
             </h2>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4" style={{ perspective: '1200px' }}>
             {PROCESS_STEPS.slice(0, 3).map((step, i) => (
               <ScrollReveal key={step.number} delay={i * 0.1} variant="fadeUp">
-                <div
-                  className="rounded-2xl p-6 lg:p-8 h-full"
-                  style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border-strong)', boxShadow: 'var(--shadow-sm)' }}
-                >
-                  <span
-                    aria-hidden="true"
-                    className="block font-cormorant font-light leading-none select-none mb-5"
-                    style={{ fontSize: '2.5rem', color: 'var(--gold-ghost)' }}
+                <Tilt3DCard className="h-full" intensity={8}>
+                  <div
+                    className="rounded-2xl p-6 lg:p-8 h-full"
+                    style={{ background: 'var(--surface-elevated)', border: '1px solid var(--border-strong)', boxShadow: 'var(--shadow-sm)' }}
                   >
-                    {step.number}
-                  </span>
-                  <h3
-                    className="font-cormorant font-light mb-3"
-                    style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="body-md" style={{ color: 'var(--text-secondary)' }}>
-                    {step.description}
-                  </p>
-                </div>
+                    <span
+                      aria-hidden="true"
+                      className="block font-cormorant font-light leading-none select-none mb-5"
+                      style={{ fontSize: '2.5rem', color: 'var(--gold-ghost)' }}
+                    >
+                      {step.number}
+                    </span>
+                    <h3
+                      className="font-cormorant font-light mb-3"
+                      style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p className="body-md" style={{ color: 'var(--text-secondary)' }}>
+                      {step.description}
+                    </p>
+                  </div>
+                </Tilt3DCard>
               </ScrollReveal>
             ))}
           </div>
@@ -320,9 +331,10 @@ export default function Home() {
         </div>
 
         <div className="container-site pb-16 lg:pb-24">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" style={{ perspective: '1200px' }}>
             {PORTFOLIO_PROJECTS.map((project, i) => (
               <ScrollReveal key={project.id} delay={Math.min(i * 0.08, 0.24)} variant="fadeUp">
+                <Tilt3DCard intensity={5}>
                 <Link
                   href={`/portfolio/${project.slug}`}
                   className="portfolio-card group relative block overflow-hidden rounded-2xl"
@@ -344,6 +356,7 @@ export default function Home() {
                     />
                   </div>
                 </Link>
+                </Tilt3DCard>
               </ScrollReveal>
             ))}
           </div>

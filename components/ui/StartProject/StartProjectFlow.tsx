@@ -254,7 +254,10 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
           style={{
             fontFamily:   'var(--font-jost)',
             fontSize:     '0.9rem',
-            color:         T.sub,
+            fontWeight:    600,
+            color:        '#FFF5E1',
+
+            letterSpacing: '0.01em',
             lineHeight:    1.7,
             maxWidth:     '36ch',
             margin:       '0 auto 2.5rem',

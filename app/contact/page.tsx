@@ -47,7 +47,10 @@ export default function ContactPage() {
               <em className="not-italic" style={{ color: 'var(--gold)' }}>your space.</em>
             </h1>
             <AnimatedLine width={200} className="mb-6" delay={0.25} />
-            <p className="body-lg">
+            <p
+              className="body-lg font-semibold"
+              style={{ color: '#FFF5E1', letterSpacing: '0.01em' }}
+            >
               Fill in the form below and we&apos;ll respond within 24 hours with a tailored proposal. All enquiries are handled in confidence.
             </p>
           </ScrollReveal>

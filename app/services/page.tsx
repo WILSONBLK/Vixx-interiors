@@ -42,7 +42,14 @@ export default function ServicesPage() {
               <em className="not-italic" style={{ color: 'var(--gold)' }}>for every space.</em>
             </h1>
             <AnimatedLine width={200} className="mb-6" delay={0.25} />
-            <p className="body-lg max-w-2xl">
+            <p
+              className="body-lg max-w-2xl font-semibold"
+              style={{
+                color: '#FFF5E1',
+
+                letterSpacing: '0.01em',
+              }}
+            >
               From full residential projects to focused design consultations, every engagement is tailored to your scope, your timeline, and your vision.
             </p>
           </ScrollReveal>

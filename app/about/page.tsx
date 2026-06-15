@@ -46,7 +46,7 @@ export default function AboutPage() {
               className="body-lg max-w-2xl font-semibold"
               style={{
                 color: '#FFF5E1',
-                textShadow: '0 2px 20px rgba(0,0,0,0.95), 0 1px 6px rgba(0,0,0,0.85)',
+
                 letterSpacing: '0.01em',
               }}
             >
