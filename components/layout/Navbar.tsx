@@ -231,7 +231,7 @@ export function Navbar() {
                 onClick={toggleTheme}
                 aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                 data-cursor="hover"
-                className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-7 h-7 text-[var(--text-muted)] opacity-60 transition-all duration-200 hover:opacity-100 hover:text-[var(--gold)] active:opacity-50 active:scale-90"
+                className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-7 h-7 text-[var(--text-secondary)] transition-all duration-200 hover:text-[var(--gold)] active:opacity-50 active:scale-90"
               >
                 {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
               </button>
