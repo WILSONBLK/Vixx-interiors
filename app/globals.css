@@ -607,3 +607,11 @@
   [style*="vixx-pan-ltr"],
   [style*="vixx-pan-rtl"] { animation: none !important; }
 }
+
+/* ─── DESKTOP SCALE REDUCTION (~10%) ──────────────────────────────────────── */
+/* Scales all rem-based sizes uniformly at xl+ (1280px), matching the visual   */
+/* effect of 90% browser zoom without touching mobile/tablet layouts.           */
+/* Fixed px values (borders, icon sizes, nav height) are intentionally exempt. */
+@media (min-width: 1280px) {
+  html { font-size: 90%; }
+}
