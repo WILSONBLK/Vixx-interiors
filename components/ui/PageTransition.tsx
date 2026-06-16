@@ -4,6 +4,29 @@ import { useEffect, useLayoutEffect, useRef } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
+// ── Scroll position persistence ──────────────────────────────────────────────
+// sessionStorage survives soft-navigation and tab restore but clears on close,
+// which is exactly the right lifetime for "where was I on this page?"
+
+const SCROLL_KEY = 'vixx-scroll'
+
+function saveScroll(path: string) {
+  try {
+    const store = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? '{}')
+    store[path] = window.scrollY
+    sessionStorage.setItem(SCROLL_KEY, JSON.stringify(store))
+  } catch {}
+}
+
+function loadScroll(path: string): number {
+  try {
+    const store = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? '{}')
+    return typeof store[path] === 'number' ? store[path] : 0
+  } catch {
+    return 0
+  }
+}
+
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname       = usePathname()
   const prefersReduced = useReducedMotion()
@@ -22,6 +45,14 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
+
+  // Continuously save scroll position for the active page.
+  // Keying by pathname means each page independently remembers where you were.
+  useEffect(() => {
+    const onScroll = () => saveScroll(pathname)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [pathname])
 
   // Runs synchronously before the browser paints — hides new page content
   // so there's no flash before the curtain arrives. Skipped on back nav since
@@ -44,13 +75,24 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     }
 
     // Back navigation (swipe-back, browser back button): skip curtain entirely.
-    // The OS already provides a native swipe animation; playing our curtain
-    // on top of it feels double and fights the gesture.
+    // Restore the scroll position the user was at when they last left this page.
     if (isBackNav.current) {
       isBackNav.current = false
       if (el) el.style.opacity = '1'
+
+      const savedY = loadScroll(pathname)
+      if (savedY > 0) {
+        // Two nested rAFs: first fires before paint, second fires after —
+        // ensuring the page has fully laid out before we jump to the saved position.
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          window.scrollTo(0, savedY)
+        }))
+      }
       return
     }
+
+    // Forward navigation: always start the new page from the top.
+    window.scrollTo(0, 0)
 
     // Cancel any in-progress sweep so rapid navigation doesn't stack animations
     curtain.stop()
