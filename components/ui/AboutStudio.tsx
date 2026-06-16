@@ -1,7 +1,8 @@
 'use client'
 
+import { useRef } from 'react'
 import Image from 'next/image'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, useInView } from 'framer-motion'
 import { ScrollReveal }    from '@/components/ui/ScrollReveal'
 import { AnimatedLine }    from '@/components/ui/AnimatedLine'
 import { SectionCTAButton } from '@/components/ui/SectionCTA'
@@ -14,19 +15,22 @@ const SECTION_TEXT = {
 } as React.CSSProperties
 
 export function AboutStudio() {
-  const rm = useReducedMotion()
+  const rm         = useReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+  const isInView   = useInView(sectionRef, { once: true, amount: 0.12 })
 
   return (
     <section
+      ref={sectionRef}
       id="about"
       className="relative overflow-hidden flex flex-col"
       style={{ minHeight: '100svh' }}
     >
-      {/* Background image — smooth load-in */}
+      {/* Background image — animates in when section enters the viewport */}
       <motion.div
         className="absolute inset-0"
         initial={rm ? false : { opacity: 0, scale: 1.03 }}
-        animate={{ opacity: 1, scale: 1 }}
+        animate={rm || isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.03 }}
         transition={{ duration: 2.0, ease: EASE, delay: 0.1 }}
       >
         <Image

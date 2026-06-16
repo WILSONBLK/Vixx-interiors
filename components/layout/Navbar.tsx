@@ -78,6 +78,7 @@ export function Navbar() {
   const { isDark, toggleTheme, mounted } = useTheme()
   const menuRef                          = useRef<HTMLDivElement>(null)
   const hamburgerRef                     = useRef<HTMLButtonElement>(null)
+  const menuEverOpened                   = useRef(false)
 
   /* ── Scroll visibility: hide on scroll-down, show on scroll-up ──────────
    * Works on every page. No hero detection — purely direction based.
@@ -133,6 +134,7 @@ export function Navbar() {
     if (!overlay) return
 
     if (open) {
+      menuEverOpened.current = true
       overlay.style.display = 'flex'
 
       animate(overlay, {
@@ -151,6 +153,9 @@ export function Navbar() {
         ease:       'outExpo',
       })
     } else {
+      // Skip the close animation on the initial mount — the overlay starts
+      // hidden already and running the animation would flicker it visible.
+      if (!menuEverOpened.current) return
       animate(overlay, {
         opacity:    [1, 0],
         translateY: [0, -10],
