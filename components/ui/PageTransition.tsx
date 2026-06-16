@@ -36,6 +36,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const sweepId        = useRef(0)
   const isBackNav      = useRef(false)
   const isTouch        = useRef(false)
+  // Holds the curtain sweep-in Promise when the user clicks a link before the
+  // route finishes loading — lets us give immediate visual feedback.
+  const pendingSweepIn = useRef<Promise<void> | null>(null)
 
   useEffect(() => {
     isTouch.current = window.matchMedia('(pointer: coarse)').matches
@@ -54,12 +57,49 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [pathname])
 
+  // Start the curtain sweep immediately on link click so the user sees instant
+  // feedback instead of a frozen screen while the next route loads.
+  useEffect(() => {
+    if (prefersReduced) return
+
+    const handleLinkClick = (e: MouseEvent) => {
+      const anchor = (e.target as Element).closest('a') as HTMLAnchorElement | null
+      if (!anchor || anchor.target === '_blank') return
+
+      const href = anchor.getAttribute('href') ?? ''
+      if (
+        !href ||
+        href.startsWith('http') ||
+        href.startsWith('//') ||
+        href.startsWith('mailto') ||
+        href.startsWith('tel') ||
+        href.startsWith('#')
+      ) return
+      if (href === pathname) return
+
+      const el = contentRef.current
+      if (el) el.style.opacity = '0'
+
+      curtain.stop()
+      curtain.set({ x: '-100%' })
+      const inDuration = isTouch.current ? 0.07 : 0.11
+      pendingSweepIn.current = curtain.start({
+        x: '0%',
+        transition: { duration: inDuration, ease: [0.4, 0, 1, 1] },
+      }) as Promise<void>
+    }
+
+    document.addEventListener('click', handleLinkClick)
+    return () => document.removeEventListener('click', handleLinkClick)
+  }, [pathname, curtain, prefersReduced])
+
   // Runs synchronously before the browser paints — hides new page content
-  // so there's no flash before the curtain arrives. Skipped on back nav since
-  // the curtain won't run and we don't want a momentary blank frame.
+  // so there's no flash before the curtain arrives. Skipped on back nav and
+  // when the click handler already hid the content.
   useLayoutEffect(() => {
     if (isFirst.current) return
     if (isBackNav.current) return
+    if (pendingSweepIn.current) return
     const el = contentRef.current
     if (el) el.style.opacity = '0'
   }, [pathname])
@@ -70,6 +110,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const el = contentRef.current
 
     if (prefersReduced) {
+      pendingSweepIn.current = null
       if (el) el.style.opacity = '1'
       return
     }
@@ -78,6 +119,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     // Restore the scroll position the user was at when they last left this page.
     if (isBackNav.current) {
       isBackNav.current = false
+      pendingSweepIn.current = null
+      curtain.stop()
+      curtain.set({ x: '100%' })
       if (el) el.style.opacity = '1'
 
       const savedY = loadScroll(pathname)
@@ -94,10 +138,6 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     // Forward navigation: always start the new page from the top.
     window.scrollTo(0, 0)
 
-    // Cancel any in-progress sweep so rapid navigation doesn't stack animations
-    curtain.stop()
-    curtain.set({ x: '-100%' })
-
     const id = ++sweepId.current
 
     // Touch devices: shorten the curtain for forward nav — mobile screens are
@@ -106,10 +146,23 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const outDuration = isTouch.current ? 0.09 : 0.13
 
     async function sweep() {
-      await curtain.start({ x: '0%', transition: { duration: inDuration, ease: [0.4, 0, 1, 1] } })
-      if (sweepId.current !== id) return
-      if (el) el.style.opacity = '1'
-      await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
+      if (pendingSweepIn.current) {
+        // Curtain already started on click — await it in case the route resolved
+        // faster than the sweep-in animation (e.g. cached page), then sweep out.
+        await Promise.resolve(pendingSweepIn.current)
+        pendingSweepIn.current = null
+        if (sweepId.current !== id) return
+        if (el) el.style.opacity = '1'
+        await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
+      } else {
+        // No link click was detected (programmatic navigation) — run full sweep.
+        curtain.stop()
+        curtain.set({ x: '-100%' })
+        await curtain.start({ x: '0%', transition: { duration: inDuration, ease: [0.4, 0, 1, 1] } })
+        if (sweepId.current !== id) return
+        if (el) el.style.opacity = '1'
+        await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
+      }
     }
 
     sweep()
