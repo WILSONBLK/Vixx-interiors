@@ -204,6 +204,9 @@
   a { text-decoration: none; color: inherit; }
   img, video { max-width: 100%; display: block; }
 
+  /* Eliminate 300ms tap delay and ensure :active fires on iOS */
+  a, button, [role="button"] { touch-action: manipulation; }
+
   ::selection {
     background-color: var(--gold-border-subtle);
     color: var(--text-primary);
@@ -235,7 +238,7 @@
            font-jost text-[0.72rem] font-medium tracking-[0.20em] uppercase
            transition-all duration-300 ease-smooth
            hover:bg-[var(--gold-light)] hover:shadow-gold-md hover:scale-[1.02]
-           active:scale-[0.97]
+           active:scale-[0.92] active:brightness-90 active:duration-75
            focus-visible:outline focus-visible:outline-2
            focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2;
   }
@@ -248,7 +251,7 @@
            font-jost text-[0.72rem] font-medium tracking-[0.20em] uppercase
            transition-all duration-300 ease-smooth
            hover:border-[var(--gold)] hover:text-[var(--gold)] hover:scale-[1.02]
-           active:scale-[0.97]
+           active:scale-[0.92] active:opacity-80 active:duration-75
            focus-visible:outline focus-visible:outline-2
            focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2;
   }
@@ -259,7 +262,7 @@
            text-[var(--text-tertiary)]
            transition-colors duration-300
            hover:text-[var(--gold)]
-           active:scale-[0.97]
+           active:scale-[0.92] active:opacity-70 active:duration-75
            focus-visible:outline focus-visible:outline-2
            focus-visible:outline-[var(--gold)] focus-visible:outline-offset-2;
   }
@@ -278,9 +281,9 @@
   }
 
   .card-glass:active {
-    transform: scale(0.99);
-    opacity: 0.90;
-    transition-duration: 0.1s;
+    transform: scale(0.97);
+    opacity: 0.85;
+    transition-duration: 0.07s;
   }
 
   /* ── Typography ── */
@@ -548,9 +551,9 @@
   box-shadow:   var(--shadow-md), 0 0 28px var(--gold-ghost);
 }
 .service-card:active {
-  transform: scale(0.99);
-  opacity: 0.88;
-  transition-duration: 0.1s;
+  transform: scale(0.97);
+  opacity: 0.82;
+  transition-duration: 0.07s;
 }
 
 /* ─── PORTFOLIO CARDS ────────────────────────────────────────────────────── */
@@ -561,9 +564,9 @@
   box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 .portfolio-card:active {
-  transform: scale(0.975);
-  opacity: 0.84;
-  transition-duration: 0.1s;
+  transform: scale(0.96);
+  opacity: 0.82;
+  transition-duration: 0.07s;
 }
 /* Touch: show a subtle lift effect on tap */
 @media (hover: none) {
@@ -572,6 +575,26 @@
     opacity: 0.80;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   }
+}
+
+/* ─── BUTTON CLICK FEEDBACK ─────────────────────────────────────────────── */
+@keyframes vixx-btn-click {
+  0%   {
+    box-shadow: 0 0 0 0px  rgba(196,154,46,0.80),
+                inset 0 0  0px rgba(196,154,46,0.28);
+  }
+  40%  {
+    box-shadow: 0 0 0 5px  rgba(196,154,46,0.28),
+                inset 0 0 20px rgba(196,154,46,0.22);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(196,154,46,0.00),
+                inset 0 0  0px rgba(196,154,46,0.00);
+  }
+}
+
+.vixx-clicked {
+  animation: vixx-btn-click 0.44s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ─── GOLD PULSE ANIMATION ───────────────────────────────────────────────── */

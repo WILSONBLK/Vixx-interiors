@@ -6,7 +6,6 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Footer }          from '@/components/layout/Footer'
 import { HexMotif }        from '@/components/ui/HexMotif'
 import { ScrollReveal }    from '@/components/ui/ScrollReveal'
-import { ProjectGallery }  from '@/components/ui/ProjectGallery'
 import { PORTFOLIO_PROJECTS } from '@/lib/data'
 
 interface Props {
@@ -37,9 +36,8 @@ export default async function PortfolioDetailPage({ params }: Props) {
   return (
     <main style={{ background: 'var(--bg-primary)' }}>
 
-
       {/* ── Hero image ── */}
-      <section className="relative h-[60vh] min-h-[420px] overflow-hidden">
+      <section className="relative h-[70vh] min-h-[480px] overflow-hidden">
         <Image
           src={project.image}
           alt={project.title}
@@ -52,83 +50,59 @@ export default async function PortfolioDetailPage({ params }: Props) {
           className="absolute inset-0"
           style={{ background: 'linear-gradient(to bottom, var(--overlay-light) 0%, var(--overlay-mid) 100%)' }}
         />
-        <div className="absolute inset-0 flex flex-col justify-end pb-12">
+        <div className="absolute inset-0 flex flex-col justify-end pb-14">
           <div className="container-site">
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 mb-6 font-jost text-xs tracking-[0.15em] uppercase transition-colors duration-200"
+              className="inline-flex items-center gap-2 font-jost text-xs tracking-[0.15em] uppercase transition-colors duration-200"
               style={{ color: 'rgba(240,235,225,0.65)' }}
             >
               <ArrowLeft size={13} strokeWidth={1.5} />
               All Projects
             </Link>
-            <h1 className="font-cormorant text-4xl sm:text-5xl lg:text-6xl font-light text-[var(--brand-cream)]">
-              {project.title}
-            </h1>
           </div>
         </div>
       </section>
 
-      {/* ── Overview ── */}
-      <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
-        <div className="container-site">
-          <div className="grid lg:grid-cols-[1fr_0.6fr] gap-16 items-start">
-            <ScrollReveal>
-              <p className="label-xs mb-5">Project Overview</p>
-              <p className="font-cormorant text-2xl lg:text-3xl font-light leading-snug mb-8" style={{ color: 'var(--text-primary)' }}>
-                {project.overview}
-              </p>
-              <div className="divider-gold mb-8" />
-              <div className="space-y-8">
-                <div>
-                  <p className="label-xs mb-3">The Challenge</p>
-                  <p className="body-lg">{project.challenge}</p>
-                </div>
-                <div>
-                  <p className="label-xs mb-3">The Solution</p>
-                  <p className="body-lg">{project.solution}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.1} variant="fadeLeft">
-              <div className="space-y-8">
-                {/* Materials */}
-                <div
-                  className="p-7"
-                  style={{ border: '1px solid var(--border)', background: 'var(--bg-card)' }}
-                >
-                  <p className="label-xs mb-5">Materials & Finishes</p>
-                  <ul className="space-y-3">
-                    {project.materials.map((m) => (
-                      <li key={m} className="flex items-center gap-3">
-                        <span className="w-1 h-1 flex-shrink-0" style={{ background: 'var(--gold)' }} />
-                        <span className="font-jost text-xs tracking-wide" style={{ color: 'var(--text-muted)' }}>{m}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Image gallery ── */}
-      <section className="py-12">
-        <ScrollReveal>
-          <p className="label-xs mb-8 container-site">Project Photography</p>
-        </ScrollReveal>
-        <ProjectGallery
-          images={project.images}
-          height="clamp(300px, 65vh, 660px)"
+      {/* ── Quotes ── */}
+      <section
+        className="relative overflow-hidden py-20 lg:py-32"
+        style={{ background: 'var(--bg-secondary)' }}
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 50%, var(--gold-glow) 0%, transparent 68%)' }}
         />
+
+        <div className="container-site relative z-10 max-w-3xl mx-auto px-6 text-center">
+          <ScrollReveal variant="fadeIn">
+            <p
+              className="font-cormorant italic font-light leading-snug mb-8"
+              style={{ fontSize: 'clamp(1.45rem, 2.8vw, 2.4rem)', color: 'var(--text-primary)' }}
+            >
+              &ldquo;{project.quotes[0]}&rdquo;
+            </p>
+
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to right, transparent, var(--gold-line))' }} />
+              <div style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--gold)', opacity: 0.55 }} />
+              <div style={{ flex: 1, height: '1px', background: 'linear-gradient(to left, transparent, var(--gold-line))' }} />
+            </div>
+
+            <p
+              className="font-cormorant italic font-light leading-snug"
+              style={{ fontSize: 'clamp(1.1rem, 2vw, 1.65rem)', color: 'var(--text-secondary)' }}
+            >
+              &ldquo;{project.quotes[1]}&rdquo;
+            </p>
+          </ScrollReveal>
+        </div>
       </section>
 
       {/* ── Other projects ── */}
       {otherProjects.length > 0 && (
-        <section className="section-pad" style={{ background: 'var(--bg-secondary)' }}>
+        <section className="section-pad" style={{ background: 'var(--bg-primary)' }}>
           <div className="container-site">
             <ScrollReveal>
               <div className="flex items-center justify-between mb-10">

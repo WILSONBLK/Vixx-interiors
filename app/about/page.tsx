@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Instagram, Play } from 'lucide-react'
 import { Footer }             from '@/components/layout/Footer'
 import { HexMotif }           from '@/components/ui/HexMotif'
 import { ScrollReveal }       from '@/components/ui/ScrollReveal'
@@ -273,6 +273,128 @@ export default function AboutPage() {
                 <p style={{ color: 'var(--text-secondary)' }}>
                   Wake up in the morning and be happy to be alive.
                 </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Interview ── */}
+      <section className="section-pad" style={{ background: 'var(--bg-primary)' }}>
+        <div className="container-site">
+          <ScrollReveal>
+            <div className="flex items-center gap-3 mb-5">
+              <AnimatedLine width={24} delay={0.1} />
+              <p className="label-xs">Hear It From Osita</p>
+            </div>
+            <h2 className="heading-lg mb-12">In his own words.</h2>
+          </ScrollReveal>
+
+          <div className="grid lg:grid-cols-2 gap-0 overflow-hidden" style={{ border: '1px solid var(--border)' }}>
+            {/* Left — visual panel */}
+            <ScrollReveal variant="fadeRight">
+              <div
+                className="relative flex flex-col items-center justify-center min-h-[420px] p-12"
+                style={{ background: 'var(--bg-secondary)' }}
+              >
+                <HexMotif size={260} variant="dual" opacity={0.07} className="absolute inset-0 m-auto" />
+
+                {/* Gold accent line top */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-px"
+                  style={{ background: 'linear-gradient(90deg, transparent, var(--gold), transparent)' }}
+                />
+
+                <div className="relative z-10 flex flex-col items-center text-center gap-6">
+                  {/* Play button */}
+                  <a
+                    href="https://www.instagram.com/reel/DZhguOQNhpR/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Watch interview on Instagram"
+                    className="group flex items-center justify-center rounded-full transition-transform duration-300 hover:scale-110"
+                    style={{
+                      width: 72,
+                      height: 72,
+                      background: 'var(--gold)',
+                      color: 'var(--bg-primary)',
+                    }}
+                  >
+                    <Play size={28} fill="currentColor" strokeWidth={0} />
+                  </a>
+
+                  <div>
+                    <p
+                      className="font-cormorant font-light italic mb-1"
+                      style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}
+                    >
+                      Watch the interview
+                    </p>
+                    <p className="label-xs" style={{ color: 'var(--gold)', opacity: 0.8 }}>
+                      Full conversation
+                    </p>
+                  </div>
+
+                  {/* Instagram handle badge */}
+                  <a
+                    href="https://www.instagram.com/vixx_interiors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2 rounded-full transition-opacity hover:opacity-70"
+                    style={{
+                      border: '1px solid var(--border)',
+                      background: 'var(--bg-primary)',
+                    }}
+                  >
+                    <Instagram size={13} strokeWidth={1.5} style={{ color: 'var(--gold)' }} />
+                    <span className="label-xs" style={{ color: 'var(--text-secondary)', letterSpacing: '0.08em' }}>
+                      @vixx_interiors
+                    </span>
+                  </a>
+                </div>
+
+                {/* Gold accent line bottom */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-px"
+                  style={{ background: 'linear-gradient(90deg, transparent, var(--gold), transparent)' }}
+                />
+              </div>
+            </ScrollReveal>
+
+            {/* Right — quote + CTA */}
+            <ScrollReveal variant="fadeLeft" delay={0.1}>
+              <div
+                className="flex flex-col justify-center p-12 min-h-[420px]"
+                style={{ background: 'var(--bg-primary)', borderLeft: '1px solid var(--border)' }}
+              >
+                <span
+                  className="font-cormorant block mb-6 leading-none select-none"
+                  style={{ fontSize: '5rem', color: 'var(--gold)', opacity: 0.15, lineHeight: 1 }}
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </span>
+
+                <p
+                  className="font-cormorant font-light italic leading-relaxed mb-8"
+                  style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.6rem)', color: 'var(--text-primary)' }}
+                >
+                  Waking up every morning to go out there and do something that you actually love, and it actually fetches you money — I feel like that&apos;s the highest blessing.
+                </p>
+
+                <p className="label-xs mb-10" style={{ color: 'var(--text-secondary)' }}>
+                  Osita Agusionu — Founder & Creative Director
+                </p>
+
+                <a
+                  href="https://www.instagram.com/reel/DZhguOQNhpR/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary self-start"
+                >
+                  Watch on Instagram
+                  <ArrowRight size={14} strokeWidth={1.5} aria-hidden="true" />
+                </a>
               </div>
             </ScrollReveal>
           </div>

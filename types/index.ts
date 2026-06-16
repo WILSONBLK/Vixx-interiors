@@ -50,10 +50,7 @@ export interface PortfolioProject {
   completedAt: string
   image:       string
   images:      string[]
-  overview:    string
-  challenge:   string
-  solution:    string
-  materials:   string[]
+  quotes:      [string, string]
   featured:    boolean
 }
 

@@ -2,6 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Playfair_Display, Jost, Inter } from 'next/font/google'
 import { CustomCursor }    from '@/components/ui/CustomCursor'
+import { ButtonFeedback }  from '@/components/ui/ButtonFeedback'
 import { PageTransition }  from '@/components/ui/PageTransition'
 import { SocialBar }       from '@/components/ui/SocialBar'
 import { Navbar }          from '@/components/layout/Navbar'
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     template: '%s | VIXX Interiors',
   },
   description:
-    'Lagos-based interior design studio crafting calm, considered living and commercial spaces with an unmistakable personal touch.',
+    'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
   keywords: [
     'interior design Lagos',
     'interior design studio Nigeria',
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
     locale:      'en_NG',
     siteName:    'VIXX Interiors',
     title:       'VIXX Interiors – Interior Design Studio, Lagos',
-    description: 'Lagos-based interior design studio crafting calm, considered spaces.',
+    description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
   },
   twitter: {
     card:  'summary_large_image',
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <CustomCursor />
+        <ButtonFeedback />
         <Navbar />
         <PageTransition>{children}</PageTransition>
         <SocialBar />

@@ -176,10 +176,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/proj-f-5.png',
       '/images/portfolio/proj-b-1.jpg',
     ],
-    overview:    'A full-scope residential interior spanning living, dining, and bedroom spaces. Every element was chosen for its relationship to the whole — form, texture, and light working in concert.',
-    challenge:   'Creating spaces that feel curated but never staged. The client wanted warmth without weight, presence without clutter.',
-    solution:    'We worked with a tightly edited palette of warm neutrals and natural materials, anchoring each room with a single statement piece and letting the light do the rest.',
-    materials:   ['Natural stone flooring', 'Warm timber veneer', 'Bespoke upholstery', 'Brass hardware', 'Woven textiles', 'Ambient pendant lighting'],
+    quotes: [
+      'A home is not decorated — it is composed, layer by layer, until it feels entirely yours.',
+      'Light does not fill a room. It reveals what was always meant to be there.',
+    ],
     featured:    true,
   },
   {
@@ -199,10 +199,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/proj2-5.jpg',
       '/images/portfolio/proj2-6.jpg',
     ],
-    overview:    'A full-scope duplex redesign spanning living, dining, and bedroom spaces. The client wanted a home that felt immediately warm and personal without sacrificing a clean, modern sensibility.',
-    challenge:   'Bringing coherence to a multi-floor residence where each room had been furnished independently over time, resulting in a fragmented visual language and poor spatial flow.',
-    solution:    'We established a unified palette of warm neutrals, natural timber, and soft gold accents that threads through each floor.',
-    materials:   ['Natural timber veneer', 'Warm stone flooring', 'Bespoke upholstery', 'Brushed brass hardware', 'Woven textiles', 'Statement pendant lighting'],
+    quotes: [
+      'Coherence across a home is not repetition. It is the same quiet thread, felt in every room.',
+      'A house becomes a home the moment every space speaks to every other.',
+    ],
     featured:    true,
   },
   {
@@ -222,10 +222,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/proj-c-5.jpg',
       '/images/portfolio/proj-c-6.jpg',
     ],
-    overview:    'A private residence designed around the rituals of daily living. Each space was refined to serve its function with quiet elegance.',
-    challenge:   'The brief required both intimacy and openness — spaces that feel expansive without sacrificing warmth.',
-    solution:    'Layered lighting, carefully proportioned furniture, and a restrained palette create spaces that breathe.',
-    materials:   ['Marble surfaces', 'Linen upholstery', 'Walnut joinery', 'Concealed lighting', 'Brass fixtures', 'Hand-knotted rug'],
+    quotes: [
+      'Serenity is not emptiness. It is the confidence to remove everything that does not belong.',
+      'The most personal spaces are often the quietest ones.',
+    ],
     featured:    false,
   },
   {
@@ -245,10 +245,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/proj-d-5.jpg',
       '/images/portfolio/proj-d-6.jpg',
     ],
-    overview:    'A complete interior design commission for a contemporary Lagos home. The client sought a space that felt both distinctly modern and timelessly comfortable.',
-    challenge:   'Balancing visual impact with livability — creating rooms that photograph beautifully but live even better.',
-    solution:    'Strong architectural elements anchor each space while softer furnishings and layered textiles provide warmth and depth.',
-    materials:   ['Travertine flooring', 'Brushed brass accents', 'Velvet upholstery', 'Custom cabinetry', 'Sculptural lighting', 'Curated art'],
+    quotes: [
+      'Modern does not mean cold. It means knowing exactly where warmth belongs.',
+      'The most enduring interiors feel of their time — and entirely timeless.',
+    ],
     featured:    false,
   },
   {
@@ -266,10 +266,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/proj-a-3.jpg',
       '/images/portfolio/proj-a-4.jpg',
     ],
-    overview:    'A focused interior study exploring the relationship between material quality and spatial experience. Every surface was chosen to contribute to a coherent sensory whole.',
-    challenge:   'Working within a defined brief to achieve maximum impact through restraint.',
-    solution:    'Precise material selection and considered placement create spaces that feel both resolved and alive.',
-    materials:   ['Stone surfaces', 'Timber accents', 'Curated lighting', 'Woven fabrics'],
+    quotes: [
+      'Material is not decoration. It is the architecture of how a space makes you feel.',
+      'In restraint, a room finds its voice. Every element earns its place.',
+    ],
     featured:    false,
   },
   {
@@ -289,10 +289,10 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
       '/images/portfolio/proj-b-5.jpg',
       '/images/portfolio/proj-b-6.jpg',
     ],
-    overview:    'A full-scope residential interior where every surface and material choice contributes to a cohesive, lived-in warmth.',
-    challenge:   "Translating the client's desire for comfort and elegance into a space that felt personal rather than prescribed.",
-    solution:    'A restrained palette of warm neutrals and natural materials, anchored by curated art and layered ambient lighting.',
-    materials:   ['Natural stone flooring', 'Warm timber veneer', 'Bespoke upholstery', 'Brass hardware', 'Woven textiles', 'Curated art'],
+    quotes: [
+      'Warmth is not a colour. It is what a room does to you the moment you walk through the door.',
+      'Comfort and elegance are not opposites. In the right hands, they are the same thing.',
+    ],
     featured:    false,
   },
 ]
