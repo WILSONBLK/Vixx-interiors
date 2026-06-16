@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, RotateCcw, Sun, Moon } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
@@ -150,7 +150,7 @@ const EMPTY: Answers = { name:'', email:'', location:'', type:'', space:'', time
 /* ══════════════════════════════════════════════════════════════════════════════
    INTRO HERO SCREEN
 ══════════════════════════════════════════════════════════════════════════════ */
-function IntroScreen({ onBegin }: { onBegin: () => void }) {
+function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => void }) {
   const rm = useReducedMotion()
 
   return (
@@ -186,9 +186,9 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
         }}
       />
 
-      {/* Back to site — top left */}
-      <Link
-        href="/"
+      {/* Back to previous page — top left */}
+      <button
+        onClick={onBack}
         style={{
           position:      'absolute',
           top:            '2rem',
@@ -202,14 +202,17 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
           fontSize:      '0.6rem',
           letterSpacing: '0.26em',
           textTransform: 'uppercase',
-          textDecoration: 'none',
+          background:    'none',
+          border:        'none',
+          padding:        0,
+          cursor:        'pointer',
           transition:    'color 0.2s',
         }}
         className="hover:text-[#C49A2E]"
       >
         <ArrowLeft size={13} strokeWidth={1.5} />
-        Home
-      </Link>
+        Back
+      </button>
 
       {/* Content */}
       <div
@@ -317,6 +320,7 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
 ══════════════════════════════════════════════════════════════════════════════ */
 export function StartProjectFlow() {
   const searchParams = useSearchParams()
+  const router       = useRouter()
   const serviceParam = searchParams.get('service') ?? ''
   const preselectedType = SERVICE_TYPE_MAP[serviceParam] ?? ''
 
@@ -397,7 +401,7 @@ export function StartProjectFlow() {
             exit={{ opacity: 0, filter: 'blur(3px)', scale: 0.99 }}
             transition={{ duration: 0.55, ease: EASE }}
           >
-            <IntroScreen onBegin={() => setPhase('flow')} />
+            <IntroScreen onBegin={() => setPhase('flow')} onBack={() => router.back()} />
           </motion.div>
         ) : (
           <motion.div
@@ -445,14 +449,14 @@ export function StartProjectFlow() {
               <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase' }}>Back</span>
             </motion.button>
           ) : (
-            <Link
-              href="/"
-              style={{ color: T.dim, fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase' }}
+            <button
+              onClick={() => router.back()}
+              style={{ color: T.dim, fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase', background:'none', border:'none', padding:0, cursor:'pointer' }}
               className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[#C49A2E]"
             >
               <ArrowLeft size={13} strokeWidth={1.5} />
-              Site
-            </Link>
+              Back
+            </button>
           )}
 
           {/* Centre: wordmark */}
