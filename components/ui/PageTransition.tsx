@@ -4,10 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
-// ── Scroll position persistence ──────────────────────────────────────────────
-// sessionStorage survives soft-navigation and tab restore but clears on close,
-// which is exactly the right lifetime for "where was I on this page?"
-
+// ── Scroll position persistence ───────────────────────────────────────────────
 const SCROLL_KEY = 'vixx-scroll'
 
 function saveScroll(path: string) {
@@ -33,73 +30,36 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const curtain        = useAnimationControls()
   const contentRef     = useRef<HTMLDivElement>(null)
   const isFirst        = useRef(true)
+  // Incremented on every navigation — any in-flight async sweep that sees a
+  // stale id bails immediately, preventing stacked/conflicting animations.
   const sweepId        = useRef(0)
   const isBackNav      = useRef(false)
   const isTouch        = useRef(false)
-  // Holds the curtain sweep-in Promise when the user clicks a link before the
-  // route finishes loading — lets us give immediate visual feedback.
-  const pendingSweepIn = useRef<Promise<void> | null>(null)
+  // True while the gold curtain is anywhere on screen (covering or revealing).
+  // Used to detect rapid navigation before a sweep has finished.
+  const curtainActive  = useRef(false)
 
   useEffect(() => {
     isTouch.current = window.matchMedia('(pointer: coarse)').matches
-
-    // popstate fires on browser back/forward and swipe-back — not on link clicks
     const onPop = () => { isBackNav.current = true }
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
-  // Continuously save scroll position for the active page.
-  // Keying by pathname means each page independently remembers where you were.
+  // Save scroll position continuously so back-nav can restore it
   useEffect(() => {
     const onScroll = () => saveScroll(pathname)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [pathname])
 
-  // Start the curtain sweep immediately on link click so the user sees instant
-  // feedback instead of a frozen screen while the next route loads.
-  useEffect(() => {
-    if (prefersReduced) return
-
-    const handleLinkClick = (e: MouseEvent) => {
-      const anchor = (e.target as Element).closest('a') as HTMLAnchorElement | null
-      if (!anchor || anchor.target === '_blank') return
-
-      const href = anchor.getAttribute('href') ?? ''
-      if (
-        !href ||
-        href.startsWith('http') ||
-        href.startsWith('//') ||
-        href.startsWith('mailto') ||
-        href.startsWith('tel') ||
-        href.startsWith('#')
-      ) return
-      if (href === pathname) return
-
-      const el = contentRef.current
-      if (el) el.style.opacity = '0'
-
-      curtain.stop()
-      curtain.set({ x: '-100%' })
-      const inDuration = isTouch.current ? 0.07 : 0.11
-      pendingSweepIn.current = curtain.start({
-        x: '0%',
-        transition: { duration: inDuration, ease: [0.4, 0, 1, 1] },
-      }) as Promise<void>
-    }
-
-    document.addEventListener('click', handleLinkClick)
-    return () => document.removeEventListener('click', handleLinkClick)
-  }, [pathname, curtain, prefersReduced])
-
-  // Runs synchronously before the browser paints — hides new page content
-  // so there's no flash before the curtain arrives. Skipped on back nav and
-  // when the click handler already hid the content.
+  // Sync, before paint: hide new content only for a fresh forward navigation.
+  // When curtainActive is true the rapid-nav path in useEffect will make content
+  // visible — don't hide it here or we create an unrecoverable opacity:0 state.
   useLayoutEffect(() => {
     if (isFirst.current) return
     if (isBackNav.current) return
-    if (pendingSweepIn.current) return
+    if (curtainActive.current) return
     const el = contentRef.current
     if (el) el.style.opacity = '0'
   }, [pathname])
@@ -109,60 +69,62 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
     const el = contentRef.current
 
+    // ── Reduced motion ────────────────────────────────────────────────────────
     if (prefersReduced) {
-      pendingSweepIn.current = null
-      if (el) el.style.opacity = '1'
-      return
-    }
-
-    // Back navigation (swipe-back, browser back button): skip curtain entirely.
-    // Restore the scroll position the user was at when they last left this page.
-    if (isBackNav.current) {
-      isBackNav.current = false
-      pendingSweepIn.current = null
       curtain.stop()
       curtain.set({ x: '100%' })
+      curtainActive.current = false
       if (el) el.style.opacity = '1'
-
-      const savedY = loadScroll(pathname)
-      if (savedY > 0) {
-        // Two nested rAFs: first fires before paint, second fires after —
-        // ensuring the page has fully laid out before we jump to the saved position.
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          window.scrollTo(0, savedY)
-        }))
-      }
       return
     }
 
-    // Forward navigation: always start the new page from the top.
-    window.scrollTo(0, 0)
+    // ── Back navigation ───────────────────────────────────────────────────────
+    // Skip curtain entirely; restore scroll position.
+    if (isBackNav.current) {
+      isBackNav.current = false
+      ++sweepId.current
+      curtain.stop()
+      curtain.set({ x: '100%' })
+      curtainActive.current = false
+      if (el) el.style.opacity = '1'
+      const y = loadScroll(pathname)
+      if (y > 0) requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)))
+      return
+    }
 
+    // ── Rapid navigation ──────────────────────────────────────────────────────
+    // The curtain is still on screen from a previous navigation.
+    // Abort the in-flight animation and show the new page immediately — no
+    // stacking, no content stuck at opacity:0, no broken state.
+    if (curtainActive.current) {
+      ++sweepId.current
+      curtain.stop()
+      curtain.set({ x: '100%' })
+      curtainActive.current = false
+      // useLayoutEffect skipped hiding because curtainActive was true,
+      // but a prior fresh-sweep may have set opacity:0 — ensure it's visible.
+      if (el) el.style.opacity = '1'
+      return
+    }
+
+    // ── Fresh forward navigation ──────────────────────────────────────────────
+    window.scrollTo(0, 0)
+    curtainActive.current = true
     const id = ++sweepId.current
 
-    // Touch devices: shorten the curtain for forward nav — mobile screens are
-    // smaller so the sweep covers distance faster and a long animation feels sluggish.
-    const inDuration  = isTouch.current ? 0.07 : 0.11
+    const inDuration  = isTouch.current ? 0.07 : 0.10
     const outDuration = isTouch.current ? 0.09 : 0.13
 
     async function sweep() {
-      if (pendingSweepIn.current) {
-        // Curtain already started on click — await it in case the route resolved
-        // faster than the sweep-in animation (e.g. cached page), then sweep out.
-        await Promise.resolve(pendingSweepIn.current)
-        pendingSweepIn.current = null
-        if (sweepId.current !== id) return
-        if (el) el.style.opacity = '1'
-        await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
-      } else {
-        // No link click was detected (programmatic navigation) — run full sweep.
-        curtain.stop()
-        curtain.set({ x: '-100%' })
-        await curtain.start({ x: '0%', transition: { duration: inDuration, ease: [0.4, 0, 1, 1] } })
-        if (sweepId.current !== id) return
-        if (el) el.style.opacity = '1'
-        await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
-      }
+      curtain.set({ x: '-100%' })
+      await curtain.start({ x: '0%', transition: { duration: inDuration, ease: [0.4, 0, 1, 1] } })
+      // A newer navigation took over — it already cleared curtainActive and
+      // showed its content; just bail without touching any shared state.
+      if (sweepId.current !== id) return
+      if (el) el.style.opacity = '1'
+      await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
+      if (sweepId.current !== id) return
+      curtainActive.current = false
     }
 
     sweep()
