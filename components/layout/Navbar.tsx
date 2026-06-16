@@ -79,84 +79,41 @@ export function Navbar() {
   const menuRef                          = useRef<HTMLDivElement>(null)
   const hamburgerRef                     = useRef<HTMLButtonElement>(null)
 
-  /* ── Smart scroll visibility ──────────────────────────────────────────────
-   * navVisible: true when elements should be shown (in hero OR scrolling up)
-   * inHero:     true when scroll position is within the hero section
-   *
-   * Show condition  → inHero OR scrolling upward
-   * Hide condition  → past hero AND scrolling downward
+  /* ── Scroll visibility: hide on scroll-down, show on scroll-up ──────────
+   * Works on every page. No hero detection — purely direction based.
+   * atTop: true when < 60 px from the top (no backdrop needed there).
    * ──────────────────────────────────────────────────────────────────────── */
   const [navVisible, setNavVisible] = useState(true)
-  const [inHero,     setInHero]     = useState(true)
+  const [atTop,      setAtTop]      = useState(true)
 
   useEffect(() => {
-    // Find the hero section by the data-hero marker added to HeroSection.tsx.
-    // On pages without a hero (About, Services, etc.) heroEl is null and we
-    // fall through to always-visible behaviour with a backdrop.
-    const heroEl = document.querySelector<HTMLElement>('[data-hero]')
+    let lastY = window.scrollY
+    let raf   = 0
 
-    let heroGone     = false   // mirror of IntersectionObserver state
-    let firstFire    = true    // used to set initial state from IO
-    let lastY        = window.scrollY
-    let raf          = 0
+    // Set correct state immediately without waiting for a scroll event
+    setAtTop(lastY < 60)
+    if (lastY >= 60) setNavVisible(false)
 
-    // ── Scroll-direction handler ──────────────────────────────────────────
-    // Runs independently of hero detection; only hides/shows based on
-    // whether the user is moving up or down AFTER leaving the hero.
-    const update = () => {
-      const y = window.scrollY
-      if (heroGone) {
-        if (y < lastY)      setNavVisible(true)
-        else if (y > lastY) setNavVisible(false)
-      } else {
-        setNavVisible(true)
-      }
-      lastY = y
-      raf   = 0
-    }
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
-    window.addEventListener('scroll', onScroll, { passive: true })
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY
+        setAtTop(y < 60)
 
-    // ── IntersectionObserver — watches the actual hero element ────────────
-    // This is the reliable way: it fires whenever the hero crosses the
-    // viewport edge regardless of what the scroll container is, what
-    // window.innerHeight returns, or how perspective/overflow is set.
-    if (heroEl) {
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          const nowInHero = entry.isIntersecting
-          heroGone = !nowInHero
-          setInHero(nowInHero)
-
-          if (nowInHero) {
-            // Hero re-entered viewport (user scrolled back up) → always show
-            setNavVisible(true)
-          } else if (firstFire) {
-            // Page loaded already scrolled past hero → start hidden
-            setNavVisible(false)
-          }
-          // If hero just left viewport mid-session, let the scroll listener
-          // handle visibility (it fires immediately after).
-          firstFire = false
-        },
-        {
-          // Fire when the hero is 92% out of view — gives a small overlap
-          // so the nav starts hiding just as the hero bottom clears the top.
-          threshold: 0.08,
+        if (y < 60) {
+          setNavVisible(true)          // always show at the very top
+        } else if (y < lastY) {
+          setNavVisible(true)          // scrolling up → reveal
+        } else if (y > lastY) {
+          setNavVisible(false)         // scrolling down → hide
         }
-      )
-      io.observe(heroEl)
 
-      return () => {
-        io.disconnect()
-        window.removeEventListener('scroll', onScroll)
-        if (raf) cancelAnimationFrame(raf)
-      }
+        lastY = y
+        raf   = 0
+      })
     }
 
-    // No hero on this page — nav is always visible with backdrop
-    setInHero(false)
-    setNavVisible(true)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
       if (raf) cancelAnimationFrame(raf)
@@ -240,8 +197,8 @@ export function Navbar() {
     return pathname === href || pathname.startsWith(href + '/')
   }
 
-  /* Show a readable backdrop only when nav is revealed outside the hero */
-  const showBackground = !inHero && navVisible
+  /* Show backdrop when nav is visible but not at the very top of the page */
+  const showBackground = !atTop && navVisible
 
   return (
     <>
