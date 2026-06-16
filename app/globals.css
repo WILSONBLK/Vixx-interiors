@@ -180,8 +180,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* Prevent horizontal overflow from decorative absolute elements */
-    overflow-x: hidden;
+    /* clip instead of hidden: visually clips without creating a scroll container,
+       which preserves the browser's native swipe-back gesture on mobile */
+    overflow-x: clip;
     /* Safe minimum width — prevents layout collapse on very narrow viewports */
     min-width: 320px;
   }
@@ -645,6 +646,13 @@
 @media (prefers-reduced-motion: reduce) {
   [style*="vixx-pan-ltr"],
   [style*="vixx-pan-rtl"] { animation: none !important; }
+}
+
+/* ─── FLOATING PARTICLES (CSS — runs on compositor thread) ───────────────── */
+@keyframes fpFloat {
+  0%   { transform: translateY(0)     scale(0.5); opacity: 0; }
+  50%  { transform: translateY(-65px) scale(1.2); opacity: 0.55; }
+  100% { transform: translateY(-130px) scale(0.5); opacity: 0; }
 }
 
 /* ─── DESKTOP SCALE REDUCTION (~10%) ──────────────────────────────────────── */

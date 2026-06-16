@@ -1,9 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { animate, createScope } from 'animejs'
+import { useEffect, useState } from 'react'
 
-// 50 particles — 10 columns × 5 rows with positional jitter
 const PARTICLES = [
   // row 0
   { left:  '5%', top:  '7%', size: 2, delay:    0 },
@@ -63,51 +61,35 @@ const PARTICLES = [
 ]
 
 export function FloatingParticles() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const [reduced, setReduced] = useState(false)
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setReduced(true)
-      return
-    }
-    if (!containerRef.current) return
-
-    const scope = createScope({
-      root: containerRef.current,
-      defaults: { ease: 'inOut(1.4)', loop: true, duration: 2200 },
-    }).add(() => {
-      animate('.fp-dot', {
-        translateY: [0, -130],
-        opacity:    [0, 0.55, 0],
-        scale:      [0.5, 1.2, 0.5],
-        delay: (_: Element, i: number) => PARTICLES[i]?.delay ?? 0,
-      })
-    })
-
-    return () => scope.revert()
+    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
   }, [])
 
   if (reduced) return null
 
   return (
     <div
-      ref={containerRef}
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none overflow-hidden z-[1]"
     >
       {PARTICLES.map((p, i) => (
         <div
           key={i}
-          className="fp-dot absolute rounded-full"
+          className="absolute rounded-full"
           style={{
-            left:       p.left,
-            top:        p.top,
-            width:      `${p.size}px`,
-            height:     `${p.size}px`,
-            background: 'rgba(196,154,46,0.65)',
-            opacity:    0,
-            willChange: 'transform, opacity',
+            left:                   p.left,
+            top:                    p.top,
+            width:                  `${p.size}px`,
+            height:                 `${p.size}px`,
+            background:             'rgba(196,154,46,0.65)',
+            animationName:          'fpFloat',
+            animationDuration:      '2200ms',
+            animationTimingFunction: 'ease-in-out',
+            animationIterationCount: 'infinite',
+            animationFillMode:      'both',
+            animationDelay:         `${p.delay}ms`,
           }}
         />
       ))}

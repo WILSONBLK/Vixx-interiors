@@ -16,19 +16,27 @@ export function SocialBar() {
 
   useEffect(() => {
     let lastY = window.scrollY
+    let raf   = 0
 
     const onScroll = () => {
-      const y          = window.scrollY
-      const atTop      = y < 60
-      const nearBottom = y + window.innerHeight >= document.documentElement.scrollHeight - 80
-      const scrollingUp = y < lastY
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        const y          = window.scrollY
+        const atTop      = y < 60
+        const nearBottom = y + window.innerHeight >= document.documentElement.scrollHeight - 80
+        const scrollingUp = y < lastY
 
-      setVisible(atTop || nearBottom || scrollingUp)
-      lastY = y
+        setVisible(atTop || nearBottom || scrollingUp)
+        lastY = y
+        raf   = 0
+      })
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
   }, [])
 
   return (

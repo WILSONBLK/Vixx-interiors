@@ -197,6 +197,9 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', trap)
   }, [open])
 
+  /* The /start page is a standalone full-screen flow with its own header */
+  if (pathname === '/start') return null
+
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
     return pathname === href || pathname.startsWith(href + '/')

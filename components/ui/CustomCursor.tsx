@@ -15,13 +15,13 @@ export function CustomCursor() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const dotX     = useSpring(mouseX, { stiffness: 500, damping: 35, mass: 0.3 })
-  const dotY     = useSpring(mouseY, { stiffness: 500, damping: 35, mass: 0.3 })
+  // Dot follows the mouse instantly — no spring, zero latency
   const dotScale = useMotionValue(1)
-  const dotSpringScale = useSpring(dotScale, { stiffness: 700, damping: 28 })
+  const dotSpringScale = useSpring(dotScale, { stiffness: 1200, damping: 40 })
 
-  const ringX = useSpring(mouseX, { stiffness: 220, damping: 28, mass: 0.4 })
-  const ringY = useSpring(mouseY, { stiffness: 220, damping: 28, mass: 0.4 })
+  // Ring trails slightly behind for the two-layer effect
+  const ringX = useSpring(mouseX, { stiffness: 600, damping: 45, mass: 0.15 })
+  const ringY = useSpring(mouseY, { stiffness: 600, damping: 45, mass: 0.15 })
 
   useEffect(() => {
     setMounted(true)
@@ -124,8 +124,8 @@ export function CustomCursor() {
               position:      'fixed',
               top:           0,
               left:          0,
-              x:             dotX,
-              y:             dotY,
+              x:             mouseX,
+              y:             mouseY,
               scale:         dotSpringScale,
               translateX:    '-50%',
               translateY:    '-50%',

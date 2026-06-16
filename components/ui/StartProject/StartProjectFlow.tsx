@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { ArrowRight, ArrowLeft, RotateCcw } from 'lucide-react'
+import { ArrowRight, ArrowLeft, RotateCcw, Sun, Moon } from 'lucide-react'
+import { useTheme } from '@/hooks/useTheme'
 
 const SERVICE_TYPE_MAP: Record<string, string> = {
   residential: 'residential',
@@ -16,19 +17,27 @@ const SERVICE_TYPE_MAP: Record<string, string> = {
   management:  '',
 }
 
-/* ── Design tokens ────────────────────────────────────────────────────────── */
+/* ── Design tokens — theme-responsive (CSS vars switch on .dark class) ────── */
 const T = {
-  bg:      '#0A0908',
-  card:    '#16130F',
-  cardHi:  '#1C1912',
-  text:    '#F0EBE1',
-  sub:     'rgba(240,235,225,0.58)',
-  dim:     'rgba(240,235,225,0.36)',
-  gold:    '#C49A2E',
-  goldL:   '#D4AF37',
-  goldB:   'rgba(196,154,46,0.30)',
-  border:  'rgba(240,235,225,0.08)',
-  borderM: 'rgba(240,235,225,0.18)',
+  bg:      'var(--surface-base)',
+  card:    'var(--surface-raised)',
+  cardHi:  'var(--surface-elevated)',
+  text:    'var(--text-primary)',
+  sub:     'var(--text-secondary)',
+  dim:     'var(--text-muted)',
+  gold:    'var(--gold)',
+  goldL:   'var(--gold-light)',
+  goldB:   'var(--gold-border)',
+  border:  'var(--border-subtle)',
+  borderM: 'var(--border-strong)',
+} as const
+
+/* ── Dark-only tokens — for the intro photo overlay (always over a dark image) */
+const DARK = {
+  bg:   '#0A0908',
+  text: '#F0EBE1',
+  dim:  'rgba(240,235,225,0.36)',
+  gold: '#C49A2E',
 } as const
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -147,7 +156,7 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
   return (
     <div
       className="relative flex flex-col items-center justify-center"
-      style={{ minHeight: '100dvh', background: T.bg }}
+      style={{ minHeight: '100dvh', background: DARK.bg }}
     >
       {/* Background image */}
       <motion.div
@@ -188,7 +197,7 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
           display:       'flex',
           alignItems:    'center',
           gap:            6,
-          color:          T.dim,
+          color:          DARK.dim,
           fontFamily:    'var(--font-jost)',
           fontSize:      '0.6rem',
           letterSpacing: '0.26em',
@@ -221,7 +230,7 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}
         >
           <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
-          <span style={{ fontFamily: 'var(--font-jost)', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: T.gold }}>
+          <span style={{ fontFamily: 'var(--font-jost)', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: DARK.gold }}>
             VIXX Interiors
           </span>
           <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
@@ -237,13 +246,13 @@ function IntroScreen({ onBegin }: { onBegin: () => void }) {
             fontSize:    'clamp(3rem, 8vw, 6rem)',
             fontWeight:   400,
             lineHeight:   0.95,
-            color:        T.text,
+            color:        DARK.text,
             textShadow:  '0 4px 28px rgba(8,8,8,0.55)',
             marginBottom: '1.25rem',
           }}
         >
           Start Your{' '}
-          <em style={{ fontStyle: 'italic', color: T.gold }}>Project</em>
+          <em style={{ fontStyle: 'italic', color: DARK.gold }}>Project</em>
         </motion.h1>
 
         {/* Intro */}
@@ -316,6 +325,7 @@ export function StartProjectFlow() {
   const [answers,  setAnswers]  = useState<Answers>({ ...EMPTY, type: preselectedType })
   const [dir,      setDir]      = useState<1|-1>(1)
   const [complete, setComplete] = useState(false)
+  const { isDark, toggleTheme, mounted } = useTheme()
 
   const step = STEPS[stepIdx]
 
@@ -355,11 +365,23 @@ export function StartProjectFlow() {
   const INTAKE_CSS = `
     .vixx-intake input::placeholder,
     .vixx-intake textarea::placeholder {
-      color: rgba(240,235,225,0.24);
+      color: var(--input-placeholder);
       font-family: var(--font-jost);
     }
     .vixx-intake input:focus,
     .vixx-intake textarea:focus { outline: none; }
+    .vixx-intake .theme-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      background: none; cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .vixx-intake .theme-btn:hover {
+      border-color: var(--gold-border);
+      color: var(--gold);
+    }
   `
 
   return (
@@ -417,7 +439,7 @@ export function StartProjectFlow() {
               onClick={back}
               whileTap={{ scale: 0.96 }}
               style={{ color: T.dim, background: 'none', border: 'none', padding: 0 }}
-              className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[#F0EBE1]"
+              className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[var(--text-primary)]"
             >
               <ArrowLeft size={13} strokeWidth={1.5} />
               <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase' }}>Back</span>
@@ -438,21 +460,32 @@ export function StartProjectFlow() {
             VIXX Interiors
           </span>
 
-          {/* Right: counter / restart */}
-          {!complete ? (
-            <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', letterSpacing:'0.22em', color: T.dim, textTransform:'uppercase' }}>
-              {String(stepIdx + 1).padStart(2, '0')} / {String(TOTAL).padStart(2, '0')}
-            </span>
-          ) : (
-            <button
-              onClick={restart}
-              style={{ color: T.dim, background:'none', border:'none', padding:0 }}
-              className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[#F0EBE1]"
-            >
-              <RotateCcw size={11} />
-              <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', letterSpacing:'0.22em', textTransform:'uppercase' }}>Start over</span>
-            </button>
-          )}
+          {/* Right: counter / theme toggle / restart */}
+          <div className="flex items-center gap-3">
+            {!complete ? (
+              <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', letterSpacing:'0.22em', color: T.dim, textTransform:'uppercase' }}>
+                {String(stepIdx + 1).padStart(2, '0')} / {String(TOTAL).padStart(2, '0')}
+              </span>
+            ) : (
+              <button
+                onClick={restart}
+                style={{ color: T.dim, background:'none', border:'none', padding:0 }}
+                className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[var(--text-primary)]"
+              >
+                <RotateCcw size={11} />
+                <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', letterSpacing:'0.22em', textTransform:'uppercase' }}>Start over</span>
+              </button>
+            )}
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                className="theme-btn"
+              >
+                {isDark ? <Sun size={14} strokeWidth={1.5} /> : <Moon size={14} strokeWidth={1.5} />}
+              </button>
+            )}
+          </div>
         </header>
 
         {/* ── Content ── */}
