@@ -247,6 +247,7 @@ export function Navbar() {
           <ul
             className="hidden xl:flex flex-1 items-center justify-center gap-6 2xl:gap-10 min-w-0 overflow-hidden"
             role="list"
+            style={slideStyle(navVisible, 20)}
           >
             {NAV_LINKS.map((link) => (
               <li key={link.href} className="flex-shrink-0">
@@ -329,13 +330,15 @@ export function Navbar() {
             )}
 
             {/* Desktop CTA — only at 2xl+ to avoid collision with nav links */}
+            <div className="hidden 2xl:inline-flex" style={slideStyle(navVisible, 40)}>
             <Link
               href="/start"
               data-cursor="hover"
-              className="hidden 2xl:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
+              className="btn-primary py-2 px-5 text-[0.58rem]"
             >
               Start a Project
             </Link>
+            </div>
 
             {/* Mobile hamburger — animated */}
             <div
