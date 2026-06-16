@@ -347,7 +347,9 @@
     width: 100%;
     padding: 0.75rem 1rem;
     font-family: var(--font-inter), system-ui, sans-serif;
-    font-size: 0.9375rem;
+    /* 16px on mobile prevents iOS Safari auto-zoom on focus.
+       Desktop overrides this back to the design-spec size below. */
+    font-size: 1rem;
     line-height: 1.5;
     color: var(--input-text);
     background-color: var(--input-bg);
@@ -359,6 +361,13 @@
                 background-color 0.2s ease,
                 box-shadow 0.2s ease,
                 transform 0.2s ease;
+  }
+
+  /* Select option elements use system rendering — set solid colors so the
+     dropdown popup is readable in both light and dark mode. */
+  select.input-field option {
+    background-color: var(--surface-base);
+    color: var(--text-primary);
   }
 
   .input-field::placeholder {
@@ -661,4 +670,7 @@
 /* Fixed px values (borders, icon sizes, nav height) are intentionally exempt. */
 @media (min-width: 1280px) {
   html { font-size: 90%; }
+
+  /* Restore design-spec input size now that desktop has no auto-zoom risk */
+  .input-field { font-size: 0.9375rem; }
 }

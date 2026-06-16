@@ -1,38 +1,90 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { BUDGET_OPTIONS, TIMELINE_OPTIONS, PROJECT_TYPE_OPTIONS, SERVICES } from '@/lib/data'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
+const REQUIRED_FIELDS = ['name', 'email', 'phone', 'location', 'projectType', 'budget']
+
+function validateField(name: string, value: string): string {
+  const trimmed = value.trim()
+  if (REQUIRED_FIELDS.includes(name) && !trimmed) return 'This field is required'
+  if (!trimmed) return ''
+
+  if (name === 'name') {
+    if (!/^[\p{L}\s'\-.]+$/u.test(trimmed))
+      return 'Please use letters only — no numbers or symbols'
+  }
+  if (name === 'email') {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed))
+      return 'Please enter a valid email address'
+  }
+  if (name === 'phone') {
+    if (!/^\+?[\d\s\-().]{7,}$/.test(trimmed))
+      return 'Please enter a valid phone number (digits, spaces, + or - only)'
+  }
+  return ''
+}
+
+// iOS Safari keeps the page zoomed after focus on a small input.
+// Temporarily adding maximum-scale=1 forces a zoom-reset, then we restore
+// the original viewport so manual zoom is still possible.
+function resetViewportZoom() {
+  if (typeof document === 'undefined') return
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="viewport"]')
+  if (!meta) return
+  const original = meta.content
+  if (original.includes('maximum-scale')) return
+  meta.content = original + ',maximum-scale=1'
+  setTimeout(() => { meta.content = original }, 80)
+}
+
 export function ContactForm() {
-  const [status,     setStatus]     = useState<Status>('idle')
-  const [errors,     setErrors]     = useState<Record<string, string>>({})
+  const [status,      setStatus]      = useState<Status>('idle')
+  const [errors,      setErrors]      = useState<Record<string, string>>({})
   const [submitError, setSubmitError] = useState('')
+
+  const handleBlur = useCallback((
+    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target
+    const error = validateField(name, value)
+    setErrors(prev => {
+      if (!error && !prev[name]) return prev
+      const next = { ...prev }
+      if (error) next[name] = error
+      else delete next[name]
+      return next
+    })
+    resetViewportZoom()
+  }, [])
+
+  const handleChange = useCallback((
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const { name } = e.target
+    setErrors(prev => {
+      if (!prev[name]) return prev
+      const next = { ...prev }
+      delete next[name]
+      return next
+    })
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
 
-    // Client-side validation
     const newErrors: Record<string, string> = {}
-    const required = ['name', 'email', 'phone', 'location', 'projectType', 'budget']
-    required.forEach((field) => {
-      if (!data.get(field)) newErrors[field] = 'This field is required'
+    REQUIRED_FIELDS.forEach((field) => {
+      const val = (data.get(field) as string) || ''
+      const err = validateField(field, val)
+      if (err) newErrors[field] = err
     })
-
-    const email = data.get('email') as string
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Please enter a valid email address'
-    }
-
-    const phone = data.get('phone') as string
-    if (phone && !/^[+\d][\d\s\-().]{6,}$/.test(phone)) {
-      newErrors.phone = 'Please enter a valid phone number'
-    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -108,8 +160,12 @@ export function ContactForm() {
             autoComplete="name"
             required
             placeholder="Adaeze Johnson"
+            maxLength={100}
             className={cn('input-field', errors.name && 'input-error')}
             aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-invalid={!!errors.name}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
           {errors.name && (
             <p id="name-error" role="alert" className="field-error">{errors.name}</p>
@@ -124,8 +180,13 @@ export function ContactForm() {
             autoComplete="email"
             required
             placeholder="hello@example.com"
+            maxLength={254}
+            inputMode="email"
             className={cn('input-field', errors.email && 'input-error')}
             aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-invalid={!!errors.email}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
           {errors.email && (
             <p id="email-error" role="alert" className="field-error">{errors.email}</p>
@@ -144,8 +205,13 @@ export function ContactForm() {
             autoComplete="tel"
             required
             placeholder="+234 800 000 0000"
+            maxLength={20}
+            inputMode="tel"
             className={cn('input-field', errors.phone && 'input-error')}
             aria-describedby={errors.phone ? 'phone-error' : undefined}
+            aria-invalid={!!errors.phone}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
           {errors.phone && (
             <p id="phone-error" role="alert" className="field-error">{errors.phone}</p>
@@ -159,8 +225,12 @@ export function ContactForm() {
             type="text"
             required
             placeholder="Lekki Phase 1, Lagos"
+            maxLength={200}
             className={cn('input-field', errors.location && 'input-error')}
             aria-describedby={errors.location ? 'location-error' : undefined}
+            aria-invalid={!!errors.location}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
           {errors.location && (
             <p id="location-error" role="alert" className="field-error">{errors.location}</p>
@@ -178,6 +248,9 @@ export function ContactForm() {
             required
             className={cn('input-field', errors.projectType && 'input-error')}
             defaultValue=""
+            aria-invalid={!!errors.projectType}
+            onBlur={handleBlur}
+            onChange={handleChange}
           >
             <option value="" disabled>Select type…</option>
             {PROJECT_TYPE_OPTIONS.map((o) => (
@@ -196,6 +269,9 @@ export function ContactForm() {
             required
             className={cn('input-field', errors.budget && 'input-error')}
             defaultValue=""
+            aria-invalid={!!errors.budget}
+            onBlur={handleBlur}
+            onChange={handleChange}
           >
             <option value="" disabled>Select budget…</option>
             {BUDGET_OPTIONS.map((o) => (
@@ -212,7 +288,13 @@ export function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="timeline" className="input-label">Timeline</label>
-          <select id="timeline" name="timeline" className="input-field" defaultValue="">
+          <select
+            id="timeline"
+            name="timeline"
+            className="input-field"
+            defaultValue=""
+            onBlur={handleBlur}
+          >
             <option value="" disabled>Select timeline…</option>
             {TIMELINE_OPTIONS.map((o) => (
               <option key={o} value={o}>{o}</option>
@@ -221,7 +303,13 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="service" className="input-label">Service Interested In</label>
-          <select id="service" name="service" className="input-field" defaultValue="">
+          <select
+            id="service"
+            name="service"
+            className="input-field"
+            defaultValue=""
+            onBlur={handleBlur}
+          >
             <option value="" disabled>Select service…</option>
             {SERVICES.map((s) => (
               <option key={s.id} value={s.id}>{s.title}</option>
@@ -240,6 +328,7 @@ export function ContactForm() {
           maxLength={500}
           placeholder="Describe your space, your vision, or any specific requirements…"
           className="input-field resize-none"
+          onBlur={handleBlur}
         />
       </div>
 
