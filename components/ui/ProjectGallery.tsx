@@ -14,9 +14,14 @@ const GAP = 3 // px between images
 
 export function ProjectGallery({ images, height = 'clamp(340px, 72vh, 740px)' }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [w, setW]       = useState(0)
-  const [live, setLive] = useState(true)
-  const [dragging, setDragging] = useState(false)
+  const [w, setW]          = useState(0)
+  const [live, setLive]    = useState(true)
+  const [dragging, setDragging]       = useState(false)
+  const [isHoverDevice, setIsHoverDevice] = useState(false)
+
+  useEffect(() => {
+    setIsHoverDevice(window.matchMedia('(hover: hover)').matches)
+  }, [])
 
   // Responsive item width: nearly full-bleed with a peek of the next image
   const mobile  = w > 0 && w < 768
@@ -50,7 +55,7 @@ export function ProjectGallery({ images, height = 'clamp(340px, 72vh, 740px)' }:
     <div
       ref={containerRef}
       className="overflow-hidden relative"
-      style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+      style={{ cursor: isHoverDevice ? undefined : (dragging ? 'grabbing' : 'grab') }}
       aria-label="Project gallery — drag or swipe to explore"
     >
       {/* Left / right feather — stays fixed as the gallery track drags */}

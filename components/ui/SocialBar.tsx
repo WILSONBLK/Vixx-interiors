@@ -36,10 +36,14 @@ export function SocialBar() {
       aria-label="Follow VIXX Interiors on social media"
       className="fixed bottom-0 inset-x-0 z-30 pointer-events-none"
       style={{
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        transform:     visible ? 'translateY(0)' : 'translateY(110%)',
-        opacity:       visible ? 1 : 0,
-        transition:    'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease',
+        paddingBottom:        'env(safe-area-inset-bottom, 0px)',
+        transform:            visible ? 'translateY(0)' : 'translateY(110%)',
+        opacity:              visible ? 1 : 0,
+        transition:           'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease',
+        background:           'var(--bg-nav-scrolled)',
+        backdropFilter:       'blur(10px) saturate(120%)',
+        WebkitBackdropFilter: 'blur(10px) saturate(120%)',
+        borderTop:            '1px solid var(--border-subtle)',
       }}
     >
       <ul

@@ -12,7 +12,6 @@ import { NAV_LINKS, SOCIAL_LINKS } from '@/lib/data'
 import { InstagramIcon, TikTokIcon, WhatsAppIcon } from '@/components/ui/SocialIcons'
 import { useTheme } from '@/hooks/useTheme'
 
-const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 const SPRING = { type: 'spring' as const, stiffness: 320, damping: 24 }
 
 function SocialIcon({ id, size = 16 }: { id: string; size?: number }) {
@@ -57,12 +56,112 @@ function GlowText({
   )
 }
 
+/**
+ * Returns CSS transition styles for smooth hide/show of nav elements.
+ * @param visible  Whether the element should be visible
+ * @param delay    Stagger delay in milliseconds (for staged reveal)
+ */
+function slideStyle(visible: boolean, delay = 0): React.CSSProperties {
+  const ease = 'cubic-bezier(0.4, 0, 0.2, 1)'
+  const dur  = visible ? '0.38s' : '0.30s'
+  return {
+    opacity:       visible ? 1 : 0,
+    transform:     visible ? 'translateY(0px)' : 'translateY(-7px)',
+    transition:    `opacity ${dur} ${ease} ${delay}ms, transform ${dur} ${ease} ${delay}ms`,
+    pointerEvents: visible ? undefined : 'none',
+  }
+}
+
 export function Navbar() {
-  const pathname                       = usePathname()
-  const [open, setOpen]                = useState(false)
+  const pathname                         = usePathname()
+  const [open, setOpen]                  = useState(false)
   const { isDark, toggleTheme, mounted } = useTheme()
-  const menuRef                        = useRef<HTMLDivElement>(null)
-  const hamburgerRef                   = useRef<HTMLButtonElement>(null)
+  const menuRef                          = useRef<HTMLDivElement>(null)
+  const hamburgerRef                     = useRef<HTMLButtonElement>(null)
+
+  /* ── Smart scroll visibility ──────────────────────────────────────────────
+   * navVisible: true when elements should be shown (in hero OR scrolling up)
+   * inHero:     true when scroll position is within the hero section
+   *
+   * Show condition  → inHero OR scrolling upward
+   * Hide condition  → past hero AND scrolling downward
+   * ──────────────────────────────────────────────────────────────────────── */
+  const [navVisible, setNavVisible] = useState(true)
+  const [inHero,     setInHero]     = useState(true)
+
+  useEffect(() => {
+    // Find the hero section by the data-hero marker added to HeroSection.tsx.
+    // On pages without a hero (About, Services, etc.) heroEl is null and we
+    // fall through to always-visible behaviour with a backdrop.
+    const heroEl = document.querySelector<HTMLElement>('[data-hero]')
+
+    let heroGone     = false   // mirror of IntersectionObserver state
+    let firstFire    = true    // used to set initial state from IO
+    let lastY        = window.scrollY
+    let raf          = 0
+
+    // ── Scroll-direction handler ──────────────────────────────────────────
+    // Runs independently of hero detection; only hides/shows based on
+    // whether the user is moving up or down AFTER leaving the hero.
+    const update = () => {
+      const y = window.scrollY
+      if (heroGone) {
+        if (y < lastY)      setNavVisible(true)
+        else if (y > lastY) setNavVisible(false)
+      } else {
+        setNavVisible(true)
+      }
+      lastY = y
+      raf   = 0
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    window.addEventListener('scroll', onScroll, { passive: true })
+
+    // ── IntersectionObserver — watches the actual hero element ────────────
+    // This is the reliable way: it fires whenever the hero crosses the
+    // viewport edge regardless of what the scroll container is, what
+    // window.innerHeight returns, or how perspective/overflow is set.
+    if (heroEl) {
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          const nowInHero = entry.isIntersecting
+          heroGone = !nowInHero
+          setInHero(nowInHero)
+
+          if (nowInHero) {
+            // Hero re-entered viewport (user scrolled back up) → always show
+            setNavVisible(true)
+          } else if (firstFire) {
+            // Page loaded already scrolled past hero → start hidden
+            setNavVisible(false)
+          }
+          // If hero just left viewport mid-session, let the scroll listener
+          // handle visibility (it fires immediately after).
+          firstFire = false
+        },
+        {
+          // Fire when the hero is 92% out of view — gives a small overlap
+          // so the nav starts hiding just as the hero bottom clears the top.
+          threshold: 0.08,
+        }
+      )
+      io.observe(heroEl)
+
+      return () => {
+        io.disconnect()
+        window.removeEventListener('scroll', onScroll)
+        if (raf) cancelAnimationFrame(raf)
+      }
+    }
+
+    // No hero on this page — nav is always visible with backdrop
+    setInHero(false)
+    setNavVisible(true)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
 
   useEffect(() => { setOpen(false) }, [pathname])
 
@@ -141,19 +240,30 @@ export function Navbar() {
     return pathname === href || pathname.startsWith(href + '/')
   }
 
+  /* Show a readable backdrop only when nav is revealed outside the hero */
+  const showBackground = !inHero && navVisible
+
   return (
     <>
       <header
         role="banner"
         className="fixed top-0 inset-x-0 z-50"
-        style={{ height: 'var(--nav-height)' }}
+        style={{
+          height:               'var(--nav-height)',
+          backgroundColor:      showBackground ? 'var(--bg-nav-scrolled)' : 'transparent',
+          backdropFilter:       showBackground ? 'blur(14px) saturate(130%)' : 'none',
+          WebkitBackdropFilter: showBackground ? 'blur(14px) saturate(130%)' : 'none',
+          boxShadow:            showBackground ? 'var(--shadow-nav)' : 'none',
+          transition:           'background-color 0.42s ease, backdrop-filter 0.42s ease, box-shadow 0.42s ease',
+        }}
       >
         <nav
-          className="w-full h-full relative flex items-center justify-center"
+          className="w-full h-full flex items-center px-4 sm:px-6 xl:px-8"
           aria-label="Primary navigation"
         >
-          {/* Logo */}
-          <div className="absolute left-4 sm:left-6 xl:left-8 top-1/2 -translate-y-1/2 z-10">
+
+          {/* ── Logo — animated hide/show ──────────────────────────────────── */}
+          <div className="flex-shrink-0 z-10" style={slideStyle(navVisible, 0)}>
             <Link
               href="/"
               className="flex items-center"
@@ -165,16 +275,19 @@ export function Navbar() {
                 alt="VIXX Interiors"
                 width={260}
                 height={84}
-                className="h-10 sm:h-14 xl:h-[4.5rem] w-auto object-contain"
+                className="h-14 xl:h-[4.5rem] w-auto object-contain"
                 priority
               />
             </Link>
           </div>
 
-          {/* Desktop nav links */}
-          <ul className="hidden xl:flex items-center gap-8 2xl:gap-10" role="list">
+          {/* ── Desktop nav links — always visible, fills remaining space ─── */}
+          <ul
+            className="hidden xl:flex flex-1 items-center justify-center gap-6 2xl:gap-10 min-w-0 overflow-hidden"
+            role="list"
+          >
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.href} className="flex-shrink-0">
                 <Link
                   href={link.href}
                   data-cursor="hover"
@@ -200,12 +313,16 @@ export function Navbar() {
             ))}
           </ul>
 
-          {/* Right utility area */}
-          <div className="absolute right-4 sm:right-6 xl:right-8 top-1/2 -translate-y-1/2 flex items-center gap-3 sm:gap-4 xl:gap-5 z-10">
+          {/* Spacer — mobile/tablet: pushes right cluster to far right */}
+          <div className="xl:hidden flex-1" aria-hidden="true" />
 
-            {/* Social icons — desktop only */}
+          {/* ── Right utility cluster ──────────────────────────────────────── */}
+          <div className="flex-shrink-0 flex items-center gap-3 sm:gap-4 xl:gap-5 z-10">
+
+            {/* Social icons — desktop only, animated */}
             <div
               className="hidden xl:flex items-center gap-2"
+              style={slideStyle(navVisible, 40)}
               role="list"
               aria-label="Social media links"
             >
@@ -225,47 +342,64 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Theme toggle */}
+            {/* Theme toggle — bordered circle, clearly recognisable, animated */}
             {mounted && (
-              <button
-                onClick={toggleTheme}
-                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-                data-cursor="hover"
-                className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] w-7 h-7 text-[var(--text-secondary)] transition-all duration-200 hover:text-[var(--gold)] active:opacity-50 active:scale-90"
-              >
-                {isDark ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
-              </button>
+              <div style={slideStyle(navVisible, 60)}>
+                <button
+                  onClick={toggleTheme}
+                  aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+                  data-cursor="hover"
+                  className={cn(
+                    'inline-flex items-center justify-center rounded-full',
+                    'min-w-[44px] min-h-[44px]',
+                    'border border-[var(--border-strong)]',
+                    'text-[var(--text-secondary)]',
+                    'transition-all duration-200',
+                    'hover:border-[var(--gold-border)] hover:text-[var(--gold)]',
+                    'active:scale-90 active:opacity-60',
+                  )}
+                >
+                  {isDark
+                    ? <Sun  size={17} strokeWidth={1.5} />
+                    : <Moon size={17} strokeWidth={1.5} />}
+                </button>
+              </div>
             )}
 
-            {/* Desktop CTA */}
+            {/* Desktop CTA — only at 2xl+ to avoid collision with nav links */}
             <Link
               href="/start"
               data-cursor="hover"
-              className="hidden xl:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
+              className="hidden 2xl:inline-flex btn-primary py-2 px-5 text-[0.58rem]"
             >
               Start a Project
             </Link>
 
-            {/* Mobile hamburger */}
-            <button
-              ref={hamburgerRef}
-              onClick={() => setOpen((v) => !v)}
-              aria-label={open ? 'Close menu' : 'Open menu'}
-              aria-expanded={open}
-              aria-controls="mobile-menu"
-              data-cursor="hover"
-              className="xl:hidden flex items-center justify-center min-w-[44px] min-h-[44px] w-8 h-8 text-[var(--text-primary)] active:opacity-60 transition-all duration-150"
+            {/* Mobile hamburger — animated */}
+            <div
+              className="xl:hidden"
+              style={slideStyle(navVisible, 60)}
             >
-              <span
-                style={{
-                  display:    'inline-flex',
-                  transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                  transform:  open ? 'rotate(90deg) scale(0.9)' : 'rotate(0deg) scale(1)',
-                }}
+              <button
+                ref={hamburgerRef}
+                onClick={() => setOpen((v) => !v)}
+                aria-label={open ? 'Close menu' : 'Open menu'}
+                aria-expanded={open}
+                aria-controls="mobile-menu"
+                data-cursor="hover"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] w-8 h-8 text-[var(--text-primary)] active:opacity-60 transition-all duration-150"
               >
-                {open ? <X size={19} strokeWidth={1.5} /> : <Menu size={19} strokeWidth={1.5} />}
-              </span>
-            </button>
+                <span
+                  style={{
+                    display:    'inline-flex',
+                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transform:  open ? 'rotate(90deg) scale(0.9)' : 'rotate(0deg) scale(1)',
+                  }}
+                >
+                  {open ? <X size={19} strokeWidth={1.5} /> : <Menu size={19} strokeWidth={1.5} />}
+                </span>
+              </button>
+            </div>
           </div>
         </nav>
       </header>

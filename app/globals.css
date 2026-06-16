@@ -55,6 +55,12 @@
   --overlay-light:   rgba(8,8,8,0.18);
   --overlay-subtle:  rgba(8,8,8,0.10);
 
+  /* ── Photo section overlays — theme-responsive (set per-theme below) */
+  --photo-overlay-hero:    rgba(8,8,8,0.18);
+  --photo-vignette-hero:   rgba(8,8,8,0.10);
+  --photo-overlay-about:   rgba(8,8,8,0.32);
+  --photo-vignette-about:  rgba(8,8,8,0.18);
+
   /* ── Status */
   --color-error:          #C0392B;
   --color-error-subtle:   rgba(192,57,43,0.10);
@@ -157,6 +163,12 @@
   --bg-card-hover: var(--surface-overlay);
   --text-muted:    var(--text-tertiary);
   --border:        var(--border-default);
+
+  /* Photo section overlays — dark mode values */
+  --photo-overlay-hero:    rgba(8,8,8,0.32);
+  --photo-vignette-hero:   rgba(8,8,8,0.15);
+  --photo-overlay-about:   rgba(8,8,8,0.46);
+  --photo-vignette-about:  rgba(8,8,8,0.28);
 }
 
 /* ─── BASE ────────────────────────────────────────────────────────────────── */
@@ -168,6 +180,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Prevent horizontal overflow from decorative absolute elements */
+    overflow-x: hidden;
+    /* Safe minimum width — prevents layout collapse on very narrow viewports */
+    min-width: 320px;
   }
 
   body {
@@ -177,6 +193,7 @@
     transition: background-color 0.35s ease, color 0.35s ease;
     /* Reserve space at the bottom so content doesn't hide behind the fixed SocialBar */
     padding-bottom: var(--social-bar-height);
+    overflow-x: hidden;
   }
 
   body.modal-open {

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { MagneticElement } from '@/components/ui/MagneticElement'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
@@ -36,6 +36,7 @@ const LINK_CLASS =
   'hover:scale-[1.05] hover:brightness-110 active:scale-[0.97]'
 
 function CTAButton({ href, label, variant = 'primary' }: CTAProps) {
+  const rm        = useReducedMotion()
   const isPrimary = variant === 'primary'
 
   const style = isPrimary
@@ -46,7 +47,7 @@ function CTAButton({ href, label, variant = 'primary' }: CTAProps) {
     <>
       {label}
       <motion.span
-        animate={{ x: [0, 4, 0] }}
+        animate={rm ? {} : { x: [0, 4, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
       >
         <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
@@ -58,8 +59,8 @@ function CTAButton({ href, label, variant = 'primary' }: CTAProps) {
     <MagneticElement>
       <motion.div
         style={{ borderRadius: '9999px', display: 'inline-flex' }}
-        animate={isPrimary ? GLOW_ANIMATE : {}}
-        transition={isPrimary ? GLOW_TRANSITION : {}}
+        animate={isPrimary && !rm ? GLOW_ANIMATE : {}}
+        transition={isPrimary && !rm ? GLOW_TRANSITION : {}}
       >
         {href.startsWith('#') ? (
           <a href={href} className={LINK_CLASS} style={style}>{content}</a>

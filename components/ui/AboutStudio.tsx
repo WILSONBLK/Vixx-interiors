@@ -22,11 +22,11 @@ export function AboutStudio() {
       className="relative overflow-hidden flex flex-col"
       style={{ minHeight: '100svh' }}
     >
-      {/* Background image — smooth load-in, reduced to half opacity */}
+      {/* Background image — smooth load-in */}
       <motion.div
         className="absolute inset-0"
         initial={rm ? false : { opacity: 0, scale: 1.03 }}
-        animate={{ opacity: 0.5, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 2.0, ease: EASE, delay: 0.1 }}
       >
         <Image
@@ -42,7 +42,7 @@ export function AboutStudio() {
       <div
         aria-hidden
         className="absolute inset-0"
-        style={{ background: 'rgba(8,8,8,0.55)' }}
+        style={{ background: 'var(--photo-overlay-about)' }}
       />
 
       {/* Radial vignette — edges darker, centre breathes */}
@@ -51,7 +51,7 @@ export function AboutStudio() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 85% 72% at 50% 50%, transparent 38%, rgba(8,8,8,0.38) 100%)',
+            'radial-gradient(ellipse 85% 72% at 50% 50%, transparent 38%, var(--photo-vignette-about) 100%)',
         }}
       />
 
@@ -103,7 +103,7 @@ export function AboutStudio() {
 
           {/* Studio identity pillars */}
           <ScrollReveal delay={0.15} variant="fadeUp">
-            <div className="flex items-center justify-center gap-5 mb-10">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-10">
               <span className="label-xs">Simplicity</span>
               <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
               <span className="label-xs">Personal</span>

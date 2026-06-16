@@ -29,8 +29,8 @@ export function useTheme(): UseThemeReturn {
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Theme | null
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    // Default to dark if no stored preference
-    const resolved: Theme = stored ?? (prefersDark ? 'dark' : 'dark')
+    // Respect OS preference when no stored value exists
+    const resolved: Theme = stored ?? (prefersDark ? 'dark' : 'light')
     setTheme(resolved)
     applyTheme(resolved)
     setMounted(true)

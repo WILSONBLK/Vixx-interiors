@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export function CustomCursor() {
-  const [mounted, setMounted] = useState(false)
-  const [isTouch, setIsTouch] = useState(false)
+  const [mounted, setMounted]       = useState(false)
+  const [isTouch, setIsTouch]       = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const [hasMoved, setHasMoved]     = useState(false)
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -29,6 +30,7 @@ export function CustomCursor() {
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
+      setHasMoved(true)
     }
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -53,15 +55,22 @@ export function CustomCursor() {
     }
   }, [mouseX, mouseY])
 
-  if (!mounted || isTouch) return null
+  if (!mounted || isTouch || !hasMoved) return null
 
-  const ringSize = isHovering ? 52 : 32
+  const dotSize   = isHovering ? 10 : 8
+  const ringSize  = isHovering ? 38 : 24
+  const ringBorder = isHovering ? '1.5px solid rgba(196,154,46,0.9)' : '1.5px solid rgba(196,154,46,0.6)'
+  const dotGlow   = isHovering
+    ? '0 0 10px rgba(196,154,46,0.9), 0 0 22px rgba(196,154,46,0.5)'
+    : '0 0 8px rgba(196,154,46,0.8), 0 0 16px rgba(196,154,46,0.35)'
 
   return (
     <>
       {/* Dot */}
       <motion.div
         aria-hidden="true"
+        animate={{ width: dotSize, height: dotSize, boxShadow: dotGlow }}
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: 'fixed',
           top: 0,
@@ -70,8 +79,6 @@ export function CustomCursor() {
           y: dotY,
           translateX: '-50%',
           translateY: '-50%',
-          width: 4,
-          height: 4,
           borderRadius: '50%',
           background: 'var(--gold)',
           pointerEvents: 'none',
@@ -83,8 +90,8 @@ export function CustomCursor() {
       {/* Ring */}
       <motion.div
         aria-hidden="true"
-        animate={{ width: ringSize, height: ringSize }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        animate={{ width: ringSize, height: ringSize, border: ringBorder }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: 'fixed',
           top: 0,
@@ -94,7 +101,6 @@ export function CustomCursor() {
           translateX: '-50%',
           translateY: '-50%',
           borderRadius: '50%',
-          border: '1px solid var(--gold-line)',
           pointerEvents: 'none',
           zIndex: 99998,
           willChange: 'transform',

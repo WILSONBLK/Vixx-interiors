@@ -67,11 +67,11 @@ export function FloatingParticles() {
   const [reduced, setReduced] = useState(false)
 
   useEffect(() => {
-    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  }, [])
-
-  useEffect(() => {
-    if (reduced || !containerRef.current) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setReduced(true)
+      return
+    }
+    if (!containerRef.current) return
 
     const scope = createScope({
       root: containerRef.current,
@@ -86,7 +86,7 @@ export function FloatingParticles() {
     })
 
     return () => scope.revert()
-  }, [reduced])
+  }, [])
 
   if (reduced) return null
 

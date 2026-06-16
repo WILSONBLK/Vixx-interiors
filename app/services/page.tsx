@@ -22,13 +22,13 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main style={{ background: 'var(--bg-primary)' }}>
+    <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
       <Navbar />
 
       {/* ── Hero ── */}
       <section
         className="relative flex flex-col justify-end overflow-hidden"
-        style={{ minHeight: '68vh' }}
+        style={{ minHeight: 'clamp(32rem, 68vh, 100vh)' }}
       >
         <PageHeroBackground src="/images/portfolio/proj-d-1.jpg" />
         <div className="container-site relative z-10 max-w-4xl pb-14 lg:pb-20" style={HERO_STYLE}>

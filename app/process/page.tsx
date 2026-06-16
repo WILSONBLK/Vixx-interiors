@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 
 export default function ProcessPage() {
   return (
-    <main style={{ background: 'var(--bg-primary)' }}>
+    <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="relative pt-40 pb-20 overflow-hidden">
+      <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-14 sm:pb-20 overflow-hidden">
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"

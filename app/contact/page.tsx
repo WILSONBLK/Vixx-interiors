@@ -24,13 +24,13 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main style={{ background: 'var(--bg-primary)' }}>
+    <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
       <Navbar />
 
       {/* ── Hero ── */}
       <section
         className="relative flex flex-col justify-end overflow-hidden"
-        style={{ minHeight: '58vh' }}
+        style={{ minHeight: 'clamp(28rem, 58vh, 90vh)' }}
       >
         <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.40} />
         <div

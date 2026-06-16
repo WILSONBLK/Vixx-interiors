@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <main style={{ background: 'var(--bg-primary)' }}>
+    <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
       <Navbar />
       <LuxuryGallery />
       <Footer />

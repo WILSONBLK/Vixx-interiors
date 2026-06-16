@@ -67,6 +67,7 @@ export function HeroSection() {
   return (
     <section
       ref={sectionRef}
+      data-hero
       className="relative flex flex-col items-center justify-center overflow-hidden"
       style={{ minHeight: '100svh' }}
       onMouseEnter={() => setImageHovered(true)}
@@ -95,10 +96,10 @@ export function HeroSection() {
           />
         </motion.div>
 
-        <div className="absolute inset-0" style={{ background: 'rgba(8,8,8,0.38)' }} />
+        <div className="absolute inset-0" style={{ background: 'var(--photo-overlay-hero)' }} />
         <div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 90% 88% at 50% 46%, transparent 42%, rgba(8,8,8,0.15) 100%)' }}
+          style={{ background: 'radial-gradient(ellipse 90% 88% at 50% 46%, transparent 42%, var(--photo-vignette-hero) 100%)' }}
         />
       </div>
 
