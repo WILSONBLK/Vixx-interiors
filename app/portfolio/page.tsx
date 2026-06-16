@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Navbar }        from '@/components/layout/Navbar'
 import { Footer }        from '@/components/layout/Footer'
 import { LuxuryGallery } from '@/components/ui/LuxuryGallery'
 
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-      <Navbar />
+
       <LuxuryGallery />
       <Footer />
     </main>

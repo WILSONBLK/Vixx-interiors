@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Plus, Minus } from 'lucide-react'
-import { Navbar }       from '@/components/layout/Navbar'
 import { Footer }       from '@/components/layout/Footer'
 import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
@@ -58,7 +57,7 @@ export default function FAQPage() {
 
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-      <Navbar />
+
 
       {/* ── Hero ── */}
       <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-14 sm:pb-20 overflow-hidden">

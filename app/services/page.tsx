@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
-import { Navbar }              from '@/components/layout/Navbar'
 import { Footer }              from '@/components/layout/Footer'
 import { HexMotif }            from '@/components/ui/HexMotif'
 import { ScrollReveal }        from '@/components/ui/ScrollReveal'
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-      <Navbar />
+
 
       {/* ── Hero ── */}
       <section

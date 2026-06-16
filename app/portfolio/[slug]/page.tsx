@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { Navbar }          from '@/components/layout/Navbar'
 import { Footer }          from '@/components/layout/Footer'
 import { HexMotif }        from '@/components/ui/HexMotif'
 import { ScrollReveal }    from '@/components/ui/ScrollReveal'
@@ -37,7 +36,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
 
   return (
     <main style={{ background: 'var(--bg-primary)' }}>
-      <Navbar />
+
 
       {/* ── Hero image ── */}
       <section className="relative h-[60vh] min-h-[420px] overflow-hidden">

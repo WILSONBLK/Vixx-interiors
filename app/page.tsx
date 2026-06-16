@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Navbar }            from '@/components/layout/Navbar'
 import { Footer }            from '@/components/layout/Footer'
 import { ScrollReveal }      from '@/components/ui/ScrollReveal'
 import { HeroSection }       from '@/components/ui/HeroSection'
@@ -24,7 +23,7 @@ export default function Home() {
     <main id="main" className="relative overflow-x-hidden" style={{ background: 'var(--bg-primary)', perspective: '1px', perspectiveOrigin: '50% 0%' }}>
       {/* <SplineScene scene="YOUR_SPLINE_SCENE_URL_HERE" style={{ opacity: 0.35 }} /> */}
       <FloatingParticles />
-      <Navbar />
+
 
       {/* ── 1. Hero ───────────────────────────────────────────────────────────── */}
       <HeroSection />

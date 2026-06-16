@@ -9,7 +9,6 @@ function TikTokIcon({ size = 16 }: { size?: number }) {
     </svg>
   )
 }
-import { Navbar }             from '@/components/layout/Navbar'
 import { Footer }             from '@/components/layout/Footer'
 import { HexMotif }           from '@/components/ui/HexMotif'
 import { ScrollReveal }       from '@/components/ui/ScrollReveal'
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-      <Navbar />
+
 
       {/* ── Hero ── */}
       <section
