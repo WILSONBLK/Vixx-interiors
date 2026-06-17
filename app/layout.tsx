@@ -1,5 +1,5 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Jost, Inter } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { CustomCursor }    from '@/components/ui/CustomCursor'
@@ -30,6 +30,21 @@ const inter = Inter({
 })
 
 const BASE_URL = 'https://vixxinteriors.com'
+
+// Explicit viewport export required in Next.js 14+ (separate from metadata).
+// viewport-fit=cover ensures content reaches the iOS notch safe-area edges.
+// interactive-widget=resizes-content prevents the virtual keyboard from
+// squashing the layout on Android (default is to resize the visual viewport).
+export const viewport: Viewport = {
+  width:           'device-width',
+  initialScale:    1,
+  viewportFit:     'cover',
+  interactiveWidget: 'resizes-content',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)',  color: '#0A0908' },
+    { media: '(prefers-color-scheme: light)', color: '#FAFAF9' },
+  ],
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

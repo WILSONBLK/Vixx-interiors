@@ -4,11 +4,21 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft } from 'lucide-react'
 
-export function BackButton() {
+// Next.js App Router sets __NA: true in history.state for every client-side
+// (soft) navigation. If it's absent, the user arrived via hard navigation
+// (typed URL, external link, page refresh) — router.back() would exit the site.
+function hasSiteHistory(): boolean {
+  try { return !!window.history.state?.__NA } catch { return false }
+}
+
+export function BackButton({ fallbackHref = '/' }: { fallbackHref?: string }) {
   const router = useRouter()
-  const [visible, setVisible] = useState(true)
+  const [visible,    setVisible]    = useState(true)
+  const [canGoBack,  setCanGoBack]  = useState(false)
 
   useEffect(() => {
+    setCanGoBack(hasSiteHistory())
+
     const onScroll = () => setVisible(window.scrollY < 100)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -16,7 +26,13 @@ export function BackButton() {
 
   return (
     <button
-      onClick={() => router.back()}
+      onClick={() => {
+        if (canGoBack) {
+          router.back()
+        } else {
+          router.push(fallbackHref)
+        }
+      }}
       aria-label="Go back"
       className="group"
       style={{
@@ -29,7 +45,9 @@ export function BackButton() {
         gap:            '6px',
         background:     'none',
         border:         'none',
-        padding:        '8px 0',
+        padding:        '8px 12px 8px 0',
+        minWidth:       '44px',
+        minHeight:      '44px',
         cursor:         'pointer',
         color:          'var(--text-secondary)',
         fontFamily:     'var(--font-jost)',

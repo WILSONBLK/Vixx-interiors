@@ -4,39 +4,18 @@ import { useEffect, useLayoutEffect, useRef } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
-// ── Scroll position persistence ───────────────────────────────────────────────
-const SCROLL_KEY = 'vixx-scroll'
-
-function saveScroll(path: string) {
-  try {
-    const store = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? '{}')
-    store[path] = window.scrollY
-    sessionStorage.setItem(SCROLL_KEY, JSON.stringify(store))
-  } catch {}
-}
-
-function loadScroll(path: string): number {
-  try {
-    const store = JSON.parse(sessionStorage.getItem(SCROLL_KEY) ?? '{}')
-    return typeof store[path] === 'number' ? store[path] : 0
-  } catch {
-    return 0
-  }
-}
-
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname       = usePathname()
   const prefersReduced = useReducedMotion()
   const curtain        = useAnimationControls()
   const contentRef     = useRef<HTMLDivElement>(null)
   const isFirst        = useRef(true)
-  // Incremented on every navigation — any in-flight async sweep that sees a
-  // stale id bails immediately, preventing stacked/conflicting animations.
+  // Incremented on every navigation — stale in-flight sweeps bail when they see
+  // a different id, preventing stacked or conflicting animations.
   const sweepId        = useRef(0)
   const isBackNav      = useRef(false)
   const isTouch        = useRef(false)
-  // True while the gold curtain is anywhere on screen (covering or revealing).
-  // Used to detect rapid navigation before a sweep has finished.
+  // True while the gold curtain is anywhere on screen.
   const curtainActive  = useRef(false)
 
   useEffect(() => {
@@ -46,16 +25,9 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
-  // Save scroll position continuously so back-nav can restore it
-  useEffect(() => {
-    const onScroll = () => saveScroll(pathname)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [pathname])
-
-  // Sync, before paint: hide new content only for fresh forward nav on desktop.
-  // Touch devices never hide here — avoids the blank-screen race condition where
-  // iOS swipe-back fires popstate after React's useLayoutEffect has already run.
+  // Sync, before paint: hide content for fresh forward nav on desktop only.
+  // Touch skips this to avoid the blank-screen race where iOS fires popstate
+  // after React's layout effect has already run.
   useLayoutEffect(() => {
     if (isFirst.current) return
     if (isBackNav.current) return
@@ -68,53 +40,44 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (isFirst.current) { isFirst.current = false; return }
 
-    const el = contentRef.current
-
-    // ── Reduced motion ────────────────────────────────────────────────────────
-    if (prefersReduced) {
+    const el          = contentRef.current
+    const showContent = () => { if (el) el.style.opacity = '1' }
+    const resetCurtain = () => {
       curtain.stop()
       curtain.set({ x: '100%' })
       curtainActive.current = false
-      if (el) el.style.opacity = '1'
+      ++sweepId.current
+    }
+
+    if (prefersReduced) {
+      resetCurtain()
+      showContent()
       return
     }
 
-    // ── Back navigation ───────────────────────────────────────────────────────
-    // Skip curtain entirely; restore scroll position.
     if (isBackNav.current) {
       isBackNav.current = false
-      ++sweepId.current
-      curtain.stop()
-      curtain.set({ x: '100%' })
-      curtainActive.current = false
-      if (el) el.style.opacity = '1'
-      const y = loadScroll(pathname)
-      if (y > 0) requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, y)))
+      resetCurtain()
+      showContent()
+      // Next.js App Router restores scroll position automatically on back/forward.
       return
     }
 
-    // ── Rapid navigation ──────────────────────────────────────────────────────
-    // The curtain is still on screen from a previous navigation.
     if (curtainActive.current) {
-      ++sweepId.current
-      curtain.stop()
-      curtain.set({ x: '100%' })
-      curtainActive.current = false
-      if (el) el.style.opacity = '1'
+      // Rapid navigation: abort the in-flight sweep and reveal new page instantly.
+      resetCurtain()
+      showContent()
       return
     }
 
-    // ── Fresh forward navigation ──────────────────────────────────────────────
-    // Touch devices: instant swap with no curtain — the native platform provides
-    // the transition feel and any opacity juggling causes blank screens on iOS.
+    // Touch devices: instant swap — no curtain, no opacity juggling.
+    // iOS native transitions handle the feel; any JS animation adds jank.
     if (isTouch.current) {
-      try { window.scrollTo({ top: 0, behavior: 'instant' }) } catch { window.scrollTo(0, 0) }
-      if (el) el.style.opacity = '1'
+      showContent()
       return
     }
 
     // Desktop: gold curtain sweep
-    window.scrollTo(0, 0)
     curtainActive.current = true
     const id = ++sweepId.current
 
@@ -122,13 +85,23 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       curtain.set({ x: '-100%' })
       await curtain.start({ x: '0%', transition: { duration: 0.10, ease: [0.4, 0, 1, 1] } })
       if (sweepId.current !== id) return
-      if (el) el.style.opacity = '1'
+      showContent()
       await curtain.start({ x: '100%', transition: { duration: 0.13, ease: [0, 0, 0.6, 1] } })
       if (sweepId.current !== id) return
       curtainActive.current = false
     }
 
     sweep()
+
+    // Cleanup fires when a new navigation arrives while sweep is still running.
+    // Without this, the curtain gets stuck at its current x-position (partially
+    // visible at the screen edge) until the next interaction resets it.
+    return () => {
+      if (curtainActive.current) {
+        resetCurtain()
+        showContent()
+      }
+    }
   }, [pathname, curtain, prefersReduced])
 
   return (
@@ -146,6 +119,7 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
             zIndex:        99990,
             pointerEvents: 'none',
             background:    '#C49A2E',
+            willChange:    'transform',
           }}
         />
       )}

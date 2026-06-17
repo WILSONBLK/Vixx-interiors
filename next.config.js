@@ -5,7 +5,10 @@ const nextConfig = {
   reactStrictMode: true,
   outputFileTracingRoot: path.join(__dirname),
   images: {
-    formats: ['image/avif', 'image/webp'],
+    // AVIF removed: encoding takes 10-20s per image in dev, killing performance.
+    // WebP gives 80-90% file size reduction with instant encoding.
+    formats: ['image/webp'],
+    minimumCacheTTL: 31536000, // 1 year — images are immutable once built
     remotePatterns: [],
   },
   async headers() {
@@ -18,6 +21,16 @@ const nextConfig = {
           { key: 'X-XSS-Protection', value: '1; mode=block' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
         ],
+      },
+      {
+        // Static image files: cache 1 year — filenames include content hash on Vercel
+        source: '/images/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        // Next.js static chunks: already have content-hashed filenames
+        source: '/_next/static/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
     ]
   },
