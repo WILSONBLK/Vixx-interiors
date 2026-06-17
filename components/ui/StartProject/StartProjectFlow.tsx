@@ -166,7 +166,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
         transition={{ duration: 1.8, ease: EASE }}
       >
         <Image
-          src="/images/start-project-bg.png"
+          src="/images/start-project-bg.jpg"
           alt=""
           fill
           priority
@@ -324,23 +324,26 @@ export function StartProjectFlow() {
   const serviceParam = searchParams.get('service') ?? ''
   const preselectedType = SERVICE_TYPE_MAP[serviceParam] ?? ''
 
-  const [phase,    setPhase]    = useState<'intro' | 'flow'>(serviceParam ? 'flow' : 'intro')
-  const [stepIdx,  setStepIdx]  = useState(0)
-  const [answers,  setAnswers]  = useState<Answers>({ ...EMPTY, type: preselectedType })
-  const [dir,      setDir]      = useState<1|-1>(1)
-  const [complete, setComplete] = useState(false)
+  const [phase,       setPhase]       = useState<'intro' | 'flow'>(serviceParam ? 'flow' : 'intro')
+  const [stepIdx,     setStepIdx]     = useState(0)
+  const [answers,     setAnswers]     = useState<Answers>({ ...EMPTY, type: preselectedType })
+  const [dir,         setDir]         = useState<1|-1>(1)
+  const [complete,    setComplete]    = useState(false)
+  const [submitError, setSubmitError] = useState(false)
   const { isDark, toggleTheme, mounted } = useTheme()
 
   const step = STEPS[stepIdx]
 
-  /* Fire-and-forget submission when user reaches the thank-you screen */
+  /* Submit enquiry when user reaches the thank-you screen */
   useEffect(() => {
     if (!complete) return
     fetch('/api/contact', {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ ...answers, source: 'start-project' }),
-    }).catch(() => {})
+    })
+      .then(res => { if (!res.ok) setSubmitError(true) })
+      .catch(() => setSubmitError(true))
   }, [complete]) // eslint-disable-line react-hooks/exhaustive-deps
 
   function set(key: FieldKey, val: string) {
@@ -537,7 +540,7 @@ export function StartProjectFlow() {
                   )}
                 </>
               ) : (
-                <ThankYouScreen />
+                <ThankYouScreen submitError={submitError} />
               )}
             </motion.div>
           </AnimatePresence>
@@ -773,7 +776,7 @@ const LOAD_MSGS = [
   'Preparing your project profile',
 ]
 
-function ThankYouScreen() {
+function ThankYouScreen({ submitError }: { submitError: boolean }) {
   const [phase,  setPhase]  = useState<'loading' | 'done'>('loading')
   const [dot,    setDot]    = useState(0)
   const [msgIdx, setMsgIdx] = useState(0)
@@ -863,6 +866,24 @@ function ThankYouScreen() {
           >
             We will be in touch shortly.
           </motion.p>
+
+          {submitError && (
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              style={{ fontFamily:'var(--font-jost)', fontSize:'0.78rem', color:'#c0392b', lineHeight:1.7, maxWidth:'32ch', margin:'1.5rem auto 0', textAlign:'center' }}
+            >
+              There was an issue sending your details. Please reach us directly at{' '}
+              <a href="mailto:vixxinteriors@gmail.com" style={{ color: T.gold, textDecoration:'underline' }}>
+                vixxinteriors@gmail.com
+              </a>{' '}
+              or{' '}
+              <a href="https://wa.me/2348065672607" target="_blank" rel="noopener noreferrer" style={{ color: T.gold, textDecoration:'underline' }}>
+                WhatsApp
+              </a>.
+            </motion.p>
+          )}
 
           {/* Footer link */}
           <motion.div

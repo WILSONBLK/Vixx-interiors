@@ -258,10 +258,13 @@ export function Navbar() {
                   href={link.href}
                   data-cursor="hover"
                   className={cn(
-                    'relative pb-1 font-jost text-[0.72rem] tracking-[0.20em] uppercase transition-colors duration-200 whitespace-nowrap',
+                    'relative pb-1 font-jost text-[0.72rem] font-semibold tracking-[0.16em] uppercase whitespace-nowrap',
+                    'transition-colors duration-[420ms] ease-[ease]',
                     isActive(link.href)
                       ? 'text-[var(--gold)]'
-                      : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]',
+                      : atTop
+                        ? 'text-white/90 hover:text-white'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
                   )}
                 >
                   {link.label}
@@ -287,7 +290,7 @@ export function Navbar() {
 
             {/* Social icons — desktop only, animated */}
             <div
-              className="hidden xl:flex items-center gap-2"
+              className={cn('hidden xl:flex items-center gap-2', atTop && 'nav-over-dark')}
               style={slideStyle(navVisible, 40)}
               role="list"
               aria-label="Social media links"
@@ -318,11 +321,11 @@ export function Navbar() {
                   className={cn(
                     'inline-flex items-center justify-center rounded-full',
                     'min-w-[44px] min-h-[44px]',
-                    'border border-[var(--border-strong)]',
-                    'text-[var(--text-secondary)]',
-                    'transition-all duration-200',
-                    'hover:border-[var(--gold-border)] hover:text-[var(--gold)]',
+                    'transition-[color,border-color] duration-[420ms] ease-[ease]',
                     'active:scale-90 active:opacity-60',
+                    atTop
+                      ? 'border border-white/30 text-white hover:border-white/60 hover:text-white'
+                      : 'border border-[var(--border-strong)] text-[var(--text-secondary)] hover:border-[var(--gold-border)] hover:text-[var(--gold)]',
                   )}
                 >
                   {isDark
@@ -355,7 +358,11 @@ export function Navbar() {
                 aria-expanded={open}
                 aria-controls="mobile-menu"
                 data-cursor="hover"
-                className="flex items-center justify-center min-w-[44px] min-h-[44px] w-8 h-8 text-[var(--text-primary)] active:opacity-60 transition-all duration-150"
+                className={cn(
+                  'flex items-center justify-center min-w-[44px] min-h-[44px] w-8 h-8',
+                  'active:opacity-60 transition-[color] duration-[420ms] ease-[ease]',
+                  atTop ? 'text-white' : 'text-[var(--text-primary)]',
+                )}
               >
                 <span
                   style={{

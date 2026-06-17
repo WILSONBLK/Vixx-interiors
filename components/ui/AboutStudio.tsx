@@ -34,7 +34,7 @@ export function AboutStudio() {
         transition={{ duration: 2.0, ease: EASE, delay: 0.1 }}
       >
         <Image
-          src="/images/about-studio.png"
+          src="/images/about-studio.jpg"
           alt=""
           fill
           className="object-cover object-center"

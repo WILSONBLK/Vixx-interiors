@@ -167,13 +167,13 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A considered residential interior — warm textures, layered lighting, and composed materiality throughout.',
     location:    'Lagos',
     completedAt: '2025',
-    image:       '/images/portfolio/proj-f-1.png',
+    image:       '/images/portfolio/proj-f-1.jpg',
     images:      [
-      '/images/portfolio/proj-f-1.png',
-      '/images/portfolio/proj-f-2.png',
-      '/images/portfolio/proj-f-3.png',
-      '/images/portfolio/proj-f-4.png',
-      '/images/portfolio/proj-f-5.png',
+      '/images/portfolio/proj-f-1.jpg',
+      '/images/portfolio/proj-f-2.jpg',
+      '/images/portfolio/proj-f-3.jpg',
+      '/images/portfolio/proj-f-4.jpg',
+      '/images/portfolio/proj-f-5.jpg',
       '/images/portfolio/proj-b-1.jpg',
     ],
     quotes: [
@@ -190,7 +190,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A full residential transformation — warm tones, refined materiality, and considered spatial flow across every room.',
     location:    'Lagos',
     completedAt: '2025',
-    image:       '/images/portfolio/proj-f-3.png',
+    image:       '/images/portfolio/proj-f-3.jpg',
     images:      [
       '/images/portfolio/proj2-1.jpg',
       '/images/portfolio/proj2-2.jpg',
@@ -213,7 +213,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A private residential suite — serene, edited, and deeply personal.',
     location:    'Lagos',
     completedAt: '2025',
-    image:       '/images/portfolio/proj-f-4.png',
+    image:       '/images/portfolio/proj-f-4.jpg',
     images:      [
       '/images/portfolio/proj-c-1.jpg',
       '/images/portfolio/proj-c-2.jpg',
@@ -236,7 +236,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A contemporary Lagos interior — confident proportions, considered detailing, and a palette that rewards attention.',
     location:    'Lagos',
     completedAt: '2026',
-    image:       '/images/portfolio/proj-f-2.png',
+    image:       '/images/portfolio/proj-f-2.jpg',
     images:      [
       '/images/portfolio/proj-d-1.jpg',
       '/images/portfolio/proj-d-2.jpg',
@@ -259,7 +259,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
     description: 'A precise, intimate interior study — architecture, material, and light in careful dialogue.',
     location:    'Lagos',
     completedAt: '2024',
-    image:       '/images/portfolio/proj-f-5.png',
+    image:       '/images/portfolio/proj-f-5.jpg',
     images:      [
       '/images/portfolio/proj-a-1.jpg',
       '/images/portfolio/proj-a-2.jpg',

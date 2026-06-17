@@ -4,7 +4,33 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 const TO     = process.env.NOTIFICATION_EMAIL ?? 'vixxinteriors@gmail.com'
 
+/* ── Simple in-memory rate limiter: max 3 submissions per IP per 10 minutes ── */
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+const WINDOW_MS    = 10 * 60 * 1000 // 10 minutes
+const MAX_REQUESTS = 3
+
+function isRateLimited(ip: string): boolean {
+  const now    = Date.now()
+  const record = rateLimitMap.get(ip)
+
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS })
+    return false
+  }
+  if (record.count >= MAX_REQUESTS) return true
+  record.count++
+  return false
+}
+
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please wait a few minutes before trying again.' },
+      { status: 429 },
+    )
+  }
+
   if (!process.env.RESEND_API_KEY) {
     console.error('[contact] RESEND_API_KEY is not set')
     return NextResponse.json({ error: 'Service not configured.' }, { status: 503 })

@@ -87,7 +87,7 @@ export function HeroSection() {
           transition={{ duration: 1.6, ease: EASE }}
         >
           <Image
-            src="/images/hero-bg.png"
+            src="/images/hero-bg.jpg"
             alt=""
             fill
             priority

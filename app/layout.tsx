@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Playfair_Display, Jost, Inter } from 'next/font/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { CustomCursor }    from '@/components/ui/CustomCursor'
 import { ButtonFeedback }  from '@/components/ui/ButtonFeedback'
 import { PageTransition }  from '@/components/ui/PageTransition'
@@ -28,7 +29,10 @@ const inter = Inter({
   display:  'swap',
 })
 
+const BASE_URL = 'https://vixxinteriors.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: {
     default:  'VIXX Interiors – Interior Design Studio, Lagos',
     template: '%s | VIXX Interiors',
@@ -45,16 +49,30 @@ export const metadata: Metadata = {
     'interior design Lekki',
     'interior design Victoria Island',
   ],
+  alternates: {
+    canonical: BASE_URL,
+  },
   openGraph: {
     type:        'website',
     locale:      'en_NG',
     siteName:    'VIXX Interiors',
+    url:         BASE_URL,
     title:       'VIXX Interiors – Interior Design Studio, Lagos',
     description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
+    images: [
+      {
+        url:    '/images/hero-bg.jpg',
+        width:  1200,
+        height: 630,
+        alt:    'VIXX Interiors – Interior Design Studio, Lagos',
+      },
+    ],
   },
   twitter: {
-    card:  'summary_large_image',
-    title: 'VIXX Interiors – Interior Design Studio, Lagos',
+    card:        'summary_large_image',
+    title:       'VIXX Interiors – Interior Design Studio, Lagos',
+    description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
+    images:      ['/images/hero-bg.jpg'],
   },
 }
 
@@ -86,12 +104,46 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'InteriorDesigner',
+              name: 'VIXX Interiors',
+              description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
+              url: 'https://vixxinteriors.com',
+              logo: 'https://vixxinteriors.com/logo-gold.png',
+              image: 'https://vixxinteriors.com/images/hero-bg.jpg',
+              telephone: '+2348065672607',
+              email: 'vixxinteriors@gmail.com',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Lagos',
+                addressCountry: 'NG',
+              },
+              areaServed: ['Lagos', 'Nigeria'],
+              sameAs: [
+                'https://www.instagram.com/vixx_interiors',
+                'https://www.tiktok.com/@vixxinteriors',
+              ],
+              founder: {
+                '@type': 'Person',
+                name: 'Osita Agusionu',
+                jobTitle: 'Founder & Creative Director',
+              },
+            }),
+          }}
+        />
         <CustomCursor />
         <ButtonFeedback />
         <Navbar />
         <PageTransition>{children}</PageTransition>
         <SocialBar />
       </body>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   )
 }
