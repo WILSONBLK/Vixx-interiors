@@ -9,7 +9,7 @@ import { AnimatedLine } from '@/components/ui/AnimatedLine'
 import { BackButton }   from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
-  title:       'Our Design Process – VIXX Interiors',
+  title:       'Our Design Process',
   description: 'Discover the six-stage VIXX Interiors design process — from discovery to final reveal. A process as refined as the result.',
 }
 

@@ -6,7 +6,7 @@ import { AnimatedLine } from '@/components/ui/AnimatedLine'
 import { BackButton }   from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
-  title:       'Privacy Policy – VIXX Interiors',
+  title:       'Privacy Policy',
   description: 'How VIXX Interiors collects, uses, and protects your personal information in accordance with the Nigeria Data Protection Regulation (NDPR).',
 }
 
