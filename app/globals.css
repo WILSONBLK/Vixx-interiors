@@ -194,7 +194,9 @@
     transition: background-color 0.35s ease, color 0.35s ease;
     /* Reserve space at the bottom so content doesn't hide behind the fixed SocialBar */
     padding-bottom: var(--social-bar-height);
-    overflow-x: hidden;
+    /* overflow-x intentionally omitted: html overflow-x:clip handles horizontal
+       clipping at the viewport level without creating a scroll container.
+       A hidden overflow on body blocks iOS Safari's native swipe-back gesture. */
   }
 
   body.modal-open {

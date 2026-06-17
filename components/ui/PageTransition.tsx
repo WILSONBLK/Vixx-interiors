@@ -53,13 +53,14 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [pathname])
 
-  // Sync, before paint: hide new content only for a fresh forward navigation.
-  // When curtainActive is true the rapid-nav path in useEffect will make content
-  // visible — don't hide it here or we create an unrecoverable opacity:0 state.
+  // Sync, before paint: hide new content only for fresh forward nav on desktop.
+  // Touch devices never hide here — avoids the blank-screen race condition where
+  // iOS swipe-back fires popstate after React's useLayoutEffect has already run.
   useLayoutEffect(() => {
     if (isFirst.current) return
     if (isBackNav.current) return
     if (curtainActive.current) return
+    if (isTouch.current) return
     const el = contentRef.current
     if (el) el.style.opacity = '0'
   }, [pathname])
@@ -94,35 +95,35 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 
     // ── Rapid navigation ──────────────────────────────────────────────────────
     // The curtain is still on screen from a previous navigation.
-    // Abort the in-flight animation and show the new page immediately — no
-    // stacking, no content stuck at opacity:0, no broken state.
     if (curtainActive.current) {
       ++sweepId.current
       curtain.stop()
       curtain.set({ x: '100%' })
       curtainActive.current = false
-      // useLayoutEffect skipped hiding because curtainActive was true,
-      // but a prior fresh-sweep may have set opacity:0 — ensure it's visible.
       if (el) el.style.opacity = '1'
       return
     }
 
     // ── Fresh forward navigation ──────────────────────────────────────────────
+    // Touch devices: instant swap with no curtain — the native platform provides
+    // the transition feel and any opacity juggling causes blank screens on iOS.
+    if (isTouch.current) {
+      try { window.scrollTo({ top: 0, behavior: 'instant' }) } catch { window.scrollTo(0, 0) }
+      if (el) el.style.opacity = '1'
+      return
+    }
+
+    // Desktop: gold curtain sweep
     window.scrollTo(0, 0)
     curtainActive.current = true
     const id = ++sweepId.current
 
-    const inDuration  = isTouch.current ? 0.07 : 0.10
-    const outDuration = isTouch.current ? 0.09 : 0.13
-
     async function sweep() {
       curtain.set({ x: '-100%' })
-      await curtain.start({ x: '0%', transition: { duration: inDuration, ease: [0.4, 0, 1, 1] } })
-      // A newer navigation took over — it already cleared curtainActive and
-      // showed its content; just bail without touching any shared state.
+      await curtain.start({ x: '0%', transition: { duration: 0.10, ease: [0.4, 0, 1, 1] } })
       if (sweepId.current !== id) return
       if (el) el.style.opacity = '1'
-      await curtain.start({ x: '100%', transition: { duration: outDuration, ease: [0, 0, 0.6, 1] } })
+      await curtain.start({ x: '100%', transition: { duration: 0.13, ease: [0, 0, 0.6, 1] } })
       if (sweepId.current !== id) return
       curtainActive.current = false
     }
