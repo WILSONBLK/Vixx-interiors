@@ -191,8 +191,8 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
         onClick={onBack}
         style={{
           position:      'absolute',
-          top:            '2rem',
-          left:           '1.75rem',
+          top:            '1.25rem',
+          left:           '1.25rem',
           zIndex:         20,
           display:       'flex',
           alignItems:    'center',
@@ -204,7 +204,8 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
           textTransform: 'uppercase',
           background:    'none',
           border:        'none',
-          padding:        0,
+          padding:       '0 0.5rem',
+          minHeight:     '44px',
           cursor:        'pointer',
           transition:    'color 0.2s',
         }}
@@ -302,6 +303,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
               textTransform:  'uppercase',
               fontWeight:      500,
               padding:        '0.95rem 2.2rem',
+              minHeight:      '44px',
               borderRadius:    2,
               cursor:         'pointer',
             }}
@@ -379,7 +381,7 @@ export function StartProjectFlow() {
     .vixx-intake textarea:focus { outline: none; }
     .vixx-intake .theme-btn {
       display: inline-flex; align-items: center; justify-content: center;
-      width: 34px; height: 34px; border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       border: 1px solid var(--border-strong);
       color: var(--text-muted);
       background: none; cursor: pointer;
@@ -445,8 +447,8 @@ export function StartProjectFlow() {
             <motion.button
               onClick={back}
               whileTap={{ scale: 0.96 }}
-              style={{ color: T.dim, background: 'none', border: 'none', padding: 0 }}
-              className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[var(--text-primary)]"
+              style={{ color: T.dim, background: 'none', border: 'none', padding: '0 0.5rem', minHeight: '44px', display: 'flex', alignItems: 'center' }}
+              className="gap-1.5 transition-colors duration-200 hover:text-[var(--text-primary)]"
             >
               <ArrowLeft size={13} strokeWidth={1.5} />
               <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase' }}>Back</span>
@@ -454,8 +456,8 @@ export function StartProjectFlow() {
           ) : (
             <button
               onClick={() => router.back()}
-              style={{ color: T.dim, fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase', background:'none', border:'none', padding:0, cursor:'pointer' }}
-              className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[#C49A2E]"
+              style={{ color: T.dim, fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase', background:'none', border:'none', padding:'0 0.5rem', minHeight:'44px', cursor:'pointer', display:'flex', alignItems:'center' }}
+              className="gap-1.5 transition-colors duration-200 hover:text-[#C49A2E]"
             >
               <ArrowLeft size={13} strokeWidth={1.5} />
               Back
@@ -476,8 +478,8 @@ export function StartProjectFlow() {
             ) : (
               <button
                 onClick={restart}
-                style={{ color: T.dim, background:'none', border:'none', padding:0 }}
-                className="flex items-center gap-1.5 transition-colors duration-200 hover:text-[var(--text-primary)]"
+                style={{ color: T.dim, background:'none', border:'none', padding:'0 0.5rem', minHeight:'44px', display:'flex', alignItems:'center' }}
+                className="gap-1.5 transition-colors duration-200 hover:text-[var(--text-primary)]"
               >
                 <RotateCcw size={11} />
                 <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', letterSpacing:'0.22em', textTransform:'uppercase' }}>Start over</span>
@@ -676,7 +678,7 @@ function TextareaStep({ step, value, onChange, onNext }: {
         {step.optional && (
           <button
             onClick={onNext}
-            style={{ fontFamily:'var(--font-jost)', fontSize:'0.62rem', letterSpacing:'0.2em', textTransform:'uppercase', color: T.dim, background:'none', border:'none', padding:0, transition:'color 0.2s' }}
+            style={{ fontFamily:'var(--font-jost)', fontSize:'0.62rem', letterSpacing:'0.2em', textTransform:'uppercase', color: T.dim, background:'none', border:'none', padding:'0.75rem 0.5rem', minHeight:'44px', transition:'color 0.2s', cursor:'pointer', display:'inline-flex', alignItems:'center' }}
             onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.color = T.text)}
             onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.color = T.dim)}
           >
@@ -755,7 +757,7 @@ function SelectStep({ step, onSelect, onSkip, initialValue }: {
       {onSkip && !selected && (
         <button
           onClick={onSkip}
-          style={{ marginTop:'1.1rem', fontFamily:'var(--font-jost)', fontSize:'0.62rem', letterSpacing:'0.2em', textTransform:'uppercase', color: T.dim, background:'none', border:'none', padding:0, transition:'color 0.2s', display:'flex', alignItems:'center', gap:4 }}
+          style={{ marginTop:'0.5rem', fontFamily:'var(--font-jost)', fontSize:'0.62rem', letterSpacing:'0.2em', textTransform:'uppercase', color: T.dim, background:'none', border:'none', padding:'0.75rem 0.5rem', minHeight:'44px', transition:'color 0.2s', display:'flex', alignItems:'center', gap:4, cursor:'pointer' }}
           onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.color = T.text)}
           onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.color = T.dim)}
         >
@@ -934,7 +936,8 @@ function GoldBtn({ onClick, children }: { onClick: () => void; children: React.R
         background: T.gold, color:'#1A1208', border:'none',
         fontFamily:'var(--font-jost)', fontSize:'0.64rem',
         letterSpacing:'0.22em', textTransform:'uppercase', fontWeight:500,
-        padding:'0.85rem 1.5rem', borderRadius:2, transition:'background 0.25s ease',
+        padding:'0.85rem 1.5rem', minHeight:'44px', borderRadius:2, transition:'background 0.25s ease',
+        cursor:'pointer',
       }}
       onMouseEnter={e => ((e.currentTarget as HTMLButtonElement).style.background = T.goldL)}
       onMouseLeave={e => ((e.currentTarget as HTMLButtonElement).style.background = T.gold)}

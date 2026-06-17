@@ -6,6 +6,7 @@ import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { PROCESS_STEPS } from '@/lib/data'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { BackButton }   from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
   title:       'Our Design Process – VIXX Interiors',
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function ProcessPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-
+      <BackButton />
 
       {/* ── Hero ── */}
       <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-14 sm:pb-20 overflow-hidden">

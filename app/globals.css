@@ -235,7 +235,7 @@
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
            bg-[var(--gold)] text-[var(--text-on-accent)]
-           px-6 py-3.5
+           px-6 py-3.5 min-h-[44px]
            font-jost text-[0.72rem] font-medium tracking-[0.20em] uppercase
            transition-all duration-300 ease-smooth
            hover:bg-[var(--gold-light)] hover:shadow-gold-md hover:scale-[1.02]
@@ -248,7 +248,7 @@
     @apply inline-flex items-center justify-center gap-2
            border border-[var(--border-strong)]
            text-[var(--text-primary)]
-           px-6 py-3.5
+           px-6 py-3.5 min-h-[44px]
            font-jost text-[0.72rem] font-medium tracking-[0.20em] uppercase
            transition-all duration-300 ease-smooth
            hover:border-[var(--gold)] hover:text-[var(--gold)] hover:scale-[1.02]
@@ -258,7 +258,7 @@
   }
 
   .btn-ghost {
-    @apply inline-flex items-center gap-2
+    @apply inline-flex items-center gap-2 min-h-[44px]
            font-jost text-[0.72rem] tracking-[0.20em] uppercase
            text-[var(--text-tertiary)]
            transition-colors duration-300
@@ -470,8 +470,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
     border: 1px solid var(--border-default);
     color: var(--text-muted);
     transition:

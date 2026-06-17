@@ -8,6 +8,7 @@ import { HexMotif }           from '@/components/ui/HexMotif'
 import { ScrollReveal }       from '@/components/ui/ScrollReveal'
 import { AnimatedLine }       from '@/components/ui/AnimatedLine'
 import { PageHeroBackground } from '@/components/ui/PageHeroBackground'
+import { BackButton }         from '@/components/ui/BackButton'
 
 const HERO_STYLE: CSSProperties = {
   '--text-primary':   'var(--brand-cream)',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-
+      <BackButton />
 
       {/* ── Hero ── */}
       <section

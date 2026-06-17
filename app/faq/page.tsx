@@ -8,6 +8,7 @@ import { HexMotif }     from '@/components/ui/HexMotif'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { FAQ_ITEMS } from '@/lib/data'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { BackButton }   from '@/components/ui/BackButton'
 
 function FAQItem({ question, answer, isOpen, onToggle }: {
   question: string
@@ -57,7 +58,7 @@ export default function FAQPage() {
 
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-
+      <BackButton />
 
       {/* ── Hero ── */}
       <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-14 sm:pb-20 overflow-hidden">

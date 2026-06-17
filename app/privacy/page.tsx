@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Footer }       from '@/components/layout/Footer'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { BackButton }   from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
   title:       'Privacy Policy – VIXX Interiors',
@@ -85,6 +86,7 @@ const SECTIONS = [
 export default function PrivacyPage() {
   return (
     <main style={{ background: 'var(--bg-primary)' }}>
+      <BackButton />
 
 
       {/* ── Page header ── */}

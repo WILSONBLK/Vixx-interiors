@@ -15,6 +15,7 @@ import { ScrollReveal }       from '@/components/ui/ScrollReveal'
 import { ContactForm }        from '@/components/forms/ContactForm'
 import { AnimatedLine }       from '@/components/ui/AnimatedLine'
 import { PageHeroBackground } from '@/components/ui/PageHeroBackground'
+import { BackButton }         from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
   title:       'Start a Project – VIXX Interiors',
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-
+      <BackButton />
 
       {/* ── Hero ── */}
       <section

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Footer }        from '@/components/layout/Footer'
 import { LuxuryGallery } from '@/components/ui/LuxuryGallery'
+import { BackButton }    from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
   title:       'Selected Work — VIXX Interiors',
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <main className="overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
-
+      <BackButton />
       <LuxuryGallery />
       <Footer />
     </main>

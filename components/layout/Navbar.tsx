@@ -220,6 +220,11 @@ export function Navbar() {
           WebkitBackdropFilter: showBackground ? 'blur(14px) saturate(130%)' : 'none',
           boxShadow:            showBackground ? 'var(--shadow-nav)' : 'none',
           transition:           'background-color 0.42s ease, backdrop-filter 0.42s ease, box-shadow 0.42s ease',
+          // When hidden the header is transparent but still sits at z-50 and
+          // would silently intercept every tap/click in the top 76px of the
+          // viewport. Disabling pointer-events on the element itself prevents
+          // that while keeping the children inert via slideStyle().
+          pointerEvents:        navVisible ? undefined : 'none',
         }}
       >
         <nav

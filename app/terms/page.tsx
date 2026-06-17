@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Footer }       from '@/components/layout/Footer'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { AnimatedLine } from '@/components/ui/AnimatedLine'
+import { BackButton }   from '@/components/ui/BackButton'
 
 export const metadata: Metadata = {
   title:       'Terms of Use – VIXX Interiors',
@@ -95,6 +96,7 @@ const SECTIONS = [
 export default function TermsPage() {
   return (
     <main style={{ background: 'var(--bg-primary)' }}>
+      <BackButton />
 
 
       {/* ── Page header ── */}
