@@ -1,68 +1,79 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { ArrowLeft } from 'lucide-react'
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 
-// Next.js App Router sets __NA: true in history.state for every client-side
-// (soft) navigation. If it's absent, the user arrived via hard navigation
-// (typed URL, external link, page refresh) — router.back() would exit the site.
 function hasSiteHistory(): boolean {
-  try { return !!window.history.state?.__NA } catch { return false }
+  try {
+    return !!window.history.state?.__NA;
+  } catch {
+    return false;
+  }
 }
 
-export function BackButton({ fallbackHref = '/' }: { fallbackHref?: string }) {
-  const router = useRouter()
-  const [visible,    setVisible]    = useState(true)
-  const [canGoBack,  setCanGoBack]  = useState(false)
+interface BackButtonProps {
+  fallbackHref?: string;
+  label?: string;
+}
+
+export function BackButton({
+  fallbackHref = "/",
+  label = "Back",
+}: BackButtonProps) {
+  const router = useRouter();
+  const [visible, setVisible] = useState(true);
+  const [canGoBack, setCanGoBack] = useState(false);
 
   useEffect(() => {
-    setCanGoBack(hasSiteHistory())
+    const update = () => {
+      const menuOpen = document.body.classList.contains("modal-open");
+      setVisible(window.scrollY < 100 && !menuOpen);
+    };
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+    };
+  }, []);
 
-    const onScroll = () => setVisible(window.scrollY < 100)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const handleBack = () => {
+    if (canGoBack) {
+      router.back();
+    } else {
+      router.push(fallbackHref);
+    }
+  };
 
   return (
     <button
-      onClick={() => {
-        if (canGoBack) {
-          router.back()
-        } else {
-          router.push(fallbackHref)
-        }
-      }}
+      onClick={handleBack}
       aria-label="Go back"
-      className="group"
+      className={`
+        fixed left-6 z-40 flex items-center gap-2.5
+        px-5 py-2.5 rounded-full
+        border border-white/10
+        bg-[rgba(10,9,8,0.45)]
+        backdrop-blur-md
+        text-[var(--brand-cream)]
+        hover:text-white
+        hover:border-[var(--gold)]
+        hover:bg-[rgba(10,9,8,0.85)]
+        transition-all duration-300
+        font-jost text-[0.65rem]
+        tracking-[0.2em] uppercase
+      `}
       style={{
-        position:       'fixed',
-        top:            'calc(var(--nav-height) + 14px)',
-        left:           '24px',
-        zIndex:         39,
-        display:        'flex',
-        alignItems:     'center',
-        gap:            '6px',
-        background:     'none',
-        border:         'none',
-        padding:        '8px 12px 8px 0',
-        minWidth:       '44px',
-        minHeight:      '44px',
-        cursor:         'pointer',
-        color:          'var(--text-secondary)',
-        fontFamily:     'var(--font-jost)',
-        fontSize:       '0.6rem',
-        letterSpacing:  '0.26em',
-        textTransform:  'uppercase' as const,
-        opacity:        visible ? 1 : 0,
-        pointerEvents:  visible ? 'auto' : 'none',
-        transition:     'opacity 0.35s ease, color 0.2s ease',
+        top: "calc(var(--nav-height) + 14px)",
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? "auto" : "none",
       }}
-      onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold)')}
-      onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
     >
-      <ArrowLeft size={13} strokeWidth={1.5} />
-      Back
+      <ArrowLeft size={12} strokeWidth={2} />
+      <span>{label}</span>
     </button>
-  )
+  );
 }

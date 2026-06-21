@@ -30,7 +30,7 @@ export default function AboutPage() {
         className="relative flex flex-col justify-end overflow-hidden"
         style={{ minHeight: 'clamp(32rem, 68vh, 100vh)' }}
       >
-        <PageHeroBackground src="/images/portfolio/proj-c-1.jpg" />
+        <PageHeroBackground src="/images/portfolio/proj-c-1.jpg" overlay={0.62} />
         <div className="container-site relative z-10 max-w-4xl pb-14 lg:pb-20" style={HERO_STYLE}>
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-5">

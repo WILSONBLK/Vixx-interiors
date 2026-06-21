@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Resend is instantiated lazily inside the handler so the build
+// doesn't fail when RESEND_API_KEY is absent in the CI environment.
 const TO     = process.env.NOTIFICATION_EMAIL ?? 'vixxinteriors@gmail.com'
 
 /* ── Simple in-memory rate limiter: max 3 submissions per IP per 10 minutes ── */
@@ -35,6 +36,8 @@ export async function POST(req: NextRequest) {
     console.error('[contact] RESEND_API_KEY is not set')
     return NextResponse.json({ error: 'Service not configured.' }, { status: 503 })
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   let body: Record<string, string>
   try {
