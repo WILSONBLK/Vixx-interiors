@@ -92,7 +92,7 @@ export function HeroSection() {
             fill
             priority
             className="object-cover"
-            sizes="110vw"
+            sizes="100vw"
           />
         </motion.div>
 

@@ -29,16 +29,16 @@ export default function ContactPage() {
 
       {/* ── Hero ── */}
       <section
-        className="relative flex flex-col justify-end overflow-hidden"
-        style={{ minHeight: 'clamp(28rem, 58vh, 90vh)' }}
+        className="relative flex flex-col justify-start items-center overflow-hidden"
+        style={{ minHeight: 'clamp(28rem, 58vh, 90vh)', paddingTop: 'var(--nav-height)' }}
       >
-        <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.40} />
+        <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.55} />
         <div
-          className="container-site relative z-10 max-w-3xl pb-12 lg:pb-16"
+          className="container-site relative z-10 max-w-3xl flex-1 flex flex-col items-center justify-center text-center py-12 lg:py-16"
           style={{ '--text-primary': 'var(--brand-cream)', '--text-secondary': 'rgba(240,235,225,0.72)' } as CSSProperties}
         >
           <ScrollReveal>
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center justify-center gap-3 mb-5">
               <AnimatedLine width={24} delay={0.1} />
               <p className="label-xs">Start Your Project</p>
             </div>
@@ -46,9 +46,9 @@ export default function ContactPage() {
               Tell us about{' '}
               <em className="not-italic" style={{ color: 'var(--gold)' }}>your space.</em>
             </h1>
-            <AnimatedLine width={200} className="mb-6" delay={0.25} />
+            <AnimatedLine width={200} className="mb-6 mx-auto" delay={0.25} />
             <p
-              className="body-lg font-semibold"
+              className="body-lg font-semibold mx-auto"
               style={{ color: '#FFF5E1', letterSpacing: '0.01em' }}
             >
               Fill in the form below and we&apos;ll respond within 24 hours with a tailored proposal. All enquiries are handled in confidence.
