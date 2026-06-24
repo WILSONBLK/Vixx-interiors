@@ -3,7 +3,7 @@ import { Resend } from 'resend'
 
 // Resend is instantiated lazily inside the handler so the build
 // doesn't fail when RESEND_API_KEY is absent in the CI environment.
-const TO     = process.env.NOTIFICATION_EMAIL ?? 'vixxinteriors@gmail.com'
+const TO     = 'vixxinteriors@gmail.com'
 
 /* ── Simple in-memory rate limiter: max 3 submissions per IP per 10 minutes ── */
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
