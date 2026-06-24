@@ -19,6 +19,7 @@ const HERO_STYLE: CSSProperties = {
 export const metadata: Metadata = {
   title:       'Interior Design Services',
   description: 'VIXX Interiors offers residential, commercial, space planning, furniture sourcing, and more. Discover our design services in Lagos, Nigeria.',
+  alternates: { canonical: 'https://vixxinteriors.com/services' },
 }
 
 // Map service ids to high-quality portfolio images for visual context

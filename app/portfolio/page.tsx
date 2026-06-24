@@ -6,6 +6,7 @@ import { BackButton }    from '@/components/ui/BackButton'
 export const metadata: Metadata = {
   title:       'Selected Work',
   description: 'Interior design projects by VIXX Interiors — a curated gallery of residential and commercial spaces in Lagos.',
+  alternates: { canonical: 'https://vixxinteriors.com/portfolio' },
 }
 
 export default function PortfolioPage() {

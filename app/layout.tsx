@@ -64,8 +64,10 @@ export const metadata: Metadata = {
     'interior design Lekki',
     'interior design Victoria Island',
   ],
-  alternates: {
-    canonical: BASE_URL,
+  robots: {
+    index:     true,
+    follow:    true,
+    googleBot: { index: true, follow: true },
   },
   openGraph: {
     type:        'website',

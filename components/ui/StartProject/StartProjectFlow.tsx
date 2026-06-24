@@ -339,9 +339,9 @@ export function StartProjectFlow() {
   /* Submit enquiry when user reaches the thank-you screen */
   useEffect(() => {
     if (!complete) return
-    fetch('/api/contact', {
+    fetch('https://formspree.io/f/xlgygydy', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body:    JSON.stringify({ ...answers, source: 'start-project' }),
     })
       .then(res => { if (!res.ok) setSubmitError(true) })

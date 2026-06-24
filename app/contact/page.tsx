@@ -20,6 +20,7 @@ import { BackButton }         from '@/components/ui/BackButton'
 export const metadata: Metadata = {
   title:       'Start a Project',
   description: 'Tell us about your space. VIXX Interiors will respond within 24 hours with a tailored design proposal.',
+  alternates: { canonical: 'https://vixxinteriors.com/contact' },
 }
 
 export default function ContactPage() {

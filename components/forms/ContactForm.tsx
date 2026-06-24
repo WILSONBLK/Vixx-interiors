@@ -95,9 +95,9 @@ export function ContactForm() {
     setStatus('submitting')
 
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://formspree.io/f/xlgygydy', {
         method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           name:        data.get('name'),
           email:       data.get('email'),
@@ -114,7 +114,8 @@ export function ContactForm() {
 
       if (!res.ok) {
         const json = await res.json().catch(() => ({}))
-        throw new Error((json as { error?: string }).error ?? 'Submission failed')
+        const msg = (json as { errors?: Array<{ message: string }> }).errors?.[0]?.message
+        throw new Error(msg ?? 'Submission failed')
       }
 
       setStatus('success')

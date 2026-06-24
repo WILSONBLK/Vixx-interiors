@@ -18,6 +18,7 @@ const HERO_STYLE: CSSProperties = {
 export const metadata: Metadata = {
   title:       'About the Studio',
   description: 'Meet Osita Agusionu, Creative Director of VIXX Interiors — a Lagos-based studio dedicated to calm, personal, story-driven spaces.',
+  alternates: { canonical: 'https://vixxinteriors.com/about' },
 }
 
 export default function AboutPage() {

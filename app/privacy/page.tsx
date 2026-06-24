@@ -8,6 +8,8 @@ import { BackButton }   from '@/components/ui/BackButton'
 export const metadata: Metadata = {
   title:       'Privacy Policy',
   description: 'How VIXX Interiors collects, uses, and protects your personal information in accordance with the Nigeria Data Protection Regulation (NDPR).',
+  alternates: { canonical: 'https://vixxinteriors.com/privacy' },
+  robots:      { index: false, follow: false },
 }
 
 const SECTIONS = [

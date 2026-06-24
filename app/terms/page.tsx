@@ -8,6 +8,8 @@ import { BackButton }   from '@/components/ui/BackButton'
 export const metadata: Metadata = {
   title:       'Terms of Use – VIXX Interiors',
   description: 'Terms governing your use of the VIXX Interiors website and engagement with our design services.',
+  alternates: { canonical: 'https://vixxinteriors.com/terms' },
+  robots:      { index: false, follow: false },
 }
 
 const SECTIONS = [

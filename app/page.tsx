@@ -14,7 +14,9 @@ import { Tilt3DCard }        from '@/components/ui/Tilt3DCard'
 import { PORTFOLIO_PROJECTS, STATS, SERVICES, PROCESS_STEPS } from '@/lib/data'
 
 export const metadata: Metadata = {
+  title:       'VIXX Interiors – Interior Design Studio, Lagos',
   description: 'VIXX Interiors is a Nigerian interior design studio crafting spaces that feel personal, calm, and completely yours. Explore our portfolio and start a conversation.',
+  alternates: { canonical: 'https://vixxinteriors.com' },
 }
 
 export default function Home() {
