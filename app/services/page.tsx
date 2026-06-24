@@ -25,19 +25,19 @@ export const metadata: Metadata = {
 function getServiceImage(id: string): string {
   switch (id) {
     case 'residential':
-      return '/images/portfolio/proj-f-1.jpg'
+      return '/images/portfolio/proj-f-1.avif'
     case 'commercial':
-      return '/images/portfolio/proj2-3.jpg'
+      return '/images/portfolio/proj2-3.avif'
     case 'consultation':
-      return '/images/portfolio/proj-f-3.jpg'
+      return '/images/portfolio/proj-f-3.avif'
     case 'sourcing':
-      return '/images/portfolio/proj-c-1.jpg'
+      return '/images/portfolio/proj-c-1.avif'
     case 'planning':
-      return '/images/portfolio/proj-d-2.jpg'
+      return '/images/portfolio/proj-d-2.avif'
     case 'management':
-      return '/images/portfolio/proj-b-1.jpg'
+      return '/images/portfolio/proj-b-1.avif'
     default:
-      return '/images/portfolio/proj-d-1.jpg'
+      return '/images/portfolio/proj-d-1.avif'
   }
 }
 
@@ -53,7 +53,7 @@ export default function ServicesPage() {
         style={{ minHeight: 'clamp(35rem, 72vh, 100vh)', paddingTop: 'var(--nav-height)' }}
       >
         {/* Dimmed hero background image for proper view of overlay fonts */}
-        <PageHeroBackground src="/images/portfolio/proj-d-1.jpg" overlay={0.65} />
+        <PageHeroBackground src="/images/portfolio/proj-d-1.avif" overlay={0.65} />
         
         {/* Dark vignette bottom gradient to naturally transition text into page background */}
         <div

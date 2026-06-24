@@ -28,9 +28,10 @@ const nextConfig = {
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
       {
-        // Next.js static chunks: already have content-hashed filenames
+        // Production: content-hashed filenames make 1-year immutable safe.
+        // Dev: filenames don't change between restarts, so no-cache prevents stale JS.
         source: '/_next/static/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+        headers: [{ key: 'Cache-Control', value: process.env.NODE_ENV === 'production' ? 'public, max-age=31536000, immutable' : 'no-cache, no-store, must-revalidate' }],
       },
     ]
   },

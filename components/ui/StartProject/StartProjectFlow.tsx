@@ -166,7 +166,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
         transition={{ duration: 1.8, ease: EASE }}
       >
         <Image
-          src="/images/start-project-bg.jpg"
+          src="/images/start-project-bg.avif"
           alt=""
           fill
           priority

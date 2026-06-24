@@ -30,7 +30,7 @@ export default function AboutPage() {
         className="relative flex flex-col justify-end overflow-hidden"
         style={{ minHeight: 'clamp(32rem, 68vh, 100vh)' }}
       >
-        <PageHeroBackground src="/images/portfolio/proj-c-1.jpg" overlay={0.62} />
+        <PageHeroBackground src="/images/portfolio/proj-c-1.avif" overlay={0.62} />
         <div className="container-site relative z-10 max-w-4xl pb-14 lg:pb-20" style={HERO_STYLE}>
           <ScrollReveal>
             <div className="flex items-center gap-3 mb-5">
@@ -65,12 +65,14 @@ export default function AboutPage() {
                 className="relative aspect-[3/4] overflow-hidden"
                 style={{ background: 'var(--bg-primary)' }}
               >
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%)' }}
-                >
-                  <HexMotif size={180} variant="dual" opacity={0.12} />
-                </div>
+                <Image
+                  src="/images/founder.avif"
+                  alt="Osita Agusionu — Founder & Creative Director, VIXX Interiors"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
                 <div className="absolute bottom-0 inset-x-0 p-6" style={{ background: 'linear-gradient(to top, var(--overlay-heavy), transparent)' }}>
                   <p className="font-cormorant text-xl font-light" style={{ color: 'var(--text-primary)' }}>Osita Agusionu</p>
                   <p className="label-xs mt-1">Founder & Creative Director</p>

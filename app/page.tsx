@@ -118,10 +118,10 @@ export default function Home() {
                     style={{ aspectRatio: '1/1', maxHeight: '56vh', maxWidth: '56vh', width: '100%', background: 'var(--surface-elevated)' }}
                   >
                     <Image
-                      src="/images/founder.jpg"
+                      src="/images/founder.avif"
                       alt="Osita Agusionu — Founder, VIXX Interiors"
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-[center_35%]"
                       sizes="(max-width: 1024px) 100vw, 45vw"
                     />
                   </div>

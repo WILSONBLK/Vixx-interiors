@@ -60,7 +60,8 @@ export function Footer() {
                   alt="VIXX Interiors"
                   width={110}
                   height={36}
-                  className="h-8 sm:h-9 w-auto object-contain mb-5"
+                  className="h-8 sm:h-9 object-contain mb-5"
+                  style={{ width: 'auto' }}
                 />
               </Link>
               <p className="font-sans text-sm leading-relaxed mb-6" style={{ color: 'var(--text-muted)' }}>

@@ -402,7 +402,7 @@ function TitleSection() {
       }}
     >
       {/* Hero background image */}
-      <PageHeroBackground src="/images/portfolio/proj-b-1.jpg" overlay={0.28} />
+      <PageHeroBackground src="/images/portfolio/proj-b-1.avif" overlay={0.28} />
 
       {/* Ambient gold glow — on top of image, warms the center */}
       <div

@@ -32,7 +32,7 @@ export default function ContactPage() {
         className="relative flex flex-col justify-start items-center overflow-hidden"
         style={{ minHeight: 'clamp(28rem, 58vh, 90vh)', paddingTop: 'var(--nav-height)' }}
       >
-        <PageHeroBackground src="/images/portfolio/proj2-1.jpg" overlay={0.55} />
+        <PageHeroBackground src="/images/portfolio/proj2-1.avif" overlay={0.55} />
         <div
           className="container-site relative z-10 max-w-3xl flex-1 flex flex-col items-center justify-center text-center py-12 lg:py-16"
           style={{ '--text-primary': 'var(--brand-cream)', '--text-secondary': 'rgba(240,235,225,0.72)' } as CSSProperties}

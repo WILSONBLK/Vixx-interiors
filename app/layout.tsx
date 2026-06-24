@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
     images: [
       {
-        url:    '/images/hero-bg.jpg',
+        url:    '/images/hero-bg.avif',
         width:  1200,
         height: 630,
         alt:    'VIXX Interiors – Interior Design Studio, Lagos',
@@ -87,7 +87,7 @@ export const metadata: Metadata = {
     card:        'summary_large_image',
     title:       'VIXX Interiors – Interior Design Studio, Lagos',
     description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
-    images:      ['/images/hero-bg.jpg'],
+    images:      ['/images/hero-bg.avif'],
   },
 }
 
@@ -129,7 +129,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
               url: 'https://vixxinteriors.com',
               logo: 'https://vixxinteriors.com/logo-gold.png',
-              image: 'https://vixxinteriors.com/images/hero-bg.jpg',
+              image: 'https://vixxinteriors.com/images/hero-bg.avif',
               telephone: '+2348065672607',
               email: 'vixxinteriors@gmail.com',
               address: {
