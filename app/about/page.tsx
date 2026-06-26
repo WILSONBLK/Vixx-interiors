@@ -146,8 +146,8 @@ export default function AboutPage() {
                 <Image
                   src="/logo-gold.png"
                   alt="VIXX Interiors"
-                  width={220}
-                  height={80}
+                  width={440}
+                  height={160}
                   className="object-contain"
                 />
                 <div className="flex flex-col items-center gap-3">

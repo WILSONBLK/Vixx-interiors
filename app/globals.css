@@ -19,7 +19,7 @@
 
 /* ─── THEME-INVARIANT TOKENS ─────────────────────────────────────────────── */
 :root {
-  --nav-height:        76px;
+  --nav-height:        96px;
   --social-bar-height: 60px;
   --scrollbar-width:   0px;
 
@@ -348,7 +348,7 @@
     display: block;
     width: 100%;
     padding: 0.75rem 1rem;
-    font-family: var(--font-inter), system-ui, sans-serif;
+    font-family: var(--font-jost), system-ui, sans-serif;
     /* 16px on mobile prevents iOS Safari auto-zoom on focus.
        Desktop overrides this back to the design-spec size below. */
     font-size: 1rem;

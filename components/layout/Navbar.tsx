@@ -272,7 +272,7 @@ export function Navbar() {
                 alt="VIXX Interiors"
                 width={260}
                 height={84}
-                className="h-14 xl:h-[4.5rem] object-contain"
+                className="h-[4.5rem] xl:h-[5.5rem] object-contain"
                 style={{ width: 'auto' }}
                 priority
               />

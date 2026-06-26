@@ -8,14 +8,6 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowLeft, RotateCcw, Sun, Moon } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
 
-const SERVICE_TYPE_MAP: Record<string, string> = {
-  residential: 'residential',
-  commercial:  'commercial',
-  consultation: '',
-  sourcing:    '',
-  planning:    '',
-  management:  '',
-}
 
 /* ── Design tokens — theme-responsive (CSS vars switch on .dark class) ────── */
 const T = {
@@ -46,16 +38,12 @@ const EASE = [0.22, 1, 0.36, 1] as const
 interface Answers {
   name:     string
   email:    string
+  phone:    string
   location: string
-  type:     string
-  space:    string
-  timeline: string
-  budget:   string
-  style:    string
 }
 
 type FieldKey = keyof Answers
-type StepKind = 'text' | 'email' | 'textarea' | 'select'
+type StepKind = 'text' | 'email' | 'tel' | 'textarea' | 'select'
 
 interface Option { value: string; label: string; desc?: string }
 interface Step {
@@ -83,69 +71,23 @@ const STEPS: Step[] = [
     placeholder: "your@email.com",
   },
   {
+    id: 'phone', kind: 'tel',
+    question:    "What's the best number to reach you?",
+    subtext:     "We'll call or message to arrange your consultation.",
+    placeholder: "+234 000 000 0000",
+  },
+  {
     id: 'location', kind: 'text',
     question:    "Where is the project located?",
     subtext:     "City, neighbourhood, or general area is fine.",
     placeholder: "e.g. Lekki Phase 1, Lagos",
-  },
-  {
-    id: 'type', kind: 'select',
-    question: "What type of project is this?",
-    subtext:  "Choose the option that best describes your space.",
-    options: [
-      { value: 'residential',  label: 'Residential',  desc: 'Home, apartment, duplex, suite'  },
-      { value: 'commercial',   label: 'Commercial',   desc: 'Office, retail, showroom'        },
-      { value: 'hospitality',  label: 'Hospitality',  desc: 'Hotel, restaurant, lounge'       },
-      { value: 'other',        label: 'Other',        desc: 'Something different or not sure' },
-    ],
-  },
-  {
-    id: 'space', kind: 'textarea',
-    question:    "Tell us about the space.",
-    subtext:     "Describe what you have — and what you want it to become.",
-    placeholder: "Three bedrooms, fourth floor. The living area feels closed off and the layout isn't working. We want it to feel open and calm…",
     optional:    true,
-  },
-  {
-    id: 'timeline', kind: 'select',
-    question: "When would you like to begin?",
-    subtext:  "Even a rough sense helps us prepare.",
-    options: [
-      { value: 'asap',         label: 'As soon as possible' },
-      { value: '1-3-months',   label: 'Within 1–3 months'   },
-      { value: '3-6-months',   label: 'Within 3–6 months'   },
-      { value: 'exploring',    label: 'Just exploring'       },
-    ],
-  },
-  {
-    id: 'budget', kind: 'select',
-    question:  "What is your estimated budget range?",
-    subtext:   "Optional — only if you're comfortable sharing.",
-    optional:  true,
-    options: [
-      { value: 'below-5m',  label: 'Below ₦5M'        },
-      { value: '5-15m',     label: '₦5M – ₦15M'       },
-      { value: '15-30m',    label: '₦15M – ₦30M'      },
-      { value: '30m-plus',  label: '₦30M and above'    },
-      { value: 'skip',      label: 'Prefer not to say' },
-    ],
-  },
-  {
-    id: 'style', kind: 'select',
-    question: "What style best describes your vision?",
-    subtext:  "Trust your instinct — there are no wrong answers.",
-    options: [
-      { value: 'warm-natural', label: 'Warm & natural',        desc: 'Organic, textured, grounded'   },
-      { value: 'contemporary', label: 'Contemporary & minimal', desc: 'Clean, light, uncluttered'     },
-      { value: 'bold',         label: 'Bold & expressive',      desc: 'Strong, confident, dramatic'   },
-      { value: 'classic',      label: 'Classic & refined',      desc: 'Timeless, structured, elegant' },
-    ],
   },
 ]
 
 const TOTAL = STEPS.length // 8
 
-const EMPTY: Answers = { name:'', email:'', location:'', type:'', space:'', timeline:'', budget:'', style:'' }
+const EMPTY: Answers = { name:'', email:'', phone:'', location:'' }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    INTRO HERO SCREEN
@@ -234,9 +176,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}
         >
           <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
-          <span style={{ fontFamily: 'var(--font-jost)', fontSize: '0.6rem', letterSpacing: '0.38em', textTransform: 'uppercase', color: DARK.gold }}>
-            VIXX Interiors
-          </span>
+          <Image src="/logo-white.png" alt="VIXX Interiors" width={120} height={40} style={{ height: '1.75rem', width: 'auto', objectFit: 'contain' }} />
           <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
         </motion.div>
 
@@ -246,7 +186,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.3, delay: 0.45, ease: EASE }}
           style={{
-            fontFamily:  'var(--font-cormorant)',
+            fontFamily:  'var(--font-jost)',
             fontSize:    'clamp(3rem, 8vw, 6rem)',
             fontWeight:   400,
             lineHeight:   0.95,
@@ -324,11 +264,10 @@ export function StartProjectFlow() {
   const searchParams = useSearchParams()
   const router       = useRouter()
   const serviceParam = searchParams.get('service') ?? ''
-  const preselectedType = SERVICE_TYPE_MAP[serviceParam] ?? ''
 
   const [phase,       setPhase]       = useState<'intro' | 'flow'>(serviceParam ? 'flow' : 'intro')
   const [stepIdx,     setStepIdx]     = useState(0)
-  const [answers,     setAnswers]     = useState<Answers>({ ...EMPTY, type: preselectedType })
+  const [answers,     setAnswers]     = useState<Answers>({ ...EMPTY })
   const [dir,         setDir]         = useState<1|-1>(1)
   const [complete,    setComplete]    = useState(false)
   const [submitError, setSubmitError] = useState(false)
@@ -339,9 +278,9 @@ export function StartProjectFlow() {
   /* Submit enquiry when user reaches the thank-you screen */
   useEffect(() => {
     if (!complete) return
-    fetch('https://formspree.io/f/xlgygydy', {
+    fetch('/api/contact', {
       method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ ...answers, source: 'start-project' }),
     })
       .then(res => { if (!res.ok) setSubmitError(true) })
@@ -464,10 +403,8 @@ export function StartProjectFlow() {
             </button>
           )}
 
-          {/* Centre: wordmark */}
-          <span style={{ color: T.gold, fontFamily:'var(--font-cormorant)', fontSize:'1.05rem', letterSpacing:'0.04em' }}>
-            VIXX Interiors
-          </span>
+          {/* Centre: logo */}
+          <Image src="/logo-gold.png" alt="VIXX Interiors" width={140} height={45} style={{ height: '2.2rem', width: 'auto', objectFit: 'contain' }} />
 
           {/* Right: counter / theme toggle / restart */}
           <div className="flex items-center gap-3">
@@ -537,7 +474,7 @@ export function StartProjectFlow() {
                       step={step}
                       onSelect={v => { set(step.id, v); setTimeout(advance, 220) }}
                       onSkip={step.optional ? advance : undefined}
-                      initialValue={step.id === 'type' && preselectedType ? preselectedType : undefined}
+                      initialValue={undefined}
                     />
                   )}
                 </>
@@ -602,19 +539,20 @@ function TextStep({ step, value, onChange, onNext }: {
       >
         <input
           ref={ref}
-          type={step.kind === 'email' ? 'email' : 'text'}
+          type={step.kind === 'email' ? 'email' : step.kind === 'tel' ? 'tel' : 'text'}
+          inputMode={step.kind === 'tel' ? 'tel' : undefined}
           value={value}
           onChange={e => onChange(e.target.value)}
           onKeyDown={e => { if (e.key === 'Enter') tryNext() }}
           onFocus={() => setFoc(true)}
           onBlur={() => setFoc(false)}
           placeholder={step.placeholder}
-          autoComplete={step.kind === 'email' ? 'email' : 'off'}
+          autoComplete={step.kind === 'email' ? 'email' : step.kind === 'tel' ? 'tel' : 'off'}
           spellCheck={false}
           style={{
             width: '100%', background: 'transparent', border: 'none',
             borderBottom: `1px solid ${foc ? T.gold : T.borderM}`,
-            color: T.text, fontFamily: 'var(--font-cormorant)',
+            color: T.text, fontFamily: 'var(--font-jost)',
             fontSize: 'clamp(1.75rem, 4.5vw, 2.6rem)', fontWeight: 400,
             padding: '0.45rem 0', letterSpacing: '0.01em',
             transition: 'border-color 0.28s ease',
@@ -846,7 +784,7 @@ function ThankYouScreen({ submitError }: { submitError: boolean }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
-            style={{ fontFamily:'var(--font-cormorant)', fontSize:'clamp(2.2rem,6vw,3.5rem)', fontWeight:400, color: T.text, lineHeight:1.1, marginBottom:'1.25rem' }}
+            style={{ fontFamily:'var(--font-jost)', fontSize:'clamp(2.2rem,6vw,3.5rem)', fontWeight:400, color: T.text, lineHeight:1.1, marginBottom:'1.25rem' }}
           >
             Thank you.
           </motion.h2>
@@ -914,7 +852,7 @@ function ThankYouScreen({ submitError }: { submitError: boolean }) {
 function QHeader({ question, subtext }: { question: string; subtext?: string }) {
   return (
     <div style={{ marginBottom:'2.5rem' }}>
-      <h2 style={{ fontFamily:'var(--font-cormorant)', fontSize:'clamp(2rem,5vw,3.25rem)', fontWeight:400, color: T.text, lineHeight:1.1, marginBottom: subtext ? '0.65rem' : 0 }}>
+      <h2 style={{ fontFamily:'var(--font-jost)', fontSize:'clamp(2rem,5vw,3.25rem)', fontWeight:400, color: T.text, lineHeight:1.1, marginBottom: subtext ? '0.65rem' : 0 }}>
         {question}
       </h2>
       {subtext && (

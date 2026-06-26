@@ -3,11 +3,10 @@
 import { useState, useCallback } from 'react'
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { BUDGET_OPTIONS, TIMELINE_OPTIONS, PROJECT_TYPE_OPTIONS, SERVICES } from '@/lib/data'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-const REQUIRED_FIELDS = ['name', 'email', 'phone', 'location', 'projectType', 'budget']
+const REQUIRED_FIELDS = ['name', 'email', 'phone']
 
 function validateField(name: string, value: string): string {
   const trimmed = value.trim()
@@ -48,7 +47,7 @@ export function ContactForm() {
   const [submitError, setSubmitError] = useState('')
 
   const handleBlur = useCallback((
-    e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target
     const error = validateField(name, value)
@@ -63,7 +62,7 @@ export function ContactForm() {
   }, [])
 
   const handleChange = useCallback((
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name } = e.target
     setErrors(prev => {
@@ -95,26 +94,21 @@ export function ContactForm() {
     setStatus('submitting')
 
     try {
-      const res = await fetch('https://formspree.io/f/xlgygydy', {
+      const res = await fetch('/api/contact', {
         method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:        data.get('name'),
-          email:       data.get('email'),
-          phone:       data.get('phone'),
-          location:    data.get('location'),
-          projectType: data.get('projectType'),
-          budget:      data.get('budget'),
-          timeline:    data.get('timeline'),
-          service:     data.get('service'),
-          message:     data.get('message'),
-          source:      'contact-form',
+          name:    data.get('name'),
+          email:   data.get('email'),
+          phone:   data.get('phone'),
+          message: data.get('message'),
+          source:  'contact-form',
         }),
       })
 
       if (!res.ok) {
         const json = await res.json().catch(() => ({}))
-        const msg = (json as { errors?: Array<{ message: string }> }).errors?.[0]?.message
+        const msg = (json as { error?: string }).error
         throw new Error(msg ?? 'Submission failed')
       }
 
@@ -195,139 +189,38 @@ export function ContactForm() {
         </div>
       </div>
 
-      {/* Row 2: Phone + Location */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="phone" className="input-label">Phone Number *</label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            required
-            placeholder="+234 800 000 0000"
-            maxLength={20}
-            inputMode="tel"
-            className={cn('input-field', errors.phone && 'input-error')}
-            aria-describedby={errors.phone ? 'phone-error' : undefined}
-            aria-invalid={!!errors.phone}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          {errors.phone && (
-            <p id="phone-error" role="alert" className="field-error">{errors.phone}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="location" className="input-label">Project Location *</label>
-          <input
-            id="location"
-            name="location"
-            type="text"
-            required
-            placeholder="Lekki Phase 1, Lagos"
-            maxLength={200}
-            className={cn('input-field', errors.location && 'input-error')}
-            aria-describedby={errors.location ? 'location-error' : undefined}
-            aria-invalid={!!errors.location}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          {errors.location && (
-            <p id="location-error" role="alert" className="field-error">{errors.location}</p>
-          )}
-        </div>
-      </div>
-
-      {/* Row 3: Project Type + Budget */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="projectType" className="input-label">Project Type *</label>
-          <select
-            id="projectType"
-            name="projectType"
-            required
-            className={cn('input-field', errors.projectType && 'input-error')}
-            defaultValue=""
-            aria-invalid={!!errors.projectType}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          >
-            <option value="" disabled>Select type…</option>
-            {PROJECT_TYPE_OPTIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-          {errors.projectType && (
-            <p role="alert" className="field-error">{errors.projectType}</p>
-          )}
-        </div>
-        <div>
-          <label htmlFor="budget" className="input-label">Budget Range *</label>
-          <select
-            id="budget"
-            name="budget"
-            required
-            className={cn('input-field', errors.budget && 'input-error')}
-            defaultValue=""
-            aria-invalid={!!errors.budget}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          >
-            <option value="" disabled>Select budget…</option>
-            {BUDGET_OPTIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-          {errors.budget && (
-            <p role="alert" className="field-error">{errors.budget}</p>
-          )}
-        </div>
-      </div>
-
-      {/* Row 4: Timeline + Services */}
-      <div className="grid sm:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="timeline" className="input-label">Timeline</label>
-          <select
-            id="timeline"
-            name="timeline"
-            className="input-field"
-            defaultValue=""
-            onBlur={handleBlur}
-          >
-            <option value="" disabled>Select timeline…</option>
-            {TIMELINE_OPTIONS.map((o) => (
-              <option key={o} value={o}>{o}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label htmlFor="service" className="input-label">Service Interested In</label>
-          <select
-            id="service"
-            name="service"
-            className="input-field"
-            defaultValue=""
-            onBlur={handleBlur}
-          >
-            <option value="" disabled>Select service…</option>
-            {SERVICES.map((s) => (
-              <option key={s.id} value={s.id}>{s.title}</option>
-            ))}
-          </select>
-        </div>
+      {/* Phone */}
+      <div>
+        <label htmlFor="phone" className="input-label">Phone Number *</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          required
+          placeholder="+234 800 000 0000"
+          maxLength={20}
+          inputMode="tel"
+          className={cn('input-field', errors.phone && 'input-error')}
+          aria-describedby={errors.phone ? 'phone-error' : undefined}
+          aria-invalid={!!errors.phone}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        {errors.phone && (
+          <p id="phone-error" role="alert" className="field-error">{errors.phone}</p>
+        )}
       </div>
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="input-label">Tell Us More (optional)</label>
+        <label htmlFor="message" className="input-label">Message</label>
         <textarea
           id="message"
           name="message"
           rows={4}
           maxLength={500}
-          placeholder="Describe your space, your vision, or any specific requirements…"
+          placeholder="Tell us about your space, your vision, or how we can help…"
           className="input-field resize-none"
           onBlur={handleBlur}
         />

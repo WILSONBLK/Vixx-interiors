@@ -453,7 +453,7 @@ function TitleSection() {
           className="flex items-center justify-center gap-3 mb-8"
         >
           <span style={{ display: 'block', width: '28px', height: '1px', background: 'var(--gold-line)' }} />
-          <p className="label-xs">VIXX Interiors</p>
+          <Image src="/logo-white.png" alt="VIXX Interiors" width={120} height={40} style={{ height: '1.75rem', width: 'auto', objectFit: 'contain' }} />
           <span style={{ display: 'block', width: '28px', height: '1px', background: 'var(--gold-line)' }} />
         </motion.div>
 

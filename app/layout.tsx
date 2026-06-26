@@ -1,31 +1,19 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, Jost, Inter } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { CustomCursor }    from '@/components/ui/CustomCursor'
 import { ButtonFeedback }  from '@/components/ui/ButtonFeedback'
 import { PageTransition }  from '@/components/ui/PageTransition'
 import { SocialBar }       from '@/components/ui/SocialBar'
 import { Navbar }          from '@/components/layout/Navbar'
+import { Preloader }       from '@/components/ui/Preloader'
 
-const cormorant = Playfair_Display({
+const jost = Raleway({
   subsets:  ['latin'],
-  weight:   ['400', '500', '600', '700', '800', '900'],
+  weight:   ['100', '200', '300', '400', '500', '600', '700'],
   style:    ['normal', 'italic'],
-  variable: '--font-cormorant',
-  display:  'swap',
-})
-
-const jost = Jost({
-  subsets:  ['latin'],
-  weight:   ['200', '300', '400', '500', '600'],
   variable: '--font-jost',
-  display:  'swap',
-})
-
-const inter = Inter({
-  subsets:  ['latin'],
-  variable: '--font-inter',
   display:  'swap',
 })
 
@@ -106,9 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body
         className={`
-          ${cormorant.variable}
           ${jost.variable}
-          ${inter.variable}
           min-h-screen font-sans antialiased
         `}
         style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
@@ -152,6 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }),
           }}
         />
+        <Preloader />
         <CustomCursor />
         <ButtonFeedback />
         <Navbar />

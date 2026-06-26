@@ -51,9 +51,9 @@ export default {
         },
       },
       fontFamily: {
-        cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
+        cormorant: ['var(--font-jost)', 'system-ui', 'sans-serif'],
         jost:      ['var(--font-jost)', 'system-ui', 'sans-serif'],
-        sans:      ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans:      ['var(--font-jost)', 'system-ui', 'sans-serif'],
       },
       transitionTimingFunction: {
         smooth: 'cubic-bezier(0.4, 0, 0.2, 1)',
