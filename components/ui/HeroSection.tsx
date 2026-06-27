@@ -188,7 +188,7 @@ export function HeroSection() {
 
           {/* Tagline — below brand name */}
           <motion.p
-            className="font-jost italic font-bold"
+            className="font-jost italic font-light"
             style={{
               fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
               letterSpacing: '0.28em',
@@ -213,7 +213,7 @@ export function HeroSection() {
         {/* CTA */}
         <motion.div
           className="flex justify-center"
-          style={{ marginTop: 0 }}
+          style={{ marginTop: 'clamp(1.5rem, 4vw, 3.5rem)' }}
           initial={rm ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, delay: 1.5, ease: EASE }}
