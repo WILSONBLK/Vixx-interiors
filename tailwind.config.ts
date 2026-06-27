@@ -51,7 +51,7 @@ export default {
         },
       },
       fontFamily: {
-        cormorant: ['var(--font-jost)', 'system-ui', 'sans-serif'],
+        cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],
         jost:      ['var(--font-jost)', 'system-ui', 'sans-serif'],
         sans:      ['var(--font-jost)', 'system-ui', 'sans-serif'],
       },

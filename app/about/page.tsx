@@ -75,7 +75,7 @@ export default function AboutPage() {
                   priority
                 />
                 <div className="absolute bottom-0 inset-x-0 p-6" style={{ background: 'linear-gradient(to top, var(--overlay-heavy), transparent)' }}>
-                  <p className="font-cormorant text-xl font-light" style={{ color: 'var(--text-primary)' }}>Osita Agusionu</p>
+                  <p className="font-jost text-xl font-light" style={{ color: 'var(--text-primary)' }}>Osita Agusionu</p>
                   <p className="label-xs mt-1">Founder & Creative Director</p>
                 </div>
               </div>
@@ -130,7 +130,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Victoria became Vicky. Vicky became VICKS. VICKS became VIX. A friend&apos;s suggestion added the final X.{' '}
-                  <span className="font-cormorant text-xl font-light" style={{ color: 'var(--gold)' }}>VIXX.</span>
+                  <span className="font-jost text-xl font-light" style={{ color: 'var(--gold)' }}>VIXX.</span>
                 </p>
                 <p>
                   &ldquo;Growing up, my mom is my hero, literally. She represents strength, patience, hard work — and that&apos;s what has kept me going.&rdquo;
@@ -166,7 +166,7 @@ export default function AboutPage() {
         <div className="container-site max-w-3xl mx-auto text-center">
           <ScrollReveal>
             <p
-              className="font-cormorant font-light italic leading-snug mb-6"
+              className="font-jost font-light italic leading-snug mb-6"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', color: 'var(--text-primary)' }}
             >
               &ldquo;When you get it right, people don&apos;t say &lsquo;I love the design.&rsquo; They say &lsquo;I love being here.&rsquo; That&apos;s the goal.&rdquo;
@@ -242,7 +242,7 @@ export default function AboutPage() {
               ].map((item, i) => (
                 <ScrollReveal key={item.number} delay={i * 0.07} variant="fadeUp">
                   <div className="card-glass p-8 h-full" style={{ background: 'var(--bg-primary)' }}>
-                    <span className="font-cormorant text-4xl font-light opacity-20 block mb-4" style={{ color: 'var(--gold)' }}>
+                    <span className="font-jost text-4xl font-light opacity-20 block mb-4" style={{ color: 'var(--gold)' }}>
                       {item.number}
                     </span>
                     <h3 className="heading-md mb-3">{item.title}</h3>
@@ -329,7 +329,7 @@ export default function AboutPage() {
 
                   <div>
                     <p
-                      className="font-cormorant font-light italic mb-1"
+                      className="font-jost font-light italic mb-1"
                       style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}
                     >
                       Watch the interview
@@ -372,7 +372,7 @@ export default function AboutPage() {
                 style={{ background: 'var(--bg-primary)', borderLeft: '1px solid var(--border)' }}
               >
                 <span
-                  className="font-cormorant block mb-6 leading-none select-none"
+                  className="font-jost block mb-6 leading-none select-none"
                   style={{ fontSize: '5rem', color: 'var(--gold)', opacity: 0.15, lineHeight: 1 }}
                   aria-hidden="true"
                 >
@@ -380,7 +380,7 @@ export default function AboutPage() {
                 </span>
 
                 <p
-                  className="font-cormorant font-light italic leading-relaxed mb-8"
+                  className="font-jost font-light italic leading-relaxed mb-8"
                   style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.6rem)', color: 'var(--text-primary)' }}
                 >
                   Waking up every morning to go out there and do something that you actually love, and it actually fetches you money — I feel like that&apos;s the highest blessing.

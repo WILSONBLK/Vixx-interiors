@@ -459,7 +459,7 @@ function TitleSection() {
 
         <div style={{ overflow: 'hidden' }}>
           <motion.h1
-            className="font-cormorant font-light"
+            className="font-jost font-light"
             style={{
               fontSize:      'clamp(4.5rem, 10vw, 11rem)',
               lineHeight:    0.9,
@@ -477,7 +477,7 @@ function TitleSection() {
 
         <div style={{ overflow: 'hidden' }}>
           <motion.h1
-            className="font-cormorant italic font-light"
+            className="font-jost italic font-light"
             style={{
               fontSize:      'clamp(4.5rem, 10vw, 11rem)',
               lineHeight:    0.9,
@@ -535,7 +535,7 @@ function CTASection() {
       <div className="container-site relative z-10 text-center">
         <FadeUp>
           <p
-            className="font-cormorant italic font-light"
+            className="font-jost italic font-light"
             style={{
               fontSize:      'clamp(1.6rem, 3.2vw, 3rem)',
               color:         'var(--text-secondary)',

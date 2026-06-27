@@ -123,7 +123,7 @@ export default function ServicesPage() {
                     
                     {/* Glowing Accent number inside the image header */}
                     <div className="absolute top-5 right-5 z-10 flex items-center justify-center w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/10">
-                      <span className="font-cormorant text-xl font-light text-[var(--gold)]">
+                      <span className="font-jost text-xl font-light text-[var(--gold)]">
                         {service.number}
                       </span>
                     </div>
@@ -207,7 +207,7 @@ export default function ServicesPage() {
                     className="flex items-center gap-5 py-4"
                     style={{ borderBottom: '1px solid var(--border)' }}
                   >
-                    <span className="font-cormorant text-xl font-light w-8 flex-shrink-0" style={{ color: 'var(--gold)' }}>
+                    <span className="font-jost text-xl font-light w-8 flex-shrink-0" style={{ color: 'var(--gold)' }}>
                       {item.step}
                     </span>
                     <span className="font-sans text-sm" style={{ color: 'var(--text-secondary)' }}>{item.text}</span>

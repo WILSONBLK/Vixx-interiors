@@ -19,7 +19,7 @@
 
 /* ─── THEME-INVARIANT TOKENS ─────────────────────────────────────────────── */
 :root {
-  --nav-height:        96px;
+  --nav-height:        120px;
   --social-bar-height: 60px;
   --scrollbar-width:   0px;
 
@@ -115,6 +115,13 @@
   --bg-card-hover: var(--surface-overlay);
   --text-muted:    var(--text-tertiary);
   --border:        var(--border-default);
+}
+
+/* ─── RESPONSIVE NAV HEIGHT (xl breakpoint = 1280px) ─────────────────────── */
+@media (min-width: 1280px) {
+  :root {
+    --nav-height: 148px;
+  }
 }
 
 /* ─── DARK THEME — Black-based cinematic premium (.dark on <html>) ────────── */
@@ -295,19 +302,19 @@
   }
 
   .heading-xl {
-    @apply font-cormorant font-medium
+    @apply font-jost font-medium
            text-6xl sm:text-7xl lg:text-8xl xl:text-[7rem]
            text-[var(--text-primary)] leading-[0.95];
   }
 
   .heading-lg {
-    @apply font-cormorant font-medium
+    @apply font-jost font-medium
            text-4xl sm:text-5xl lg:text-6xl
            text-[var(--text-primary)] leading-[1.05];
   }
 
   .heading-md {
-    @apply font-cormorant font-medium
+    @apply font-jost font-medium
            text-3xl sm:text-4xl
            text-[var(--text-primary)] leading-snug;
   }

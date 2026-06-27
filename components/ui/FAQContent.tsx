@@ -24,7 +24,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: {
         className="w-full flex items-center justify-between gap-6 py-6 text-left"
       >
         <span
-          className="font-cormorant text-xl sm:text-2xl font-light"
+          className="font-jost text-xl sm:text-2xl font-light"
           style={{ color: 'var(--text-primary)' }}
         >
           {question}

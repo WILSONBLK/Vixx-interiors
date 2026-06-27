@@ -272,7 +272,7 @@ export function Navbar() {
                 alt="VIXX Interiors"
                 width={260}
                 height={84}
-                className="h-[4.5rem] xl:h-[5.5rem] object-contain"
+                className="h-[6.75rem] xl:h-[8.25rem] object-contain"
                 style={{ width: 'auto' }}
                 priority
               />
@@ -281,7 +281,7 @@ export function Navbar() {
 
           {/* Desktop nav links — always visible, fills remaining space */}
           <ul
-            className="hidden lg:flex flex-1 items-center justify-center gap-6 2xl:gap-10 min-w-0 overflow-hidden"
+            className="hidden lg:flex flex-1 items-center justify-center gap-4 xl:gap-6 2xl:gap-10 min-w-0"
             role="list"
             style={slideStyle(navVisible, 20)}
           >
@@ -468,7 +468,7 @@ export function Navbar() {
                   >
                     <GlowText
                       active={active}
-                      className="block font-cormorant text-3xl sm:text-4xl font-light"
+                      className="block font-jost text-3xl sm:text-4xl font-light"
                     >
                       {link.label}
                     </GlowText>

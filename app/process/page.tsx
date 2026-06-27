@@ -57,7 +57,7 @@ export default function ProcessPage() {
                   {/* Number */}
                   <div className="flex lg:flex-col items-center lg:items-start gap-4 lg:gap-2">
                     <span
-                      className="font-cormorant text-5xl lg:text-6xl font-light leading-none"
+                      className="font-jost text-5xl lg:text-6xl font-light leading-none"
                       style={{ color: 'var(--gold)' }}
                     >
                       {step.number}

@@ -75,7 +75,7 @@ export function AboutStudio() {
             </div>
 
             <h2
-              className="font-cormorant font-light mb-8 mx-auto"
+              className="font-jost font-light mb-8 mx-auto"
               style={{
                 fontSize:   'clamp(2.4rem, 4.5vw, 4rem)',
                 lineHeight: 1.05,
@@ -118,7 +118,7 @@ export function AboutStudio() {
 
           <ScrollReveal delay={0.2} variant="fadeUp">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <SectionCTAButton href="#founder" label="Meet The Founder" variant="primary" />
+              <SectionCTAButton href="#founder" label="Meet The Founder" variant="primary" arrow="down" />
               <SectionCTAButton href="/about" label="About The Studio" variant="secondary" />
             </div>
           </ScrollReveal>

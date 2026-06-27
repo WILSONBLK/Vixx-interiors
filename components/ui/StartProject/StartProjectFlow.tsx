@@ -67,13 +67,13 @@ const STEPS: Step[] = [
   {
     id: 'email', kind: 'email',
     question:    "What is your email address?",
-    subtext:     "We'll use this to follow up personally after your consultation.",
+    subtext:     "We'll use this to get back to you personally.",
     placeholder: "your@email.com",
   },
   {
     id: 'phone', kind: 'tel',
     question:    "What's the best number to reach you?",
-    subtext:     "We'll call or message to arrange your consultation.",
+    subtext:     "We'll reach out here when we're ready to discuss your project.",
     placeholder: "+234 000 000 0000",
   },
   {
@@ -176,7 +176,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '2rem' }}
         >
           <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
-          <Image src="/logo-white.png" alt="VIXX Interiors" width={120} height={40} style={{ height: '1.75rem', width: 'auto', objectFit: 'contain' }} />
+          <Image src="/logo-gold.png" alt="VIXX Interiors" width={120} height={40} style={{ height: '6rem', width: 'auto', objectFit: 'contain' }} />
           <span style={{ display: 'block', width: 24, height: 1, background: 'rgba(196,154,46,0.65)' }} />
         </motion.div>
 
@@ -216,7 +216,7 @@ function IntroScreen({ onBegin, onBack }: { onBegin: () => void; onBack: () => v
             margin:       '0 auto 2.5rem',
           }}
         >
-          A guided consultation to understand your space and your vision. Two minutes of your time.
+          Tell us what you're looking for — we'll take care of the rest.
         </motion.p>
 
         {/* CTA */}
@@ -404,13 +404,13 @@ export function StartProjectFlow() {
           )}
 
           {/* Centre: logo */}
-          <Image src="/logo-gold.png" alt="VIXX Interiors" width={140} height={45} style={{ height: '2.2rem', width: 'auto', objectFit: 'contain' }} />
+          <Image src="/logo-gold.png" alt="VIXX Interiors" width={140} height={45} style={{ height: '6rem', width: 'auto', objectFit: 'contain' }} />
 
           {/* Right: counter / theme toggle / restart */}
           <div className="flex items-center gap-3">
             {!complete ? (
-              <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.58rem', letterSpacing:'0.22em', color: T.dim, textTransform:'uppercase' }}>
-                {String(stepIdx + 1).padStart(2, '0')} / {String(TOTAL).padStart(2, '0')}
+              <span style={{ fontFamily:'var(--font-jost)', fontSize:'0.72rem', letterSpacing:'0.14em', color: T.sub, textTransform:'uppercase' }}>
+                Step {stepIdx + 1} <span style={{ color: T.dim }}>/ {TOTAL}</span>
               </span>
             ) : (
               <button
@@ -453,7 +453,7 @@ export function StartProjectFlow() {
             >
               {!complete ? (
                 <>
-                  {(step.kind === 'text' || step.kind === 'email') && (
+                  {(step.kind === 'text' || step.kind === 'email' || step.kind === 'tel') && (
                     <TextStep
                       step={step}
                       value={answers[step.id]}
@@ -710,10 +710,10 @@ function SelectStep({ step, onSelect, onSkip, initialValue }: {
    FINAL SCREEN — placeholder for AI qualification (Phase 2)
 ══════════════════════════════════════════════════════════════════════════════ */
 const LOAD_MSGS = [
-  'Reviewing your brief',
-  'Analysing project scope',
-  'Assessing timeline and investment',
-  'Preparing your project profile',
+  'Looking over your details',
+  'Getting to know your space',
+  'Matching you with our team',
+  'Almost ready',
 ]
 
 function ThankYouScreen({ submitError }: { submitError: boolean }) {

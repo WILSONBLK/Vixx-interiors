@@ -160,7 +160,7 @@ export default function ContactPage() {
                       { step: '04', text: 'Project begins on a date that suits your timeline.' },
                     ].map((item) => (
                       <div key={item.step} className="flex items-start gap-4">
-                        <span className="font-cormorant text-lg font-light flex-shrink-0 w-6" style={{ color: 'var(--gold)' }}>
+                        <span className="font-jost text-lg font-light flex-shrink-0 w-6" style={{ color: 'var(--gold)' }}>
                           {item.step}
                         </span>
                         <p className="font-sans text-sm" style={{ color: 'var(--text-muted)' }}>{item.text}</p>
@@ -176,7 +176,7 @@ export default function ContactPage() {
                 >
                   <HexMotif size="xs" opacity={0.5} className="mb-3" />
                   <blockquote>
-                    <p className="font-cormorant text-lg font-light leading-snug" style={{ color: 'var(--text-primary)' }}>
+                    <p className="font-jost text-lg font-light leading-snug" style={{ color: 'var(--text-primary)' }}>
                       &ldquo;We start every project by listening — deeply — before we design anything.&rdquo;
                     </p>
                     <footer className="mt-3">

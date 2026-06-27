@@ -323,12 +323,11 @@ export const WHY_ITEMS: WhyItem[] = [
 
 // ── Navigation ────────────────────────────────────────────────────────────────
 export const NAV_LINKS = [
-  { label: 'Home',          href: '/'          },
-  { label: 'About Studio',  href: '/about'     },
-  { label: 'Portfolio',     href: '/portfolio' },
-  { label: 'Services',      href: '/services'  },
-  { label: 'Start Project', href: '/start'     },
-  { label: 'Contact',       href: '/contact'   },
+  { label: 'Home',         href: '/'          },
+  { label: 'About Studio', href: '/about'     },
+  { label: 'Portfolio',    href: '/portfolio' },
+  { label: 'Services',     href: '/services'  },
+  { label: 'Contact',      href: '/contact'   },
 ]
 
 // ── Budget Options ────────────────────────────────────────────────────────────

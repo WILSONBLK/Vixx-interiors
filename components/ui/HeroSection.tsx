@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowDown } from 'lucide-react'
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion'
 import { MagneticElement } from '@/components/ui/MagneticElement'
 
@@ -60,7 +60,11 @@ export function HeroSection() {
       ref={sectionRef}
       data-hero
       className="relative flex flex-col items-center justify-center overflow-hidden"
-      style={{ minHeight: '100svh' }}
+      style={{
+        minHeight:     '100svh',
+        paddingTop:    'var(--nav-height)',
+        paddingBottom: 'var(--nav-height)',
+      }}
       onMouseEnter={() => setImageHovered(true)}
       onMouseLeave={() => setImageHovered(false)}
     >
@@ -113,81 +117,110 @@ export function HeroSection() {
       )}
 
       {/* ── Hero content — centered, logo-first ───────────────────────────── */}
-      <div className="relative z-20 flex flex-col items-center justify-center text-center w-full px-6 sm:px-12">
+      <div className="relative z-20 flex flex-col items-center justify-center text-center w-full px-6 sm:px-12"
+           style={{ gap: 'clamp(1.5rem, 3.5vw, 3rem)' }}>
 
-        {/* Brand logo — the visual focal point */}
-        <motion.div
+        {/* Interior Design Studio — above brand name */}
+        <motion.p
+          className="font-jost uppercase w-full"
+          style={{
+            fontSize:      'clamp(0.93rem, 1.65vw, 1.17rem)',
+            letterSpacing: '0.42em',
+            textIndent:    '0.42em',
+            color:         'var(--gold-text)',
+            textShadow:    '0 1px 14px rgba(8,8,8,0.9)',
+            cursor:        'default',
+          }}
+          initial={rm ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, delay: 0.1, ease: EASE }}
+          whileHover={rm ? {} : { scale: 1.06, transition: HOVER_SPRING }}
+          whileTap={rm ? {} : { scale: 0.94 }}
+        >
+          Interior Design Studio
+        </motion.p>
+
+        {/* Brand name — the visual focal point */}
+        <motion.h1
           initial={rm ? false : { opacity: 0, scale: 0.92, y: 28 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.9, delay: 0.1, ease: EASE }}
-          whileHover={rm ? {} : { scale: 1.025, transition: HOVER_SPRING }}
-          style={{ marginBottom: 'clamp(1.75rem, 4.5vw, 3.5rem)' }}
+          transition={{ duration: 1.9, delay: 0.3, ease: EASE }}
+          whileTap={rm ? {} : { scale: 0.97 }}
+          className="font-jost uppercase text-center w-full"
+          style={{ margin: 0, cursor: 'default' }}
         >
-          <Image
-            src="/logo-gold.png"
-            alt="VIXX Interiors"
-            width={580}
-            height={188}
-            priority
-            className="object-contain mx-auto"
+          <motion.span
+            className="text-white dark:text-black"
             style={{
-              width:  'clamp(220px, 52vw, 580px)',
-              height: 'auto',
-              filter: 'drop-shadow(0 6px 36px rgba(8,8,8,0.55))',
+              display:       'block',
+              fontSize:      'clamp(2.8rem, min(16.8vw, 17svh), 14.4rem)',
+              fontWeight:    200,
+              letterSpacing: '0.22em',
+              textShadow:    '0 6px 36px rgba(8,8,8,0.55)',
+              lineHeight:    1,
             }}
-          />
-        </motion.div>
+            whileHover={rm ? {} : { scale: 1.07, transition: HOVER_SPRING }}
+            whileTap={rm ? {} : { scale: 0.93 }}
+          >
+            VIXX
+          </motion.span>
+          <motion.span
+            className="text-white dark:text-black"
+            style={{
+              display:       'block',
+              fontSize:      'clamp(0.84rem, min(4.85vw, 4.9svh), 4.16rem)',
+              fontWeight:    700,
+              letterSpacing: '0.5em',
+              paddingLeft:   '0.5em',
+              textShadow:    '0 6px 36px rgba(8,8,8,0.55)',
+              lineHeight:    1,
+              marginTop:     '0.12em',
+            }}
+            whileHover={rm ? {} : { scale: 1.07, letterSpacing: '0.6em', transition: HOVER_SPRING }}
+            whileTap={rm ? {} : { scale: 0.93 }}
+          >
+            INTERIORS
+          </motion.span>
+        </motion.h1>
 
         {/* Gold separator */}
         <motion.div
           aria-hidden
           initial={rm ? false : { scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 0.9, delay: 0.75, ease: EASE }}
+          transition={{ duration: 0.9, delay: 0.95, ease: EASE }}
           style={{
             width:           52,
             height:          1,
             background:      'rgba(196,154,46,0.55)',
             transformOrigin: 'center',
-            marginBottom:    'clamp(1.1rem, 2.5vw, 1.75rem)',
           }}
         />
 
-        {/* Interior Design Studio */}
-        <motion.p
-          className="font-jost uppercase tracking-[0.42em]"
-          style={{
-            fontSize:     'clamp(0.62rem, 1.1vw, 0.8rem)',
-            color:        'var(--gold-text)',
-            textShadow:   '0 1px 14px rgba(8,8,8,0.9)',
-            marginBottom: 'clamp(0.55rem, 1.2vw, 0.9rem)',
-          }}
-          initial={rm ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 0.95, ease: EASE }}
-        >
-          Interior Design Studio
-        </motion.p>
-
         {/* Tagline */}
         <motion.p
-          className="font-jost italic"
+          className="font-jost italic font-bold w-full"
           style={{
-            fontSize:   'clamp(0.62rem, 1.1vw, 0.78rem)',
+            fontSize:      'clamp(0.93rem, 1.65vw, 1.17rem)',
             letterSpacing: '0.28em',
-            color:      'rgba(196,154,46,0.68)',
-            textShadow: '0 2px 14px rgba(8,8,8,0.88)',
+            paddingLeft:   '0.28em',
+            color:         'rgba(196,154,46,0.68)',
+            textShadow:    '0 2px 14px rgba(8,8,8,0.88)',
+            cursor:        'default',
           }}
           initial={rm ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, delay: 1.15, ease: EASE }}
+          whileHover={rm ? {} : { scale: 1.06, color: 'rgba(196,154,46,1)', transition: HOVER_SPRING }}
+          whileTap={rm ? {} : { scale: 0.94 }}
         >
-          Simplicity&nbsp;·&nbsp;Kindness&nbsp;·&nbsp;Different
+          simplicity kind of different
         </motion.p>
 
         {/* CTA */}
         <motion.div
-          style={{ marginTop: 'clamp(2.5rem, 6vw, 5rem)' }}
+          className="flex justify-center"
+          style={{ marginTop: 0 }}
           initial={rm ? false : { opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.0, delay: 1.5, ease: EASE }}
@@ -217,10 +250,10 @@ export function HeroSection() {
               >
                 About the Studio
                 <motion.span
-                  animate={rm || !isInView ? {} : { x: [0, 4, 0] }}
+                  animate={rm || !isInView ? {} : { y: [0, 4, 0] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                 >
-                  <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+                  <ArrowDown size={12} strokeWidth={1.5} aria-hidden="true" />
                 </motion.span>
               </a>
             </motion.div>

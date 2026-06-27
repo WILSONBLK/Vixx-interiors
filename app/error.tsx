@@ -25,7 +25,7 @@ export default function Error({
           Something went wrong
         </p>
 
-        <h1 className="font-cormorant text-3xl sm:text-4xl font-light mb-5" style={{ color: 'var(--text-primary)' }}>
+        <h1 className="font-jost text-3xl sm:text-4xl font-light mb-5" style={{ color: 'var(--text-primary)' }}>
           An unexpected error occurred.
         </h1>
 

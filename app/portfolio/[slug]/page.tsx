@@ -79,7 +79,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         <div className="container-site relative z-10 max-w-3xl mx-auto px-6 text-center">
           <ScrollReveal variant="fadeIn">
             <p
-              className="font-cormorant italic font-light leading-snug mb-8"
+              className="font-jost italic font-light leading-snug mb-8"
               style={{ fontSize: 'clamp(1.45rem, 2.8vw, 2.4rem)', color: 'var(--text-primary)' }}
             >
               &ldquo;{project.quotes[0]}&rdquo;
@@ -92,7 +92,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
             </div>
 
             <p
-              className="font-cormorant italic font-light leading-snug"
+              className="font-jost italic font-light leading-snug"
               style={{ fontSize: 'clamp(1.1rem, 2vw, 1.65rem)', color: 'var(--text-secondary)' }}
             >
               &ldquo;{project.quotes[1]}&rdquo;

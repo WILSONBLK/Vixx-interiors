@@ -58,13 +58,13 @@ export default function Home() {
                 </div>
 
                 <h2
-                  className="font-cormorant font-light mb-3"
+                  className="font-jost font-light mb-3"
                   style={{ fontSize: 'clamp(2.8rem, 5vw, 5rem)', lineHeight: 0.92, color: 'var(--text-primary)' }}
                 >
                   Osita<br />Agusionu
                 </h2>
                 <p
-                  className="font-cormorant italic mb-6"
+                  className="font-jost italic mb-6"
                   style={{ fontSize: '1.25rem', color: 'var(--gold-text)' }}
                 >
                   Founder &amp; Creative Director
@@ -94,7 +94,7 @@ export default function Home() {
                       style={{ borderLeft: i > 0 ? '1px solid var(--border)' : 'none' }}
                     >
                       <p
-                        className="font-cormorant font-light leading-none mb-1"
+                        className="font-jost font-light leading-none mb-1"
                         style={{ fontSize: 'clamp(1.9rem, 3vw, 3.2rem)', color: 'var(--gold)' }}
                       >
                         {stat.value}
@@ -137,7 +137,7 @@ export default function Home() {
                   </div>
                   <blockquote>
                     <p
-                      className="font-cormorant italic font-light leading-snug mb-3"
+                      className="font-jost italic font-light leading-snug mb-3"
                       style={{ fontSize: 'clamp(1.05rem, 1.7vw, 1.38rem)', color: 'var(--text-primary)' }}
                     >
                       &ldquo;We want our clients to feel safe, feel at home, feel peace — away from the noise and the chaos of the city.&rdquo;
@@ -159,7 +159,7 @@ export default function Home() {
 
           <ScrollReveal delay={0.3} variant="fadeUp">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-12 lg:pt-16">
-              <SectionCTAButton href="#services" label="Explore Our Services" variant="primary" />
+              <SectionCTAButton href="#services" label="Explore Our Services" variant="primary" arrow="down" />
               <SectionCTAButton href="/about" label="Read Full Story" variant="secondary" />
             </div>
           </ScrollReveal>
@@ -192,7 +192,7 @@ export default function Home() {
               <p className="label-xs">What We Do</p>
             </div>
             <h2
-              className="font-cormorant font-light mb-5 lg:mb-7"
+              className="font-jost font-light mb-5 lg:mb-7"
               style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', color: 'var(--text-primary)', lineHeight: 1.1 }}
             >
               Studio Services
@@ -212,14 +212,14 @@ export default function Home() {
                     />
                     <span
                       aria-hidden="true"
-                      className="absolute top-5 right-6 font-cormorant font-light select-none leading-none"
+                      className="absolute top-5 right-6 font-jost font-light select-none leading-none"
                       style={{ fontSize: '1.75rem', color: 'var(--gold-ghost)' }}
                     >
                       {svc.number}
                     </span>
                     <div className="w-1.5 h-1.5 rounded-full mb-5" style={{ background: 'var(--gold)', opacity: 0.65 }} />
                     <h3
-                      className="font-cormorant font-light leading-snug relative z-10 mb-5"
+                      className="font-jost font-light leading-snug relative z-10 mb-5"
                       style={{ fontSize: 'clamp(1.1rem, 1.5vw, 1.35rem)', color: 'var(--text-primary)' }}
                     >
                       {svc.title}
@@ -250,7 +250,7 @@ export default function Home() {
 
           <ScrollReveal delay={0.3} variant="fadeUp">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 lg:pt-10">
-              <SectionCTAButton href="#process" label="How We Work" variant="primary" />
+              <SectionCTAButton href="#process" label="How We Work" variant="primary" arrow="down" />
               <SectionCTAButton href="/services" label="View All Services" variant="secondary" />
             </div>
           </ScrollReveal>
@@ -270,7 +270,7 @@ export default function Home() {
               <p className="label-xs">How We Work</p>
             </div>
             <h2
-              className="font-cormorant font-light mb-8 lg:mb-10"
+              className="font-jost font-light mb-8 lg:mb-10"
               style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', color: 'var(--text-primary)', lineHeight: 1.1 }}
             >
               Our Process
@@ -287,13 +287,13 @@ export default function Home() {
                   >
                     <span
                       aria-hidden="true"
-                      className="block font-cormorant font-light leading-none select-none mb-5"
+                      className="block font-jost font-light leading-none select-none mb-5"
                       style={{ fontSize: '2.5rem', color: 'var(--gold-ghost)' }}
                     >
                       {step.number}
                     </span>
                     <h3
-                      className="font-cormorant font-light mb-3"
+                      className="font-jost font-light mb-3"
                       style={{ fontSize: 'clamp(1.2rem, 1.8vw, 1.5rem)', color: 'var(--text-primary)' }}
                     >
                       {step.title}
@@ -309,7 +309,7 @@ export default function Home() {
 
           <ScrollReveal delay={0.3} variant="fadeUp">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-10 lg:pt-12">
-              <SectionCTAButton href="#portfolio" label="View Selected Work" variant="primary" />
+              <SectionCTAButton href="#portfolio" label="View Selected Work" variant="primary" arrow="down" />
               <SectionCTAButton href="/start" label="Start A Project" variant="secondary" />
             </div>
           </ScrollReveal>
@@ -386,7 +386,7 @@ export default function Home() {
 
             <blockquote>
               <p
-                className="font-cormorant italic font-light leading-[1.25]"
+                className="font-jost italic font-light leading-[1.25]"
                 style={{ fontSize: 'clamp(1.55rem, 3.2vw, 2.85rem)', color: 'var(--text-primary)' }}
               >
                 &ldquo;A space is not truly finished until it belongs entirely to the people who live in it.&rdquo;
@@ -438,7 +438,7 @@ export default function Home() {
             </div>
 
             <h2
-              className="font-cormorant font-light mb-5"
+              className="font-jost font-light mb-5"
               style={{ fontSize: 'clamp(2.4rem, 4.5vw, 4rem)', lineHeight: 1.08, color: 'var(--text-primary)' }}
             >
               Ready to begin{' '}
@@ -450,8 +450,8 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <SectionCTAButton href="/start" label="Start Your Project" variant="primary" />
-              <SectionCTAButton href="/contact" label="Contact Us" variant="secondary" />
+              <SectionCTAButton href="/start" label="Start Your Project" variant="primary" arrow={false} />
+              <SectionCTAButton href="/contact" label="Contact Us" variant="secondary" arrow={false} />
             </div>
 
           </ScrollReveal>

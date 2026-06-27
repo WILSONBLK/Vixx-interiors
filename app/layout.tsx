@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata, Viewport } from 'next'
-import { Raleway } from 'next/font/google'
+import { Raleway, Cormorant_Garamond } from 'next/font/google'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { CustomCursor }    from '@/components/ui/CustomCursor'
 import { ButtonFeedback }  from '@/components/ui/ButtonFeedback'
@@ -14,6 +14,14 @@ const jost = Raleway({
   weight:   ['100', '200', '300', '400', '500', '600', '700'],
   style:    ['normal', 'italic'],
   variable: '--font-jost',
+  display:  'swap',
+})
+
+const cormorant = Cormorant_Garamond({
+  subsets:  ['latin'],
+  weight:   ['300', '400', '500', '600', '700'],
+  style:    ['normal', 'italic'],
+  variable: '--font-cormorant',
   display:  'swap',
 })
 
@@ -94,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body
         className={`
-          ${jost.variable}
+          ${jost.variable} ${cormorant.variable}
           min-h-screen font-sans antialiased
         `}
         style={{ background: 'var(--bg-primary)', color: 'var(--text-primary)' }}

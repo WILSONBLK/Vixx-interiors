@@ -143,7 +143,7 @@ export default function TermsPage() {
                 <div className="grid sm:grid-cols-[3rem_1fr] gap-5 sm:gap-8">
                   {/* Number */}
                   <span
-                    className="font-cormorant text-2xl font-light leading-none pt-1 flex-shrink-0"
+                    className="font-jost text-2xl font-light leading-none pt-1 flex-shrink-0"
                     style={{ color: 'var(--gold)' }}
                   >
                     {section.number}
@@ -152,7 +152,7 @@ export default function TermsPage() {
                   {/* Content */}
                   <div>
                     <h2
-                      className="font-cormorant text-2xl sm:text-3xl font-medium mb-4"
+                      className="font-jost text-2xl sm:text-3xl font-medium mb-4"
                       style={{ color: 'var(--text-primary)' }}
                     >
                       {section.title}

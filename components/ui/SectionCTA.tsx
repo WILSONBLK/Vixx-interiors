@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ArrowDown } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { MagneticElement } from '@/components/ui/MagneticElement'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
@@ -10,6 +10,7 @@ interface CTAProps {
   href: string
   label: string
   variant?: 'primary' | 'secondary'
+  arrow?: 'right' | 'down' | false
 }
 
 interface SectionCTAProps extends CTAProps {
@@ -35,7 +36,7 @@ const LINK_CLASS =
   'font-medium tracking-[0.22em] uppercase transition-all duration-500 ' +
   'hover:scale-[1.05] hover:brightness-110 active:scale-[0.97]'
 
-function CTAButton({ href, label, variant = 'primary' }: CTAProps) {
+function CTAButton({ href, label, variant = 'primary', arrow = 'right' }: CTAProps) {
   const rm        = useReducedMotion()
   const isPrimary = variant === 'primary'
 
@@ -43,15 +44,26 @@ function CTAButton({ href, label, variant = 'primary' }: CTAProps) {
     ? { background: 'var(--gold)', color: 'var(--text-on-accent)', padding: '0.9rem 2rem' }
     : { border: '1px solid rgba(196,154,46,0.50)', color: 'var(--gold-text)', padding: '0.9rem 2rem' }
 
+  const arrowEl = arrow === 'down' ? (
+    <motion.span
+      animate={rm ? {} : { y: [0, 4, 0] }}
+      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+    >
+      <ArrowDown size={12} strokeWidth={1.5} aria-hidden="true" />
+    </motion.span>
+  ) : arrow === 'right' ? (
+    <motion.span
+      animate={rm ? {} : { x: [0, 4, 0] }}
+      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+    >
+      <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
+    </motion.span>
+  ) : null
+
   const content = (
     <>
       {label}
-      <motion.span
-        animate={rm ? {} : { x: [0, 4, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <ArrowRight size={12} strokeWidth={1.5} aria-hidden="true" />
-      </motion.span>
+      {arrowEl}
     </>
   )
 

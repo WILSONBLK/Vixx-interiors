@@ -12,7 +12,7 @@ export default function NotFound() {
 
       <div className="relative z-10 max-w-lg">
         <span
-          className="font-cormorant text-[8rem] sm:text-[10rem] font-light leading-none block"
+          className="font-jost text-[8rem] sm:text-[10rem] font-light leading-none block"
           style={{ color: 'var(--gold-ghost)' }}
           aria-hidden="true"
         >
@@ -23,7 +23,7 @@ export default function NotFound() {
           Page Not Found
         </p>
 
-        <h1 className="font-cormorant text-3xl sm:text-4xl font-light mb-5" style={{ color: 'var(--text-primary)' }}>
+        <h1 className="font-jost text-3xl sm:text-4xl font-light mb-5" style={{ color: 'var(--text-primary)' }}>
           This space doesn&apos;t exist — yet.
         </h1>
 
