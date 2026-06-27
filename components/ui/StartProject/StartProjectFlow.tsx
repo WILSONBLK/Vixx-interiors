@@ -272,6 +272,7 @@ export function StartProjectFlow() {
   const [complete,    setComplete]    = useState(false)
   const [submitError, setSubmitError] = useState(false)
   const { isDark, toggleTheme, mounted } = useTheme()
+  const backLockRef = useRef(false)
 
   const step = STEPS[stepIdx]
 
@@ -296,7 +297,18 @@ export function StartProjectFlow() {
     else                      { setDir(1); setComplete(true) }
   }
 
+  function safeBack() {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back()
+    } else {
+      router.push('/')
+    }
+  }
+
   function back() {
+    if (backLockRef.current) return
+    backLockRef.current = true
+    setTimeout(() => { backLockRef.current = false }, 620)
     if (complete)        { setDir(-1); setComplete(false) }
     else if (stepIdx > 0){ setDir(-1); setStepIdx(i => i - 1) }
   }
@@ -345,7 +357,7 @@ export function StartProjectFlow() {
             exit={{ opacity: 0, filter: 'blur(3px)', scale: 0.99 }}
             transition={{ duration: 0.55, ease: EASE }}
           >
-            <IntroScreen onBegin={() => setPhase('flow')} onBack={() => router.back()} />
+            <IntroScreen onBegin={() => setPhase('flow')} onBack={safeBack} />
           </motion.div>
         ) : (
           <motion.div
@@ -394,7 +406,7 @@ export function StartProjectFlow() {
             </motion.button>
           ) : (
             <button
-              onClick={() => router.back()}
+              onClick={safeBack}
               style={{ color: T.dim, fontFamily:'var(--font-jost)', fontSize:'0.6rem', letterSpacing:'0.26em', textTransform:'uppercase', background:'none', border:'none', padding:'0 0.5rem', minHeight:'44px', cursor:'pointer', display:'flex', alignItems:'center' }}
               className="gap-1.5 transition-colors duration-200 hover:text-[#C49A2E]"
             >

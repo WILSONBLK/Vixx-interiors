@@ -118,13 +118,13 @@ export function HeroSection() {
 
       {/* ── Hero content — left-aligned ───────────────────────────────────── */}
       <div className="relative z-20 flex flex-col items-center text-center w-full px-6 sm:px-12"
-           style={{ gap: 'clamp(1rem, 2.8vw, 2.5rem)' }}>
+           style={{ gap: 'clamp(1.6rem, 4.2vw, 4rem)' }}>
 
         {/* Interior Design Studio — above brand name */}
         <motion.p
           className="font-jost uppercase"
           style={{
-            fontSize:      'clamp(0.6rem, 1.8vw, 1.1rem)',
+            fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
             letterSpacing: '0.42em',
             textIndent:    '0.42em',
             whiteSpace:    'nowrap',
@@ -202,7 +202,7 @@ export function HeroSection() {
         <motion.p
           className="font-jost italic font-bold"
           style={{
-            fontSize:      'clamp(0.6rem, 1.8vw, 1.1rem)',
+            fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
             letterSpacing: '0.28em',
             paddingLeft:   '0.28em',
             whiteSpace:    'nowrap',
@@ -241,7 +241,7 @@ export function HeroSection() {
             >
               <a
                 href="#about"
-                className="inline-flex items-center gap-3 rounded-full font-jost text-[0.65rem]
+                className="inline-flex items-center gap-3 rounded-full font-jost text-[0.75rem]
                            font-medium tracking-[0.22em] uppercase transition-all duration-500
                            hover:scale-[1.05] hover:brightness-110 active:scale-[0.97]"
                 style={{

@@ -107,13 +107,13 @@ export function AboutStudio() {
 
           {/* Studio identity pillars */}
           <ScrollReveal delay={0.15} variant="fadeUp">
-            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-10">
-              <span className="label-xs">Simplicity</span>
-              <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
-              <span className="label-xs">Personal</span>
-              <span className="label-xs" style={{ opacity: 0.35 }}>·</span>
-              <span className="label-xs">Peace</span>
-            </div>
+            <p className="label-xs text-center mb-10 whitespace-nowrap">
+              Simplicity
+              <span style={{ opacity: 0.35, margin: '0 0.6em' }}>·</span>
+              Personal
+              <span style={{ opacity: 0.35, margin: '0 0.6em' }}>·</span>
+              Peace
+            </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2} variant="fadeUp">

@@ -19,7 +19,7 @@
 
 /* ─── THEME-INVARIANT TOKENS ─────────────────────────────────────────────── */
 :root {
-  --nav-height:        120px;
+  --nav-height:        84px;
   --social-bar-height: 60px;
   --scrollbar-width:   0px;
 
@@ -104,8 +104,8 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.13);
 
   /* Navigation */
-  --bg-nav-scrolled: rgba(250,250,249,0.50);
-  --bg-nav-menu:     rgba(250,250,249,0.50);
+  --bg-nav-scrolled: rgba(250,250,249,0.80);
+  --bg-nav-menu:     rgba(250,250,249,0.80);
   --shadow-nav:      0 2px 16px rgba(0,0,0,0.06);
 
   /* Legacy aliases */
@@ -120,7 +120,7 @@
 /* ─── RESPONSIVE NAV HEIGHT (xl breakpoint = 1280px) ─────────────────────── */
 @media (min-width: 1280px) {
   :root {
-    --nav-height: 148px;
+    --nav-height: 100px;
   }
 }
 
@@ -159,8 +159,8 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.75);
 
   /* Navigation */
-  --bg-nav-scrolled: rgba(10,9,8,0.50);
-  --bg-nav-menu:     rgba(10,9,8,0.50);
+  --bg-nav-scrolled: rgba(10,9,8,0.80);
+  --bg-nav-menu:     rgba(10,9,8,0.80);
   --shadow-nav:      0 2px 16px rgba(0,0,0,0.32);
 
   /* Legacy aliases */
