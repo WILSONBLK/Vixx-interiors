@@ -377,16 +377,16 @@ export function Navbar() {
               </div>
             )}
 
-            {/* Desktop CTA — only at 2xl+ to avoid collision with nav links */}
+            {/* CTA — visible on all screen sizes */}
             <div
-              className="hidden lg:inline-flex"
+              className="inline-flex"
               style={slideStyle(navVisible, 40)}
             >
               <Link
                 onClick={closeMenu}
                 href="/start"
                 data-cursor="hover"
-                className="btn-primary py-2 px-5 text-[0.58rem]"
+                className="btn-primary py-2 px-3 sm:px-5 text-[0.52rem] sm:text-[0.58rem]"
               >
                 Start a Project
               </Link>
