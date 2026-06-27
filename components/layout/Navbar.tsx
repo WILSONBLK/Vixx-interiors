@@ -256,7 +256,7 @@ export function Navbar() {
         }}
       >
         <nav
-          className="w-full h-full flex items-center px-4 sm:px-6 xl:px-8"
+          className="w-full h-full flex items-start pt-3 sm:pt-4 px-4 sm:px-6 xl:px-8"
           aria-label="Primary navigation"
         >
           {/* ── Logo — animated hide/show ──────────────────────────────────── */}

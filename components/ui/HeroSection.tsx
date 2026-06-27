@@ -116,17 +116,18 @@ export function HeroSection() {
         />
       )}
 
-      {/* ── Hero content — centered, logo-first ───────────────────────────── */}
-      <div className="relative z-20 flex flex-col items-center justify-center text-center w-full px-6 sm:px-12"
-           style={{ gap: 'clamp(1.5rem, 3.5vw, 3rem)' }}>
+      {/* ── Hero content — left-aligned ───────────────────────────────────── */}
+      <div className="relative z-20 flex flex-col items-center text-center w-full px-6 sm:px-12"
+           style={{ gap: 'clamp(1rem, 2.8vw, 2.5rem)' }}>
 
         {/* Interior Design Studio — above brand name */}
         <motion.p
-          className="font-jost uppercase w-full"
+          className="font-jost uppercase"
           style={{
-            fontSize:      'clamp(0.93rem, 1.65vw, 1.17rem)',
+            fontSize:      'clamp(0.6rem, 1.8vw, 1.1rem)',
             letterSpacing: '0.42em',
             textIndent:    '0.42em',
+            whiteSpace:    'nowrap',
             color:         'var(--gold-text)',
             textShadow:    '0 1px 14px rgba(8,8,8,0.9)',
             cursor:        'default',
@@ -146,11 +147,10 @@ export function HeroSection() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.9, delay: 0.3, ease: EASE }}
           whileTap={rm ? {} : { scale: 0.97 }}
-          className="font-jost uppercase text-center w-full"
+          className="font-jost uppercase"
           style={{ margin: 0, cursor: 'default' }}
         >
           <motion.span
-            className="text-white dark:text-black"
             style={{
               display:       'block',
               fontSize:      'clamp(2.8rem, min(16.8vw, 17svh), 14.4rem)',
@@ -158,6 +158,7 @@ export function HeroSection() {
               letterSpacing: '0.22em',
               textShadow:    '0 6px 36px rgba(8,8,8,0.55)',
               lineHeight:    1,
+              color:         'rgba(255,255,255,0.70)',
             }}
             whileHover={rm ? {} : { scale: 1.07, transition: HOVER_SPRING }}
             whileTap={rm ? {} : { scale: 0.93 }}
@@ -165,7 +166,6 @@ export function HeroSection() {
             VIXX
           </motion.span>
           <motion.span
-            className="text-white dark:text-black"
             style={{
               display:       'block',
               fontSize:      'clamp(0.84rem, min(4.85vw, 4.9svh), 4.16rem)',
@@ -175,6 +175,7 @@ export function HeroSection() {
               textShadow:    '0 6px 36px rgba(8,8,8,0.55)',
               lineHeight:    1,
               marginTop:     '0.12em',
+              color:         'rgba(255,255,255,0.70)',
             }}
             whileHover={rm ? {} : { scale: 1.07, letterSpacing: '0.6em', transition: HOVER_SPRING }}
             whileTap={rm ? {} : { scale: 0.93 }}
@@ -199,11 +200,12 @@ export function HeroSection() {
 
         {/* Tagline */}
         <motion.p
-          className="font-jost italic font-bold w-full"
+          className="font-jost italic font-bold"
           style={{
-            fontSize:      'clamp(0.93rem, 1.65vw, 1.17rem)',
+            fontSize:      'clamp(0.6rem, 1.8vw, 1.1rem)',
             letterSpacing: '0.28em',
             paddingLeft:   '0.28em',
+            whiteSpace:    'nowrap',
             color:         'rgba(196,154,46,0.68)',
             textShadow:    '0 2px 14px rgba(8,8,8,0.88)',
             cursor:        'default',

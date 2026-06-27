@@ -104,8 +104,8 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.13);
 
   /* Navigation */
-  --bg-nav-scrolled: rgba(250,250,249,0.94);
-  --bg-nav-menu:     rgba(250,250,249,0.98);
+  --bg-nav-scrolled: rgba(250,250,249,0.50);
+  --bg-nav-menu:     rgba(250,250,249,0.50);
   --shadow-nav:      0 2px 16px rgba(0,0,0,0.06);
 
   /* Legacy aliases */
@@ -159,8 +159,8 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.75);
 
   /* Navigation */
-  --bg-nav-scrolled: rgba(10,9,8,0.86);
-  --bg-nav-menu:     rgba(10,9,8,0.98);
+  --bg-nav-scrolled: rgba(10,9,8,0.50);
+  --bg-nav-menu:     rgba(10,9,8,0.50);
   --shadow-nav:      0 2px 16px rgba(0,0,0,0.32);
 
   /* Legacy aliases */
