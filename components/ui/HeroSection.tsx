@@ -120,104 +120,95 @@ export function HeroSection() {
       <div className="relative z-20 flex flex-col items-center text-center w-full px-6 sm:px-12"
            style={{ gap: 'clamp(1.6rem, 4.2vw, 4rem)' }}>
 
-        {/* Interior Design Studio — above brand name */}
-        <motion.p
-          className="font-jost uppercase"
-          style={{
-            fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
-            letterSpacing: '0.42em',
-            textIndent:    '0.42em',
-            whiteSpace:    'nowrap',
-            color:         'var(--gold-text)',
-            textShadow:    '0 1px 14px rgba(8,8,8,0.9)',
-            cursor:        'default',
-          }}
-          initial={rm ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 0.1, ease: EASE }}
-          whileHover={rm ? {} : { scale: 1.06, transition: HOVER_SPRING }}
-          whileTap={rm ? {} : { scale: 0.94 }}
-        >
-          Interior Design Studio
-        </motion.p>
+        {/* Logo + adjacent labels grouped tightly */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 0 }}>
 
-        {/* Brand name — the visual focal point */}
-        <motion.h1
-          initial={rm ? false : { opacity: 0, scale: 0.92, y: 28 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.9, delay: 0.3, ease: EASE }}
-          whileTap={rm ? {} : { scale: 0.97 }}
-          className="font-jost uppercase"
-          style={{ margin: 0, cursor: 'default' }}
-        >
-          <motion.span
+          {/* Interior Design Studio — above brand name */}
+          <motion.p
+            className="font-jost uppercase"
             style={{
-              display:       'block',
-              fontSize:      'clamp(2.8rem, min(16.8vw, 17svh), 14.4rem)',
-              fontWeight:    200,
-              letterSpacing: '0.22em',
-              textShadow:    '0 6px 36px rgba(8,8,8,0.55)',
-              lineHeight:    1,
-              color:         'rgba(255,255,255,0.70)',
+              fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
+              letterSpacing: '0.42em',
+              textIndent:    '0.42em',
+              whiteSpace:    'nowrap',
+              color:         'rgba(255,255,255,0.80)',
+              textShadow:    '0 1px 14px rgba(8,8,8,0.9)',
+              cursor:        'default',
+              margin:        0,
             }}
+            initial={rm ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 0.1, ease: EASE }}
+            whileHover={rm ? {} : { scale: 1.06, transition: HOVER_SPRING }}
+            whileTap={rm ? {} : { scale: 0.94 }}
+          >
+            Interior Design Studio
+          </motion.p>
+
+          {/* Brand name — the visual focal point */}
+          <motion.h1
+            initial={rm ? false : { opacity: 0, scale: 0.92, y: 28 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.9, delay: 0.3, ease: EASE }}
             whileHover={rm ? {} : { scale: 1.07, transition: HOVER_SPRING }}
-            whileTap={rm ? {} : { scale: 0.93 }}
-          >
-            VIXX
-          </motion.span>
-          <motion.span
+            whileTap={rm ? {} : { scale: 0.97 }}
             style={{
-              display:       'block',
-              fontSize:      'clamp(0.84rem, min(4.85vw, 4.9svh), 4.16rem)',
-              fontWeight:    700,
-              letterSpacing: '0.5em',
-              paddingLeft:   '0.5em',
-              textShadow:    '0 6px 36px rgba(8,8,8,0.55)',
-              lineHeight:    1,
-              marginTop:     '0.12em',
-              color:         'rgba(255,255,255,0.70)',
+              margin:       0,
+              marginTop:    'clamp(-3rem, -7.5vw, -7.5rem)',
+              marginBottom: 'clamp(-3.5rem, -9vw, -9rem)',
+              cursor:       'default',
+              filter:       'drop-shadow(0 6px 36px rgba(8,8,8,0.55))',
+              opacity:      0.90,
+              width:        'clamp(18rem, min(68vw, 66svh), 58rem)',
             }}
-            whileHover={rm ? {} : { scale: 1.07, letterSpacing: '0.6em', transition: HOVER_SPRING }}
-            whileTap={rm ? {} : { scale: 0.93 }}
           >
-            INTERIORS
-          </motion.span>
-        </motion.h1>
+            <Image
+              src="/logo-gold.png"
+              alt="VIXX Interiors"
+              width={1200}
+              height={390}
+              priority
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          </motion.h1>
 
-        {/* Gold separator */}
-        <motion.div
-          aria-hidden
-          initial={rm ? false : { scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.9, delay: 0.95, ease: EASE }}
-          style={{
-            width:           52,
-            height:          1,
-            background:      'rgba(196,154,46,0.55)',
-            transformOrigin: 'center',
-          }}
-        />
+          {/* Gold separator */}
+          <motion.div
+            aria-hidden
+            initial={rm ? false : { scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.9, delay: 0.95, ease: EASE }}
+            style={{
+              width:           52,
+              height:          1,
+              background:      'rgba(196,154,46,0.55)',
+              transformOrigin: 'center',
+            }}
+          />
 
-        {/* Tagline */}
-        <motion.p
-          className="font-jost italic font-bold"
-          style={{
-            fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
-            letterSpacing: '0.28em',
-            paddingLeft:   '0.28em',
-            whiteSpace:    'nowrap',
-            color:         'rgba(196,154,46,0.68)',
-            textShadow:    '0 2px 14px rgba(8,8,8,0.88)',
-            cursor:        'default',
-          }}
-          initial={rm ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 1.15, ease: EASE }}
-          whileHover={rm ? {} : { scale: 1.06, color: 'rgba(196,154,46,1)', transition: HOVER_SPRING }}
-          whileTap={rm ? {} : { scale: 0.94 }}
-        >
-          simplicity kind of different
-        </motion.p>
+          {/* Tagline — below brand name */}
+          <motion.p
+            className="font-jost italic font-bold"
+            style={{
+              fontSize:      'clamp(0.8rem, 2.5vw, 1.1rem)',
+              letterSpacing: '0.28em',
+              paddingLeft:   '0.28em',
+              whiteSpace:    'nowrap',
+              color:         'rgba(255,255,255,0.80)',
+              textShadow:    '0 2px 14px rgba(8,8,8,0.88)',
+              cursor:        'default',
+              margin:        0,
+            }}
+            initial={rm ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, delay: 1.15, ease: EASE }}
+            whileHover={rm ? {} : { scale: 1.06, color: 'rgba(255,255,255,1)', transition: HOVER_SPRING }}
+            whileTap={rm ? {} : { scale: 0.94 }}
+          >
+            simplicity kind of different
+          </motion.p>
+
+        </div>
 
         {/* CTA */}
         <motion.div
