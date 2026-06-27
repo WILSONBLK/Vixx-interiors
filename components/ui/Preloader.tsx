@@ -56,7 +56,7 @@ export function Preloader() {
               width:           48,
               height:          1,
               background:      '#C49A2E',
-              marginBottom:    28,
+              marginBottom:    8,
               transformOrigin: 'left center',
             }}
           />
@@ -90,7 +90,7 @@ export function Preloader() {
               width:           48,
               height:          1,
               background:      '#C49A2E',
-              marginTop:       28,
+              marginTop:       8,
               transformOrigin: 'right center',
             }}
           />
