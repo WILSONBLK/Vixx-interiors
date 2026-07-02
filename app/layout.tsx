@@ -65,6 +65,15 @@ export const metadata: Metadata = {
     follow:    true,
     googleBot: { index: true, follow: true },
   },
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+    ],
+    apple:    [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: ['/favicon-32x32.png'],
+  },
   openGraph: {
     type:        'website',
     locale:      'en_NG',
@@ -74,7 +83,10 @@ export const metadata: Metadata = {
     description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
     images: [
       {
-        url:    '/images/hero-bg.avif',
+        // JPEG, not AVIF — social crawlers (Facebook/LinkedIn/etc.) don't
+        // reliably render AVIF previews, so this is a dedicated re-encode
+        // cropped to the standard 1200x630 (1.91:1) OG ratio.
+        url:    '/images/og-image.jpg',
         width:  1200,
         height: 630,
         alt:    'VIXX Interiors – Interior Design Studio, Lagos',
@@ -85,7 +97,7 @@ export const metadata: Metadata = {
     card:        'summary_large_image',
     title:       'VIXX Interiors – Interior Design Studio, Lagos',
     description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
-    images:      ['/images/hero-bg.avif'],
+    images:      ['/images/og-image.jpg'],
   },
 }
 
@@ -120,29 +132,49 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'InteriorDesigner',
-              name: 'VIXX Interiors',
-              description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
-              url: 'https://vixxinteriors.com',
-              logo: 'https://vixxinteriors.com/logo-gold.png',
-              image: 'https://vixxinteriors.com/images/hero-bg.avif',
-              telephone: '+2348065672607',
-              email: 'vixxinteriors@gmail.com',
-              address: {
-                '@type': 'PostalAddress',
-                addressLocality: 'Lagos',
-                addressCountry: 'NG',
-              },
-              areaServed: ['Lagos', 'Nigeria'],
-              sameAs: [
-                'https://www.instagram.com/vixx_interiors',
-                'https://www.tiktok.com/@vixxinteriors',
+              '@graph': [
+                {
+                  // Explicit "Organization" type (alongside the more specific
+                  // InteriorDesigner) so the logo is unambiguously eligible
+                  // for Google's Logo / Knowledge Panel structured data.
+                  '@type': ['Organization', 'InteriorDesigner'],
+                  '@id': 'https://vixxinteriors.com/#organization',
+                  name: 'VIXX Interiors',
+                  description: 'A Lagos-based interior design studio crafting calm, considered spaces for homes and businesses across Nigeria.',
+                  url: 'https://vixxinteriors.com',
+                  logo: {
+                    '@type': 'ImageObject',
+                    url: 'https://vixxinteriors.com/logo-gold.png',
+                    width: 2000,
+                    height: 2000,
+                  },
+                  image: 'https://vixxinteriors.com/images/hero-bg.avif',
+                  telephone: '+2348065672607',
+                  email: 'vixxinteriors@gmail.com',
+                  address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Lagos',
+                    addressCountry: 'NG',
+                  },
+                  areaServed: ['Lagos', 'Nigeria'],
+                  sameAs: [
+                    'https://www.instagram.com/vixx_interiors',
+                    'https://www.tiktok.com/@vixxinteriors',
+                  ],
+                  founder: {
+                    '@type': 'Person',
+                    name: 'Osita Agusionu',
+                    jobTitle: 'Founder & Creative Director',
+                  },
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://vixxinteriors.com/#website',
+                  name: 'VIXX Interiors',
+                  url: 'https://vixxinteriors.com',
+                  publisher: { '@id': 'https://vixxinteriors.com/#organization' },
+                },
               ],
-              founder: {
-                '@type': 'Person',
-                name: 'Osita Agusionu',
-                jobTitle: 'Founder & Creative Director',
-              },
             }),
           }}
         />
